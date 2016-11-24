@@ -10,4 +10,5 @@
         <item>Gas Density</item>
 
     </string-array>
+    <string name="title_activity_main_menu">MainMenu</string>
 </resources>

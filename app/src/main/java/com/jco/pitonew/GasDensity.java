@@ -12,7 +12,7 @@ public class GasDensity implements Serializable{
     private Boolean standardAir;
     private Boolean wetBulbTemperature;
     private String TemperatureUnit;
-    private int Temperature;
+    private int DryBulbTemperature;
     private int WetBulbTemperature;
     private String PressureUnit;
     private int SealevelPressure;
@@ -35,7 +35,8 @@ public class GasDensity implements Serializable{
     private double individualGasConstant;
     private double atmosphericPressure;
     private static final double universalGasConstant =8.3144598;
-    private EditText temperatureEditText, seaLevelPressureEditText, elevationAboveSeaLevelEditText,staticPressureEditText;
+    private EditText temperatureEditText, seaLevelPressureEditText, elevationAboveSeaLevelEditText,staticPressureEditText,temperatureWetBulbEditText;
+
 
 
 
@@ -91,8 +92,16 @@ MW is the molecular weight.
 public GasDensity(Activity activity){
     temperatureEditText= (EditText)activity.findViewById(R.id.temperatureGasDensityFragmentEditText);
     seaLevelPressureEditText = (EditText)activity.findViewById(R.id.seaLevelPressureGasDensityFragmentEditText);
-    elevationAboveSeaLevelEditText = (EditText)activity.findViewById(R.id.elevationAboveSeaLevelFragmentEditText);
+    elevationAboveSeaLevelEditText = (EditText)activity.findViewById(R.id.E);
     staticPressureEditText = (EditText)activity.findViewById(R.id.staticPressureFragmentEditText);
+    temperatureWetBulbEditText = (EditText)activity.findViewById(R.id.wetBulbTemperatureGasDensityFragmentEditText);
+    this.DryBulbTemperature = Integer.valueOf(temperatureEditText.getText().toString());
+    this.WetBulbTemperature = Integer.valueOf(temperatureWetBulbEditText.getText().toString());
+    this.SealevelPressure = Integer.valueOf(seaLevelPressureEditText.getText().toString());
+    this.ElevationAboveSeaLevel =Integer.valueOf(elevationAboveSeaLevelEditText.getText().toString());
+    this.StaticPressure =Integer.valueOf(staticPressureEditText.getText().toString());
+
+
 
 
 
@@ -105,7 +114,7 @@ public GasDensity(Activity activity){
     }
 
     public double calculateGasDensity() {
-        this.absoluteTemperature = this.getTemperature() + 273.15;
+        this.absoluteTemperature = this.getDryBulbTemperature() + 273.15;
         this.individualGasConstant = this.universalGasConstant / this.molecularWeight;
         return this.atmosphericPressure * this.molecularWeight / this.absoluteTemperature;
     }
@@ -212,15 +221,15 @@ public GasDensity(Activity activity){
         TemperatureUnit = temperatureUnit;
     }
 
-    public int getTemperature() {
-        return Temperature;
+    public int getDryBulbTemperature() {
+        return DryBulbTemperature;
     }
 
     public void displayResult(){
 
     }
 
-    public void setTemperature(int temperature) {
-        Temperature = temperature;
+    public void setDryBulbTemperature(int dryBulbTemperature) {
+        DryBulbTemperature = dryBulbTemperature;
     }
 }

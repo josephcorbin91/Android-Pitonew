@@ -224,7 +224,7 @@ public void calculateResult(String currentCalculations){
         TextView UnitsDimensionWidthGasFlowFragmentTextView =  (TextView)findViewById(R.id.UnitsDimensionWidthGasFlowFragmentTextView);
         TextView UnitspitotTubeCoefficientTextView=   (TextView)  findViewById(R.id.UnitspitotTubeCoefficientTextView);
 
-        TextView UnitsCalculatedGasDensity = (TextView)findViewById(R.id.)
+        TextView UnitsCalculatedGasDensity = (TextView)findViewById(R.id.UnitsCalculatedGasDensityTextView);
         switch (units) {
             case "Metric":
                 unitsGasDensityTemperatureDB.setText("°C");
@@ -237,6 +237,7 @@ public void calculateResult(String currentCalculations){
                 unitsMassAirFlow.setText("kg/s");
                 unitsNormalAirFlow.setText("Nm³/h");
                 unitsActualAirFlow.setText("m³/h");
+                UnitsCalculatedGasDensity.setText("kg/m³");
                 break;
             case "Imperial":
                 unitsGasDensityTemperatureDB.setText("°F");
@@ -249,7 +250,7 @@ public void calculateResult(String currentCalculations){
                 unitsMassAirFlow.setText("lb/min");
                 unitsNormalAirFlow.setText("ACFM");
                 unitsActualAirFlow.setText("SCFM");
-
+                UnitsCalculatedGasDensity.setText("lb/ft³");
                 break;
         }
     }

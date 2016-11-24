@@ -241,7 +241,28 @@
                 />
 
         </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Calculated Gas Density (Ideal Gas Law)"
+                />
 
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/ResultCalculatedGasDensityTextView"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:id="@+id/UnitsCalculatedGasDensityTextView"
+
+                />
+
+        </TableRow>
 
 
     </TableLayout>
