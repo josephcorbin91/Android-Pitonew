@@ -1,0 +1,235 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/gasFlowFragment"
+    tools:context=".GasDensityFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Gas Flow"
+                />
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Circular or Rectangular"
+                android:id="@+id/circularOrDiamaterHeader"
+                />
+        </TableRow>
+<TableRow>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Rectangular or Circular"
+            android:id="@+id/rectangularCircularGasFlowFragmentTextView"
+
+            />
+
+
+    <Switch
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:gravity="right"
+        android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
+
+        android:checked="false" />
+
+</TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Height"
+                android:id="@+id/dimensionHeightOrDiameterGasFlowFragmentTextView"
+                android:layout_gravity="center" />
+
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:id="@+id/dimensionHeightGasFlowFragmentEditText"
+                android:checked="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="m"
+                android:id="@+id/UnitsDimensionHeightGasFlowFragmentTextView"
+                android:layout_gravity="center" />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Width"
+                android:id="@+id/dimensionWidthGasFlowFragmentTextView"
+
+                />
+
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:id="@+id/dimensionWidthGasFlowFragmentEditText"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="m"
+                android:id="@+id/UnitsDimensionWidthGasFlowFragmentTextView"
+
+                />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Pitot Tube Coefficient"
+                android:id="@+id/pitotTubeCoefficientTextView"
+
+                />
+
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:id="@+id/pitotTubeCoefficientEditText"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:id="@+id/UnitspitotTubeCoefficientTextView"
+
+                />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Vavg: Avg. Velocity"
+                android:id="@+id/averageVelocityTextView"
+
+                />
+
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:id="@+id/averageVelocityValueTextView"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:id="@+id/UnitsaverageVelocityTextView"
+
+                />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Qm: Mass Air Flow"
+                android:id="@+id/massAirFlowTextView"
+
+                />
+
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:id="@+id/massAirFlowTextViewValue"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:id="@+id/UnitsmassAirFlowTextView"
+
+                />
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Q: Actual Air Flow"
+                android:id="@+id/actualAirFlowTextView"
+
+                />
+
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:id="@+id/actualAirFlowTextViewTextViewValue"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:id="@+id/UnitsactualAirFlowTextView"
+
+                />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Qn: Normal Air Flow"
+                android:id="@+id/normalAirFlowTextView"
+                />
+
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:id="@+id/normalAirFlowTextViewTextViewValue"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:id="@+id/UnitsnormalAirFlowTextView"
+
+                />
+
+        </TableRow>
+
+
+    </TableLayout>
+
+</FrameLayout>
