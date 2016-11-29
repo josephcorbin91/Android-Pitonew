@@ -92,7 +92,7 @@ MW is the molecular weight.
 public GasDensity(Activity activity){
     temperatureEditText= (EditText)activity.findViewById(R.id.temperatureGasDensityFragmentEditText);
     seaLevelPressureEditText = (EditText)activity.findViewById(R.id.seaLevelPressureGasDensityFragmentEditText);
-    elevationAboveSeaLevelEditText = (EditText)activity.findViewById(R.id.E);
+    elevationAboveSeaLevelEditText = (EditText)activity.findViewById(R.id.ElevationAboveSeaLevelFragmentEdiText);
     staticPressureEditText = (EditText)activity.findViewById(R.id.staticPressureFragmentEditText);
     temperatureWetBulbEditText = (EditText)activity.findViewById(R.id.wetBulbTemperatureGasDensityFragmentEditText);
     this.DryBulbTemperature = Integer.valueOf(temperatureEditText.getText().toString());

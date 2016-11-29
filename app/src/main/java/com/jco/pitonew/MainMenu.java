@@ -1,5 +1,6 @@
 package com.jco.pitonew;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,14 +15,20 @@ import android.widget.Toast;
 public class MainMenu extends AppCompatActivity {
 
     private Toolbar actionToolBar;
-    private Button
+    private Button calculationButton, theoryButton, constantButton, developerButton;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        actionToolBar = (Toolbar) findViewById(R.id.toolbar);
+        actionToolBar = (Toolbar) findViewById(R.id.action_bar_toolbar);
         setSupportActionBar(actionToolBar);
-
-
+calculationButton = (Button)findViewById(R.id.mainMenuCalculatorButton);
+calculationButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
+});
         //actionToolBar.setNavigationIcon(R.drawable.pitonew_logo);
         // actionToolBar.setNavigationContentDescription("This App");
         //  actionToolBar.setLogo(R.drawable.pitonew_logo);
@@ -46,3 +53,4 @@ public class MainMenu extends AppCompatActivity {
 
     }
 }
+;

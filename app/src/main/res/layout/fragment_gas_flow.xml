@@ -43,6 +43,8 @@
         android:layout_height="20dp"
         android:gravity="right"
         android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
+        android:textOff="Rectangular"
+        android:textOn="Circular"
 
         android:checked="false" />
 

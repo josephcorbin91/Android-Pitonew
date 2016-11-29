@@ -32,13 +32,12 @@ private Spinner spinner;
     private String currentCalculations;
     private Switch unitSwitch,rectangularOrCircularSwitch;
     private TextView unitsGasDensityTemperatureDB,unitsGasDensityTemperatureWB, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel,unitsGasDensityAtmosphericPressure, unitsStaticPressure,unitsDuctPressure,dimensionHeader,dimension1TextView, dimension2TextView;
-
-
+    private View gasDensityFragmentView, gasFlowFragmentView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rectangularOrCircularSwitch = (Switch)findViewById(R.id.rectangularCircularGasFlowFragmentSwitch);
+
         dimensionHeader = (TextView)findViewById(R.id.rectangularCircularGasFlowFragmentTextView);
         dimension1TextView = (TextView)findViewById(R.id.dimensionHeightOrDiameterGasFlowFragmentTextView);
         dimension2TextView = (TextView)findViewById(R.id.dimensionWidthGasFlowFragmentTextView);
@@ -49,28 +48,27 @@ private Spinner spinner;
         unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    changeUnits("Metric");
-                    // The toggle is enabled
-                } else {
-                    changeUnits("Imperial");
-                    // The toggle is disabled
+                    switch(currentCalculations){
+                        case "gasFlow": gasFlowFragment.changeUnits("Metric");
+                            break;
+                        case "gasDensity": gasDensityFragment.changeUnits("Metric");
+
+                    }
+                }
+                else {
+                    switch(currentCalculations){
+                        case "gasFlow": gasFlowFragment.changeUnits("Imperial");
+                          break;
+                        case "gasDensity": gasDensityFragment.changeUnits("Imperial");
+                            break;
                 }
             }
+        }
         });
-
-        rectangularOrCircularSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    setDimensions("Rectangular");
-                    // The toggle is enabled
-                } else {
-                    setDimensions("Circular");
-                    // The toggle is disabled
-                }
-            }
-        });
+/*
 
 
+*/
 
         setSupportActionBar(actionToolBar);
         //actionToolBar.setNavigationIcon(R.drawable.pitonew_logo);
@@ -122,11 +120,11 @@ private Spinner spinner;
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
-            gasDensityFragment.setArguments(getIntent().getExtras());
+            gasFlowFragment.setArguments(getIntent().getExtras());
 
             // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, gasDensityFragment).commit();
+                    .add(R.id.fragment_container, gasFlowFragment).commit();
         }
         currentCalculations="gasFlow";
         clearButton = (Button)findViewById(R.id.toolbarClearButton);
@@ -138,10 +136,9 @@ private Spinner spinner;
 
                 switch (currentCalculations){
                     case "gasFlow":
-                        clearAllFields((ViewGroup)findViewById(R.id.gasFlowFragment));
+                        gasFlowFragment.clear();
                     case "gasDensity":
-                        clearAllFields((ViewGroup)findViewById(R.id.gasDensityFragment));
-
+                        gasDensityFragment.clear();
                 }
             }
         });
@@ -209,70 +206,10 @@ public void calculateResult(String currentCalculations){
             }
         }
 
-    public void changeUnits(String units) {
-        unitsGasDensityTemperatureDB = (TextView) findViewById(R.id.UnitstemperatureGasDensityFragmentTextView);
-        unitsGasDensityTemperatureWB = (TextView) findViewById(R.id.UnitsWetBulbtemperatureGasDensityFragmentTextView);
-        unitsGasDensitySeaLevelPressure = (TextView) findViewById(R.id.UnitsElevationAboveSeaLevelFragmentTextView);
-        unitsGasDensityElevationAboveSeaLevel = (TextView) findViewById(R.id.UnitsElevationAboveSeaLevelFragmentTextView);
-        unitsGasDensityAtmosphericPressure = (TextView) findViewById(R.id.UnitsAtmosphericPressureFragmentTextView);
-        unitsDuctPressure = (TextView) findViewById(R.id.UnitsDuctPressureFragmentTextView);
-        TextView unitsAverageVelocity = (TextView)findViewById(R.id.UnitsDimensionHeightGasFlowFragmentTextView);
-        TextView unitsMassAirFlow =  (TextView)findViewById(R.id.UnitsDimensionWidthGasFlowFragmentTextView);
-        TextView unitsActualAirFlow=   (TextView)  findViewById(R.id.UnitspitotTubeCoefficientTextView);
-        TextView unitsNormalAirFlow=(TextView)findViewById(R.id.UnitsnormalAirFlowTextView);
-        TextView UnitsDimensionHeightGasFlowFragmentTextView = (TextView)findViewById(R.id.UnitsDimensionHeightGasFlowFragmentTextView);
-        TextView UnitsDimensionWidthGasFlowFragmentTextView =  (TextView)findViewById(R.id.UnitsDimensionWidthGasFlowFragmentTextView);
-        TextView UnitspitotTubeCoefficientTextView=   (TextView)  findViewById(R.id.UnitspitotTubeCoefficientTextView);
-
-        TextView UnitsCalculatedGasDensity = (TextView)findViewById(R.id.UnitsCalculatedGasDensityTextView);
-        switch (units) {
-            case "Metric":
-                unitsGasDensityTemperatureDB.setText("°C");
-                unitsGasDensityTemperatureWB.setText("°C");
-                unitsGasDensitySeaLevelPressure.setText("kPa");
-                unitsGasDensityElevationAboveSeaLevel.setText("m");
-                unitsGasDensityAtmosphericPressure.setText("kPa");
-                unitsDuctPressure.setText("kPa");
-                unitsAverageVelocity.setText("m/s");
-                unitsMassAirFlow.setText("kg/s");
-                unitsNormalAirFlow.setText("Nm³/h");
-                unitsActualAirFlow.setText("m³/h");
-                UnitsCalculatedGasDensity.setText("kg/m³");
-                break;
-            case "Imperial":
-                unitsGasDensityTemperatureDB.setText("°F");
-                unitsGasDensityTemperatureWB.setText("°F");
-                unitsGasDensitySeaLevelPressure.setText("in. Hg");
-                unitsGasDensityElevationAboveSeaLevel.setText("ft");
-                unitsGasDensityAtmosphericPressure.setText("in. Hg");
-                unitsDuctPressure.setText("in. Hg");
-                unitsAverageVelocity.setText("ft/s");
-                unitsMassAirFlow.setText("lb/min");
-                unitsNormalAirFlow.setText("ACFM");
-                unitsActualAirFlow.setText("SCFM");
-                UnitsCalculatedGasDensity.setText("lb/ft³");
-                break;
-        }
-    }
-
-    public void setDimensions(String dimensions){
-        switch (dimensions) {
-            case "Rectangular":
-                dimensionHeader.setText("Rectangular");
-                dimension1TextView.setText("Height");
-                dimension2TextView.setText("Width");
-                break;
-            case "Circular":
-                dimensionHeader.setText("Circular");
-                dimension1TextView.setText("Diameter");
-                break;
-        }
-        }
 
 
 
     }
-
 
 
 

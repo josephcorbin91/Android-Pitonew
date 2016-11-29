@@ -26,15 +26,55 @@
             android:layout_height="match_parent"
             android:text="Standard Air"
             android:layout_gravity="center" />
-
-
-    <Switch
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:gravity="right"
-        android:checked="false" />
-
 </TableRow>
+        <TableRow>
+
+
+    <com.fenjuly.mylibrary.ToggleExpandLayout
+        android:id="@+id/toogleLayout"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="One"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Two"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Three"/>
+        <View
+            android:id="@+id/view1"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:elevation="2dp"
+            android:outlineProvider="bounds"
+            >
+        </View>
+        <View
+            android:id="@+id/rootView"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:elevation="2dp"
+
+            android:outlineProvider="bounds"
+            >
+        </View>
+    </com.fenjuly.mylibrary.ToggleExpandLayout>
+
+        </TableRow>
+
 
         <TableRow>
             <TextView
@@ -153,7 +193,7 @@
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:gravity="right"
-            android:id="@+id/ElevationAboveSeaLevelFragmentTextView"
+            android:id="@+id/ElevationAboveSeaLevelFragmentEdiText"
             />
 
             <TextView

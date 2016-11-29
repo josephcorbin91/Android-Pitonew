@@ -19,6 +19,9 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:id="@+id/unitSwitch"
+        android:textOff="Metric"
+        android:textOn="Imperial"
+
         />
     <Button
         android:layout_width="90dp"
