@@ -1,14 +1,18 @@
 package com.jco.pitonew;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.fenjuly.mylibrary.ToggleExpandLayout;
 import com.fenjuly.mylibrary.*;
 
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 /**
@@ -26,7 +30,9 @@ public class GasDensityFragment extends Fragment {
 
     private TextView unitsGasDensityTemperatureDB, unitsGasDensityTemperatureWB, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension1TextView, dimension2TextView;
 
+    private Switch standardAirSwitch;
     private View mView;
+
 
     public GasDensityFragment() {
 
@@ -37,12 +43,53 @@ public class GasDensityFragment extends Fragment {
         Utility.clearAllFields((ViewGroup)this.mView);
     }
     @Nullable
-    @Override
+    public void showStandardAirDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Standard Air Input");
+        builder.setView(R.layout.dialog_standardair);
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNegativeButton("Reset", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNeutralButton("Reset", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+
+    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gas_density, container, false);
         this.mView = view;
+        standardAirSwitch = (Switch)mView.findViewById(R.id.standardAirSwitch);
+        standardAirSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    showStandardAirDialog();
+                } else {
+
+                    showStandardAirDialog();
+                }
+            }
+        });
+        //standardAirSwitch = (Switch)mView.findViewById(R.id.);
+
+
+
+
         return view;
     }
+
 
 
     public void changeUnits(String units) {

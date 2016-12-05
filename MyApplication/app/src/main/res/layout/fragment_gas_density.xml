@@ -1,0 +1,285 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://scheomas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/gasDensityFragment"
+    android:orientation="vertical"
+    tools:context=".GasDensityFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Gas Density"
+                />
+        </TableRow>
+
+<TableRow>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Standard Air"
+            android:layout_gravity="left" />
+    <Switch
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textOn="yes"
+        android:textOff="no"
+        android:showText="true"
+        android:id="@+id/standardAirSwitch"
+        android:gravity="right"
+        />
+</TableRow>
+
+
+
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Wet Bulb Temperature"
+                android:id="@+id/WetBulbTemperatureGasDensityFragmentTextView"
+                android:layout_gravity="center" />
+
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:showText="true"
+
+                android:gravity="right"
+                android:id="@+id/WetBulbTemperatureGasDensityFragmentSwitch"
+                android:checked="false" />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Tdb: Temperature"
+                />
+
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:id="@+id/temperatureGasDensityFragmentEditText"
+                 />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="°C"
+                android:id="@+id/UnitstemperatureGasDensityFragmentTextView"
+
+                />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Twb: Wet Bulb Temperature"
+                />
+
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:id="@+id/wetBulbTemperatureGasDensityFragmentEditText"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="°C"
+                android:id="@+id/UnitsWetBulbtemperatureGasDensityFragmentTextView"
+
+                />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Relative Humidity"
+                />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="%"
+                android:id="@+id/UnitsRelativeHumiditytemperatureGasDensityFragmentTextView"
+
+                />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Sealevel Pressure"
+                />
+
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+
+                android:id="@+id/seaLevelPressureGasDensityFragmentEditText"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="kPa"
+                android:id="@+id/UnitsseaLevelPressureGasDensityFragmentTextView"
+                />
+        </TableRow>
+<TableRow>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Enter number of velocities"
+        android:id="@+id/velocitiesToBeCalculateUnitsseaLevelPressureGasDensityFragmentTextView"
+        />
+</TableRow>
+        <TableRow>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Elevation above SeaLevel"
+            />
+
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:gravity="right"
+            android:id="@+id/ElevationAboveSeaLevelFragmentEdiText"
+            />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ft"
+                android:id="@+id/UnitsElevationAboveSeaLevelFragmentTextView"
+
+                />
+
+    </TableRow>
+        <TableRow>
+
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:text="Pb. Atm. pressure"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ft"
+                android:id="@+id/AtmosphericPressureFragmentTextView"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ft"
+                android:id="@+id/UnitsAtmosphericPressureFragmentTextView"
+
+                />
+
+        </TableRow>
+
+
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Ps: Static Pressure"
+                />
+
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/staticPressureFragmentEditText"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="°H2O"
+                android:id="@+id/StaticPressureFragmentTextView"
+
+                />
+
+        </TableRow>
+
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Pd: Duct Pressure (absolute P)"
+                />
+
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/ductPressureFragmentTextView"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="°KPa"
+                android:id="@+id/UnitsDuctPressureFragmentTextView"
+
+                />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Calculated Gas Density (Ideal Gas Law)"
+                />
+
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/ResultCalculatedGasDensityTextView"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:id="@+id/UnitsCalculatedGasDensityTextView"
+
+                />
+
+        </TableRow>
+
+
+    </TableLayout>
+
+</LinearLayout>

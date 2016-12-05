@@ -2,6 +2,8 @@ package com.jco.pitonew;
 
 import android.app.Activity;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -11,9 +13,10 @@ import java.io.Serializable;
 public class GasFlow implements Serializable{
     private String DuctUnits;
     private Boolean RectangularDuct;
-    private int Diameter;
-    private int Height;
-    private int Widfth;
+    private double Diameter;
+    private double Height;
+    private double Width;
+    private double Area;
     private int PilotTubeCoeffecient;
     private int [][] DynamicVelocityPressure;
     private boolean checkRule;
@@ -22,12 +25,28 @@ public class GasFlow implements Serializable{
     private double actualAirFlow;
     private double normalAirFlow;
     private EditText dimensionHeightEditText,pitotTubeCoefficientEditText, dynamicPressure, dimensionWidthEditText, dimensionDiameterEditText;
+    private TextView areaTextView;
 
 
-    public GasFlow(Activity activity){
+    public GasFlow(Activity activity, String pipeType){
+
         dimensionHeightEditText = (EditText)activity.findViewById(R.id.dimensionHeightGasFlowFragmentEditText);
         pitotTubeCoefficientEditText =(EditText)activity.findViewById(R.id.pitotTubeCoefficientEditText);
         dimensionWidthEditText =(EditText)activity.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
+        areaTextView = (TextView)activity.findViewById(R.id.ductAreaGasFlowFragmentTextView);
+
+        if(pipeType == "Circular"){
+            this.Diameter= Double.valueOf(dimensionHeightEditText.getText().toString());
+            this.Area = Math.PI*this.Diameter/2;
+        }
+        if(pipeType == "Rectangular"){
+            this.Height= Double.valueOf(dimensionHeightEditText.getText().toString());
+            this.Width = Double.valueOf(dimensionWidthEditText.getText().toString());
+            this.Area = this.Height*this.Width;
+        }
+
+      //  Toast.makeText(activity, )
+
 
 
 
@@ -53,8 +72,16 @@ public class GasFlow implements Serializable{
         return  this.actualAirFlow;
     }
     public void displayResult() {
+        areaTextView.setText(String.valueOf(this.Area));
+
 
     }
+
+    public boolean verifyDataIntegrity() {
+        return Utility.containsText(dimensionDiameterEditText)&&Utility.containsText(dimensionHeightEditText)&&Utility.containsText(dimensionWidthEditText);
+
+    }
+
 
 
 
@@ -70,7 +97,7 @@ public class GasFlow implements Serializable{
         RectangularDuct = rectangularDuct;
     }
 
-    public int getDiameter() {
+    public double getDiameter() {
         return Diameter;
     }
 
@@ -78,7 +105,7 @@ public class GasFlow implements Serializable{
         Diameter = diameter;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return Height;
     }
 
@@ -86,12 +113,12 @@ public class GasFlow implements Serializable{
         Height = height;
     }
 
-    public int getWidfth() {
-        return Widfth;
+    public double getWidth() {
+        return Width;
     }
 
-    public void setWidfth(int widfth) {
-        Widfth = widfth;
+    public void setWidth(int width) {
+        Width = width;
     }
 
     public int getPilotTubeCoeffecient() {

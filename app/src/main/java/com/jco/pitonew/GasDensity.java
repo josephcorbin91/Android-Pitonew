@@ -2,6 +2,7 @@ package com.jco.pitonew;
 
 import android.app.Activity;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.Serializable;
 
@@ -34,7 +35,9 @@ public class GasDensity implements Serializable{
     private double molarMass;
     private double individualGasConstant;
     private double atmosphericPressure;
+    private double gasDensity;
     private static final double universalGasConstant =8.3144598;
+    private TextView gasDensityResultTextView;
     private EditText temperatureEditText, seaLevelPressureEditText, elevationAboveSeaLevelEditText,staticPressureEditText,temperatureWetBulbEditText;
 
 
@@ -95,6 +98,7 @@ public GasDensity(Activity activity){
     elevationAboveSeaLevelEditText = (EditText)activity.findViewById(R.id.ElevationAboveSeaLevelFragmentEdiText);
     staticPressureEditText = (EditText)activity.findViewById(R.id.staticPressureFragmentEditText);
     temperatureWetBulbEditText = (EditText)activity.findViewById(R.id.wetBulbTemperatureGasDensityFragmentEditText);
+    gasDensityResultTextView= (TextView)activity.findViewById(R.id.ResultCalculatedGasDensityTextView);
     this.DryBulbTemperature = Integer.valueOf(temperatureEditText.getText().toString());
     this.WetBulbTemperature = Integer.valueOf(temperatureWetBulbEditText.getText().toString());
     this.SealevelPressure = Integer.valueOf(seaLevelPressureEditText.getText().toString());
@@ -109,14 +113,14 @@ public GasDensity(Activity activity){
     public double calculateMolarMass(){
 
         this.molecularWeight= (this.airContentPercentageCO2*44.01)+(this.airContentPercentageAr*39.94)+(this.airContentPercentageH2O*18.01528)+(this.airContentPercentageO2*32)+(this.airContentPercentageN2*28.02);
-
         return this.molecularWeight;
     }
 
     public double calculateGasDensity() {
         this.absoluteTemperature = this.getDryBulbTemperature() + 273.15;
         this.individualGasConstant = this.universalGasConstant / this.molecularWeight;
-        return this.atmosphericPressure * this.molecularWeight / this.absoluteTemperature;
+        this.gasDensity= this.atmosphericPressure * this.molecularWeight / this.absoluteTemperature;
+        return this.gasDensity;
     }
 
 
@@ -145,6 +149,11 @@ public GasDensity(Activity activity){
         this.airContentPercentageN2 = airContentPercentageN2;
     }
 
+    public boolean verifyDataIntegrity() {
+        return Utility.containsText(temperatureEditText)&& Utility.containsText(seaLevelPressureEditText) && Utility.containsText(elevationAboveSeaLevelEditText)&& Utility.containsText(staticPressureEditText)&& Utility.containsText(temperatureWetBulbEditText);
+
+
+    }
     public double getAirContentPercentageAr() {
         return airContentPercentageAr;
     }
@@ -226,6 +235,10 @@ public GasDensity(Activity activity){
     }
 
     public void displayResult(){
+        calculateMolarMass();
+        calculateGasDensity();
+        System.out.println(this.gasDensity);
+        gasDensityResultTextView.setText(String.valueOf(this.gasDensity));
 
     }
 

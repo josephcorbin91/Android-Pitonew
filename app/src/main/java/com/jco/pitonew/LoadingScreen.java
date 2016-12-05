@@ -1,19 +1,31 @@
 package com.jco.pitonew;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.widget.TextView;
 
 public class LoadingScreen extends AppCompatActivity {
     private Thread welcomeThread;
+    private TextView loadingScreenTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_loading_screen);
+        TitanicTextView loadingScreenTextView = (TitanicTextView) findViewById(R.id.loading_screen_textview);
+/*
+        Typeface font = Typeface.createFromAsset(
+                getApplicationContext().getAssets(),
+                "fonts/trench100free.ttf");
+*/
+        loadingScreenTextView.setTypeface(Typefaces.get(this, "trench100free.ttf"));
+       // loadingScreenTextView .setTypeface(font);
+        new Titanic().start(loadingScreenTextView);
+
 
 
 
@@ -24,14 +36,14 @@ public class LoadingScreen extends AppCompatActivity {
             public void run() {
                 try {
                     super.run();
-                    sleep(3000);  //Delay of 10 seconds
+                    sleep(7000);  //Delay of 10 seconds
 
                 } catch (Exception e) {
 
                 } finally {
 
                     Intent i = new Intent(LoadingScreen.this,
-                            MainMenu.class);
+                            Activity.class);
                     startActivity(i);
                     finish();
                 }

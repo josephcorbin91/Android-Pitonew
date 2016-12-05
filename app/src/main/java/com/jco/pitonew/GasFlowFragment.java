@@ -1,22 +1,32 @@
 package com.jco.pitonew;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.Space;
+import android.support.v7.app.AlertDialog;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
 /**
  * Created by jco on 11/23/2016.
  */
-public class GasFlowFragment extends Fragment {
+public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private Switch rectangularOrCircularSwitch;
     private View mView;
+    private Spinner numberOfGasFlowValuesNumberSpinner;
 
 
 
@@ -62,22 +72,57 @@ public class GasFlowFragment extends Fragment {
         dimension2TextView = (TextView)mView.findViewById(R.id.dimensionWidthGasFlowFragmentTextView);
         dimension2EditText = (EditText)mView.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
 
+        numberOfGasFlowValuesNumberSpinner =(Spinner) mView.findViewById(R.id.numberOfGasFlowValuesNumberSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.numbers_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        numberOfGasFlowValuesNumberSpinner.setAdapter(adapter);
+        numberOfGasFlowValuesNumberSpinner.setOnItemSelectedListener(this);
+
+
 
         rectangularOrCircularSwitch= (Switch) mView.findViewById(R.id.rectangularCircularGasFlowFragmentSwitch);
         rectangularOrCircularSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     setDimensions("Rectangular");
-                    // The toggle is enabled
-                } else {
+                }
+                else{
                     setDimensions("Circular");
-                    // The toggle is disabled
+
                 }
             }
         });
         return view;
     }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+
+        LinearLayout linearLayout = (LinearLayout)mView.findViewById(R.id.gas_flow_input_values_linear_layout);
+               LinearLayout.LayoutParams editTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                for(int i=0 ; i< pos; i++)
+                {
+                    EditText editTextValue = new EditText(getContext());
+                    editTextValue.setLayoutParams(editTextParams);
+                    linearLayout.addView(editTextValue);
+                }
+
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.dialog_gas_flow_input_values);
+        dialog.setTitle("Title...");
+            dialog.show();
+        }
 
 
 
@@ -85,7 +130,7 @@ public class GasFlowFragment extends Fragment {
         TextView unitsAverageVelocity = (TextView)mView.findViewById(R.id.UnitsactualAirFlowTextView);
         TextView unitsMassAirFlow =  (TextView)mView.findViewById(R.id.UnitsmassAirFlowTextView);
         TextView unitsActualAirFlow=   (TextView)  mView.findViewById(R.id.UnitsactualAirFlowTextView);
-        TextView unitsNormalAirFlow=(TextView)mView.findViewById(R.id.UnitsnormalAirFlowTextView);
+        TextView unitsNormalAirFlow=(TextView)mView.findViewById(R.id.normalAirFlowValueUnits);
         TextView UnitsDimensionHeightGasFlowFragmentTextView = (TextView)mView.findViewById(R.id.UnitsDimensionHeightGasFlowFragmentTextView);
         TextView UnitsDimensionWidthGasFlowFragmentTextView =  (TextView)mView.findViewById(R.id.UnitsDimensionWidthGasFlowFragmentTextView);
 

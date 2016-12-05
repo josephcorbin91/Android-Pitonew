@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="@dimen/input_fragment_width"
+    android:padding="10dp"
+    android:background="@color/inputBackgroundColor"
+    android:layout_height="@dimen/input_fragment_height">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Temperature (T):"
+        android:textSize="@dimen/input_fragment_text_size"/>
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+    <EditText
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/input_fragment_text_size"/>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="C"
+    android:textSize="@dimen/input_fragment_text_size"/>
+</LinearLayout>
+</LinearLayout>

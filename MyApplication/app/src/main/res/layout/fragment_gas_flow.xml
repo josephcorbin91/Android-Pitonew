@@ -1,0 +1,334 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/gasFlowFragment"
+    tools:context=".GasDensityFragment">
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Gas Flow"
+                />
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Circular or Rectangular"
+                android:id="@+id/circularOrDiamaterHeader"
+                />
+
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
+
+
+                />
+        </TableRow>
+    <TableRow>
+            <include layout="@layout/inputfragment"/>
+
+
+
+
+
+    </TableRow>
+<TableRow>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Rectangular or Circular"
+            android:id="@+id/rectangularCircularGasFlowFragmentTextView"
+
+            />
+
+
+</TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Height"
+                android:id="@+id/dimensionHeightOrDiameterGasFlowFragmentTextView"
+                android:layout_gravity="left" />
+</TableRow>
+<TableRow>
+
+
+        >
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Enter First Dimension"
+                android:textColor="@color/text_color_fragment_black"
+                android:textColorHint="@color/text_color_fragment_black"
+                android:textSize="20dp"
+                android:inputType="numberDecimal"
+                android:id="@+id/dimensionHeightGasFlowFragmentEditText"
+                android:layout_gravity="left"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="m"
+                android:textSize="20dp"
+                android:textColor="@color/text_color_fragment_black"
+                android:id="@+id/UnitsDimensionHeightGasFlowFragmentTextView"
+                android:layout_gravity="bottom"
+                android:layout_column="2" />
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Width"
+                                android:textSize="20dp"
+
+            android:id="@+id/dimensionWidthGasFlowFragmentTextView"
+                 />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Second Dimension"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:id="@+id/dimensionWidthGasFlowFragmentEditText"
+
+                    android:layout_gravity="left"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="m"
+                android:layout_gravity="left"
+                android:id="@+id/UnitsDimensionWidthGasFlowFragmentTextView"
+
+                android:layout_column="2" />
+
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Width"
+                android:id="@+id/dimensionAreaGasFlowFragmentTextView"
+
+                />
+        </TableRow>
+
+        <TableRow>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="m"
+                android:id="@+id/UnitsDimensionAreaGasFlowFragmentTextView"
+
+                android:layout_column="2" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duct Area"
+                android:textSize="20dp"
+
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+
+                android:id="@+id/ductAreaGasFlowFragmentTextView"
+                android:layout_column="2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+
+                android:text="m²"
+                android:id="@+id/UnitsductAreaGasFlowFragmentTextView"
+
+                android:layout_column="3" />
+
+        </TableRow>
+
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cv: Pitot Tube Coefficient"
+                android:textSize="20dp"
+
+                android:id="@+id/pitotTubeCoefficientTextView"
+
+                />
+
+
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+
+                android:id="@+id/pitotTubeCoefficientEditText"
+
+                android:layout_column="2" />
+
+        </TableRow>
+
+
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vavg: Avg. Velocity"
+                android:id="@+id/averageVelocityTextView"
+                android:textSize="20dp"
+
+
+
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+
+                android:id="@+id/averageVelocityValueTextView"
+
+                android:layout_column="2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+
+                android:text="m"
+                android:id="@+id/UnitsaverageVelocityTextView"
+
+                android:layout_column="3" />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Qm: Mass Air Flow"
+                android:textSize="20dp"
+
+                android:id="@+id/massAirFlowTextView"
+
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="20dp"
+
+                android:id="@+id/massAirFlowTextViewValue"
+
+                android:layout_column="2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20dp"
+
+                android:id="@+id/UnitsmassAirFlowTextView"
+
+                android:layout_column="3" />
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q: Actual Air Flow"
+                android:textSize="20dp"
+
+                android:id="@+id/actualAirFlowTextView"
+
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+
+                android:id="@+id/actualAirFlowTextViewTextViewValue"
+
+                android:layout_column="2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20dp"
+
+                android:id="@+id/UnitsactualAirFlowTextView"
+
+                android:layout_column="3" />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Qn: Normal Air Flow"
+                android:textSize="20dp"
+                android:id="@+id/normalAirFlowTextView"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="20dp"
+
+            android:id="@+id/normalAirFlowTextViewTextViewValue"
+
+                android:layout_column="2" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20dp"
+
+                android:id="@+id/UnitsnormalAirFlowTextView"
+
+                android:layout_column="3" />
+
+        </TableRow>
+
+
+    </LinearLayout>
+
+
