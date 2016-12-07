@@ -1,6 +1,7 @@
 package com.jco.pitonew;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,12 +31,57 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
 
 
 
-    private TextView dimensionHeader, dimension2TextView,dimension1TextView;
+    private TextView dimensionHeader, dimension2TextView,dimension1TextView,dimension2UnitText;
     private EditText dimension2EditText;
+    LinearLayout dimesnion2LinearLayout;
     public static GasFlowFragment newInstance() {
         return new GasFlowFragment();
     }
 
+
+    public void showStandardAirDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Gas Flow Velocity");
+        builder.setTitle("Gas Flow Velocity");
+        builder.setIcon(R.drawable.pitonew_logo);
+
+        builder.setView(R.layout.inputfragment);
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Dialog standardAirDialog = (Dialog)dialog;
+               EditText editText = (EditText)standardAirDialog.findViewById(R.id.input1);
+
+
+
+
+
+
+            }
+        });
+        builder.setNegativeButton("Reset", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Dialog standardAirDialog = (Dialog)dialog;
+                EditText editText = (EditText)standardAirDialog.findViewById(R.id.input1);
+                  editText.setText("");
+
+
+            }
+        });
+        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Dialog standardAirDialog = (Dialog)dialog;
+                standardAirDialog.hide();
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     public GasFlowFragment() {
     }
     public void setDimensions(String dimensions){
@@ -52,6 +98,8 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
                 dimension1TextView.setText("Diameter");
                 dimension2TextView.setVisibility(View.INVISIBLE);
                 dimension2EditText.setVisibility(View.INVISIBLE);
+                dimension2UnitText.setVisibility(View.INVISIBLE);
+                dimesnion2LinearLayout.setVisibility(View.INVISIBLE);
                 break;
         }
     }
@@ -67,11 +115,12 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gas_flow, container, false);
         this.mView = view;
-        dimensionHeader = (TextView)mView.findViewById(R.id.circularOrDiamaterHeader);
+        dimensionHeader = (TextView)mView.findViewById(R.id.rectangularCircularGasFlowFragmentTextView);
         dimension1TextView =(TextView)mView.findViewById(R.id.dimensionHeightOrDiameterGasFlowFragmentTextView);
         dimension2TextView = (TextView)mView.findViewById(R.id.dimensionWidthGasFlowFragmentTextView);
         dimension2EditText = (EditText)mView.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
-
+        dimension2UnitText = (TextView)mView.findViewById(R.id.UnitsactualAirFlowTextView);
+        dimesnion2LinearLayout = (LinearLayout)mView.findViewById(R.id.dimension2LinearLayout);
         numberOfGasFlowValuesNumberSpinner =(Spinner) mView.findViewById(R.id.numberOfGasFlowValuesNumberSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -109,19 +158,7 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
 
-        LinearLayout linearLayout = (LinearLayout)mView.findViewById(R.id.gas_flow_input_values_linear_layout);
-               LinearLayout.LayoutParams editTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                for(int i=0 ; i< pos; i++)
-                {
-                    EditText editTextValue = new EditText(getContext());
-                    editTextValue.setLayoutParams(editTextParams);
-                    linearLayout.addView(editTextValue);
-                }
 
-        Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.dialog_gas_flow_input_values);
-        dialog.setTitle("Title...");
-            dialog.show();
         }
 
 

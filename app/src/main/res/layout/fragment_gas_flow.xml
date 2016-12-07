@@ -9,22 +9,9 @@
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal|bottom">
 
-        <TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Gas Flow"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Circular"
-                android:id="@+id/circularOrDiamaterHeader"
-                />
-            </TableRow>
 <TableRow >
 
    <Spinner
@@ -34,26 +21,29 @@
 </TableRow>
         <TableRow
             >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Rectangular or Circular"
-                android:id="@+id/rectangularCircularGasFlowFragmentTextView"
 
-                />
+
+        </TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rectangular or Circular"
+            android:id="@+id/rectangularCircularGasFlowFragmentTextView"/>
+
 
 
             <Switch
-                android:layout_width="200dp"
-                android:layout_height="20dp"
-                android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_gravity="center"
                 android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
-                android:textOff="Rectangular"
-                android:textOn="Circular"
+                android:textOff="Circular"
+                android:textOn="Rectangular"
+android:showText="true"
 
-                android:checked="false" />
+                android:checked="false"
+                 />
 
-        </TableRow>
 
         <TableRow
                       >
@@ -75,6 +65,7 @@
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:background="@color/inputBackgroundColor"
+                    android:id="@+id/dimension2LinearLayout"
 
                     android:layout_height="wrap_content"
                     android:gravity="center">
@@ -101,7 +92,8 @@
                 android:layout_width="@dimen/input_fragment_width"
                 android:background="@color/inputBackgroundColor"
 android:layout_margin="10dp"
-                android:layout_height="@dimen/input_fragment_height">
+                android:layout_height="@dimen/input_fragment_height"
+                android:layout_column="2">
                 <TextView
                     android:text="Height"
                     android:id="@+id/dimensionHeightOrDiameterGasFlowFragmentTextView"
@@ -171,7 +163,8 @@ android:layout_margin="10dp"
         android:layout_width="@dimen/input_fragment_width"
         android:background="@color/inputBackgroundColor"
         android:layout_margin="10dp"
-        android:layout_height="@dimen/input_fragment_height">
+        android:layout_height="@dimen/input_fragment_height"
+        android:layout_column="2">
         <TextView
             android:background="@color/inputBackgroundColor"
 
@@ -249,7 +242,8 @@ android:layout_margin="10dp"
 
                 android:background="@color/inputBackgroundColor"
                 android:layout_margin="10dp"
-                android:layout_height="@dimen/input_fragment_height">
+                android:layout_height="@dimen/input_fragment_height"
+                android:layout_column="2">
                 <TextView
 
                     android:layout_width="fill_parent"
@@ -331,7 +325,8 @@ android:layout_margin="10dp"
                 android:layout_width="@dimen/input_fragment_width"
                 android:background="@color/inputBackgroundColor"
                 android:layout_margin="10dp"
-                android:layout_height="@dimen/input_fragment_height">
+                android:layout_height="@dimen/input_fragment_height"
+                android:layout_column="2">
                 <TextView
 
                     android:layout_width="fill_parent"
@@ -367,6 +362,14 @@ android:layout_margin="10dp"
             </LinearLayout>
 
         </TableRow>
+
+        <com.jco.pitonew.ButtonRectangle
+            android:id="@+id/tooldbarCalculateButton"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:background="@color/button_color"
+            android:text="Show Reuslts"
+            android:layout_gravity="right"/>
 
 
     </TableLayout>

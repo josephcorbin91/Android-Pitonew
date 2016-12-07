@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +28,36 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         private GasFlowFragment gasFlowFragment;
         private FragmentTransaction fragmentTransaction;
         private Toolbar actionToolBar;
-        private ButtonRectangle clearButton, calculateButton;
+        private ButtonFlat clearButton, calculateButton;
         private String currentCalculations,currentUnits;
         private TextView unitsGasDensityTemperatureDB,unitsGasDensityTemperatureWB, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel,unitsGasDensityAtmosphericPressure, unitsStaticPressure,unitsDuctPressure,dimensionHeader,dimension1TextView, dimension2TextView;
         private View gasDensityFragmentView, gasFlowFragmentView;
         private Switch unitSwitch;
         private Switch circularOrRectangularSwitch;
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        /* Handle item selection
+        switch (item.getItemId()) {
+            case R.id.new_game:
+                newGame();
+                return true;
+            case R.id.help:
+                showHelp();
+                return true;
+                */
+                return super.onOptionsItemSelected(item);
 
 
-        private LinearLayout activityMainRootLayout;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    private LinearLayout activityMainRootLayout;
     protected void onCreate(Bundle savedInstanceState) {
 
 
@@ -53,11 +75,13 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                     switch (currentCalculations) {
                         case "gasFlow":
                             gasFlowFragment.changeUnits("Imperial");
+                            gasDensityFragment.clear();
                             currentUnits = "Imperial";
                             break;
                         case "gasDensity":
                             gasDensityFragment.changeUnits("Imperial");
                             currentUnits = "Imperial";
+                            gasDensityFragment.clear();
                             break;
                     }
                 } else {
@@ -76,7 +100,6 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                 }
             }
         });
-        dimensionHeader = (TextView)findViewById(R.id.rectangularCircularGasFlowFragmentTextView);
         dimension1TextView = (TextView)findViewById(R.id.dimensionHeightOrDiameterGasFlowFragmentTextView);
         dimension2TextView = (TextView)findViewById(R.id.dimensionWidthGasFlowFragmentTextView);
         gasDensityFragment = new GasDensityFragment();
@@ -144,8 +167,8 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                     .add(R.id.fragment_container, gasDensityFragment).commit();
         }
         currentCalculations="gasDensity";
-        clearButton = (ButtonRectangle)findViewById(R.id.toolbarClearButton);
-        calculateButton = (ButtonRectangle)findViewById(R.id.tooldbarCalculateButton);
+        clearButton = (ButtonFlat)findViewById(R.id.toolbarClearButton);
+        calculateButton = (ButtonFlat)findViewById(R.id.tooldbarCalculateButton);
         clearButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -218,7 +241,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                     gasFlow.displayResult();
                 break;
             case "gasDensity" :
-                GasDensity gasDensity = new GasDensity(this);
+                GasDensity gasDensity = new GasDensity(this,gasDensityFragment);
                 if(!gasDensity.verifyDataIntegrity()){
                     Toast.makeText(getApplicationContext(), "Invalid or missing entry \n Please try again.",Toast.LENGTH_LONG).show();
                     gasDensityFragment.clear();

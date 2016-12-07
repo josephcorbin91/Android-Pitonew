@@ -4,13 +4,12 @@
     android:layout_height="match_parent"
     android:layout_centerVertical="true"
     android:paddingTop="200dp"
-    android:background="#000000"
 
     >
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
          android:src="@drawable/gaslogo"
 
         android:layout_gravity="center_horizontal" />
@@ -20,7 +19,7 @@
     android:layout_height="100dp"
     android:textSize="70dp"
     android:text="Pitonew"
-        android:textColor="#689F38"
+        android:textColor="@color/colorPrimaryDark"
         android:id="@+id/loading_screen_textview"></com.jco.pitonew.TitanicTextView>
 
 </LinearLayout>

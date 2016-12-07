@@ -1,6 +1,7 @@
 package com.jco.pitonew;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class GasFlow implements Serializable{
         pitotTubeCoefficientEditText =(EditText)activity.findViewById(R.id.pitotTubeCoefficientEditText);
         dimensionWidthEditText =(EditText)activity.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
         areaTextView = (TextView)activity.findViewById(R.id.ductAreaGasFlowFragmentTextView);
+
 
         if(pipeType == "Circular"){
             this.Diameter= Double.valueOf(dimensionHeightEditText.getText().toString());

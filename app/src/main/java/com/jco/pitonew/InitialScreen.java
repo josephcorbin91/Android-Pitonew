@@ -13,7 +13,7 @@ public class InitialScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-        setContentView(R.layout.activity_initial_screen);
+        setContentView(R.layout.activity_loading_screen);
         TitanicTextView loadingScreenTextView = (TitanicTextView) findViewById(R.id.loading_screen_textview);
 /*
         Typeface font = Typeface.createFromAsset(

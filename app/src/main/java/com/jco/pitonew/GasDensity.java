@@ -1,6 +1,7 @@
 package com.jco.pitonew;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class GasDensity implements Serializable{
     private String PressureUnit;
     private int SealevelPressure;
     private int ElevationAboveSeaLevel;
+    private static final double standardAirMolecularWeight=28.96;
     private int StaticPressure;
     private double airContentPercentageCO2;
     private double airContentPercentageO2;
@@ -39,7 +41,7 @@ public class GasDensity implements Serializable{
     private static final double universalGasConstant =8.3144598;
     private TextView gasDensityResultTextView;
     private EditText temperatureEditText, seaLevelPressureEditText, elevationAboveSeaLevelEditText,staticPressureEditText,temperatureWetBulbEditText;
-
+private double [] gasCompositionInputArry;
 
 
 
@@ -92,7 +94,7 @@ MW is the molecular weight.
     http://www.engineeringtoolbox.com/molecular-mass-air-d_679.html
      */
 
-public GasDensity(Activity activity){
+public GasDensity(Activity activity, GasDensityFragment gasDensityFragment){
     temperatureEditText= (EditText)activity.findViewById(R.id.temperatureGasDensityFragmentEditText);
     seaLevelPressureEditText = (EditText)activity.findViewById(R.id.seaLevelPressureGasDensityFragmentEditText);
     elevationAboveSeaLevelEditText = (EditText)activity.findViewById(R.id.ElevationAboveSeaLevelFragmentEdiText);
@@ -104,25 +106,35 @@ public GasDensity(Activity activity){
     this.SealevelPressure = Integer.valueOf(seaLevelPressureEditText.getText().toString());
     this.ElevationAboveSeaLevel =Integer.valueOf(elevationAboveSeaLevelEditText.getText().toString());
     this.StaticPressure =Integer.valueOf(staticPressureEditText.getText().toString());
+    this.gasCompositionInputArry = gasDensityFragment.getStandardAirResult();
 
-
-
+    this.airContentPercentageCO2= this.gasCompositionInputArry[0];
+    this.airContentPercentageO2 = this.gasCompositionInputArry[1];
+    this.airContentPercentageN2=this.gasCompositionInputArry[2];
+    this.airContentPercentageAr=this.gasCompositionInputArry[3];
+    this.airContentPercentageH2O=this.gasCompositionInputArry[4];
 
 
 }
     public double calculateMolarMass(){
 
-        this.molecularWeight= (this.airContentPercentageCO2*44.01)+(this.airContentPercentageAr*39.94)+(this.airContentPercentageH2O*18.01528)+(this.airContentPercentageO2*32)+(this.airContentPercentageN2*28.02);
+        this.molecularWeight= (this.airContentPercentageCO2*44.01/100)+(this.airContentPercentageAr*39.94/100)+(this.airContentPercentageH2O*18.01528/100)+(this.airContentPercentageO2*32/100)+(this.airContentPercentageN2*28.02/100);
         return this.molecularWeight;
     }
 
     public double calculateGasDensity() {
-        this.absoluteTemperature = this.getDryBulbTemperature() + 273.15;
-        this.individualGasConstant = this.universalGasConstant / this.molecularWeight;
-        this.gasDensity= this.atmosphericPressure * this.molecularWeight / this.absoluteTemperature;
-        return this.gasDensity;
+        if (standardAir) {
+            this.absoluteTemperature = this.getDryBulbTemperature() + 273.15;
+            this.individualGasConstant = this.universalGasConstant / this.molecularWeight;
+            this.gasDensity = this.atmosphericPressure * this.molecularWeight / this.absoluteTemperature;
+            return this.gasDensity;
+        }
+        else{
+            this.absoluteTemperature = this.getDryBulbTemperature() + 273.15;
+            this.individualGasConstant = this.universalGasConstant / standardAirMolecularWeight;
+            this.gasDensity = this.atmosphericPressure * this.molecularWeight / this.absoluteTemperature;
+            return this.gasDensity;        }
     }
-
 
 
     public double getAirContentPercentageCO2() {

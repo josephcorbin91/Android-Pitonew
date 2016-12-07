@@ -14,8 +14,8 @@
 <GridLayout
     android:layout_width="wrap_content"
     android:columnCount="11"
-    android:background="@color/LogoColor"
     android:rowCount="5"
+    android:background="#000000"
     android:verticalSpacing="1dp"
     android:orientation="horizontal"
     android:layout_height="wrap_content">
@@ -23,48 +23,38 @@
     <TextView
         android:layout_width="@dimen/grid_input_width"
         android:layout_height="@dimen/grid_input_height"
+        android:background="#8CDD81"
         android:textSize="@dimen/grid_input_text_size"
-        android:background="#FFFFFF"
         android:layout_margin="2dp"
         android:text=""/>
     <TextView
+        android:background="#8CDD81"
+        android:layout_margin="2dp"
         android:layout_width="@dimen/grid_input_width"
         android:textSize="@dimen/grid_input_text_size"
-        android:background="#FFFFFF"
-        android:layout_margin="2dp"
-
         android:layout_height="@dimen/grid_input_height"
         android:text="1"/>
     <TextView
         android:layout_width="@dimen/grid_input_width"
         android:textSize="@dimen/grid_input_text_size"
         android:layout_height="@dimen/grid_input_height"
-        android:layout_margin="2dp"
-
-        android:background="#FFFFFF"
         android:text="2"/>
 
     <TextView
         android:layout_width="@dimen/grid_input_width"
-        android:background="#FFFFFF"
-        android:layout_margin="2dp"
-
         android:textSize="@dimen/grid_input_text_size"
         android:layout_height="@dimen/grid_input_height"
         android:text="3"/>
 
     <TextView
         android:layout_width="@dimen/grid_input_width"
-        android:background="#FFFFFF"
-        android:layout_margin="2dp"
-
         android:textSize="@dimen/grid_input_text_size"
         android:layout_height="@dimen/grid_input_height"
         android:text="4"/>
     <TextView
         android:layout_width="@dimen/grid_input_width"
         android:textSize="@dimen/grid_input_text_size"
-        android:background="#FFFFFF"
+        android:background="#8CDD81"
         android:layout_margin="2dp"
         android:layout_height="@dimen/grid_input_height"
         android:text="5"/>
@@ -77,7 +67,6 @@
         android:text="6"/>
     <TextView
         android:layout_width="@dimen/grid_input_width"
-        android:layout_margin="2dp"
         android:textSize="@dimen/grid_input_text_size"
         android:layout_height="@dimen/grid_input_height"
         android:text="7"/>
@@ -92,39 +81,31 @@
         android:layout_width="@dimen/grid_input_width"
 
         android:textSize="@dimen/grid_input_text_size"
-        android:layout_margin="2dp"
         android:layout_height="@dimen/grid_input_height"
         android:text="9"/>
     <TextView
         android:layout_width="@dimen/grid_input_width"
 
-        android:layout_margin="2dp"
         android:textSize="@dimen/grid_input_text_size"
         android:layout_height="@dimen/grid_input_height"
         android:text="10"/>
 
     <TextView
         android:layout_width="@dimen/grid_input_width"
-        android:background="#FFFFFF"
 
-        android:layout_margin="2dp"
         android:textSize="@dimen/grid_input_text_size"
         android:layout_height="@dimen/grid_input_height"
         android:text="1"/>
 
     <EditText
         android:layout_width="@dimen/grid_input_width"
-        android:layout_margin="2dp"
         android:layout_height="@dimen/grid_input_height"
-        android:background="#FFFFFF"
         android:layout_gravity="left|top"
         android:text="" />
 
     <EditText
         android:layout_width="@dimen/grid_input_width"
         android:layout_height="@dimen/grid_input_height"
-        android:background="#FFFFFF"
-        android:layout_margin="2dp"
         android:layout_gravity="left|top"
         android:text="" />
 
@@ -132,8 +113,6 @@
     <EditText
         android:layout_width="@dimen/grid_input_width"
         android:layout_height="@dimen/grid_input_height"
-        android:layout_margin="2dp"
-        android:background="#FFFFFF"
         android:id="@+id/input1"
         android:layout_gravity="left|top"
         android:text="" />
@@ -141,40 +120,6 @@
     <EditText
         android:layout_width="@dimen/grid_input_width"
         android:layout_height="@dimen/grid_input_height"
-        android:layout_margin="2dp"
-        android:background="#FFFFFF"
-        android:layout_gravity="left|top"
-        android:text="" />
-
-    <EditText
-        android:layout_width="@dimen/grid_input_width"
-        android:background="#FFFFFF"
-        android:layout_height="@dimen/grid_input_height"
-        android:layout_margin="2dp"
-        android:layout_gravity="left|top"
-        android:text="" />
-
-    <EditText
-        android:layout_width="@dimen/grid_input_width"
-        android:layout_height="@dimen/grid_input_height"
-        android:layout_margin="2dp"
-        android:layout_gravity="left|top"
-        android:background="#FFFFFF"
-        android:text="" />
-
-    <EditText
-        android:layout_margin="2dp"
-        android:layout_width="@dimen/grid_input_width"
-        android:background="#FFFFFF"
-        android:layout_height="@dimen/grid_input_height"
-        android:layout_gravity="left|top"
-        android:text="" />
-
-    <EditText
-        android:layout_width="@dimen/grid_input_width"
-        android:layout_height="@dimen/grid_input_height"
-        android:layout_margin="2dp"
-        android:background="#FFFFFF"
         android:layout_gravity="left|top"
         android:text="" />
 
@@ -182,22 +127,40 @@
         android:layout_width="@dimen/grid_input_width"
         android:layout_height="@dimen/grid_input_height"
         android:layout_gravity="left|top"
-        android:background="#FFFFFF"
-        android:layout_margin="2dp"
         android:text="" />
 
     <EditText
         android:layout_width="@dimen/grid_input_width"
-        android:layout_margin="2dp"
         android:layout_height="@dimen/grid_input_height"
-        android:background="#FFFFFF"
+        android:layout_gravity="left|top"
+        android:text="" />
+
+    <EditText
+        android:layout_width="@dimen/grid_input_width"
+        android:layout_height="@dimen/grid_input_height"
+        android:layout_gravity="left|top"
+        android:text="" />
+
+    <EditText
+        android:layout_width="@dimen/grid_input_width"
+        android:layout_height="@dimen/grid_input_height"
+        android:layout_gravity="left|top"
+        android:text="" />
+
+    <EditText
+        android:layout_width="@dimen/grid_input_width"
+        android:layout_height="@dimen/grid_input_height"
+        android:layout_gravity="left|top"
+        android:text="" />
+
+    <EditText
+        android:layout_width="@dimen/grid_input_width"
+        android:layout_height="@dimen/grid_input_height"
         android:layout_gravity="left|top"
         android:text="" />
 
     <TextView
         android:layout_width="@dimen/grid_input_width"
-        android:layout_margin="2dp"
-        android:background="#FFFFFF"
         android:layout_height="@dimen/grid_input_height"
         android:text="2"/>
 
@@ -205,21 +168,16 @@
     <EditText
         android:layout_width="@dimen/grid_input_width"
         android:layout_height="@dimen/grid_input_height"
-        android:background="#FFFFFF"
-        android:layout_margin="2dp"
         android:layout_gravity="left|top"
         android:text="" />
 
     <EditText
         android:layout_width="@dimen/grid_input_width"
         android:layout_height="@dimen/grid_input_height"
-        android:background="#FFFFFF"
         android:layout_gravity="left|top"
-        android:layout_margin="2dp"
         android:text="" />
 
     <EditText
-        android:layout_margin="2dp"
         android:layout_width="@dimen/grid_input_width"
         android:layout_height="@dimen/grid_input_height"
         android:layout_gravity="left|top"

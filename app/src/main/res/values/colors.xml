@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#4CAF50</color>
+    <color name="colorPrimaryDark">#2E7D32</color>
     <color name="colorAccent">#FF4081</color>  <color name="guillotine_background">#444153</color>
     <color name="guillotine_background_dark">#383547</color>
     <color name="selected_item_color">#30d1d5</color>
@@ -9,5 +9,6 @@
     <color name="loadingScreenBackgroundColor">#000000</color>
     <color name="inputBackgroundColor">#689F38</color>
     <color name="LogoColor">#689F38</color>
+    <color name="button_color">#1E88E5</color>
 
 </resources>
