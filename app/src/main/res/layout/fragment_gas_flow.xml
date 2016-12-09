@@ -1,48 +1,40 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/gasFlowFragment"
     tools:context=".GasDensityFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center_horizontal|bottom">
+  >
 
-<TableRow >
 
-   <Spinner
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-        android:id="@+id/numberOfGasFlowValuesNumberSpinner" />
-</TableRow>
         <TableRow
-            >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-
-        </TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rectangular or Circular"
-            android:id="@+id/rectangularCircularGasFlowFragmentTextView"/>
-
-
-
-            <Switch
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:layout_gravity="center"
-                android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
-                android:textOff="Circular"
-                android:textOn="Rectangular"
-android:showText="true"
+                android:text="Rectangular or Circular"
+                android:gravity="center"
+                android:id="@+id/rectangularCircularGasFlowFragmentTextView"/>
 
-                android:checked="false"
-                 />
+            <Switch
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                   android:gravity="center"
+                    android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
+                    android:textOff="C"
+                    android:textOn="R"
+                    android:showText="true"
+                    android:checked="false"
+                android:layout_column="2" />
+        </TableRow>
 
 
         <TableRow

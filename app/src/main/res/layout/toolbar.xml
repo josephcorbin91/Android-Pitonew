@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v7.widget.Toolbar android:id="@+id/action_bar_toolbar"
-    android:layout_width="wrap_content"
-    android:layout_height="50dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorPrimaryDark"
-    android:minHeight="70dp"
+    android:minHeight="50dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:layout_height="50dp">
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/logoImage"
-
             android:src="@drawable/transparent_calculator"/>
 
 
@@ -22,25 +21,30 @@
 <Switch
     android:id="@+id/unitSwitch"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textOn="yes"
-    android:textOff="no"
+    android:layout_height="50dp"
+    android:textOn="US"
+    android:textOff="SI"
     android:showText="true"
+
     />
-    <com.jco.pitonew.ButtonFlat
-        android:paddingLeft="30dp"
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/toolbarClearButton"
-        android:layout_width="100dp"
+        android:layout_width="70dp"
         android:layout_height="50dp"
-        android:background="#1E88E5"
+        android:layout_gravity="right"
+        android:textColor="#ffffff"
 
-        android:text="Clear" />
+        style="@style/Widget.AppCompat.Button.Borderless"
 
-    <com.jco.pitonew.ButtonFlat
-        android:id="@+id/tooldbarCalculateButton"
-        android:layout_width="100dp"
+        android:text="Clear"  />
+
+    <android.support.v7.widget.AppCompatButton
+    android:id="@+id/tooldbarCalculateButton"
+        android:layout_width="110dp"
         android:layout_height="50dp"
-        android:background="#1E88E5"
+        android:textColor="#ffffff"
+
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:text="Calculate"
         android:layout_gravity="right"/>
 

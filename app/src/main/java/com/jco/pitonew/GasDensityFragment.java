@@ -44,14 +44,25 @@ public class GasDensityFragment extends Fragment {
 
     private TextView unitsGasDensityTemperatureDB, unitsGasDensityTemperatureWB, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension1TextView, dimension2TextView;
 
+    public Boolean getStandardAirBoolean() {
+        return standardAirBoolean;
+    }
+
+    public void setStandardAirBoolean(Boolean standardAirBoolean) {
+        this.standardAirBoolean = standardAirBoolean;
+    }
+
+    private Boolean standardAirBoolean;
     private Switch standardAirSwitch;
     private View mView;
 
 
     public GasDensityFragment() {
 
+        standardAirBoolean=false;
 
     }
+
 
     public void clear(){
         Utility.clearAllFields((ViewGroup)this.mView);
@@ -77,35 +88,21 @@ public class GasDensityFragment extends Fragment {
                 standardAirResult[2]= Double.valueOf(N2EditText.getText().toString());
                 standardAirResult[3]= Double.valueOf(ArEditText.getText().toString());
                 standardAirResult[4]= Double.valueOf(H20EditText.getText().toString());
+                for(int i=0; i<standardAirResult.length; i++)
+                    System.out.print(standardAirResult[i]);
 
 
 
 
-            }
-        });
-        builder.setNegativeButton("Reset", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                Dialog standardAirDialog = (Dialog)dialog;
-                EditText C02EditText = (EditText)standardAirDialog.findViewById(R.id.C02EditText);
-                EditText O2EditText = (EditText)standardAirDialog.findViewById(R.id.O2EditText);
-                EditText N2EditText = (EditText)standardAirDialog.findViewById(R.id.N2EditText);
-                EditText ArEditText = (EditText)standardAirDialog.findViewById(R.id.ArEditText);
-                EditText H20EditText = (EditText)standardAirDialog.findViewById(R.id.H2OEditText);
-C02EditText.setText("");
-               O2EditText.setText("");
-                N2EditText.setText("");
-                ArEditText.setText("");
-                H20EditText.setText("");
 
             }
         });
-        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Dialog standardAirDialog = (Dialog)dialog;
                 standardAirDialog.hide();
+                standardAirSwitch.setChecked(false);
 
             }
         });
@@ -119,10 +116,11 @@ dialog.show();
         standardAirSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    standardAirBoolean=true;
                     showStandardAirDialog();
                 } else {
 
-                    showStandardAirDialog();
+                    standardAirBoolean=false;
                 }
             }
         });
@@ -139,7 +137,7 @@ dialog.show();
     public void changeUnits(String units) {
         unitsGasDensityTemperatureDB = (TextView) mView.findViewById(R.id.UnitstemperatureGasDensityFragmentTextView);
         unitsGasDensityTemperatureWB = (TextView) mView.findViewById(R.id.UnitsWetBulbtemperatureGasDensityFragmentTextView);
-        unitsGasDensitySeaLevelPressure = (TextView) mView.findViewById(R.id.UnitsElevationAboveSeaLevelFragmentTextView);
+        unitsGasDensitySeaLevelPressure = (TextView) mView.findViewById(R.id.UnitsseaLevelPressureGasDensityFragmentTextView);
         unitsGasDensityElevationAboveSeaLevel = (TextView) mView.findViewById(R.id.UnitsElevationAboveSeaLevelFragmentTextView);
         unitsGasDensityAtmosphericPressure = (TextView) mView.findViewById(R.id.UnitsAtmosphericPressureFragmentTextViewUnits);
         unitsDuctPressure = (TextView) mView.findViewById(R.id.UnitsDuctPressureFragmentTextView);

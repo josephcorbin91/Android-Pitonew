@@ -3,6 +3,7 @@ package com.jco.pitonew;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +29,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         private GasFlowFragment gasFlowFragment;
         private FragmentTransaction fragmentTransaction;
         private Toolbar actionToolBar;
-        private ButtonFlat clearButton, calculateButton;
+        private AppCompatButton clearButton,calculateButton;
         private String currentCalculations,currentUnits;
         private TextView unitsGasDensityTemperatureDB,unitsGasDensityTemperatureWB, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel,unitsGasDensityAtmosphericPressure, unitsStaticPressure,unitsDuctPressure,dimensionHeader,dimension1TextView, dimension2TextView;
         private View gasDensityFragmentView, gasFlowFragmentView;
@@ -94,8 +95,6 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                             gasDensityFragment.changeUnits("Metric");
                             currentUnits = "Metric";
                             break;
-
-
                     }
                 }
             }
@@ -167,8 +166,8 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                     .add(R.id.fragment_container, gasDensityFragment).commit();
         }
         currentCalculations="gasDensity";
-        clearButton = (ButtonFlat)findViewById(R.id.toolbarClearButton);
-        calculateButton = (ButtonFlat)findViewById(R.id.tooldbarCalculateButton);
+        clearButton = (AppCompatButton)findViewById(R.id.toolbarClearButton);
+        calculateButton = (AppCompatButton)findViewById(R.id.tooldbarCalculateButton);
         clearButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -241,13 +240,13 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                     gasFlow.displayResult();
                 break;
             case "gasDensity" :
-                GasDensity gasDensity = new GasDensity(this,gasDensityFragment);
+                GasDensity gasDensity = new GasDensity(this,gasDensityFragment,currentUnits,gasDensityFragment.getStandardAirBoolean());
                 if(!gasDensity.verifyDataIntegrity()){
                     Toast.makeText(getApplicationContext(), "Invalid or missing entry \n Please try again.",Toast.LENGTH_LONG).show();
                     gasDensityFragment.clear();
                 }
                 else
-                    gasDensity.displayResult();
+                    gasDensity.calculatePressureAtCurrentElevation();
                 break;
         }
 

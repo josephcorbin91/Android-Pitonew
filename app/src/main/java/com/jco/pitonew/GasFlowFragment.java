@@ -121,15 +121,12 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
         dimension2EditText = (EditText)mView.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
         dimension2UnitText = (TextView)mView.findViewById(R.id.UnitsactualAirFlowTextView);
         dimesnion2LinearLayout = (LinearLayout)mView.findViewById(R.id.dimension2LinearLayout);
-        numberOfGasFlowValuesNumberSpinner =(Spinner) mView.findViewById(R.id.numberOfGasFlowValuesNumberSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.numbers_array, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-        numberOfGasFlowValuesNumberSpinner.setAdapter(adapter);
-        numberOfGasFlowValuesNumberSpinner.setOnItemSelectedListener(this);
 
 
 
