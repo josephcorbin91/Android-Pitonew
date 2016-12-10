@@ -1,8 +1,11 @@
 package com.jco.pitonew;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
@@ -21,11 +24,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jaredrummler.materialspinner.MaterialSpinner;
+
 /**
  * Created by jco on 12/3/2016.
  */
 public class Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-        private Spinner spinner;
+        private MaterialSpinner spinner;
         private GasDensityFragment gasDensityFragment;
         private GasFlowFragment gasFlowFragment;
         private FragmentTransaction fragmentTransaction;
@@ -36,6 +41,9 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         private View gasDensityFragmentView, gasFlowFragmentView;
         private Switch unitSwitch;
         private Switch circularOrRectangularSwitch;
+    private DrawerLayout drawerLayout;
+    private boolean isDrawerOpened;
+        //private MaterialMenuDrawable materialMenu;
 
     public boolean onOptionsItemSelected(MenuItem item) {
         /* Handle item selection
@@ -117,6 +125,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         //  actionToolBar.setLogo(R.drawable.pitonew_logo);
         //  actionToolBar.setLogoDescription("LOGO DESCRIPTION");
 
+      //  materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
         actionToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -124,16 +133,54 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                 return true;
             }
         });
+
+
+
+/*
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout.setDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                materialMenu.setTransformationOffset(
+                        MaterialMenuDrawable.AnimationState.BURGER_ARROW,
+                        isDrawerOpened ? 2 - slideOffset : slideOffset
+                );
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                isDrawerOpened = true;
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                isDrawerOpened = false;
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                if(newState == DrawerLayout.STATE_IDLE) {
+                    if(isDrawerOpened) {
+                        menu.setIconState(MaterialMenuDrawable.IconState.ARROW);
+                    } else {
+                        menu.setIconState(MaterialMenuDrawable.IconState.BURGER);
+                    }
+                }
+            }
+        });
+
         actionToolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                materialMenu.animateState(newState);
                 Toast.makeText(Activity.this, "Navigation Icon Pressed",Toast.LENGTH_LONG).show();
 
-                actionToolBar.setVisibility(View.GONE);
             }
         });
-        spinner = (Spinner) findViewById(R.id.functionsSpinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        actionToolBar.setNavigationIcon(materialMenu);
+  */
+        spinner = (MaterialSpinner) findViewById(R.id.functionsSpinner);
+/* Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.functionality_array, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
@@ -141,7 +188,30 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+*/
+        spinner.setItems("Gas Flow", "Gas Density");
+        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
+                                              @Override
+                                              public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                                                  switch (position) {
+                                                      case 0:
+                                                          //android.support.v4.app.FragmentManager fm = getSupportFragmentManager();https://github.com/DesarrolloAntonio/FragmentTransactionExtended/blob/master/fragmentTransactionExample/src/main/java/com/desarrollodroide/fragmenttrasitionextendedexample/MainActivity.java
+                                                          // FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                                                          // FragmentTransactionExtended fragmentTransactionExtended = new FragmentTransactionExtended(this, fragmentTransaction, gasDensityFragment, gasFlowFragment, R.id.fragment_container);
+                                                          //  fragmentTransactionExtended.addTransition(FragmentTransactionExtended.GLIDE);
+                                                          //  fragmentTransactionExtended.commit();
+                                                          getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout).replace(R.id.fragment_container, gasFlowFragment).commit();
+                                                          currentCalculations = "gasFlow";
+                                                          break;
+                                                      case 1:
+                                                          getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout).replace(R.id.fragment_container, gasDensityFragment).commit();
+                                                          currentCalculations = "gasDensity";
+                                                          break;
+
+                                                  }
+                                              }
+                                          });
 
 
         // Check that the activity is using the layout version with

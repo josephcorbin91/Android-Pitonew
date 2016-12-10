@@ -3,19 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootLayoutActivityMain"
-android:orientation="vertical"
+    android:orientation="vertical"
+
 
     tools:context="com.jco.pitonew.Activity">
     <include layout="@layout/toolbar"/>
 
 
 
-    <Spinner
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/functionsSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/functionsSpinner" />
-
+        app:ms_arrow_tint="@color/colorPrimaryDark"
+        app:ms_background_color="@color/colorPrimary"
+        app:ms_text_color="@color/text_color"
+        />
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_container"

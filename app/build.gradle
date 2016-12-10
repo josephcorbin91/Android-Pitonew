@@ -35,7 +35,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.yalantis:sidemenu:1.0'
     compile 'com.github.Yalantis:GuillotineMenu-Android:1.2'
-
+    compile 'com.jaredrummler:material-spinner:1.1.0'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:design:24.2.1'
@@ -44,6 +44,7 @@ dependencies {
     compile 'com.github.glomadrian:MaterialAnimatedSwitch:1.1@aar'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.github.florent37:materialtextfield:1.0.5'
+    compile 'com.balysv.materialmenu:material-menu:2.0.0'
 
 
 
