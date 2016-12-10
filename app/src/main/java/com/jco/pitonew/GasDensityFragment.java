@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,6 +91,10 @@ public class GasDensityFragment extends Fragment {
                 standardAirResult[4]= Double.valueOf(H20EditText.getText().toString());
                 for(int i=0; i<standardAirResult.length; i++)
                     System.out.print(standardAirResult[i]);
+                Toast.makeText(getActivity(), "Molecular Weight ="+String.valueOf(standardAirResult[0]*44.01/100+standardAirResult[1]*32/100+standardAirResult[2]*28.02/100+standardAirResult[3]*39.94/100+standardAirResult[4]*18.01528/100),Toast.LENGTH_LONG).show();
+
+
+
 
 
 
@@ -103,6 +108,8 @@ public class GasDensityFragment extends Fragment {
                 Dialog standardAirDialog = (Dialog)dialog;
                 standardAirDialog.hide();
                 standardAirSwitch.setChecked(false);
+                Toast.makeText(getActivity(), "Molecular Weight = 28.96",Toast.LENGTH_LONG).show();
+
 
             }
         });
@@ -119,7 +126,8 @@ dialog.show();
                     standardAirBoolean=true;
                     showStandardAirDialog();
                 } else {
-
+                    Toast.makeText(getActivity(), "Molecular Weight = 28.96",
+                            Toast.LENGTH_LONG).show();
                     standardAirBoolean=false;
                 }
             }

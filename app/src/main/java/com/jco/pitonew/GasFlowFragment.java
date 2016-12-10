@@ -33,7 +33,7 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
 
     private TextView dimensionHeader, dimension2TextView,dimension1TextView,dimension2UnitText;
     private EditText dimension2EditText;
-    LinearLayout dimesnion2LinearLayout;
+    LinearLayout dimesnion2LinearLayout, dimension2LinearLayoutFull;
     public static GasFlowFragment newInstance() {
         return new GasFlowFragment();
     }
@@ -92,6 +92,10 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
                 dimension2TextView.setText("Width");
                 dimension2TextView.setVisibility(View.VISIBLE);
                 dimension2EditText.setVisibility(View.VISIBLE);
+
+                dimension2UnitText.setVisibility(View.VISIBLE);
+                dimesnion2LinearLayout.setVisibility(View.VISIBLE);
+                dimension2LinearLayoutFull.setVisibility(View.VISIBLE);
                 break;
             case "Circular":
                 dimensionHeader.setText("Circular");
@@ -100,6 +104,7 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
                 dimension2EditText.setVisibility(View.INVISIBLE);
                 dimension2UnitText.setVisibility(View.INVISIBLE);
                 dimesnion2LinearLayout.setVisibility(View.INVISIBLE);
+                dimension2LinearLayoutFull.setVisibility(View.INVISIBLE);
                 break;
         }
     }
@@ -121,6 +126,7 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
         dimension2EditText = (EditText)mView.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
         dimension2UnitText = (TextView)mView.findViewById(R.id.UnitsactualAirFlowTextView);
         dimesnion2LinearLayout = (LinearLayout)mView.findViewById(R.id.dimension2LinearLayout);
+        dimension2LinearLayoutFull = (LinearLayout)mView.findViewById(R.id.dimension2LinearLayoutFull);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.numbers_array, android.R.layout.simple_spinner_item);

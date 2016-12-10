@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     android:id="@+id/gasFlowFragment"
     tools:context=".GasDensityFragment">
 
@@ -44,6 +45,7 @@
                 android:layout_width="@dimen/input_fragment_width"
                 android:background="@color/inputBackgroundColor"
                 android:layout_height="@dimen/input_fragment_height"
+                android:id="@+id/dimension2LinearLayoutFull"
                 android:layout_margin="10dp">
                 <TextView
 

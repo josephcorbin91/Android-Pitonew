@@ -74,8 +74,11 @@ public class GasFlow implements Serializable{
         return  this.actualAirFlow;
     }
     public void displayResult() {
-        areaTextView.setText(String.valueOf(this.Area));
 
+
+    }
+    public void calculateArea(){
+        areaTextView.setText(String.valueOf(this.Area));
 
     }
 

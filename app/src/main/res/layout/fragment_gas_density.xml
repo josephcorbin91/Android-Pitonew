@@ -23,8 +23,8 @@
     <Switch
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:textOn="yes"
-        android:textOff="no"
+        android:textOn="no"
+        android:textOff="yes"
         android:showText="true"
         android:id="@+id/standardAirSwitch"
         android:gravity="right"
@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:text="Wet Bulb Temperature"
                 android:id="@+id/WetBulbTemperatureGasDensityFragmentTextView"
-                android:layout_gravity="center" />
+                android:layout_gravity="left" />
 
 
             <Switch
@@ -279,10 +279,8 @@ android:inputType="numberDecimal"
 
                 </LinearLayout>
             </LinearLayout>
-
-
-
         </TableRow>
+
 
         <TableRow
             >
@@ -345,7 +343,7 @@ android:inputType="numberDecimal"
 
                     android:layout_height="wrap_content"
                     android:gravity="center">
-                     <TextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="      "
@@ -353,10 +351,10 @@ android:inputType="numberDecimal"
 
 
                         android:textSize="@dimen/input_fragment_text_size"/>
-                   <TextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                      android:text="ft"
+                        android:text="ft"
                         android:id="@+id/UnitsAtmosphericPressureFragmentTextViewUnits"
 
 
@@ -369,7 +367,16 @@ android:inputType="numberDecimal"
 
 
 
+
+
+
+
+
+
+
     </TableLayout>
+
+
 
 
     <LinearLayout android:orientation="vertical"

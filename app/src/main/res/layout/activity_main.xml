@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/rootLayoutActivityMain"
 android:orientation="vertical"
+
     tools:context="com.jco.pitonew.Activity">
     <include layout="@layout/toolbar"/>
 

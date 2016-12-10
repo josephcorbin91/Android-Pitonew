@@ -43,7 +43,6 @@
         android:layout_width="110dp"
         android:layout_height="50dp"
         android:textColor="#ffffff"
-
         style="@style/Widget.AppCompat.Button.Borderless"
         android:text="Calculate"
         android:layout_gravity="right"/>

@@ -1,6 +1,7 @@
 package com.jco.pitonew;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -157,13 +158,20 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
             // Create a new Fragment to be placed in the activity layout
 
 
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+            transaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
+            transaction.add(R.id.fragment_container, gasFlowFragment);
+            transaction.commit();
+
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
             gasDensityFragment.setArguments(getIntent().getExtras());
 
             // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, gasDensityFragment).commit();
+           // getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein,R.anim.fadeout)
+             //       .commit();
         }
         currentCalculations="gasDensity";
         clearButton = (AppCompatButton)findViewById(R.id.toolbarClearButton);
@@ -206,11 +214,11 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                 // FragmentTransactionExtended fragmentTransactionExtended = new FragmentTransactionExtended(this, fragmentTransaction, gasDensityFragment, gasFlowFragment, R.id.fragment_container);
                 //  fragmentTransactionExtended.addTransition(FragmentTransactionExtended.GLIDE);
                 //  fragmentTransactionExtended.commit();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, gasFlowFragment).commit();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein,R.anim.fadeout).replace(R.id.fragment_container, gasFlowFragment).commit();
                 currentCalculations="gasFlow";
                 break;
             case 1:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, gasDensityFragment).commit();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein,R.anim.fadeout).replace(R.id.fragment_container, gasDensityFragment).commit();
                 currentCalculations="gasDensity";
                 break;
         }
@@ -236,8 +244,10 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                     Toast.makeText(getApplicationContext(), "Invalid or missing entry \n Please try again.",Toast.LENGTH_LONG).show();
                     gasFlowFragment.clear();
                 }
-                else
-                    gasFlow.displayResult();
+                else{
+                    gasFlow.calculateArea();
+
+                }
                 break;
             case "gasDensity" :
                 GasDensity gasDensity = new GasDensity(this,gasDensityFragment,currentUnits,gasDensityFragment.getStandardAirBoolean());
