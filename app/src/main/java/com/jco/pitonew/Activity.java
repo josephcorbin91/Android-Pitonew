@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -24,6 +26,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 /**
@@ -39,6 +42,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         private String currentCalculations,currentUnits;
         private TextView unitsGasDensityTemperatureDB,unitsGasDensityTemperatureWB, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel,unitsGasDensityAtmosphericPressure, unitsStaticPressure,unitsDuctPressure,dimensionHeader,dimension1TextView, dimension2TextView;
         private View gasDensityFragmentView, gasFlowFragmentView;
+        private MaterialMenuDrawable materialMenu;
         private Switch unitSwitch;
         private Switch circularOrRectangularSwitch;
     private DrawerLayout drawerLayout;
@@ -71,9 +75,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
     protected void onCreate(Bundle savedInstanceState) {
 
 
-
-
-        currentUnits="Metric";
+        currentUnits = "Metric";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -108,99 +110,43 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                 }
             }
         });
-        dimension1TextView = (TextView)findViewById(R.id.dimensionHeightOrDiameterGasFlowFragmentTextView);
-        dimension2TextView = (TextView)findViewById(R.id.dimensionWidthGasFlowFragmentTextView);
+        dimension1TextView = (TextView) findViewById(R.id.dimensionHeightOrDiameterGasFlowFragmentTextView);
+        dimension2TextView = (TextView) findViewById(R.id.dimensionWidthGasFlowFragmentTextView);
         gasDensityFragment = new GasDensityFragment();
         gasFlowFragment = new GasFlowFragment();
-        actionToolBar = (Toolbar)findViewById(R.id.action_bar_toolbar);
-
-/*
 
 
-*/
-
+        //Action Toolbar Code
+        actionToolBar = (Toolbar) findViewById(R.id.action_bar_toolbar);
         setSupportActionBar(actionToolBar);
-        //actionToolBar.setNavigationIcon(R.drawable.pitonew_logo);
-        // actionToolBar.setNavigationContentDescription("This App");
-        //  actionToolBar.setLogo(R.drawable.pitonew_logo);
-        //  actionToolBar.setLogoDescription("LOGO DESCRIPTION");
-
-      //  materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
-        actionToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(Activity.this, "TEST",Toast.LENGTH_LONG).show();
-                return true;
-            }
-        });
-
-
-
 /*
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerLayout.setDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                materialMenu.setTransformationOffset(
-                        MaterialMenuDrawable.AnimationState.BURGER_ARROW,
-                        isDrawerOpened ? 2 - slideOffset : slideOffset
-                );
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                isDrawerOpened = true;
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                isDrawerOpened = false;
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-                if(newState == DrawerLayout.STATE_IDLE) {
-                    if(isDrawerOpened) {
-                        menu.setIconState(MaterialMenuDrawable.IconState.ARROW);
-                    } else {
-                        menu.setIconState(MaterialMenuDrawable.IconState.BURGER);
-                    }
-                }
-            }
-        });
-
-        actionToolBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                materialMenu.animateState(newState);
-                Toast.makeText(Activity.this, "Navigation Icon Pressed",Toast.LENGTH_LONG).show();
-
-            }
-        });
+      materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
         actionToolBar.setNavigationIcon(materialMenu);
-  */
-        spinner = (MaterialSpinner) findViewById(R.id.functionsSpinner);
-/* Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.functionality_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        actionToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                // random state
+                materialMenu.anima(MaterialMenuDrawable.AnimationState.BURGER_ARROW);}
+        });
 */
+        /*
+        // Demo view initialization
+        initViews();
+        drawerLayout.postDelayed(new Runnable() {
+            @Override public void run() {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        }, 1500);
+*/
+        // End ActionBarCode /
+
+        //Spinner Code
+        spinner = (MaterialSpinner) findViewById(R.id.functionsSpinner);
         spinner.setItems("Gas Flow", "Gas Density");
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
                                               @Override
                                               public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                                                   switch (position) {
                                                       case 0:
-                                                          //android.support.v4.app.FragmentManager fm = getSupportFragmentManager();https://github.com/DesarrolloAntonio/FragmentTransactionExtended/blob/master/fragmentTransactionExample/src/main/java/com/desarrollodroide/fragmenttrasitionextendedexample/MainActivity.java
-                                                          // FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                                                          // FragmentTransactionExtended fragmentTransactionExtended = new FragmentTransactionExtended(this, fragmentTransaction, gasDensityFragment, gasFlowFragment, R.id.fragment_container);
-                                                          //  fragmentTransactionExtended.addTransition(FragmentTransactionExtended.GLIDE);
-                                                          //  fragmentTransactionExtended.commit();
                                                           getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout).replace(R.id.fragment_container, gasFlowFragment).commit();
                                                           currentCalculations = "gasFlow";
                                                           break;
@@ -214,18 +160,10 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                                           });
 
 
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
         if (findViewById(R.id.fragment_container) != null) {
-
-            // However, if we're being restored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
-            if (savedInstanceState != null) {
+      if (savedInstanceState != null) {
                 return;
             }
-
-            // Create a new Fragment to be placed in the activity layout
 
 
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -235,13 +173,8 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
             transaction.add(R.id.fragment_container, gasFlowFragment);
             transaction.commit();
 
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
             gasDensityFragment.setArguments(getIntent().getExtras());
 
-            // Add the fragment to the 'fragment_container' FrameLayout
-           // getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein,R.anim.fadeout)
-             //       .commit();
         }
         currentCalculations="gasDensity";
         clearButton = (AppCompatButton)findViewById(R.id.toolbarClearButton);

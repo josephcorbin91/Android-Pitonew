@@ -17,8 +17,8 @@
         android:id="@+id/functionsSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:ms_arrow_tint="@color/colorPrimaryDark"
-        app:ms_background_color="@color/colorPrimary"
+        app:ms_arrow_tint="@color/text_color"
+        app:ms_background_color="@color/colorPrimaryDark"
         app:ms_text_color="@color/text_color"
         />
 

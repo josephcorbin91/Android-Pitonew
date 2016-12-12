@@ -50,6 +50,7 @@
                 android:layout_margin="10dp">
                 <TextView
 
+                    android:textColor="@color/text_color"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -66,6 +67,7 @@
                     android:gravity="center">
                     <EditText
                         android:layout_width="100sp"
+                        android:textColor="@color/text_color"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
                         android:id="@+id/dimensionWidthGasFlowFragmentEditText"
@@ -73,6 +75,7 @@
                         android:textSize="@dimen/input_fragment_text_size"/>
                     <TextView
                         android:layout_width="wrap_content"
+                        android:textColor="@color/text_color"
                         android:layout_height="wrap_content"
 
                         android:text="m"
@@ -93,6 +96,7 @@ android:layout_margin="10dp"
                     android:text="Height"
                     android:id="@+id/dimensionHeightOrDiameterGasFlowFragmentTextView"
                     android:gravity="center"
+                    android:textColor="@color/text_color"
 
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -106,6 +110,7 @@ android:layout_margin="10dp"
                     <EditText
                         android:layout_width="100sp"
                         android:inputType="numberDecimal"
+                        android:textColor="@color/text_color"
 
                         android:id="@+id/dimensionHeightGasFlowFragmentEditText"
                         android:layout_height="wrap_content"
@@ -113,6 +118,7 @@ android:layout_margin="10dp"
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/text_color"
 
                         android:text="m"
                         android:id="@+id/UnitsDimensionHeightGasFlowFragmentTextView"
@@ -130,6 +136,7 @@ android:layout_margin="10dp"
                 android:layout_height="@dimen/input_fragment_height">
                 <TextView
 
+                    android:textColor="@color/text_color"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -138,6 +145,7 @@ android:layout_margin="10dp"
                     android:textSize="@dimen/input_fragment_text_size"/>
                 <LinearLayout
                     android:layout_width="fill_parent"
+                    android:textColor="@color/text_color"
                     android:orientation="horizontal"
                     android:background="@color/inputBackgroundColor"
 
@@ -145,6 +153,7 @@ android:layout_margin="10dp"
                     android:gravity="center">
                     <EditText
                         android:inputType="numberDecimal"
+                        android:textColor="@color/text_color"
 
                         android:layout_width="100sp"
                      android:id="@+id/pitotTubeCoefficientEditText"
@@ -162,6 +171,7 @@ android:layout_margin="10dp"
         android:layout_column="2">
         <TextView
             android:background="@color/inputBackgroundColor"
+            android:textColor="@color/text_color"
 
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -178,10 +188,12 @@ android:layout_margin="10dp"
             <TextView
                 android:layout_width="100sp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
                 android:id="@+id/ductAreaGasFlowFragmentTextView"
                 android:textSize="@dimen/input_fragment_text_size"/>
             <TextView
                 android:layout_width="wrap_content"
+                android:textColor="@color/text_color"
                 android:id="@+id/ductAreaGasFlowFragmentTextViewUnits"
                 android:layout_height="wrap_content"
                 android:text="m²"
@@ -205,6 +217,7 @@ android:layout_margin="10dp"
                 android:layout_height="@dimen/input_fragment_height">
                 <TextView
 
+                    android:textColor="@color/text_color"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center"
@@ -218,11 +231,13 @@ android:layout_margin="10dp"
                     android:layout_height="fill_parent"
                     android:gravity="center">
                     <TextView
+                        android:textColor="@color/text_color"
                         android:layout_width="100sp"
                         android:layout_height="wrap_content"
                         android:id="@+id/normalAirFlowValue"
                         android:textSize="@dimen/input_fragment_text_size"/>
                     <TextView
+                        android:textColor="@color/text_color"
                         android:layout_width="wrap_content"
                         android:id="@+id/normalAirFlowValueUnits"
                         android:layout_height="wrap_content"
@@ -241,6 +256,7 @@ android:layout_margin="10dp"
                 android:layout_column="2">
                 <TextView
 
+                    android:textColor="@color/text_color"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -256,6 +272,7 @@ android:layout_margin="10dp"
                     android:gravity="center">
                     <TextView
                         android:id="@+id/averageVelocityValueTextView"
+                        android:textColor="@color/text_color"
 
                         android:layout_width="100sp"
                         android:layout_height="wrap_content"
@@ -264,6 +281,7 @@ android:layout_margin="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="m/s"
+                        android:textColor="@color/text_color"
                         android:id="@+id/UnitsaverageVelocityTextView"
 
                         android:textSize="@dimen/input_fragment_text_size"/>
@@ -283,6 +301,7 @@ android:layout_margin="10dp"
 
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
                     android:gravity="center"
                     android:text="Qm: Mass Air Flow"
                     android:id="@+id/massAirFlowTextView"
@@ -297,11 +316,13 @@ android:layout_margin="10dp"
                     android:gravity="center">
                     <TextView
                         android:id="@+id/massAirFlowTextViewValue"
+                        android:textColor="@color/text_color"
 
                         android:layout_width="100sp"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/input_fragment_text_size"/>
                     <TextView
+                        android:textColor="@color/text_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="C"
@@ -326,6 +347,7 @@ android:layout_margin="10dp"
 
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
                     android:gravity="center"
                     android:text="Q: Actual Air Flow"
                     android:id="@+id/actualAirFlowTextView"
@@ -341,6 +363,7 @@ android:layout_margin="10dp"
                     android:gravity="center">
                     <TextView
                         android:layout_width="100sp"
+                        android:textColor="@color/text_color"
                         android:layout_height="wrap_content"
                         android:id="@+id/actualAirFlowTextViewTextViewValue"
 
@@ -348,6 +371,7 @@ android:layout_margin="10dp"
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/text_color"
                         android:text="C"
                         android:id="@+id/UnitsactualAirFlowTextView"
                         android:textSize="@dimen/input_fragment_text_size"/>
@@ -362,8 +386,8 @@ android:layout_margin="10dp"
             android:id="@+id/tooldbarCalculateButton"
             android:layout_width="110dp"
             android:layout_height="50dp"
-            android:background="@color/button_color"
-            android:text="Show Reuslts"
+            android:background="@color/colorPrimaryDark"
+            android:text="Image"
             android:layout_gravity="right"/>
 
 

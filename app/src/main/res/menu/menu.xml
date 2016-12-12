@@ -3,21 +3,31 @@
 
 
     <item
-        android:id="@+id/profile_group"
+        android:id="@+id/Help"
         android:icon="@drawable/ic_profile"
-        android:title="profile" />
+        android:title="Help" />
     <item
-        android:id="@+id/feed_group"
+        android:id="@+id/Settings"
+        android:title="Settings"
+        />
+    <item
+        android:id="@+id/about_developper"
+        android:title="About Developper"/>
+    <item
+        android:id="@+id/contact_Me"
         android:icon="@drawable/ic_feed"
-        android:title="feed" />
+        android:title="Contact Me" />
     <item
-        android:id="@+id/activity_group"
+        android:id="@+id/unit_converter"
+        android:title="Unit C" />
+    <item
+        android:id="@+id/rate_This"
         android:icon="@drawable/ic_activity_active"
-        android:title="activity" />
+        android:title="Rate This" />
     <item
         android:id="@+id/settings_group"
         android:icon="@drawable/ic_settings"
-        android:title="settings" />
+        android:title="Settings" />
 
 
 
