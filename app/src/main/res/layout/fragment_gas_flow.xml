@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
 
     android:id="@+id/gasFlowFragment"
@@ -41,13 +42,22 @@
 
         <TableRow
                       >
-
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="@dimen/input_fragment_width"
+            <android.support.v7.widget.CardView
                 android:background="@color/inputBackgroundColor"
+                android:elevation="5dp"
+                android:id="@+id/layoutDuctPressure"
+
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_width="@dimen/input_fragment_width"
                 android:layout_height="@dimen/input_fragment_height"
-                android:id="@+id/dimension2LinearLayoutFull"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                >
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@color/inputBackgroundColor"
+                android:layout_height="match_parent"
+               >
                 <TextView
 
                     android:textColor="@color/text_color"
@@ -84,14 +94,22 @@
                 </LinearLayout>
             </LinearLayout>
 
-
+</android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:background="@color/inputBackgroundColor"
+                android:elevation="5dp"
+android:id="@+id/dimension2LinearLayoutFull"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_width="@dimen/input_fragment_width"
+                android:layout_height="@dimen/input_fragment_height"
+                android:layout_margin="10dp"
+                >
 
             <LinearLayout android:orientation="vertical"
-                android:layout_width="@dimen/input_fragment_width"
+                android:layout_width="match_parent"
                 android:background="@color/inputBackgroundColor"
-android:layout_margin="10dp"
-                android:layout_height="@dimen/input_fragment_height"
-                android:layout_column="2">
+                android:layout_height="match_parent">
                 <TextView
                     android:text="Height"
                     android:id="@+id/dimensionHeightOrDiameterGasFlowFragmentTextView"
@@ -125,15 +143,26 @@ android:layout_margin="10dp"
                         android:textSize="@dimen/input_fragment_text_size"/>
                 </LinearLayout>
             </LinearLayout>
-
+</android.support.v7.widget.CardView>
         </TableRow>
 
 <TableRow>
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="@dimen/input_fragment_width"
+    <android.support.v7.widget.CardView
+        android:background="@color/inputBackgroundColor"
+        android:elevation="5dp"
+
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        android:layout_width="@dimen/input_fragment_width"
+        android:layout_height="@dimen/input_fragment_height"
+        android:layout_margin="10dp"
+        >
+
+    <LinearLayout android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:id="@+id/linearLayoutPitotTubeCoeffecient"
                 android:background="@color/inputBackgroundColor"
-android:layout_margin="10dp"
-                android:layout_height="@dimen/input_fragment_height">
+                android:layout_height="match_parent">
                 <TextView
 
                     android:textColor="@color/text_color"
@@ -161,13 +190,24 @@ android:layout_margin="10dp"
                         android:textSize="@dimen/input_fragment_text_size"/>
                      </LinearLayout>
             </LinearLayout>
+    </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+        android:background="@color/inputBackgroundColor"
+        android:elevation="5dp"
+            android:id="@+id/layoutArea"
+
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        android:layout_width="@dimen/input_fragment_width"
+        android:layout_height="@dimen/input_fragment_height"
+        android:layout_margin="10dp"
+        >
 
 
     <LinearLayout android:orientation="vertical"
-        android:layout_width="@dimen/input_fragment_width"
+        android:layout_width="match_parent"
         android:background="@color/inputBackgroundColor"
-        android:layout_margin="10dp"
-        android:layout_height="@dimen/input_fragment_height"
+        android:layout_height="match_parent"
         android:layout_column="2">
         <TextView
             android:background="@color/inputBackgroundColor"
@@ -200,21 +240,31 @@ android:layout_margin="10dp"
                 android:textSize="@dimen/input_fragment_text_size"/>
         </LinearLayout>
     </LinearLayout>
-
+</android.support.v7.widget.CardView>
 
 </TableRow>
 
         <TableRow
             >
 
+            <android.support.v7.widget.CardView
+                android:background="@color/inputBackgroundColor"
+                android:elevation="5dp"
+                android:id="@+id/normalAirFlowLayout"
+
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_width="@dimen/input_fragment_width"
+                android:layout_height="@dimen/input_fragment_height"
+                android:layout_margin="10dp"
+                >
 
             <LinearLayout android:orientation="vertical"
-                android:layout_width="@dimen/input_fragment_width"
+                android:layout_width="match_parent"
                 android:gravity="center"
                 android:background="@color/inputBackgroundColor"
-                android:layout_margin="10dp"
 
-                android:layout_height="@dimen/input_fragment_height">
+                android:layout_height="match_parent">
                 <TextView
 
                     android:textColor="@color/text_color"
@@ -246,13 +296,25 @@ android:layout_margin="10dp"
                 </LinearLayout>
             </LinearLayout>
 
+</android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:background="@color/inputBackgroundColor"
+                android:elevation="5dp"
+                android:id="@+id/layoutAverageVelocity"
+
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_width="@dimen/input_fragment_width"
+                android:layout_height="@dimen/input_fragment_height"
+                android:layout_margin="10dp"
+                >
 
             <LinearLayout android:orientation="vertical"
-                android:layout_width="@dimen/input_fragment_width"
+                android:layout_width="match_parent"
 
                 android:background="@color/inputBackgroundColor"
-                android:layout_margin="10dp"
-                android:layout_height="@dimen/input_fragment_height"
+                android:layout_height="match_parent"
                 android:layout_column="2">
                 <TextView
 
@@ -287,16 +349,28 @@ android:layout_margin="10dp"
                         android:textSize="@dimen/input_fragment_text_size"/>
                 </LinearLayout>
             </LinearLayout>
+            </android.support.v7.widget.CardView>
 </TableRow>
         <TableRow
             android:orientation="horizontal">
 
 
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="@dimen/input_fragment_width"
+            <android.support.v7.widget.CardView
                 android:background="@color/inputBackgroundColor"
+                android:elevation="5dp"
+                android:id="@+id/massAirFlowLayout"
+
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_width="@dimen/input_fragment_width"
+                android:layout_height="@dimen/input_fragment_height"
                 android:layout_margin="10dp"
-                android:layout_height="@dimen/input_fragment_height">
+                >
+
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@color/inputBackgroundColor"
+                android:layout_height="match_parent">
                 <TextView
 
                     android:layout_width="fill_parent"
@@ -334,14 +408,27 @@ android:layout_margin="10dp"
 
 
 
+</android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:background="@color/inputBackgroundColor"
+                android:elevation="5dp"
+                android:id="@+id/layoutActualAirFlow"
+
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_width="@dimen/input_fragment_width"
+                android:layout_height="@dimen/input_fragment_height"
+                android:layout_margin="10dp"
+                >
 
 
 
             <LinearLayout android:orientation="vertical"
-                android:layout_width="@dimen/input_fragment_width"
+                android:layout_width="match_parent"
                 android:background="@color/inputBackgroundColor"
-                android:layout_margin="10dp"
-                android:layout_height="@dimen/input_fragment_height"
+                android:layout_height="match_parent"
                 android:layout_column="2">
                 <TextView
 
@@ -379,7 +466,7 @@ android:layout_margin="10dp"
 
                 </LinearLayout>
             </LinearLayout>
-
+</android.support.v7.widget.CardView>
         </TableRow>
 
         <com.jco.pitonew.ButtonRectangle

@@ -12,6 +12,8 @@ public class Utility {
 
 
     public static void clearAllFields(ViewGroup group){
+
+
         for (int i = 0, count = group.getChildCount(); i < count; ++i) {
             View view = group.getChildAt(i);
             if (view instanceof EditText) {

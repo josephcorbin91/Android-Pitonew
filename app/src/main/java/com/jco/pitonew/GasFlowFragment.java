@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.Space;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +34,11 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
 
     private TextView dimensionHeader, dimension2TextView,dimension1TextView,dimension2UnitText;
     private EditText dimension2EditText;
-    LinearLayout dimesnion2LinearLayout, dimension2LinearLayoutFull;
+    CardView dimension2LinearLayoutFull;
+    LinearLayout dimesnion2LinearLayout;
     public static GasFlowFragment newInstance() {
         return new GasFlowFragment();
+
     }
 
 
@@ -110,8 +113,34 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
 
+    public void showResultView(){
+        View layoutArea = mView.findViewById(R.id.layoutArea);
+        layoutArea.setVisibility(View.VISIBLE);
+        View layoutNormalAir = mView.findViewById(R.id.normalAirFlowLayout);
+        layoutNormalAir.setVisibility(View.VISIBLE);
+        View layoutAverageVelocity = mView.findViewById(R.id.layoutAverageVelocity);
+        layoutAverageVelocity.setVisibility(View.VISIBLE);
+        View massAirFlowLayout = mView.findViewById(R.id.massAirFlowLayout);
+        massAirFlowLayout.setVisibility(View.VISIBLE);
+        View layoutActualAirFlow = mView.findViewById(R.id.layoutActualAirFlow);
+        layoutActualAirFlow.setVisibility(View.VISIBLE);
+    }
     public void clear(){
         Utility.clearAllFields((ViewGroup)this.mView);
+        View layoutArea = mView.findViewById(R.id.layoutArea);
+        layoutArea.setVisibility(View.GONE);
+        View layoutNormalAir = mView.findViewById(R.id.normalAirFlowLayout);
+        layoutNormalAir.setVisibility(View.GONE);
+        View layoutAverageVelocity = mView.findViewById(R.id.layoutAverageVelocity);
+        layoutAverageVelocity.setVisibility(View.GONE);
+        View massAirFlowLayout = mView.findViewById(R.id.massAirFlowLayout);
+        massAirFlowLayout.setVisibility(View.GONE);
+        View layoutActualAirFlow = mView.findViewById(R.id.layoutActualAirFlow);
+        layoutActualAirFlow.setVisibility(View.GONE);
+
+
+
+
     }
 
 
@@ -126,13 +155,23 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
         dimension2EditText = (EditText)mView.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
         dimension2UnitText = (TextView)mView.findViewById(R.id.UnitsactualAirFlowTextView);
         dimesnion2LinearLayout = (LinearLayout)mView.findViewById(R.id.dimension2LinearLayout);
-        dimension2LinearLayoutFull = (LinearLayout)mView.findViewById(R.id.dimension2LinearLayoutFull);
+        dimension2LinearLayoutFull = (CardView)mView.findViewById(R.id.dimension2LinearLayoutFull);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.numbers_array, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
+        View layoutArea = mView.findViewById(R.id.layoutArea);
+        layoutArea.setVisibility(View.GONE);
+        View layoutNormalAir = mView.findViewById(R.id.normalAirFlowLayout);
+        layoutNormalAir.setVisibility(View.GONE);
+        View layoutAverageVelocity = mView.findViewById(R.id.layoutAverageVelocity);
+        layoutAverageVelocity.setVisibility(View.GONE);
+        View massAirFlowLayout = mView.findViewById(R.id.massAirFlowLayout);
+        massAirFlowLayout.setVisibility(View.GONE);
+        View layoutActualAirFlow = mView.findViewById(R.id.layoutActualAirFlow);
+        layoutActualAirFlow.setVisibility(View.GONE);
 
 
 

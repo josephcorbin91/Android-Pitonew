@@ -54,8 +54,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         switch (item.getItemId()) {
             case R.id.new_game:
                 newGame();
-                return true;
-            case R.id.help:
+                return tru99999999999992                      p            case R.id.help:
                 showHelp();
                 return true;
                 */
@@ -71,14 +70,36 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         return true;
     }
 
+
     private LinearLayout activityMainRootLayout;
     protected void onCreate(Bundle savedInstanceState) {
-
-
         currentUnits = "Metric";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+        gasDensityFragment = new GasDensityFragment();
+        gasFlowFragment = new GasFlowFragment();
+
+/*
+        if (findViewById(R.id.fragment_container) != null) {
+            if (savedInstanceState != null) {
+                return;
+            }
+
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+            transaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
+            transaction.add(R.id.fragment_container, gasDensityFragment);
+            transaction.commit();
+
+            gasDensityFragment.setArguments(getIntent().getExtras());
+
+        }
+*/
+
 
         unitSwitch = (Switch) findViewById(R.id.unitSwitch);
         unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -112,32 +133,11 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         });
         dimension1TextView = (TextView) findViewById(R.id.dimensionHeightOrDiameterGasFlowFragmentTextView);
         dimension2TextView = (TextView) findViewById(R.id.dimensionWidthGasFlowFragmentTextView);
-        gasDensityFragment = new GasDensityFragment();
-        gasFlowFragment = new GasFlowFragment();
 
 
         //Action Toolbar Code
         actionToolBar = (Toolbar) findViewById(R.id.action_bar_toolbar);
         setSupportActionBar(actionToolBar);
-/*
-      materialMenu = new MaterialMenuDrawable(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN);
-        actionToolBar.setNavigationIcon(materialMenu);
-        actionToolBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                // random state
-                materialMenu.anima(MaterialMenuDrawable.AnimationState.BURGER_ARROW);}
-        });
-*/
-        /*
-        // Demo view initialization
-        initViews();
-        drawerLayout.postDelayed(new Runnable() {
-            @Override public void run() {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        }, 1500);
-*/
-        // End ActionBarCode /
 
         //Spinner Code
         spinner = (MaterialSpinner) findViewById(R.id.functionsSpinner);
@@ -159,24 +159,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                                               }
                                           });
 
-
-        if (findViewById(R.id.fragment_container) != null) {
-      if (savedInstanceState != null) {
-                return;
-            }
-
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-            transaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
-            transaction.add(R.id.fragment_container, gasFlowFragment);
-            transaction.commit();
-
-            gasDensityFragment.setArguments(getIntent().getExtras());
-
-        }
-        currentCalculations="gasDensity";
+        currentCalculations="gasFlow";
         clearButton = (AppCompatButton)findViewById(R.id.toolbarClearButton);
         calculateButton = (AppCompatButton)findViewById(R.id.tooldbarCalculateButton);
         clearButton.setOnClickListener(new View.OnClickListener() {
@@ -184,6 +167,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
             @Override
             public void onClick(View v) {
 
+                System.out.println(currentCalculations);
                 switch (currentCalculations){
                     case "gasFlow":
                         gasFlowFragment.clear();
@@ -195,13 +179,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                calculateResult(currentCalculations);
-
-
-
-
-            }
+                calculateResult(currentCalculations);}
         });
 
     }
@@ -246,9 +224,13 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                 if(!gasFlow.verifyDataIntegrity()){
                     Toast.makeText(getApplicationContext(), "Invalid or missing entry \n Please try again.",Toast.LENGTH_LONG).show();
                     gasFlowFragment.clear();
+                    gasFlowFragment.showResultView();
                 }
                 else{
-                    gasFlow.calculateArea();
+
+                    gasFlowFragment.clear();
+                    gasFlowFragment.showResultView();
+                    //gasFlow.calculateArea();
 
                 }
                 break;
@@ -266,6 +248,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
     }
 
     public void clearAllFields(ViewGroup group){
+
         for (int i = 0, count = group.getChildCount(); i < count; ++i) {
             View view = group.getChildAt(i);
             if (view instanceof EditText) {
