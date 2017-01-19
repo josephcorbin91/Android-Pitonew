@@ -36,6 +36,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         private MaterialSpinner spinner;
         private GasDensityFragment gasDensityFragment;
         private GasFlowFragment gasFlowFragment;
+        private BlankContainer blankContainer;
         private FragmentTransaction fragmentTransaction;
         private Toolbar actionToolBar;
         private AppCompatButton clearButton,calculateButton;
@@ -81,7 +82,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         gasDensityFragment = new GasDensityFragment();
         gasFlowFragment = new GasFlowFragment();
 
-/*
+
         if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
                 return;
@@ -95,10 +96,9 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
             transaction.add(R.id.fragment_container, gasDensityFragment);
             transaction.commit();
 
-            gasDensityFragment.setArguments(getIntent().getExtras());
 
         }
-*/
+        currentCalculations="gasDensity";
 
 
         unitSwitch = (Switch) findViewById(R.id.unitSwitch);
@@ -141,11 +141,13 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
 
         //Spinner Code
         spinner = (MaterialSpinner) findViewById(R.id.functionsSpinner);
+
         spinner.setItems("Gas Flow", "Gas Density");
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
                                               @Override
                                               public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                                                   switch (position) {
+
                                                       case 0:
                                                           getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout).replace(R.id.fragment_container, gasFlowFragment).commit();
                                                           currentCalculations = "gasFlow";
@@ -159,7 +161,6 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                                               }
                                           });
 
-        currentCalculations="gasFlow";
         clearButton = (AppCompatButton)findViewById(R.id.toolbarClearButton);
         calculateButton = (AppCompatButton)findViewById(R.id.tooldbarCalculateButton);
         clearButton.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +182,11 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
             public void onClick(View v) {
                 calculateResult(currentCalculations);}
         });
+
+
+
+
+
 
     }
     public void onItemSelected(AdapterView<?> parent, View view,
@@ -217,6 +223,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
     public void calculateResult(String currentCalculations){
         switch (currentCalculations){
             case "gasFlow" :
+                /*
                 circularOrRectangularSwitch = (Switch)findViewById(R.id.rectangularCircularGasFlowFragmentSwitch);
                 String pipeType= circularOrRectangularSwitch.isChecked()? "circular" : "rectangular";
                 Toast.makeText(getApplicationContext(), pipeType,Toast.LENGTH_LONG).show();
@@ -229,12 +236,17 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                 else{
 
                     gasFlowFragment.clear();
-                    gasFlowFragment.showResultView();
                     //gasFlow.calculateArea();
 
                 }
                 break;
+                */
+                gasFlowFragment.showResultView();
+
+                Toast.makeText(getApplicationContext(), "ToBeDetermined",Toast.LENGTH_LONG).show();
+
             case "gasDensity" :
+                /*
                 GasDensity gasDensity = new GasDensity(this,gasDensityFragment,currentUnits,gasDensityFragment.getStandardAirBoolean());
                 if(!gasDensity.verifyDataIntegrity()){
                     Toast.makeText(getApplicationContext(), "Invalid or missing entry \n Please try again.",Toast.LENGTH_LONG).show();
@@ -243,9 +255,15 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                 else
                     gasDensity.calculatePressureAtCurrentElevation();
                 break;
+                */
+                gasDensityFragment.showResultView();
+
+                Toast.makeText(getApplicationContext(), "ToBeDetermined",Toast.LENGTH_LONG).show();
+
         }
 
     }
+
 
     public void clearAllFields(ViewGroup group){
 

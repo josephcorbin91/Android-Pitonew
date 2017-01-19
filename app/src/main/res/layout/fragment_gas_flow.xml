@@ -21,20 +21,18 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rectangular or Circular"
-                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Rectangular / Circular"
+                android:gravity="left"
                 android:id="@+id/rectangularCircularGasFlowFragmentTextView"/>
 
             <Switch
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                   android:gravity="center"
+                   android:gravity="right"
                     android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
-                    android:textOff="C"
-                    android:textOn="R"
-                    android:showText="true"
+
                     android:checked="false"
                 android:layout_column="2" />
         </TableRow>

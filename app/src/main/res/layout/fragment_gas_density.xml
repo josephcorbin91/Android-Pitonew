@@ -25,9 +25,7 @@
     <Switch
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:textOn="no"
-        android:textOff="yes"
-        android:showText="true"
+
         android:id="@+id/standardAirSwitch"
         android:gravity="right"
         />
@@ -48,9 +46,7 @@
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:showText="true"
-                android:textOn="yes"
-                android:textOff="no"
+
 
                 android:gravity="right"
                 android:id="@+id/WetBulbTemperatureGasDensityFragmentSwitch"
@@ -110,6 +106,8 @@
                             android:inputType="numberDecimal"
                             android:id="@+id/temperatureGasDensityFragmentEditText"
                             android:textColor="@color/text_color"
+                            android:maxLines = "1"
+                            android:background="#FFFFFF"
 
                             android:textSize="@dimen/input_fragment_text_size"/>
 
@@ -162,6 +160,9 @@
                     <EditText
                         android:id="@+id/ElevationAboveSeaLevelFragmentEdiText"
 android:inputType="numberDecimal"
+                        android:maxLines = "1"
+                        android:background="#FFFFFF"
+
                         android:layout_width="100sp"
                         android:textColor="@color/text_color"
                         android:layout_height="wrap_content"
@@ -219,6 +220,8 @@ android:inputType="numberDecimal"
                         android:inputType="numberDecimal"
                         android:id="@+id/wetBulbTemperatureGasDensityFragmentEditText"
                         android:textColor="@color/text_color"
+                        android:maxLines = "1"
+                        android:background="#FFFFFF"
 
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/input_fragment_text_size"/>
@@ -266,6 +269,9 @@ android:inputType="numberDecimal"
                     android:gravity="center">
                     <EditText
                         android:layout_width="100sp"
+                        android:maxLines = "1"
+                        android:background="#FFFFFF"
+
                         android:textColor="@color/text_color"
                         android:inputType="numberDecimal"
                         android:layout_height="wrap_content"
@@ -312,6 +318,9 @@ android:inputType="numberDecimal"
                     android:layout_height="wrap_content"
                     android:gravity="center">
                     <EditText
+                        android:maxLines = "1"
+                        android:background="#FFFFFF"
+
                         android:inputType="numberDecimal"
                         android:textColor="@color/text_color"
                         android:id="@+id/staticPressureFragmentEditText"

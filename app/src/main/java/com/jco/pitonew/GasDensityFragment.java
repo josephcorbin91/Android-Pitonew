@@ -155,6 +155,16 @@ dialog.show();
         return view;
     }
 
+    public void showResultView(){
+
+        View layoutDuctPressure = mView.findViewById(R.id.layoutDuctPressure);
+        layoutDuctPressure.setVisibility(View.VISIBLE);
+        View layoutRelativeHumidity = mView.findViewById(R.id.layoutRelativeHumidity);
+        layoutRelativeHumidity.setVisibility(View.VISIBLE);
+        View layoutAtmosphericPressure = mView.findViewById(R.id.layoutAtmosphericPressure);
+        layoutAtmosphericPressure.setVisibility(View.VISIBLE);
+
+    }
 
 
     public void changeUnits(String units) {
