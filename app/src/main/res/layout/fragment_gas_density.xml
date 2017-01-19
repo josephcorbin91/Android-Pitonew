@@ -106,8 +106,6 @@
                             android:inputType="numberDecimal"
                             android:id="@+id/temperatureGasDensityFragmentEditText"
                             android:textColor="@color/text_color"
-                            android:maxLines = "1"
-                            android:background="#FFFFFF"
 
                             android:textSize="@dimen/input_fragment_text_size"/>
 
@@ -160,9 +158,6 @@
                     <EditText
                         android:id="@+id/ElevationAboveSeaLevelFragmentEdiText"
 android:inputType="numberDecimal"
-                        android:maxLines = "1"
-                        android:background="#FFFFFF"
-
                         android:layout_width="100sp"
                         android:textColor="@color/text_color"
                         android:layout_height="wrap_content"
@@ -220,8 +215,6 @@ android:inputType="numberDecimal"
                         android:inputType="numberDecimal"
                         android:id="@+id/wetBulbTemperatureGasDensityFragmentEditText"
                         android:textColor="@color/text_color"
-                        android:maxLines = "1"
-                        android:background="#FFFFFF"
 
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/input_fragment_text_size"/>
@@ -269,9 +262,6 @@ android:inputType="numberDecimal"
                     android:gravity="center">
                     <EditText
                         android:layout_width="100sp"
-                        android:maxLines = "1"
-                        android:background="#FFFFFF"
-
                         android:textColor="@color/text_color"
                         android:inputType="numberDecimal"
                         android:layout_height="wrap_content"
@@ -318,9 +308,6 @@ android:inputType="numberDecimal"
                     android:layout_height="wrap_content"
                     android:gravity="center">
                     <EditText
-                        android:maxLines = "1"
-                        android:background="#FFFFFF"
-
                         android:inputType="numberDecimal"
                         android:textColor="@color/text_color"
                         android:id="@+id/staticPressureFragmentEditText"
