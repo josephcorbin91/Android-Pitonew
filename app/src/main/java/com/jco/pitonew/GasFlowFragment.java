@@ -124,6 +124,9 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
         massAirFlowLayout.setVisibility(View.VISIBLE);
         View layoutActualAirFlow = mView.findViewById(R.id.layoutActualAirFlow);
         layoutActualAirFlow.setVisibility(View.VISIBLE);
+
+
+
     }
     public void clear(){
         Utility.clearAllFields((ViewGroup)this.mView);

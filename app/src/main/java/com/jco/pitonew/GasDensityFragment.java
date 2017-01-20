@@ -149,6 +149,8 @@ dialog.show();
         layoutRelativeHumidity.setVisibility(View.GONE);
         View layoutAtmosphericPressure = mView.findViewById(R.id.layoutAtmosphericPressure);
         layoutAtmosphericPressure.setVisibility(View.GONE);
+        View layoutGasDensityResult = mView.findViewById(R.id.layoutGasDensity);
+        layoutGasDensityResult.setVisibility(View.GONE);
 
 
 
@@ -163,6 +165,8 @@ dialog.show();
         layoutRelativeHumidity.setVisibility(View.VISIBLE);
         View layoutAtmosphericPressure = mView.findViewById(R.id.layoutAtmosphericPressure);
         layoutAtmosphericPressure.setVisibility(View.VISIBLE);
+        View layoutGasDensityResult = mView.findViewById(R.id.layoutGasDensity);
+        layoutGasDensityResult.setVisibility(View.VISIBLE);
 
     }
 

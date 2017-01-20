@@ -142,7 +142,7 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         //Spinner Code
         spinner = (MaterialSpinner) findViewById(R.id.functionsSpinner);
 
-        spinner.setItems("Gas Flow", "Gas Density");
+        spinner.setItems("Gas Density", "Gas Flow");
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
                                               @Override
                                               public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
@@ -150,11 +150,11 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
 
                                                       case 0:
                                                           getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout).replace(R.id.fragment_container, gasFlowFragment).commit();
-                                                          currentCalculations = "gasFlow";
+                                                          currentCalculations = "gasDensity";
                                                           break;
                                                       case 1:
                                                           getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout).replace(R.id.fragment_container, gasDensityFragment).commit();
-                                                          currentCalculations = "gasDensity";
+                                                          currentCalculations = "gasFlow";
                                                           break;
 
                                                   }

@@ -62,7 +62,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Width (W)"
+                    android:text="Width"
                     android:id="@+id/dimensionWidthGasFlowFragmentTextView"
                     android:textSize="@dimen/input_fragment_text_size"/>
                 <LinearLayout
@@ -214,14 +214,14 @@ android:id="@+id/dimension2LinearLayoutFull"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity=    "center"
-            android:text="Duct Area (A):"
+            android:text="Duct Area"
             android:textSize="@dimen/input_fragment_text_size"/>
         <LinearLayout
             android:layout_width="fill_parent"
             android:orientation="horizontal"
             android:background="@color/inputBackgroundColor"
 
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:gravity="center">
             <TextView
                 android:layout_width="100sp"
@@ -259,24 +259,22 @@ android:id="@+id/dimension2LinearLayoutFull"
 
             <LinearLayout android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:gravity="center"
                 android:background="@color/inputBackgroundColor"
 
                 android:layout_height="match_parent">
                 <TextView
-
+android:gravity="center"
                     android:textColor="@color/text_color"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:gravity="center"
-                    android:text="Normal Air Flow (Qn):"
+                    android:layout_height="wrap_content"
+                    android:text="Normal Air Flow"
                     android:textSize="@dimen/input_fragment_text_size"/>
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:orientation="horizontal"
                     android:background="@color/inputBackgroundColor"
 
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center">
                     <TextView
                         android:textColor="@color/text_color"
@@ -320,7 +318,7 @@ android:id="@+id/dimension2LinearLayoutFull"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Vavg: Avg. Velocity"
+                    android:text="Average Velocity"
                     android:id="@+id/averageVelocityTextView"
                     android:textSize="@dimen/input_fragment_text_size"/>
                 <LinearLayout
@@ -375,7 +373,7 @@ android:id="@+id/dimension2LinearLayoutFull"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
                     android:gravity="center"
-                    android:text="Qm: Mass Air Flow"
+                    android:text="Mass Air Flow"
                     android:id="@+id/massAirFlowTextView"
 
                     android:textSize="@dimen/input_fragment_text_size"/>
@@ -434,7 +432,7 @@ android:id="@+id/dimension2LinearLayoutFull"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
                     android:gravity="center"
-                    android:text="Q: Actual Air Flow"
+                    android:text="Actual Air Flow"
                     android:id="@+id/actualAirFlowTextView"
 
                     android:textSize="@dimen/input_fragment_text_size"/>
