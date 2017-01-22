@@ -114,7 +114,7 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
 
 
     public void showResultView(){
-        /*
+
         View layoutArea = mView.findViewById(R.id.layoutArea);
         layoutArea.setVisibility(View.VISIBLE);
         View layoutNormalAir = mView.findViewById(R.id.normalAirFlowLayout);
@@ -126,11 +126,9 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
         View layoutActualAirFlow = mView.findViewById(R.id.layoutActualAirFlow);
         layoutActualAirFlow.setVisibility(View.VISIBLE);
 
-
-*/
     }
     public void clear(){
-        /*
+
         Utility.clearAllFields((ViewGroup)this.mView);
         View layoutArea = mView.findViewById(R.id.layoutArea);
         layoutArea.setVisibility(View.GONE);
@@ -145,7 +143,7 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
 
 
 
-*/
+
     }
 
 
@@ -167,7 +165,7 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-        /*
+   
         View layoutArea = mView.findViewById(R.id.layoutArea);
         layoutArea.setVisibility(View.GONE);
         View layoutNormalAir = mView.findViewById(R.id.normalAirFlowLayout);
@@ -179,7 +177,6 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
         View layoutActualAirFlow = mView.findViewById(R.id.layoutActualAirFlow);
         layoutActualAirFlow.setVisibility(View.GONE);
 
-*/
 
         rectangularOrCircularSwitch= (Switch) mView.findViewById(R.id.rectangularCircularGasFlowFragmentSwitch);
         rectangularOrCircularSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

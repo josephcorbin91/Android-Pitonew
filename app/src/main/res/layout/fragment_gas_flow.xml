@@ -12,33 +12,32 @@
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="1"
+        android:orientation="vertical"
+        >
 
-  >
 
-
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Rectangular / Circular"
                 android:gravity="left"
                 android:id="@+id/rectangularCircularGasFlowFragmentTextView"/>
 
             <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                   android:gravity="right"
-                    android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
 
-                    android:checked="false"
+                android:checked="false"
                 android:layout_column="2" />
         </TableRow>
 
-
         <TableRow
-                      >
+            >
             <android.support.v7.widget.CardView
                 android:background="@color/inputBackgroundColor"
                 android:elevation="5dp"
@@ -50,52 +49,52 @@
                 android:layout_height="@dimen/input_fragment_height"
                 android:layout_margin="10dp"
                 >
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:background="@color/inputBackgroundColor"
-                android:layout_height="match_parent"
-               >
-                <TextView
-
-                    android:textColor="@color/text_color"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Width"
-                    android:id="@+id/dimensionWidthGasFlowFragmentTextView"
-                    android:textSize="@dimen/input_fragment_text_size"/>
-                <LinearLayout
+                <LinearLayout android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:orientation="horizontal"
                     android:background="@color/inputBackgroundColor"
-                    android:id="@+id/dimension2LinearLayout"
-
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-                    <EditText
-                        android:layout_width="100sp"
-                        android:textColor="@color/text_color"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:id="@+id/dimensionWidthGasFlowFragmentEditText"
-
-                        android:textSize="@dimen/input_fragment_text_size"/>
+                    android:layout_height="match_parent"
+                    >
                     <TextView
-                        android:layout_width="wrap_content"
+
                         android:textColor="@color/text_color"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-
-                        android:text="m"
-                        android:id="@+id/UnitsDimensionWidthGasFlowFragmentTextView"
+                        android:gravity="center"
+                        android:text="Width"
+                        android:id="@+id/dimensionWidthGasFlowFragmentTextView"
                         android:textSize="@dimen/input_fragment_text_size"/>
-                </LinearLayout>
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:background="@color/inputBackgroundColor"
+                        android:id="@+id/dimension2LinearLayout"
 
-</android.support.v7.widget.CardView>
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <EditText
+                            android:layout_width="100sp"
+                            android:textColor="@color/text_color"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:id="@+id/dimensionWidthGasFlowFragmentEditText"
+
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/text_color"
+                            android:layout_height="wrap_content"
+
+                            android:text="m"
+                            android:id="@+id/UnitsDimensionWidthGasFlowFragmentTextView"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
                 android:background="@color/inputBackgroundColor"
                 android:elevation="5dp"
-android:id="@+id/dimension2LinearLayoutFull"
+                android:id="@+id/dimension2LinearLayoutFull"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
                 android:layout_width="@dimen/input_fragment_width"
@@ -103,143 +102,143 @@ android:id="@+id/dimension2LinearLayoutFull"
                 android:layout_margin="10dp"
                 >
 
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:background="@color/inputBackgroundColor"
-                android:layout_height="match_parent">
-                <TextView
-                    android:text="Height"
-                    android:id="@+id/dimensionHeightOrDiameterGasFlowFragmentTextView"
-                    android:gravity="center"
-                    android:textColor="@color/text_color"
-
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/input_fragment_text_size"/>
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:orientation="horizontal"
-
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-                    <EditText
-                        android:layout_width="100sp"
-                        android:inputType="numberDecimal"
-                        android:textColor="@color/text_color"
-
-                        android:id="@+id/dimensionHeightGasFlowFragmentEditText"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/input_fragment_text_size"/>
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:background="@color/inputBackgroundColor"
+                    android:layout_height="match_parent">
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:text="Height"
+                        android:id="@+id/dimensionHeightOrDiameterGasFlowFragmentTextView"
+                        android:gravity="center"
                         android:textColor="@color/text_color"
 
-                        android:text="m"
-                        android:id="@+id/UnitsDimensionHeightGasFlowFragmentTextView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
                         android:textSize="@dimen/input_fragment_text_size"/>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:orientation="horizontal"
+
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <EditText
+                            android:layout_width="100sp"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/text_color"
+
+                            android:id="@+id/dimensionHeightGasFlowFragmentEditText"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color"
+
+                            android:text="m"
+                            android:id="@+id/UnitsDimensionHeightGasFlowFragmentTextView"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-</android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
         </TableRow>
 
-<TableRow>
-    <android.support.v7.widget.CardView
-        android:background="@color/inputBackgroundColor"
-        android:elevation="5dp"
-
-        app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
-        android:layout_width="@dimen/input_fragment_width"
-        android:layout_height="@dimen/input_fragment_height"
-        android:layout_margin="10dp"
-        >
-
-    <LinearLayout android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:id="@+id/linearLayoutPitotTubeCoeffecient"
+        <TableRow>
+            <android.support.v7.widget.CardView
                 android:background="@color/inputBackgroundColor"
-                android:layout_height="match_parent">
-                <TextView
+                android:elevation="5dp"
 
-                    android:textColor="@color/text_color"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Pitot Tube Coefficient"
-                    android:id="@+id/pitotTubeCoefficientTextView"
-                    android:textSize="@dimen/input_fragment_text_size"/>
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:textColor="@color/text_color"
-                    android:orientation="horizontal"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_width="@dimen/input_fragment_width"
+                android:layout_height="@dimen/input_fragment_height"
+                android:layout_margin="10dp"
+                >
+
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:id="@+id/linearLayoutPitotTubeCoeffecient"
                     android:background="@color/inputBackgroundColor"
+                    android:layout_height="match_parent">
+                    <TextView
 
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-                    <EditText
-                        android:inputType="numberDecimal"
+                        android:textColor="@color/text_color"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Pitot Tube Coefficient"
+                        android:id="@+id/pitotTubeCoefficientTextView"
+                        android:textSize="@dimen/input_fragment_text_size"/>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:textColor="@color/text_color"
+                        android:orientation="horizontal"
+                        android:background="@color/inputBackgroundColor"
+
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <EditText
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/text_color"
+
+                            android:layout_width="100sp"
+                            android:id="@+id/pitotTubeCoefficientEditText"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:background="@color/inputBackgroundColor"
+                android:elevation="5dp"
+                android:id="@+id/layoutArea"
+
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_width="@dimen/input_fragment_width"
+                android:layout_height="@dimen/input_fragment_height"
+                android:layout_margin="10dp"
+                >
+
+
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:background="@color/inputBackgroundColor"
+                    android:layout_height="match_parent"
+                    android:layout_column="2">
+                    <TextView
+                        android:background="@color/inputBackgroundColor"
                         android:textColor="@color/text_color"
 
-                        android:layout_width="100sp"
-                     android:id="@+id/pitotTubeCoefficientEditText"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:gravity=    "center"
+                        android:text="Duct Area"
                         android:textSize="@dimen/input_fragment_text_size"/>
-                     </LinearLayout>
-            </LinearLayout>
-    </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-        android:background="@color/inputBackgroundColor"
-        android:elevation="5dp"
-            android:id="@+id/layoutArea"
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:orientation="horizontal"
+                        android:background="@color/inputBackgroundColor"
 
-        app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
-        android:layout_width="@dimen/input_fragment_width"
-        android:layout_height="@dimen/input_fragment_height"
-        android:layout_margin="10dp"
-        >
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="100sp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color"
+                            android:id="@+id/ductAreaGasFlowFragmentTextView"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/text_color"
+                            android:id="@+id/ductAreaGasFlowFragmentTextViewUnits"
+                            android:layout_height="wrap_content"
+                            android:text="m²"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-
-    <LinearLayout android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:background="@color/inputBackgroundColor"
-        android:layout_height="match_parent"
-        android:layout_column="2">
-        <TextView
-            android:background="@color/inputBackgroundColor"
-            android:textColor="@color/text_color"
-
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity=    "center"
-            android:text="Duct Area"
-            android:textSize="@dimen/input_fragment_text_size"/>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:orientation="horizontal"
-            android:background="@color/inputBackgroundColor"
-
-            android:layout_height="wrap_content"
-            android:gravity="center">
-            <TextView
-                android:layout_width="100sp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:id="@+id/ductAreaGasFlowFragmentTextView"
-                android:textSize="@dimen/input_fragment_text_size"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:textColor="@color/text_color"
-                android:id="@+id/ductAreaGasFlowFragmentTextViewUnits"
-                android:layout_height="wrap_content"
-                android:text="m²"
-                android:textSize="@dimen/input_fragment_text_size"/>
-        </LinearLayout>
-    </LinearLayout>
-</android.support.v7.widget.CardView>
-
-</TableRow>
+        </TableRow>
 
         <TableRow
             >
@@ -256,42 +255,42 @@ android:id="@+id/dimension2LinearLayoutFull"
                 android:layout_margin="10dp"
                 >
 
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:background="@color/inputBackgroundColor"
-
-                android:layout_height="match_parent">
-                <TextView
-android:gravity="center"
-                    android:textColor="@color/text_color"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Normal Air Flow"
-                    android:textSize="@dimen/input_fragment_text_size"/>
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:orientation="horizontal"
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:background="@color/inputBackgroundColor"
 
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_height="match_parent">
                     <TextView
+                        android:gravity="center"
                         android:textColor="@color/text_color"
-                        android:layout_width="100sp"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/normalAirFlowValue"
+                        android:text="Normal Air Flow"
                         android:textSize="@dimen/input_fragment_text_size"/>
-                    <TextView
-                        android:textColor="@color/text_color"
-                        android:layout_width="wrap_content"
-                        android:id="@+id/normalAirFlowValueUnits"
-                        android:layout_height="wrap_content"
-                        android:text="Nm³/h"
-                        android:textSize="@dimen/input_fragment_text_size"/>
-                </LinearLayout>
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:orientation="horizontal"
+                        android:background="@color/inputBackgroundColor"
 
-</android.support.v7.widget.CardView>
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <TextView
+                            android:textColor="@color/text_color"
+                            android:layout_width="100sp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/normalAirFlowValue"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:id="@+id/normalAirFlowValueUnits"
+                            android:layout_height="wrap_content"
+                            android:text="Nm³/h"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:background="@color/inputBackgroundColor"
@@ -305,47 +304,47 @@ android:gravity="center"
                 android:layout_margin="10dp"
                 >
 
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="match_parent"
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
 
-                android:background="@color/inputBackgroundColor"
-                android:layout_height="match_parent"
-                android:layout_column="2">
-                <TextView
-
-                    android:textColor="@color/text_color"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Average Velocity"
-                    android:id="@+id/averageVelocityTextView"
-                    android:textSize="@dimen/input_fragment_text_size"/>
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:orientation="horizontal"
                     android:background="@color/inputBackgroundColor"
-
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_height="match_parent"
+                    android:layout_column="2">
                     <TextView
-                        android:id="@+id/averageVelocityValueTextView"
-                        android:textColor="@color/text_color"
 
-                        android:layout_width="100sp"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/input_fragment_text_size"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="m/s"
                         android:textColor="@color/text_color"
-                        android:id="@+id/UnitsaverageVelocityTextView"
-
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Average Velocity"
+                        android:id="@+id/averageVelocityTextView"
                         android:textSize="@dimen/input_fragment_text_size"/>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:orientation="horizontal"
+                        android:background="@color/inputBackgroundColor"
+
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <TextView
+                            android:id="@+id/averageVelocityValueTextView"
+                            android:textColor="@color/text_color"
+
+                            android:layout_width="100sp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="m/s"
+                            android:textColor="@color/text_color"
+                            android:id="@+id/UnitsaverageVelocityTextView"
+
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
             </android.support.v7.widget.CardView>
-</TableRow>
+        </TableRow>
         <TableRow>
 
 
@@ -361,48 +360,48 @@ android:gravity="center"
                 android:layout_margin="10dp"
                 >
 
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:background="@color/inputBackgroundColor"
-                android:layout_height="match_parent">
-                <TextView
-
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_color"
-                    android:gravity="center"
-                    android:text="Mass Air Flow"
-                    android:id="@+id/massAirFlowTextView"
-
-                    android:textSize="@dimen/input_fragment_text_size"/>
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:orientation="horizontal"
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:background="@color/inputBackgroundColor"
-
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_height="match_parent">
                     <TextView
-                        android:id="@+id/massAirFlowTextViewValue"
-                        android:textColor="@color/text_color"
 
-                        android:layout_width="100sp"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/input_fragment_text_size"/>
-                    <TextView
                         android:textColor="@color/text_color"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="C"
-                        android:id="@+id/UnitsmassAirFlowTextView"
+                        android:gravity="center"
+                        android:text="Mass Air Flow"
+                        android:id="@+id/massAirFlowTextView"
 
                         android:textSize="@dimen/input_fragment_text_size"/>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:orientation="horizontal"
+                        android:background="@color/inputBackgroundColor"
+
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <TextView
+                            android:id="@+id/massAirFlowTextViewValue"
+                            android:textColor="@color/text_color"
+
+                            android:layout_width="100sp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:textColor="@color/text_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="C"
+                            android:id="@+id/UnitsmassAirFlowTextView"
+
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
 
 
-</android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
 
             <android.support.v7.widget.CardView
@@ -419,48 +418,48 @@ android:gravity="center"
 
 
 
-            <LinearLayout android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:background="@color/inputBackgroundColor"
-                android:layout_height="match_parent"
-                android:layout_column="2">
-                <TextView
-
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_color"
-                    android:gravity="center"
-                    android:text="Actual Air Flow"
-                    android:id="@+id/actualAirFlowTextView"
-
-                    android:textSize="@dimen/input_fragment_text_size"/>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:orientation="horizontal"
+                <LinearLayout android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:background="@color/inputBackgroundColor"
-
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_height="match_parent"
+                    android:layout_column="2">
                     <TextView
-                        android:layout_width="100sp"
-                        android:textColor="@color/text_color"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/actualAirFlowTextViewTextViewValue"
 
-                        android:textSize="@dimen/input_fragment_text_size"/>
-                    <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_color"
-                        android:text="C"
-                        android:id="@+id/UnitsactualAirFlowTextView"
+                        android:gravity="center"
+                        android:text="Actual Air Flow"
+                        android:id="@+id/actualAirFlowTextView"
+
                         android:textSize="@dimen/input_fragment_text_size"/>
 
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:orientation="horizontal"
+                        android:background="@color/inputBackgroundColor"
 
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="100sp"
+                            android:textColor="@color/text_color"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/actualAirFlowTextViewTextViewValue"
+
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color"
+                            android:text="C"
+                            android:id="@+id/UnitsactualAirFlowTextView"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+
+
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-</android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
         </TableRow>
 
         <com.jco.pitonew.ButtonRectangle
