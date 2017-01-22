@@ -1,13 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://scheomas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/gasDensityFragment"
-    android:orientation="vertical"
 
     tools:context=".GasDensityFragment">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <!-- TODO: Update blank fragment layout -->
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -56,14 +57,7 @@
 
 
 
-        </TableLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="1">
+
         <TableRow>
 
 
@@ -106,6 +100,7 @@
                             android:inputType="numberDecimal"
                             android:id="@+id/temperatureGasDensityFragmentEditText"
                             android:textColor="@color/text_color"
+                            android:background="#ffffff"
 
                             android:textSize="@dimen/input_fragment_text_size"/>
 
@@ -158,6 +153,8 @@
                     <EditText
                         android:id="@+id/ElevationAboveSeaLevelFragmentEdiText"
 android:inputType="numberDecimal"
+                        android:background="#ffffff"
+
                         android:layout_width="100sp"
                         android:textColor="@color/text_color"
                         android:layout_height="wrap_content"
@@ -215,6 +212,7 @@ android:inputType="numberDecimal"
                         android:inputType="numberDecimal"
                         android:id="@+id/wetBulbTemperatureGasDensityFragmentEditText"
                         android:textColor="@color/text_color"
+                        android:background="#ffffff"
 
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/input_fragment_text_size"/>
@@ -258,12 +256,14 @@ android:inputType="numberDecimal"
                     android:orientation="horizontal"
                     android:background="@color/inputBackgroundColor"
 
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center">
                     <EditText
                         android:layout_width="100sp"
                         android:textColor="@color/text_color"
                         android:inputType="numberDecimal"
+                        android:background="#ffffff"
+android:textSize="12sp"
                         android:layout_height="wrap_content"
                         android:id="@+id/seaLevelPressureGasDensityFragmentEditText"/>
                     <TextView
@@ -309,6 +309,8 @@ android:inputType="numberDecimal"
                     android:gravity="center">
                     <EditText
                         android:inputType="numberDecimal"
+                        android:background="#ffffff"
+
                         android:textColor="@color/text_color"
                         android:id="@+id/staticPressureFragmentEditText"
                         android:layout_width="100sp"
@@ -486,8 +488,7 @@ android:inputType="numberDecimal"
 
 
 
-
-
+<TableRow>
 
     <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent"
@@ -530,8 +531,19 @@ android:inputType="numberDecimal"
         </LinearLayout>
 
     </LinearLayout>
+</TableRow>
+<TableRow>
+    <com.jco.pitonew.ButtonRectangle
+        android:id="@+id/fragmentGasDensityImage"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Image"
+        android:layout_gravity="right"/>
+
+</TableRow>
     </TableLayout>
 
 </ScrollView>
 
-</LinearLayout>
+</FrameLayout>

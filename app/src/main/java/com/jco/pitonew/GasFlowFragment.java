@@ -90,7 +90,7 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
     public void setDimensions(String dimensions){
         switch (dimensions) {
             case "Rectangular":
-                dimensionHeader.setText("Rectangular");
+
                 dimension1TextView.setText("Height");
                 dimension2TextView.setText("Width");
                 dimension2TextView.setVisibility(View.VISIBLE);
@@ -101,7 +101,7 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
                 dimension2LinearLayoutFull.setVisibility(View.VISIBLE);
                 break;
             case "Circular":
-                dimensionHeader.setText("Circular");
+
                 dimension1TextView.setText("Diameter");
                 dimension2TextView.setVisibility(View.INVISIBLE);
                 dimension2EditText.setVisibility(View.INVISIBLE);
@@ -165,7 +165,7 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-   
+
         View layoutArea = mView.findViewById(R.id.layoutArea);
         layoutArea.setVisibility(View.GONE);
         View layoutNormalAir = mView.findViewById(R.id.normalAirFlowLayout);
@@ -182,10 +182,10 @@ public class GasFlowFragment extends Fragment implements AdapterView.OnItemSelec
         rectangularOrCircularSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    setDimensions("Rectangular");
+                    setDimensions("Circular");
                 }
                 else{
-                    setDimensions("Circular");
+                    setDimensions("Rectangular");
 
                 }
             }
