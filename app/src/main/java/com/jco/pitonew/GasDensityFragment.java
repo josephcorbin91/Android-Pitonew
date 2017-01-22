@@ -67,13 +67,14 @@ public class GasDensityFragment extends Fragment {
 
     public void clear(){
         Utility.clearAllFields((ViewGroup)this.mView);
+        /*
         View layoutDuctPressure = mView.findViewById(R.id.layoutDuctPressure);
         layoutDuctPressure.setVisibility(View.GONE);
         View layoutRelativeHumidity = mView.findViewById(R.id.layoutRelativeHumidity);
         layoutRelativeHumidity.setVisibility(View.GONE);
         View layoutAtmosphericPressure = mView.findViewById(R.id.layoutAtmosphericPressure);
         layoutAtmosphericPressure.setVisibility(View.GONE);
-
+*/
 
     }
     @Nullable
@@ -142,7 +143,7 @@ dialog.show();
         });
         //standardAirSwitch = (Switch)mView.findViewById(R.id.);
 
-
+/*
         View layoutDuctPressure = mView.findViewById(R.id.layoutDuctPressure);
         layoutDuctPressure.setVisibility(View.GONE);
         View layoutRelativeHumidity = mView.findViewById(R.id.layoutRelativeHumidity);
@@ -153,7 +154,7 @@ dialog.show();
         layoutGasDensityResult.setVisibility(View.GONE);
 
 
-
+*/
         return view;
     }
 

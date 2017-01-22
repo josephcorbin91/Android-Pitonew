@@ -149,11 +149,11 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
                                                   switch (position) {
 
                                                       case 0:
-                                                          getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout).replace(R.id.fragment_container, gasFlowFragment).commit();
+                                                          getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout).replace(R.id.fragment_container, gasDensityFragment).commit();
                                                           currentCalculations = "gasDensity";
                                                           break;
                                                       case 1:
-                                                          getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout).replace(R.id.fragment_container, gasDensityFragment).commit();
+                                                          getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout).replace(R.id.fragment_container, gasFlowFragment).commit();
                                                           currentCalculations = "gasFlow";
                                                           break;
 

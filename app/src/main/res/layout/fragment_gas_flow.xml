@@ -12,13 +12,12 @@
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:stretchColumns="1"
+
   >
 
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TableRow>
 
             <TextView
                 android:layout_width="match_parent"
@@ -347,8 +346,7 @@ android:gravity="center"
             </LinearLayout>
             </android.support.v7.widget.CardView>
 </TableRow>
-        <TableRow
-            android:orientation="horizontal">
+        <TableRow>
 
 
             <android.support.v7.widget.CardView
