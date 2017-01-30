@@ -7,6 +7,7 @@
 
     android:id="@+id/gasFlowFragment"
     tools:context=".GasDensityFragment">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,6 +23,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
+                android:textSize="@dimen/input_fragment_text_size"
                 android:layout_height="wrap_content"
                 android:text="Rectangular / Circular"
                 android:layout_gravity="left"
@@ -71,9 +73,9 @@ android:gravity="right"             android:checked="false"
                         android:layout_height="wrap_content"
                         android:gravity="center">
                         <EditText
-                            android:layout_width="100sp"
+                            android:layout_width="@dimen/InputEditTextWidth"
                             android:textColor="@color/text_color"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/InputEditTextHeight"
                             android:inputType="numberDecimal"
                             android:id="@+id/dimensionWidthGasFlowFragmentEditText"
 android:background="#ffffff"
@@ -121,13 +123,13 @@ android:background="#ffffff"
                         android:layout_height="wrap_content"
                         android:gravity="center">
                         <EditText
-                            android:layout_width="100sp"
+                            android:layout_width="@dimen/InputEditTextWidth"
                             android:inputType="numberDecimal"
                             android:textColor="@color/text_color"
                             android:background="#ffffff"
 
                             android:id="@+id/dimensionHeightGasFlowFragmentEditText"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/InputEditTextHeight"
                             android:textSize="@dimen/input_fragment_text_size"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -181,9 +183,9 @@ android:background="#ffffff"
                             android:textColor="@color/text_color"
                             android:background="#ffffff"
 
-                            android:layout_width="100sp"
+                            android:layout_width="@dimen/InputEditTextWidth"
                             android:id="@+id/pitotTubeCoefficientEditText"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/InputEditTextHeight"
                             android:textSize="@dimen/input_fragment_text_size"/>
                     </LinearLayout>
                 </LinearLayout>
