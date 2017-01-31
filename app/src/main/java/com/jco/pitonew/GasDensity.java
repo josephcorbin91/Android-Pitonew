@@ -1,25 +1,25 @@
 package com.jco.pitonew;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.Serializable;
+
 
 /**
  * Created by jco on 11/17/2016.
  */
 public class GasDensity implements Serializable{
     private Boolean standardAir;
-    private Boolean wetBulbTemperature;
+    private Boolean wetBulbTemperatureBoolean;
     private String TemperatureUnit;
-    private int DryBulbTemperature;
-    private int WetBulbTemperature;
+    private double dryBulbTemperature;
+    private double wetBulbTemperature;
     private String PressureUnit;
     private int SealevelPressure;
+    private double ductPressure;
     private int ElevationAboveSeaLevel;
     private int StaticPressure;
     private double airContentPercentageCO2;
@@ -34,84 +34,68 @@ public class GasDensity implements Serializable{
     private double gasConstantMetric;
     private double absolutePressure;
     private double absoluteTemperature;
-    private String units;
+    private String currentUnits;
     private double molarMass;
     private double individualGasConstant;
     private double atmosphericPressure;
     private double gasDensity;
+    private Activity activity;
+
+
+    //Relative Humidty Variables
+    private double relativeHumidity;
+    private double Kd;
+    private double Kw;
+    private double dryBulbWaterSaturationPressurePD;
+    private double wetBulbWaterSaturationPressurePW;
+    private double partialWaterPressureDueToDepressionPM;
+    private double partialPressureOfWaterPA;
+    private double dryAirHumidity;
+    private double wetAirHumidity;
+
+
+    //Gas Constants
+    private static final double pressureHG = 754.30;
     private static final double universalGasConstant =8.3144598;
     private static final double standardAirMolecularWeight = 28.97;
     private static final double boltzmannConstant =1.38064852E10-23; // Units m2 kg s-2 K-1
     private static final double gravitationalConstant = 9.8;// m * s^-2
-    private TextView gasDensityResultTextView,gasAtmosphericPressureTextView;
+    private static final double criticalPressureH20 = 166818;
+    private static final double criticalTemperatureH20=1165.67;
+    private TextView gasDensityResultTextView,gasAtmosphericPressureTextView,ductPressureTextView;
     private EditText temperatureEditText, seaLevelPressureEditText, elevationAboveSeaLevelEditText,staticPressureEditText,temperatureWetBulbEditText;
-private double [] gasCompositionInputArry;
+    private Switch standardAirSwitch,WetBulbTemperatureGasDensityFragmentSwitch,unitSwitch;
+    private double [] gasCompositionInputArry;
 private double pressureCurrentElevation;
 
 
-    /*Uses pv=nrt to calculate gas density
- PV = nRT and n = m/MW and d = m/V
-
-Where:
-
-    P - pressure
-
-    V - volume
-
-    n - number of moles
-
-    T - temperature
-
-    m - mass
-
-    d - dendity
-
-    MW - Molecular Weight
-
-    R - ideal gas constant. If the units of P, V, n and T are atm, L, mol and K, respectively, the value of R is 0.0821 L x atm/K x mol or 8.314 J/K x mol.
-
-The density (d) of a gas is defined as
-
-d = m / V
-The Ideal Gas Law is accurate only at relatively low pressures and high temperatures. To account for deviation from the ideal situation an other factor is included. It is called the Gas Compressibility Factor, or Z-factor. This correction factor is dependent on pressure and temperature for each gas considered.
-
-The True Gas Law, or the Non-Ideal Gas Law, becomes:
-
-P V = Z n R T        (7)
-
-where
-
-Z = Gas Compressibility Factor
-
-n = number of moles of gas present
-and the moles of a gas is:
-
-n = m / MW
-
-Where
-
-m is the mass of the gas, and
-
-MW is the molecular weight.
-
-**Take into consideration compmressibility factor http://www.engineeringtoolbox.com/ideal-gas-law-d_157.html
-    http://www.engineeringtoolbox.com/molecular-mass-air-d_679.html
-     */
-
 public GasDensity(Activity activity, GasDensityFragment gasDensityFragment,String units, Boolean standardAirBoolean){
+
+    this.activity =activity;
+    //Edit Texts
     temperatureEditText= (EditText)activity.findViewById(R.id.temperatureGasDensityFragmentEditText);
     seaLevelPressureEditText = (EditText)activity.findViewById(R.id.seaLevelPressureGasDensityFragmentEditText);
     elevationAboveSeaLevelEditText = (EditText)activity.findViewById(R.id.ElevationAboveSeaLevelFragmentEdiText);
     staticPressureEditText = (EditText)activity.findViewById(R.id.staticPressureFragmentEditText);
     temperatureWetBulbEditText = (EditText)activity.findViewById(R.id.wetBulbTemperatureGasDensityFragmentEditText);
+    //TextViews
     gasDensityResultTextView= (TextView)activity.findViewById(R.id.ResultCalculatedGasDensityTextView);
-    this.DryBulbTemperature = Integer.valueOf(temperatureEditText.getText().toString());
-    this.WetBulbTemperature = Integer.valueOf(temperatureWetBulbEditText.getText().toString());
+    ductPressureTextView = (TextView)activity.findViewById(R.id.ductPressureFragmentTextView);
+    //Switches
+    standardAirSwitch = (Switch)activity.findViewById(R.id.standardAirSwitch);
+    WetBulbTemperatureGasDensityFragmentSwitch = (Switch)activity.findViewById(R.id.WetBulbTemperatureGasDensityFragmentSwitch);
+    unitSwitch = (Switch)activity.findViewById(R.id.unitSwitch);
+
+
+    //
+    this.dryBulbTemperature = Integer.valueOf(temperatureEditText.getText().toString());
+    this.wetBulbWaterSaturationPressurePW = Integer.valueOf(temperatureWetBulbEditText.getText().toString());
     this.SealevelPressure = Integer.valueOf(seaLevelPressureEditText.getText().toString());
     this.ElevationAboveSeaLevel =Integer.valueOf(elevationAboveSeaLevelEditText.getText().toString());
     this.StaticPressure =Integer.valueOf(staticPressureEditText.getText().toString());
     this.gasCompositionInputArry = gasDensityFragment.getStandardAirResult();
     this.gasAtmosphericPressureTextView = (TextView) activity.findViewById(R.id.AtmosphericPressureFragmentTextView);
+
 
     if(!standardAirBoolean) {
         this.airContentPercentageCO2 = this.gasCompositionInputArry[0];
@@ -125,28 +109,111 @@ public GasDensity(Activity activity, GasDensityFragment gasDensityFragment,Strin
     {
         this.molarMass=standardAirMolecularWeight;
     }
-    System.out.println(DryBulbTemperature + WetBulbTemperature +SealevelPressure+ airContentPercentageAr);
+    System.out.println(dryBulbTemperature + wetBulbWaterSaturationPressurePW +SealevelPressure+ airContentPercentageAr);
 
 }
-    public double calculatePressureAtCurrentElevation(){
-        this.pressureCurrentElevation = this.SealevelPressure*Math.pow(Math.E,28.9*gravitationalConstant*ElevationAboveSeaLevel/boltzmannConstant*this.DryBulbTemperature);
-        this.gasAtmosphericPressureTextView.setText(String.valueOf(this.pressureCurrentElevation));
-        return this.pressureCurrentElevation;
+    public double calculateAtmosphericPressure(){
+        switch(getCurrentUnits()) {
+            case "SI":
+                this.atmosphericPressure = this.SealevelPressure * (Math.pow(10, -0.00001696 * this.ElevationAboveSeaLevel));break;
+            case "US":
+                this.atmosphericPressure = (this.SealevelPressure / 0.2952998) * (Math.pow(10, -0.00001696 * this.ElevationAboveSeaLevel));break;
+        }
+
+        this.gasAtmosphericPressureTextView.setText(String.valueOf(this.atmosphericPressure));
+        return this.atmosphericPressure;
     }
 
-    public double calculateGasDensity() {
+    public double calculateDuctPressure(){
+        switch(getCurrentUnits()) {
+            case "SI":
+                this.ductPressure = this.SealevelPressure + this.ductPressure * 0.249088;
+                break;
+            case "US":
+                this.ductPressure = this.SealevelPressure + this.ductPressure * 0.07355;
+                break;
+        }
+        ductPressureTextView.setText(String.valueOf(this.ductPressure));
+        return this.ductPressure;
+    }
+
+    public double calculateWetBulbTemperature(){
+        switch(getCurrentUnits()) {
+            case "SI":
+                this.wetBulbWaterSaturationPressurePW = this.SealevelPressure + this.ductPressure * 0.249088;
+                break;
+            case "US":
+                this.wetBulbWaterSaturationPressurePW = this.SealevelPressure + this.ductPressure * 0.07355;
+                break;
+        }
+        ductPressureTextView.setText(String.valueOf(this.ductPressure));
+        return this.ductPressure;
+
+    }
+
+    /*TODO
+    Not Done
+     */
+    /*
+    public double calculateHumidity(){
+       dryAirHumidity=18.02/molecularWeight*(partialPressureOfWaterPA/(pressureHG-partialPressureOfWaterPA));
+        if(wetBulbTemperature ==0)
+            wetAirHumidity=0;
+        else if()
+
+        this.wetAirHumidity=IF(D20="value?",0,IF(D8="Y",P12/P5,0))
+
+
+    }
+
+    */
+    public double calculateRelativeHumidtiy(){
+        this.dryBulbWaterSaturationPressurePD = criticalPressureH20*Math.pow(10,Kd*(1-criticalTemperatureH20)/this.dryBulbTemperature);
+        this.wetBulbWaterSaturationPressurePW=criticalPressureH20*Math.pow(10,Kw*(1-criticalTemperatureH20)/this.wetBulbTemperature);
+        this.partialWaterPressureDueToDepressionPM =0.000367*(1+(wetBulbTemperature-32)/1571)*(754.30-wetBulbWaterSaturationPressurePW)*(dryBulbTemperature-wetBulbTemperature);
+        this.partialPressureOfWaterPA=relativeHumidity*dryBulbWaterSaturationPressurePD;
+
+        /*TODO
+        Create an error for when the dialog shows up
+         */
+        if((wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD>=100 ||(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD<0)
+            System.out.println("ERROR");
+        else
+            this.relativeHumidity=(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD;
+
+
+        switch(getCurrentUnits()) {
+            case "SI":
+                this.relativeHumidity = this.SealevelPressure + this.ductPressure * 0.249088;
+                break;
+            case "US":
+                this.relativeHumidity = this.SealevelPressure + this.ductPressure * 0.07355;
+                break;
+        }
+        ductPressureTextView.setText(String.valueOf(this.ductPressure));
+        return this.ductPressure;
+
+    }
+
+     public double calculateGasDensity() {
         if (!standardAir) {
-            this.absoluteTemperature = this.getDryBulbTemperature() + 273.15;
+            this.absoluteTemperature =   273.15;
             this.individualGasConstant = this.universalGasConstant / this.molecularWeight;
             this.gasDensity = this.atmosphericPressure * this.molecularWeight / this.absoluteTemperature;
             return this.gasDensity;
         }
         else{
-            this.absoluteTemperature = this.getDryBulbTemperature() + 273.15;
+            this.absoluteTemperature =  273.15;
             this.individualGasConstant = this.universalGasConstant / standardAirMolecularWeight;
             this.gasDensity = (this.atmosphericPressure * this.molecularWeight) / (this.absoluteTemperature *this.universalGasConstant);
             return this.gasDensity;        }
     }
+
+    public String getCurrentUnits(){
+        return unitSwitch.isChecked() ? "SI": "US";
+    }
+
+
 
 
     public double getAirContentPercentageCO2() {
@@ -202,12 +269,12 @@ public GasDensity(Activity activity, GasDensityFragment gasDensityFragment,Strin
         this.standardAir = standardAir;
     }
 
-    public Boolean getWetBulbTemperature() {
-        return wetBulbTemperature;
+    public Boolean getWetBulbTemperatureBoolean() {
+        return wetBulbTemperatureBoolean;
     }
 
-    public void setWetBulbTemperature(int wetBulbTemperature) {
-        WetBulbTemperature = wetBulbTemperature;
+    public void setWetBulbTemperatureBoolean(int wetBulbTemperatureBoolean) {
+        wetBulbTemperatureBoolean = wetBulbTemperatureBoolean;
     }
 
     public String getPressureUnit() {
@@ -243,7 +310,7 @@ public GasDensity(Activity activity, GasDensityFragment gasDensityFragment,Strin
     }
 
     public void setWetBulbTemperature(Boolean wetBulbTemperature) {
-        this.wetBulbTemperature = wetBulbTemperature;
+        this.wetBulbTemperatureBoolean = wetBulbTemperature;
     }
 
     public String getTemperatureUnit() {
@@ -254,9 +321,7 @@ public GasDensity(Activity activity, GasDensityFragment gasDensityFragment,Strin
         TemperatureUnit = temperatureUnit;
     }
 
-    public int getDryBulbTemperature() {
-        return DryBulbTemperature;
-    }
+
 
     public void displayResult(){
 
@@ -266,7 +331,4 @@ public GasDensity(Activity activity, GasDensityFragment gasDensityFragment,Strin
 
     }
 
-    public void setDryBulbTemperature(int dryBulbTemperature) {
-        DryBulbTemperature = dryBulbTemperature;
-    }
 }

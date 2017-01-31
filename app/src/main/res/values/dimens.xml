@@ -15,6 +15,7 @@
     <dimen name="ms__popup_padding_left">24dp</dimen>
     <dimen name="ms__popup_padding_top">12dp</dimen>
     <dimen name="input_fragment_height">100dp</dimen>
+    <dimen name="cardViewMargin">5dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <!-- Guillotine screen dimens-->
     <dimen name="guillotine_small_margin">24dp</dimen>

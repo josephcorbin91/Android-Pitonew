@@ -79,6 +79,9 @@ public class GasDensityFragment extends Fragment {
     }
     @Nullable
     public void showStandardAirDialog(){
+        /*
+        Refactor code so you only call the EditText Once.
+         */
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Standard Air Input");
         builder.setView(R.layout.dialog_standardair);
@@ -102,6 +105,11 @@ public class GasDensityFragment extends Fragment {
                     System.out.print(standardAirResult[i]);
                 Toast.makeText(getActivity(), "Molecular Weight ="+String.valueOf(standardAirResult[0]*44.01/100+standardAirResult[1]*32/100+standardAirResult[2]*28.02/100+standardAirResult[3]*39.94/100+standardAirResult[4]*18.01528/100),Toast.LENGTH_LONG).show();
 
+                TextView molecularWeightTextView = (TextView)mView.findViewById(R.id.MolecularWeightTextView);
+                molecularWeightTextView.setText(String.valueOf(standardAirResult[0]*44.01/100+standardAirResult[1]*32/100+standardAirResult[2]*28.02/100+standardAirResult[3]*39.94/100+standardAirResult[4]*18.01528/100));
+
+
+
 
 
 
@@ -111,13 +119,32 @@ public class GasDensityFragment extends Fragment {
 
             }
         });
+
+
+        builder.setNeutralButton("Clear", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Dialog standardAirDialog = (Dialog)dialog;
+                EditText C02EditText = (EditText)standardAirDialog.findViewById(R.id.C02EditText);
+                EditText O2EditText = (EditText)standardAirDialog.findViewById(R.id.O2EditText);
+                EditText N2EditText = (EditText)standardAirDialog.findViewById(R.id.N2EditText);
+                EditText ArEditText = (EditText)standardAirDialog.findViewById(R.id.ArEditText);
+                EditText H20EditText = (EditText)standardAirDialog.findViewById(R.id.H2OEditText);
+                C02EditText.setText("");
+                O2EditText.setText("");
+                N2EditText.setText("");
+                ArEditText.setText("");
+                H20EditText.setText("");
+
+            }
+        });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Dialog standardAirDialog = (Dialog)dialog;
                 standardAirDialog.hide();
                 standardAirSwitch.setChecked(false);
-                Toast.makeText(getActivity(), "Molecular Weight = 28.96",Toast.LENGTH_LONG).show();
 
 
             }
