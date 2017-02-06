@@ -1,10 +1,13 @@
-package com.jco.pitonew;
+package com.jco.pitonew.models;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.jco.pitonew.R;
+import com.jco.pitonew.Utility;
 
 import java.io.Serializable;
 

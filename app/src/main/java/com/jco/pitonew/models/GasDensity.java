@@ -1,9 +1,13 @@
-package com.jco.pitonew;
+package com.jco.pitonew.models;
 
 import android.app.Activity;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.jco.pitonew.GasDensityFragment;
+import com.jco.pitonew.R;
+import com.jco.pitonew.Utility;
 
 import java.io.Serializable;
 
@@ -69,7 +73,7 @@ public class GasDensity implements Serializable{
 private double pressureCurrentElevation;
 
 
-public GasDensity(Activity activity, GasDensityFragment gasDensityFragment,String units, Boolean standardAirBoolean){
+public GasDensity(Activity activity, GasDensityFragment gasDensityFragment, String units, Boolean standardAirBoolean){
 
     this.activity =activity;
     //Edit Texts
