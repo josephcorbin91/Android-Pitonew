@@ -1,155 +1,115 @@
 package com.jco.pitonew.models;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jco.pitonew.R;
 import com.jco.pitonew.Utility;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * Created by jco on 11/17/2016.
  */
 public class GasFlow implements Serializable{
     private String DuctUnits;
-    private Boolean RectangularDuct;
-    private double Diameter;
-    private double Height;
-    private double Width;
-    private double Area;
-    private int PilotTubeCoeffecient;
-    private int [][] DynamicVelocityPressure;
+    private Boolean rectangularDuct;
+    private double diameter;
+    private double height;
+    private double width;
+    private double area;
+    private int pilotTubeCoeffecient;
     private boolean checkRule;
+    private double ductPressure;
+
+    private double dryBulbTemperature;
+    private String pipeType;
+    private EditText dimensionHeightEditText,pitotTubeCoefficientEditText, dynamicPressure, dimensionWidthEditText, dimensionDiameterEditText;
+    private TextView areaTextView;
+
+    //Dynamic Velocity
+    private ArrayList<Double> dynamicVelocityArrayList= new ArrayList<Double>();
+    private ArrayList<Double> dynamicPressureArrayList= new ArrayList<Double>();
+
+    //Gas Density
+    private double gasDensity;
+
+    //Average Flow/Velocty
     private double averageVelocity;
     private double massAirFlow;
     private double actualAirFlow;
     private double normalAirFlow;
-    private EditText dimensionHeightEditText,pitotTubeCoefficientEditText, dynamicPressure, dimensionWidthEditText, dimensionDiameterEditText;
-    private TextView areaTextView;
 
 
-    public GasFlow(Activity activity, String pipeType){
 
+
+
+
+    public GasFlow(Activity activity, String pipeShape){
+
+        this.pipeType=pipeShape;
         dimensionHeightEditText = (EditText)activity.findViewById(R.id.dimensionHeightGasFlowFragmentEditText);
         pitotTubeCoefficientEditText =(EditText)activity.findViewById(R.id.pitotTubeCoefficientEditText);
         dimensionWidthEditText =(EditText)activity.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
         areaTextView = (TextView)activity.findViewById(R.id.ductAreaGasFlowFragmentTextView);
+    }
 
-
+    //Area Calculations
+    public double calculateArea(){
         if(pipeType == "Circular"){
-            this.Diameter= Double.valueOf(dimensionHeightEditText.getText().toString());
-            this.Area = Math.PI*this.Diameter/2;
+            diameter = Double.valueOf(dimensionHeightEditText.getText().toString());
+            area = Math.PI*diameter /2;
         }
-        if(pipeType == "Rectangular"){
-            this.Height= Double.valueOf(dimensionHeightEditText.getText().toString());
-            this.Width = Double.valueOf(dimensionWidthEditText.getText().toString());
-            this.Area = this.Height*this.Width;
+        else if(pipeType == "Rectangular"){
+            height = Double.valueOf(dimensionHeightEditText.getText().toString());
+            width = Double.valueOf(dimensionWidthEditText.getText().toString());
+            area = height *width;
         }
-
-      //  Toast.makeText(activity, )
-
-
-
-
-    }
-    public String getDuctUnits() {
-        return DuctUnits;
+        areaTextView.setText(String.valueOf(area));
+        return area;
     }
 
-    public double calculateAverageVelocity(String unit){
-         this.averageVelocity = this.Diameter; return this.averageVelocity;
+    //Dyanmic Velocity
+    public void calculateDynamicVelocity(){
+       for(int i=0; i<dynamicPressureArrayList.size();i++)
+       {
+           dynamicVelocityArrayList.set(i,pilotTubeCoeffecient*Math.pow(2*dynamicPressureArrayList.get(i)*1000/4.01864/gasDensity,0.5));
+       }
     }
 
-    public double calculateMassAirFlow(String units){
-        this.massAirFlow = this.Diameter; return this.massAirFlow;
+    //Average Velocity
+
+    public double calculateAverageVelocity(){
+        int sum=0;
+        for(Double velocity: dynamicVelocityArrayList)
+            sum+=velocity;
+        averageVelocity=sum;
+        return averageVelocity;
     }
 
-    public double calculateNormalAirFlow(String unit){
-        this.normalAirFlow = this.Diameter;return  this.normalAirFlow;
+    public double calculateMassAirFlow(){
+        massAirFlow=actualAirFlow*gasDensity/3600;
+        return massAirFlow;
     }
 
-    public double calculateActualAirFlow(String unit){
-        this.actualAirFlow = this.Diameter;
-        return  this.actualAirFlow;
-    }
-    public void displayResult() {
-
+    public double calculateActualAirFlow(){
+        actualAirFlow= averageVelocity*area*3600;
+        return actualAirFlow;
 
     }
-    public void calculateArea(){
-        areaTextView.setText(String.valueOf(this.Area));
-
+    public double calculateNormalAirFlow(){
+        normalAirFlow=actualAirFlow*ductPressure/101.325*273.15/(273.15+((dryBulbTemperature-32)/1.8));
+        return normalAirFlow;
     }
+
+
 
     public boolean verifyDataIntegrity() {
         return Utility.containsText(dimensionDiameterEditText)&&Utility.containsText(dimensionHeightEditText)&&Utility.containsText(dimensionWidthEditText);
 
     }
 
-
-
-
-    public void setDuctUnits(String ductUnits) {
-        DuctUnits = ductUnits;
     }
-
-    public Boolean getRectangularDuct() {
-        return RectangularDuct;
-    }
-
-    public void setRectangularDuct(Boolean rectangularDuct) {
-        RectangularDuct = rectangularDuct;
-    }
-
-    public double getDiameter() {
-        return Diameter;
-    }
-
-    public void setDiameter(int diameter) {
-        Diameter = diameter;
-    }
-
-    public double getHeight() {
-        return Height;
-    }
-
-    public void setHeight(int height) {
-        Height = height;
-    }
-
-    public double getWidth() {
-        return Width;
-    }
-
-    public void setWidth(int width) {
-        Width = width;
-    }
-
-    public int getPilotTubeCoeffecient() {
-        return PilotTubeCoeffecient;
-    }
-
-    public void setPilotTubeCoeffecient(int pilotTubeCoeffecient) {
-        PilotTubeCoeffecient = pilotTubeCoeffecient;
-    }
-
-    public int[][] getDynamicVelocityPressure() {
-        return DynamicVelocityPressure;
-    }
-
-    public void setDynamicVelocityPressure(int[][] dynamicVelocityPressure) {
-        DynamicVelocityPressure = dynamicVelocityPressure;
-    }
-
-    public boolean isCheckRule() {
-        return checkRule;
-    }
-
-    public void setCheckRule(boolean checkRule) {
-        this.checkRule = checkRule;
-    }
-}

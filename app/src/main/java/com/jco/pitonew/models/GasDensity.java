@@ -21,11 +21,16 @@ public class GasDensity implements Serializable{
     private String TemperatureUnit;
     private double dryBulbTemperature;
     private double wetBulbTemperature;
+
+
+    //Pressure Variables
     private String PressureUnit;
-    private int SealevelPressure;
+    private int seaLevelPressure;
     private double ductPressure;
-    private int ElevationAboveSeaLevel;
-    private int StaticPressure;
+    private int elevationAboveSeaLevel;
+    private int staticPressure;
+
+    //Air Composition Variables
     private double airContentPercentageCO2;
     private double airContentPercentageO2;
     private double airContentPercentageN2;
@@ -55,7 +60,7 @@ public class GasDensity implements Serializable{
     private double partialWaterPressureDueToDepressionPM;
     private double partialPressureOfWaterPA;
     private double dryAirHumidity;
-    private double wetAirHumidity;
+    private double wetAFirHumidity;
 
 
     //Gas Constants
@@ -82,6 +87,8 @@ public GasDensity(Activity activity, GasDensityFragment gasDensityFragment, Stri
     elevationAboveSeaLevelEditText = (EditText)activity.findViewById(R.id.ElevationAboveSeaLevelFragmentEdiText);
     staticPressureEditText = (EditText)activity.findViewById(R.id.staticPressureFragmentEditText);
     temperatureWetBulbEditText = (EditText)activity.findViewById(R.id.wetBulbTemperatureGasDensityFragmentEditText);
+
+
     //TextViews
     gasDensityResultTextView= (TextView)activity.findViewById(R.id.ResultCalculatedGasDensityTextView);
     ductPressureTextView = (TextView)activity.findViewById(R.id.ductPressureFragmentTextView);
@@ -94,9 +101,9 @@ public GasDensity(Activity activity, GasDensityFragment gasDensityFragment, Stri
     //
     this.dryBulbTemperature = Integer.valueOf(temperatureEditText.getText().toString());
     this.wetBulbWaterSaturationPressurePW = Integer.valueOf(temperatureWetBulbEditText.getText().toString());
-    this.SealevelPressure = Integer.valueOf(seaLevelPressureEditText.getText().toString());
-    this.ElevationAboveSeaLevel =Integer.valueOf(elevationAboveSeaLevelEditText.getText().toString());
-    this.StaticPressure =Integer.valueOf(staticPressureEditText.getText().toString());
+    this.seaLevelPressure = Integer.valueOf(seaLevelPressureEditText.getText().toString());
+    this.elevationAboveSeaLevel =Integer.valueOf(elevationAboveSeaLevelEditText.getText().toString());
+    this.staticPressure =Integer.valueOf(staticPressureEditText.getText().toString());
     this.gasCompositionInputArry = gasDensityFragment.getStandardAirResult();
     this.gasAtmosphericPressureTextView = (TextView) activity.findViewById(R.id.AtmosphericPressureFragmentTextView);
 
@@ -113,41 +120,44 @@ public GasDensity(Activity activity, GasDensityFragment gasDensityFragment, Stri
     {
         this.molarMass=standardAirMolecularWeight;
     }
-    System.out.println(dryBulbTemperature + wetBulbWaterSaturationPressurePW +SealevelPressure+ airContentPercentageAr);
+    System.out.println(dryBulbTemperature + wetBulbWaterSaturationPressurePW + seaLevelPressure + airContentPercentageAr);
 
 }
+
+    //Pressure Calculations
+
     public double calculateAtmosphericPressure(){
         switch(getCurrentUnits()) {
             case "SI":
-                this.atmosphericPressure = this.SealevelPressure * (Math.pow(10, -0.00001696 * this.ElevationAboveSeaLevel));break;
+                atmosphericPressure = seaLevelPressure * (Math.pow(10, -0.00001696 * elevationAboveSeaLevel));break;
             case "US":
-                this.atmosphericPressure = (this.SealevelPressure / 0.2952998) * (Math.pow(10, -0.00001696 * this.ElevationAboveSeaLevel));break;
+                atmosphericPressure = (seaLevelPressure / 0.2952998) * (Math.pow(10, -0.00001696 * elevationAboveSeaLevel));break;
         }
 
-        this.gasAtmosphericPressureTextView.setText(String.valueOf(this.atmosphericPressure));
-        return this.atmosphericPressure;
+        gasAtmosphericPressureTextView.setText(String.valueOf(atmosphericPressure));
+        return atmosphericPressure;
     }
 
     public double calculateDuctPressure(){
         switch(getCurrentUnits()) {
             case "SI":
-                this.ductPressure = this.SealevelPressure + this.ductPressure * 0.249088;
+                ductPressure = seaLevelPressure + ductPressure * 0.249088;
                 break;
             case "US":
-                this.ductPressure = this.SealevelPressure + this.ductPressure * 0.07355;
+                ductPressure = seaLevelPressure + ductPressure * 0.07355;
                 break;
         }
-        ductPressureTextView.setText(String.valueOf(this.ductPressure));
-        return this.ductPressure;
+        ductPressureTextView.setText(String.valueOf(ductPressure));
+        return ductPressure;
     }
 
     public double calculateWetBulbTemperature(){
         switch(getCurrentUnits()) {
             case "SI":
-                this.wetBulbWaterSaturationPressurePW = this.SealevelPressure + this.ductPressure * 0.249088;
+                this.wetBulbWaterSaturationPressurePW = this.seaLevelPressure + this.ductPressure * 0.249088;
                 break;
             case "US":
-                this.wetBulbWaterSaturationPressurePW = this.SealevelPressure + this.ductPressure * 0.07355;
+                this.wetBulbWaterSaturationPressurePW = this.seaLevelPressure + this.ductPressure * 0.07355;
                 break;
         }
         ductPressureTextView.setText(String.valueOf(this.ductPressure));
@@ -188,10 +198,10 @@ public GasDensity(Activity activity, GasDensityFragment gasDensityFragment, Stri
 
         switch(getCurrentUnits()) {
             case "SI":
-                this.relativeHumidity = this.SealevelPressure + this.ductPressure * 0.249088;
+                this.relativeHumidity = this.seaLevelPressure + this.ductPressure * 0.249088;
                 break;
             case "US":
-                this.relativeHumidity = this.SealevelPressure + this.ductPressure * 0.07355;
+                this.relativeHumidity = this.seaLevelPressure + this.ductPressure * 0.07355;
                 break;
         }
         ductPressureTextView.setText(String.valueOf(this.ductPressure));
@@ -248,81 +258,6 @@ public GasDensity(Activity activity, GasDensityFragment gasDensityFragment, Stri
         return Utility.containsText(temperatureEditText)&& Utility.containsText(seaLevelPressureEditText) && Utility.containsText(elevationAboveSeaLevelEditText)&& Utility.containsText(staticPressureEditText)&& Utility.containsText(temperatureWetBulbEditText);
 
 
-    }
-    public double getAirContentPercentageAr() {
-        return airContentPercentageAr;
-    }
-
-    public void setAirContentPercentageAr(double airContentPercentageAr) {
-        this.airContentPercentageAr = airContentPercentageAr;
-    }
-
-    public double getAirContentPercentageH2O() {
-        return airContentPercentageH2O;
-    }
-
-    public void setAirContentPercentageH2O(double airContentPercentageH2O) {
-        this.airContentPercentageH2O = airContentPercentageH2O;
-    }
-
-    public Boolean getStandardAir() {
-        return standardAir;
-    }
-
-    public void setStandardAir(Boolean standardAir) {
-        this.standardAir = standardAir;
-    }
-
-    public Boolean getWetBulbTemperatureBoolean() {
-        return wetBulbTemperatureBoolean;
-    }
-
-    public void setWetBulbTemperatureBoolean(int wetBulbTemperatureBoolean) {
-        wetBulbTemperatureBoolean = wetBulbTemperatureBoolean;
-    }
-
-    public String getPressureUnit() {
-        return PressureUnit;
-    }
-
-    public void setPressureUnit(String pressureUnit) {
-        PressureUnit = pressureUnit;
-    }
-
-    public int getSealevelPressure() {
-        return SealevelPressure;
-    }
-
-    public void setSealevelPressure(int sealevelPressure) {
-        SealevelPressure = sealevelPressure;
-    }
-
-    public int getElevationAboveSeaLevel() {
-        return ElevationAboveSeaLevel;
-    }
-
-    public void setElevationAboveSeaLevel(int elevationAboveSeaLevel) {
-        ElevationAboveSeaLevel = elevationAboveSeaLevel;
-    }
-
-    public int getStaticPressure() {
-        return StaticPressure;
-    }
-
-    public void setStaticPressure(int staticPressure) {
-        StaticPressure = staticPressure;
-    }
-
-    public void setWetBulbTemperature(Boolean wetBulbTemperature) {
-        this.wetBulbTemperatureBoolean = wetBulbTemperature;
-    }
-
-    public String getTemperatureUnit() {
-        return TemperatureUnit;
-    }
-
-    public void setTemperatureUnit(String temperatureUnit) {
-        TemperatureUnit = temperatureUnit;
     }
 
 
