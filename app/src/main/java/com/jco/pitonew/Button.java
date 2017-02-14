@@ -13,6 +13,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
+import com.jco.pitonew.Utilities.Utils;
+
 public abstract class Button extends CustomView {
 
 	final static String ANDROIDXML = "http://schemas.android.com/apk/res/android";

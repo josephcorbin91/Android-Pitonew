@@ -6,7 +6,7 @@
 
 
     android:id="@+id/gasFlowFragment"
-    tools:context=".GasDensityFragment">
+    tools:context=".Fragments.GasDensityFragment">
 
     <ScrollView
         android:layout_width="match_parent"

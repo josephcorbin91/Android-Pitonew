@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jco.pitonew.Utilities.Utils;
+
 public class ButtonFlat extends Button {
 	
 	TextView textButton;

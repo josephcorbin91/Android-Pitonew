@@ -1,4 +1,4 @@
-package com.jco.pitonew;
+package com.jco.pitonew.Utilities;
 
 import android.content.res.Resources;
 import android.util.TypedValue;

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.jco.pitonew.Activities.Activity;
+
 public class InitialScreen extends AppCompatActivity {
     private Thread welcomeThread;
     private TextView loadingScreenTextView;

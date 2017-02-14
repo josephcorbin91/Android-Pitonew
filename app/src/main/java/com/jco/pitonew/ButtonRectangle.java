@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jco.pitonew.Utilities.Utils;
+
 public class ButtonRectangle extends Button {
 	
 	TextView textButton;

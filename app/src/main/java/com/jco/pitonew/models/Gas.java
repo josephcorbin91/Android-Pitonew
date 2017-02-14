@@ -1,11 +1,10 @@
-package com.jco.pitonew.models;
+package com.jco.pitonew.Models;
 
 import android.app.Activity;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.jco.pitonew.GasDensityFragment;
 import com.jco.pitonew.R;
 
 import java.io.Serializable;

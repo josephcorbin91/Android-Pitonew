@@ -1,4 +1,4 @@
-package com.jco.pitonew;
+package com.jco.pitonew.Fragments;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -9,6 +9,10 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.jco.pitonew.R;
+import com.jco.pitonew.Utilities.Utility;
+
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -18,14 +22,14 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GasFragment.OnFragmentInteractionListener} interface
+ * {@link GasDensityFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GasFragment#newInstance} factory method to
+ * Use the {@link GasDensityFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GasFragment extends Fragment {
-    public static GasFragment newInstance() {
-        return new GasFragment();
+public class GasDensityFragment extends Fragment {
+    public static GasDensityFragment newInstance() {
+        return new GasDensityFragment();
     }
 
     public double[] getStandardAirResult() {
@@ -53,7 +57,7 @@ public class GasFragment extends Fragment {
     private View mView;
 
 
-    public GasFragment() {
+    public GasDensityFragment() {
 
         standardAirBoolean=false;
 

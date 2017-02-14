@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
     </activity>
-        <activity android:name="com.jco.pitonew.Activity"
+        <activity android:name="com.jco.pitonew.Activities.Activity"
             android:label="Gas Property Calculator">
 
         </activity>
