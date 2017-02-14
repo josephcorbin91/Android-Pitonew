@@ -182,7 +182,7 @@ public class GasFragment extends Fragment implements AdapterView.OnItemSelectedL
 dialog.show();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_gas_density, container, false);
+        View view = inflater.inflate(R.layout.fragment_gas, container, false);
         this.mView = view;
         standardAirSwitch = (Switch)mView.findViewById(R.id.standardAirSwitch);
         standardAirSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

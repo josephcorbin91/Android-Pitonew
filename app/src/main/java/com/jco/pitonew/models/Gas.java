@@ -47,7 +47,8 @@ public class Gas implements Serializable {
     private double dryBulbTemperature,wetBulbTemperature;
 
     //Pressure
-    private double dryBulbWaterSaturationPressurePD,wetBulbWaterSaturationPressurePW,partialWaterPressureDueToDepressionPM,partialPressureOfWaterPA,seaLevelPressure;
+   private double seaLevelPressure;
+    private Integer staticPressure;
 
 
     //Relative Humidity
@@ -120,7 +121,7 @@ public class Gas implements Serializable {
         seaLevelPressure = Integer.valueOf(seaLevelPressureEditText.getText().toString());
         elevationAboveSeaLevel = Integer.valueOf(elevationAboveSeaLevelEditText.getText().toString());
         staticPressure = Integer.valueOf(staticPressureEditText.getText().toString());
-        gasCompositionInputArry = gasDensityFragment.getStandardAirResult();
+        //gasCompositionInputArry = gasFragment.getStandardAirResult();
         gasAtmosphericPressureTextView = (TextView) activity.findViewById(R.id.AtmosphericPressureFragmentTextView);
 
 
@@ -169,12 +170,12 @@ public class Gas implements Serializable {
         if((wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD>=100 ||(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD<0)
             System.out.println("ERROR");
         else
-            .relativeHumidity=(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD;
+            relativeHumidity=(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD;
 
 
         switch(getUnits()) {
             case "SI":
-                .relativeHumidity = seaLevelPressure + ductPressure * 0.249088;
+                relativeHumidity = seaLevelPressure + ductPressure * 0.249088;
                 break;
             case "US":
                 relativeHumidity = seaLevelPressure + ductPressure * 0.07355;
