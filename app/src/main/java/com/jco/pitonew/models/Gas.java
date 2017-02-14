@@ -75,7 +75,7 @@ public class Gas implements Serializable {
     Activity currentActivity;
 
     //TextView
-    private TextView gasDensityResultTextView,gasAtmosphericPressureTextView,ductPressureTextView,areaTextView;
+    private TextView gasDensityResultTextView, gasAtmosphericPressureResultTextView, ductPressureResultTextView,areaTextView,relativeHumidityResultTextView;
 
     //EditText
     private EditText temperatureEditText, seaLevelPressureEditText, elevationAboveSeaLevelEditText,staticPressureEditText,temperatureWetBulbEditText,dimensionHeightEditText,pitotTubeCoefficientEditText, dynamicPressure, dimensionWidthEditText, dimensionDiameterEditText;
@@ -105,7 +105,8 @@ public class Gas implements Serializable {
 
         //TextViews
         gasDensityResultTextView = (TextView) activity.findViewById(R.id.ResultCalculatedGasDensityTextView);
-        ductPressureTextView = (TextView) activity.findViewById(R.id.ductPressureFragmentTextView);
+        ductPressureResultTextView = (TextView) activity.findViewById(R.id.ductPressureFragmentTextView);
+        relativeHumidityResultTextView = (TextView)activity.findViewById(R.id.relativeHumidityResultTextView);
 
 
         //Switches
@@ -122,12 +123,17 @@ public class Gas implements Serializable {
         elevationAboveSeaLevel = Integer.valueOf(elevationAboveSeaLevelEditText.getText().toString());
         staticPressure = Integer.valueOf(staticPressureEditText.getText().toString());
         //gasCompositionInputArry = gasFragment.getStandardAirResult();
-        gasAtmosphericPressureTextView = (TextView) activity.findViewById(R.id.AtmosphericPressureFragmentTextView);
+        gasAtmosphericPressureResultTextView = (TextView) activity.findViewById(R.id.AtmosphericPressureFragmentTextView);
 
 
     }
     //Current settings of calculator
+    public void calculateResult(){
 
+        gasDensityResultTextView.setText(String .valueOf(calculateGasDensity()));
+        gasAtmosphericPressureResultTextView.setText(String .valueOf(cal));
+                relativeHumidityResultTextView.setText();
+    }
 
     //Methods to determine status of switches
     public String getPipeType(){
@@ -181,7 +187,7 @@ public class Gas implements Serializable {
                 relativeHumidity = seaLevelPressure + ductPressure * 0.07355;
                 break;
         }
-        ductPressureTextView.setText(String.valueOf(ductPressure));
+        ductPressureResultTextView.setText(String.valueOf(ductPressure));
         return ductPressure;
 
     }

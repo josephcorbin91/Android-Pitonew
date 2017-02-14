@@ -19,22 +19,23 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jco.pitonew.Models.Gas;
 import com.jco.pitonew.R;
 import com.jco.pitonew.Utilities.Utility;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GasFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link GasFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GasFragment extends Fragment implements AdapterView.OnItemSelectedListener{
+public class GasFragment extends Fragment  {
     public static GasFragment newInstance() {
         return new GasFragment();
     }
 
+    private Gas gas;
 
 
     private double[] standardAirResult;
@@ -43,6 +44,8 @@ public class GasFragment extends Fragment implements AdapterView.OnItemSelectedL
     //GUI Components
     private TextView unitsGasDensityTemperatureDB, unitsGasDensityTemperatureWB, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView,dimension1TextView,dimension2UnitText,        unitsAverageVelocity,unitsMassAirFlow,unitsActualAirFlow,unitsNormalAirFlow,UnitsDimensionHeightGasFlowFragmentTextView,UnitsDimensionWidthGasFlowFragmentTextView;;
     private View layoutDuctPressure,layoutRelativeHumidity,layoutAtmosphericPressure,layoutGasDensityResult,        layoutArea,layoutNormalAir,layoutAverageVelocity,massAirFlowLayout,layoutActualAirFlow;
+    private TextView molecularWeightTextView ;
+    EditText dimensionWidthGasEditText,dimensionHeightGasEditText,pitotTubeCoefficientEditText, staticPressureFragmentEditText, temperatureGasFragmentEditText, ElevationAboveSeaLevelFragmentEdiText, wetBulbTemperatureGasFragmentEditText, seaLevelPressureGasFragmentEditText;
 
     public Boolean getStandardAirBoolean() {
         return standardAirBoolean;
@@ -90,7 +93,69 @@ public class GasFragment extends Fragment implements AdapterView.OnItemSelectedL
     LinearLayout dimesnion2LinearLayout;
 
 
+    public void instantiateViews() {
+        molecularWeightTextView = (TextView) mView.findViewById(R.id.MolecularWeightTextView);
 
+        //Instantiating Layouts
+        layoutDuctPressure = mView.findViewById(R.id.layoutDuctPressure);
+        layoutDuctPressure.setVisibility(View.GONE);
+        layoutRelativeHumidity = mView.findViewById(R.id.layoutRelativeHumidity);
+        layoutRelativeHumidity.setVisibility(View.GONE);
+        layoutAtmosphericPressure = mView.findViewById(R.id.layoutAtmosphericPressure);
+        layoutAtmosphericPressure.setVisibility(View.GONE);
+        layoutGasDensityResult = mView.findViewById(R.id.layoutGasDensity);
+        layoutGasDensityResult.setVisibility(View.GONE);
+
+
+        unitsAverageVelocity = (TextView) mView.findViewById(R.id.UnitsactualAirFlowTextView);
+        unitsMassAirFlow = (TextView) mView.findViewById(R.id.UnitsmassAirFlowTextView);
+        unitsActualAirFlow = (TextView) mView.findViewById(R.id.UnitsactualAirFlowTextView);
+        unitsNormalAirFlow = (TextView) mView.findViewById(R.id.normalAirFlowValueUnits);
+        UnitsDimensionHeightGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimensionHeightGasFlowFragmentTextView);
+        UnitsDimensionWidthGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimensionWidthGasFlowFragmentTextView);
+
+        unitsGasDensityTemperatureDB = (TextView) mView.findViewById(R.id.UnitstemperatureGasDensityFragmentTextView);
+        unitsGasDensityTemperatureWB = (TextView) mView.findViewById(R.id.UnitsWetBulbtemperatureGasDensityFragmentTextView);
+        unitsGasDensitySeaLevelPressure = (TextView) mView.findViewById(R.id.UnitsseaLevelPressureGasDensityFragmentTextView);
+        unitsGasDensityElevationAboveSeaLevel = (TextView) mView.findViewById(R.id.UnitsElevationAboveSeaLevelFragmentTextView);
+        unitsGasDensityAtmosphericPressure = (TextView) mView.findViewById(R.id.UnitsAtmosphericPressureFragmentTextViewUnits);
+        unitsDuctPressure = (TextView) mView.findViewById(R.id.UnitsDuctPressureFragmentTextView);
+        unitsCalculatedGasDensity = (TextView) mView.findViewById(R.id.UnitsCalculatedGasDensityTextView);
+
+
+        dimensionHeader = (TextView) mView.findViewById(R.id.rectangularCircularGasFlowFragmentTextView);
+        dimension1TextView = (TextView) mView.findViewById(R.id.dimensionHeightOrDiameterGasFlowFragmentTextView);
+        dimension2TextView = (TextView) mView.findViewById(R.id.dimensionWidthGasFlowFragmentTextView);
+        dimension2EditText = (EditText) mView.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
+        dimension2UnitText = (TextView) mView.findViewById(R.id.UnitsactualAirFlowTextView);
+        dimesnion2LinearLayout = (LinearLayout) mView.findViewById(R.id.dimension2LinearLayout);
+        dimension2LinearLayoutFull = (CardView) mView.findViewById(R.id.dimension2LinearLayoutFull);
+        layoutArea = mView.findViewById(R.id.layoutArea);
+        layoutNormalAir = mView.findViewById(R.id.normalAirFlowLayout);
+        layoutAverageVelocity = mView.findViewById(R.id.layoutAverageVelocity);
+        massAirFlowLayout = mView.findViewById(R.id.massAirFlowLayout);
+        layoutActualAirFlow = mView.findViewById(R.id.layoutActualAirFlow);
+
+
+        dimensionWidthGasEditText= (EditText) mView.findViewById(R.id.dimensionWidthGasEditText);
+        dimensionHeightGasEditText= (EditText) mView.findViewById(R.id.dimensionHeightGasEditText);
+        pitotTubeCoefficientEditText= (EditText) mView.findViewById(R.id.pitotTubeCoefficientEditText);
+        staticPressureFragmentEditText= (EditText) mView.findViewById(R.id.staticPressureFragmentEditText);
+        temperatureGasFragmentEditText= (EditText) mView.findViewById(R.id.temperatureGasFragmentEditText);
+        ElevationAboveSeaLevelFragmentEdiText= (EditText) mView.findViewById(R.id.ElevationAboveSeaLevelFragmentEdiText);
+        wetBulbTemperatureGasFragmentEditText= (EditText) mView.findViewById(R.id.wetBulbTemperatureGasFragmentEditText);
+        seaLevelPressureGasFragmentEditText= (EditText) mView.findViewById(R.id.seaLevelPressureGasFragmentEditText);
+        ;
+
+
+
+        rectangularOrCircularSwitch= (Switch) mView.findViewById(R.id.rectangularCircularGasFlowFragmentSwitch);
+        standardAirSwitch = (Switch)mView.findViewById(R.id.standardAirSwitch);
+
+        molecularWeightTextView.setText("28.96");
+
+
+    }
 
     public void clear(){
         Utility.clearAllFields((ViewGroup)this.mView);
@@ -134,7 +199,6 @@ public class GasFragment extends Fragment implements AdapterView.OnItemSelectedL
                     System.out.print(standardAirResult[i]);
                 Toast.makeText(getActivity(), "Molecular Weight ="+String.valueOf(standardAirResult[0]*44.01/100+standardAirResult[1]*32/100+standardAirResult[2]*28.02/100+standardAirResult[3]*39.94/100+standardAirResult[4]*18.01528/100),Toast.LENGTH_LONG).show();
 
-                TextView molecularWeightTextView = (TextView)mView.findViewById(R.id.MolecularWeightTextView);
                 molecularWeightTextView.setText(String.valueOf(standardAirResult[0]*44.01/100+standardAirResult[1]*32/100+standardAirResult[2]*28.02/100+standardAirResult[3]*39.94/100+standardAirResult[4]*18.01528/100));
 
 
@@ -172,6 +236,7 @@ public class GasFragment extends Fragment implements AdapterView.OnItemSelectedL
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Dialog standardAirDialog = (Dialog)dialog;
+                molecularWeightTextView.setText("28.96");
                 standardAirDialog.hide();
                 standardAirSwitch.setChecked(false);
 
@@ -184,74 +249,18 @@ dialog.show();
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gas, container, false);
         this.mView = view;
-        standardAirSwitch = (Switch)mView.findViewById(R.id.standardAirSwitch);
-        standardAirSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    standardAirBoolean=true;
-                    showStandardAirDialog();
-                } else {
-                    Toast.makeText(getActivity(), "Molecular Weight = 28.96",
-                            Toast.LENGTH_LONG).show();
-                    standardAirBoolean=false;
-                }
-            }
-        });
-
-        //Instantiating Layouts
-        layoutDuctPressure = mView.findViewById(R.id.layoutDuctPressure);
-        layoutDuctPressure.setVisibility(View.GONE);
-        layoutRelativeHumidity = mView.findViewById(R.id.layoutRelativeHumidity);
-        layoutRelativeHumidity.setVisibility(View.GONE);
-        layoutAtmosphericPressure = mView.findViewById(R.id.layoutAtmosphericPressure);
-        layoutAtmosphericPressure.setVisibility(View.GONE);
-        layoutGasDensityResult = mView.findViewById(R.id.layoutGasDensity);
-        layoutGasDensityResult.setVisibility(View.GONE);
 
 
-        unitsAverageVelocity = (TextView)mView.findViewById(R.id.UnitsactualAirFlowTextView);
-        unitsMassAirFlow =  (TextView)mView.findViewById(R.id.UnitsmassAirFlowTextView);
-        unitsActualAirFlow=   (TextView)  mView.findViewById(R.id.UnitsactualAirFlowTextView);
-        unitsNormalAirFlow=(TextView)mView.findViewById(R.id.normalAirFlowValueUnits);
-        UnitsDimensionHeightGasFlowFragmentTextView = (TextView)mView.findViewById(R.id.UnitsDimensionHeightGasFlowFragmentTextView);
-        UnitsDimensionWidthGasFlowFragmentTextView =  (TextView)mView.findViewById(R.id.UnitsDimensionWidthGasFlowFragmentTextView);
-
-        unitsGasDensityTemperatureDB = (TextView) mView.findViewById(R.id.UnitstemperatureGasDensityFragmentTextView);
-        unitsGasDensityTemperatureWB = (TextView) mView.findViewById(R.id.UnitsWetBulbtemperatureGasDensityFragmentTextView);
-        unitsGasDensitySeaLevelPressure = (TextView) mView.findViewById(R.id.UnitsseaLevelPressureGasDensityFragmentTextView);
-        unitsGasDensityElevationAboveSeaLevel = (TextView) mView.findViewById(R.id.UnitsElevationAboveSeaLevelFragmentTextView);
-        unitsGasDensityAtmosphericPressure = (TextView) mView.findViewById(R.id.UnitsAtmosphericPressureFragmentTextViewUnits);
-        unitsDuctPressure = (TextView) mView.findViewById(R.id.UnitsDuctPressureFragmentTextView);
-        unitsCalculatedGasDensity = (TextView) mView.findViewById(R.id.UnitsCalculatedGasDensityTextView);
+        instantiateViews();
 
 
-
-        dimensionHeader = (TextView)mView.findViewById(R.id.rectangularCircularGasFlowFragmentTextView);
-        dimension1TextView =(TextView)mView.findViewById(R.id.dimensionHeightOrDiameterGasFlowFragmentTextView);
-        dimension2TextView = (TextView)mView.findViewById(R.id.dimensionWidthGasFlowFragmentTextView);
-        dimension2EditText = (EditText)mView.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
-        dimension2UnitText = (TextView)mView.findViewById(R.id.UnitsactualAirFlowTextView);
-        dimesnion2LinearLayout = (LinearLayout)mView.findViewById(R.id.dimension2LinearLayout);
-        dimension2LinearLayoutFull = (CardView)mView.findViewById(R.id.dimension2LinearLayoutFull);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.numbers_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        layoutArea = mView.findViewById(R.id.layoutArea);
         layoutArea.setVisibility(View.GONE);
-        layoutNormalAir = mView.findViewById(R.id.normalAirFlowLayout);
         layoutNormalAir.setVisibility(View.GONE);
-        layoutAverageVelocity = mView.findViewById(R.id.layoutAverageVelocity);
         layoutAverageVelocity.setVisibility(View.GONE);
-        massAirFlowLayout = mView.findViewById(R.id.massAirFlowLayout);
         massAirFlowLayout.setVisibility(View.GONE);
-        layoutActualAirFlow = mView.findViewById(R.id.layoutActualAirFlow);
         layoutActualAirFlow.setVisibility(View.GONE);
 
 
-        rectangularOrCircularSwitch= (Switch) mView.findViewById(R.id.rectangularCircularGasFlowFragmentSwitch);
         rectangularOrCircularSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -264,24 +273,26 @@ dialog.show();
             }
         });
 
+        standardAirSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    standardAirBoolean=true;
+                    showStandardAirDialog();
+                } else {
+                    Toast.makeText(getActivity(), "Molecular Weight = 28.96",
+                            Toast.LENGTH_LONG).show();
+                    molecularWeightTextView.setText("28.96");
+
+                    standardAirBoolean=false;
+                }
+            }
+        });
 
 
         return view;
     }
 
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-
-
-    }
 
     public void changeUnits(String units) {
 
@@ -323,6 +334,10 @@ dialog.show();
     }
 
     public void showResultView(){
+        if(!verifyInput())
+            return;
+        gas = new Gas(getActivity());
+        gas.calculateResult();
 
         layoutDuctPressure.setVisibility(View.VISIBLE);
         layoutRelativeHumidity.setVisibility(View.VISIBLE);
@@ -333,10 +348,20 @@ dialog.show();
         layoutAverageVelocity.setVisibility(View.VISIBLE);
         massAirFlowLayout.setVisibility(View.VISIBLE);
         layoutActualAirFlow.setVisibility(View.VISIBLE);
+    }
 
+    public boolean verifyInput(){
+
+        return !emptyEditText(dimensionWidthGasEditText)&& !emptyEditText(dimensionHeightGasEditText) && !emptyEditText(pitotTubeCoefficientEditText) && !emptyEditText( staticPressureFragmentEditText) &&!emptyEditText( temperatureGasFragmentEditText) && !emptyEditText(ElevationAboveSeaLevelFragmentEdiText) && !emptyEditText( wetBulbTemperatureGasFragmentEditText) && !emptyEditText(seaLevelPressureGasFragmentEditText);
 
 
     }
+
+    public boolean emptyEditText(EditText editText){
+        return editText.getText().equals("");
+    }
+
+
     public double[] getStandardAirResult() {
         return standardAirResult;
     }

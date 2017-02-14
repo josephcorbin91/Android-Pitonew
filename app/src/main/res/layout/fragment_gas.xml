@@ -6,7 +6,7 @@
 
 
     android:id="@+id/gasFlowFragment"
-    tools:context=".Fragments.GasDensityFragment">
+    tools:context=".Fragments.GasFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -113,7 +113,7 @@
                                 android:textColor="@color/text_color"
                                 android:layout_height="@dimen/InputEditTextHeight"
                                 android:inputType="numberDecimal"
-                                android:id="@+id/dimensionWidthGasFlowFragmentEditText"
+                                android:id="@+id/dimensionWidthGasEditText"
                                 android:background="#ffffff"
                                 android:textSize="@dimen/input_fragment_text_size"/>
                             <TextView
@@ -164,7 +164,7 @@
                                 android:textColor="@color/text_color"
                                 android:background="#ffffff"
 
-                                android:id="@+id/dimensionHeightGasFlowFragmentEditText"
+                                android:id="@+id/dimensionHeightGasEditText"
                                 android:layout_height="@dimen/InputEditTextHeight"
                                 android:textSize="@dimen/input_fragment_text_size"/>
                             <TextView
@@ -312,7 +312,7 @@
                                 android:layout_width="@dimen/InputEditTextWidth"
                                 android:layout_height="@dimen/InputEditTextHeight"
                                 android:inputType="numberDecimal"
-                                android:id="@+id/temperatureGasDensityFragmentEditText"
+                                android:id="@+id/temperatureGasFragmentEditText"
                                 android:textColor="@color/text_color"
                                 android:background="#ffffff"
 
@@ -425,7 +425,7 @@
                             <EditText
                                 android:layout_width="@dimen/InputEditTextWidth"
                                 android:inputType="numberDecimal"
-                                android:id="@+id/wetBulbTemperatureGasDensityFragmentEditText"
+                                android:id="@+id/wetBulbTemperatureGasFragmentEditText"
                                 android:textColor="@color/text_color"
                                 android:background="#ffffff"
 
@@ -480,7 +480,7 @@
                                 android:background="#ffffff"
                                 android:textSize="12sp"
                                 android:layout_height="@dimen/InputEditTextHeight"
-                                android:id="@+id/seaLevelPressureGasDensityFragmentEditText"/>
+                                android:id="@+id/seaLevelPressureGasFragmentEditText"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -954,7 +954,7 @@
                                 android:textColor="@color/text_color"
                                 android:layout_height="wrap_content"
                                 android:text="  "
-                                android:id="@+id/relativeHumidityTextView"
+                                android:id="@+id/relativeHumidityResultTextView"
                                 android:textSize="@dimen/input_fragment_text_size"/>
                             <TextView
                                 android:textColor="@color/text_color"
@@ -1003,7 +1003,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="      "
-                                android:id="@+id/AtmosphericPressureFragmentTextView"
+                                android:id="@+id/gasAtmosphericPressureResultTextView"
                                 android:textColor="@color/text_color"
 
                                 android:textSize="@dimen/input_fragment_text_size"/>
