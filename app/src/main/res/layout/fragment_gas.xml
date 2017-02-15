@@ -78,7 +78,7 @@
                 <android.support.v7.widget.CardView
                     android:background="@color/inputBackgroundColor"
                     android:elevation="5dp"
-                    android:id="@+id/layoutDuctPressure"
+                    android:id="@+id/layoutWidthCardView"
 
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp"
@@ -98,7 +98,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Width"
-                            android:id="@+id/dimensionWidthGasFlowFragmentTextView"
+                            android:id="@+id/dimension_1_WidthGasFragmentTextView"
                             android:textSize="@dimen/input_fragment_text_size"/>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -113,7 +113,7 @@
                                 android:textColor="@color/text_color"
                                 android:layout_height="@dimen/InputEditTextHeight"
                                 android:inputType="numberDecimal"
-                                android:id="@+id/dimensionWidthGasEditText"
+                                android:id="@+id/dimension_1_WidthGasEditText"
                                 android:background="#ffffff"
                                 android:textSize="@dimen/input_fragment_text_size"/>
                             <TextView
@@ -122,7 +122,7 @@
                                 android:layout_height="wrap_content"
 
                                 android:text="m"
-                                android:id="@+id/UnitsDimensionWidthGasFlowFragmentTextView"
+                                android:id="@+id/UnitsDimension_1_WidthGasFragmentTextView"
                                 android:textSize="@dimen/input_fragment_text_size"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -145,7 +145,7 @@
                         android:layout_height="match_parent">
                         <TextView
                             android:text="Height"
-                            android:id="@+id/dimensionHeightOrDiameterGasFlowFragmentTextView"
+                            android:id="@+id/dimension_2_GasFragmentTextView"
                             android:gravity="center"
                             android:textColor="@color/text_color"
 
@@ -164,7 +164,7 @@
                                 android:textColor="@color/text_color"
                                 android:background="#ffffff"
 
-                                android:id="@+id/dimensionHeightGasEditText"
+                                android:id="@+id/dimension_2_HeightGasEditText"
                                 android:layout_height="@dimen/InputEditTextHeight"
                                 android:textSize="@dimen/input_fragment_text_size"/>
                             <TextView
@@ -173,7 +173,7 @@
                                 android:textColor="@color/text_color"
 
                                 android:text="m"
-                                android:id="@+id/UnitsDimensionHeightGasFlowFragmentTextView"
+                                android:id="@+id/UnitsDimension_2_HeightGasFragmentTextView"
                                 android:textSize="@dimen/input_fragment_text_size"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -409,7 +409,7 @@
                         android:layout_height="match_parent">
                         <TextView
                             android:text="Wet Bulb Temperature"
-                            android:id="@+id/dimensionHeightOrDiameterGasFlowFragmentTextView"
+
                             android:gravity="center"
 
                             android:textColor="@color/text_color"
@@ -534,7 +534,7 @@
                                 android:textColor="@color/text_color"
                                 android:layout_width="100sp"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/normalAirFlowValue"
+                                android:id="@+id/normalAirFlowResultTextView"
                                 android:textSize="@dimen/input_fragment_text_size"/>
                             <TextView
                                 android:textColor="@color/text_color"
@@ -583,7 +583,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center">
                             <TextView
-                                android:id="@+id/averageVelocityValueTextView"
+                                android:id="@+id/averageVelocityResultTextView"
                                 android:textColor="@color/text_color"
 
                                 android:layout_width="100sp"
@@ -638,7 +638,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center">
                             <TextView
-                                android:id="@+id/massAirFlowTextViewValue"
+                                android:id="@+id/massAirFlowResultTextView"
                                 android:textColor="@color/text_color"
 
                                 android:layout_width="100sp"
@@ -701,7 +701,7 @@
                                 android:layout_width="100sp"
                                 android:textColor="@color/text_color"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/actualAirFlowTextViewTextViewValue"
+                                android:id="@+id/actualAirFlowResultTextView"
 
                                 android:textSize="@dimen/input_fragment_text_size"/>
                             <TextView
@@ -1077,11 +1077,11 @@
             </TableRow>
 
             <com.jco.pitonew.ButtonRectangle
-                android:id="@+id/fragmentGasFlowImage"
+                android:id="@+id/dynamicVelocityButton"
                 android:layout_width="110dp"
                 android:layout_height="50dp"
                 android:background="@color/colorPrimaryDark"
-                android:text="Image"
+                android:text="Dynamic Velocity"
                 android:layout_gravity="right"/>
 
 

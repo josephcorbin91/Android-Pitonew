@@ -2,6 +2,7 @@ package com.jco.pitonew.Fragments;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,14 +15,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jco.pitonew.ButtonRectangle;
 import com.jco.pitonew.Models.Gas;
 import com.jco.pitonew.R;
 import com.jco.pitonew.Utilities.Utility;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,8 +42,11 @@ public class GasFragment extends Fragment  {
 
     private Gas gas;
 
+    private ButtonRectangle dynamicVelocityButton;
+
 
     private double[] standardAirResult;
+    public ArrayList<Double> dynamicVelocityArrayList;
 
 
     //GUI Components
@@ -46,11 +54,9 @@ public class GasFragment extends Fragment  {
     private View layoutDuctPressure,layoutRelativeHumidity,layoutAtmosphericPressure,layoutGasDensityResult,        layoutArea,layoutNormalAir,layoutAverageVelocity,massAirFlowLayout,layoutActualAirFlow;
     private TextView molecularWeightTextView ;
     EditText dimensionWidthGasEditText,dimensionHeightGasEditText,pitotTubeCoefficientEditText, staticPressureFragmentEditText, temperatureGasFragmentEditText, ElevationAboveSeaLevelFragmentEdiText, wetBulbTemperatureGasFragmentEditText, seaLevelPressureGasFragmentEditText;
-
     public Boolean getStandardAirBoolean() {
         return standardAirBoolean;
     }
-
     private Boolean standardAirBoolean;
     private Switch standardAirSwitch,rectangularOrCircularSwitch;
     private View mView;
@@ -76,24 +82,22 @@ public class GasFragment extends Fragment  {
                 break;
         }
     }
-
-
-
-
-
     public GasFragment() {
 
         standardAirBoolean=false;
 
     }
-
-
     private EditText dimension2EditText;
     CardView dimension2LinearLayoutFull;
     LinearLayout dimesnion2LinearLayout;
 
-
     public void instantiateViews() {
+
+
+        dynamicVelocityButton= (ButtonRectangle)mView.findViewById(R.id.dynamicVelocityButton);
+        dynamicVelocityButton.setSelected(true);
+        dynamicVelocityButton.setBackgroundColor(Color.RED);
+
         molecularWeightTextView = (TextView) mView.findViewById(R.id.MolecularWeightTextView);
 
         //Instantiating Layouts
@@ -111,8 +115,8 @@ public class GasFragment extends Fragment  {
         unitsMassAirFlow = (TextView) mView.findViewById(R.id.UnitsmassAirFlowTextView);
         unitsActualAirFlow = (TextView) mView.findViewById(R.id.UnitsactualAirFlowTextView);
         unitsNormalAirFlow = (TextView) mView.findViewById(R.id.normalAirFlowValueUnits);
-        UnitsDimensionHeightGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimensionHeightGasFlowFragmentTextView);
-        UnitsDimensionWidthGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimensionWidthGasFlowFragmentTextView);
+        UnitsDimensionHeightGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimension_2_HeightGasFragmentTextView);
+        UnitsDimensionWidthGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimension_1_WidthGasFragmentTextView);
 
         unitsGasDensityTemperatureDB = (TextView) mView.findViewById(R.id.UnitstemperatureGasDensityFragmentTextView);
         unitsGasDensityTemperatureWB = (TextView) mView.findViewById(R.id.UnitsWetBulbtemperatureGasDensityFragmentTextView);
@@ -124,9 +128,9 @@ public class GasFragment extends Fragment  {
 
 
         dimensionHeader = (TextView) mView.findViewById(R.id.rectangularCircularGasFlowFragmentTextView);
-        dimension1TextView = (TextView) mView.findViewById(R.id.dimensionHeightOrDiameterGasFlowFragmentTextView);
-        dimension2TextView = (TextView) mView.findViewById(R.id.dimensionWidthGasFlowFragmentTextView);
-        dimension2EditText = (EditText) mView.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
+        dimension1TextView = (TextView) mView.findViewById(R.id.dimension_1_WidthGasFragmentTextView);
+        dimension2TextView = (TextView) mView.findViewById(R.id.dimension_2_GasFragmentTextView);
+        //dimension2EditText = (EditText) mView.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
         dimension2UnitText = (TextView) mView.findViewById(R.id.UnitsactualAirFlowTextView);
         dimesnion2LinearLayout = (LinearLayout) mView.findViewById(R.id.dimension2LinearLayout);
         dimension2LinearLayoutFull = (CardView) mView.findViewById(R.id.dimension2LinearLayoutFull);
@@ -137,8 +141,8 @@ public class GasFragment extends Fragment  {
         layoutActualAirFlow = mView.findViewById(R.id.layoutActualAirFlow);
 
 
-        dimensionWidthGasEditText= (EditText) mView.findViewById(R.id.dimensionWidthGasEditText);
-        dimensionHeightGasEditText= (EditText) mView.findViewById(R.id.dimensionHeightGasEditText);
+        dimensionWidthGasEditText= (EditText) mView.findViewById(R.id.dimension_1_WidthGasEditText);
+        dimensionHeightGasEditText= (EditText) mView.findViewById(R.id.dimension_2_HeightGasEditText);
         pitotTubeCoefficientEditText= (EditText) mView.findViewById(R.id.pitotTubeCoefficientEditText);
         staticPressureFragmentEditText= (EditText) mView.findViewById(R.id.staticPressureFragmentEditText);
         temperatureGasFragmentEditText= (EditText) mView.findViewById(R.id.temperatureGasFragmentEditText);
@@ -156,7 +160,6 @@ public class GasFragment extends Fragment  {
 
 
     }
-
     public void clear(){
         Utility.clearAllFields((ViewGroup)this.mView);
 
@@ -246,14 +249,66 @@ public class GasFragment extends Fragment  {
         AlertDialog dialog = builder.create();
 dialog.show();
     }
+
+
+    public void showDyanamicVelocityInputDialog(){
+
+        dynamicVelocityArrayList = new ArrayList<Double>();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Dynamic Velocity Input");
+        builder.setView(R.layout.dialog_dynamic_velocity);
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Dialog dynamicVelocityDiaog = (Dialog)dialog;
+                dynamicVelocityDiaog.hide();
+            }
+        });
+        builder.setNeutralButton("Next", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Dialog dynamicVelocityDiaog = (Dialog)dialog;
+
+                TextView dynamicVelocityTextView = (TextView)dynamicVelocityDiaog.findViewById(R.id.listOfDynamicVelocities);
+                for(Double dynamicVelocity : dynamicVelocityArrayList)
+                    dynamicVelocityTextView.setText(dynamicVelocityTextView.getText().toString()+ ", "+String.valueOf(dynamicVelocity));
+
+                EditText dynamicVelocityInputEditText = (EditText)dynamicVelocityDiaog.findViewById(R.id.dynamicVelocityInput);
+                dynamicVelocityArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
+                dynamicVelocityInputEditText.setText("");
+
+                           }
+        });
+        builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Dialog dynamicVelocityDialog = (Dialog)dialog;
+                dynamicVelocityArrayList.clear();
+                TextView dynamicVelocityTextView = (TextView)dynamicVelocityDialog.findViewById(R.id.listOfDynamicVelocities);
+
+                EditText dynamicVelocityInputEditText = (EditText)dynamicVelocityDialog.findViewById(R.id.dynamicVelocityInput);
+                dynamicVelocityInputEditText.setText("");
+                dynamicVelocityTextView.setText("");
+                dynamicVelocityDialog.hide();
+                     }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gas, container, false);
         this.mView = view;
 
-
         instantiateViews();
 
 
+        dynamicVelocityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDyanamicVelocityInputDialog();
+
+            }
+        });
         layoutArea.setVisibility(View.GONE);
         layoutNormalAir.setVisibility(View.GONE);
         layoutAverageVelocity.setVisibility(View.GONE);
@@ -361,6 +416,9 @@ dialog.show();
         return editText.getText().equals("");
     }
 
+    public void setDynamicInputVaues(ArrayList<Double> dynamicInputVaues){
+
+    }
 
     public double[] getStandardAirResult() {
         return standardAirResult;

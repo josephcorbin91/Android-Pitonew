@@ -23,19 +23,16 @@
         android:layout_marginBottom="4dp"
         android:textSize="@dimen/input_fragment_text_size"
         android:text="Dynamic Velocity Pressures "/>
-    <GridView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/dynamicVelocityGridView"
-        android:numColumns="4"
-        android:verticalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"
-        >
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listOfDynamicVelocities"
 
-
-    </GridView>
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"/>
         <EditText
             android:id="@+id/dynamicVelocityInput"
             android:inputType="numberDecimal"
