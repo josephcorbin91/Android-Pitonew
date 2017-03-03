@@ -8,7 +8,7 @@
     android:orientation="vertical"
 
 
-    tools:context="com.jco.pitonew.Activities.Activity">
+    tools:context="com.jco.pitonew.Activities.DisplayActivity">
     <include layout="@layout/toolbar"/>
 
 

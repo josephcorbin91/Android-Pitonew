@@ -2,7 +2,6 @@ package com.jco.pitonew.Fragments;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,11 +10,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -32,17 +27,18 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * to handle interaction events.
- * Use the {@link GasFragment#newInstance} factory method to
+ * Use the {@link InputFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GasFragment extends Fragment  {
-    public static GasFragment newInstance() {
-        return new GasFragment();
+public class InputFragment extends Fragment  {
+    public static InputFragment newInstance() {
+        return new InputFragment();
     }
 
     private Gas gas;
 
     private ButtonRectangle dynamicVelocityButton;
+    private ArrayList<String > stringInputValues = new ArrayList<String>();
 
 
     private double[] standardAirResult;
@@ -51,9 +47,8 @@ public class GasFragment extends Fragment  {
 
     //GUI Components
     private TextView unitsGasDensityTemperatureDB, unitsGasDensityTemperatureWB, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView,dimension1TextView,dimension2UnitText,        unitsAverageVelocity,unitsMassAirFlow,unitsActualAirFlow,unitsNormalAirFlow,UnitsDimensionHeightGasFlowFragmentTextView,UnitsDimensionWidthGasFlowFragmentTextView;;
-    private View layoutDuctPressure,layoutRelativeHumidity,layoutAtmosphericPressure,layoutGasDensityResult,        layoutArea,layoutNormalAir,layoutAverageVelocity,massAirFlowLayout,layoutActualAirFlow;
     private TextView molecularWeightTextView ;
-    EditText dimensionWidthGasEditText,dimensionHeightGasEditText,pitotTubeCoefficientEditText, staticPressureFragmentEditText, temperatureGasFragmentEditText, ElevationAboveSeaLevelFragmentEdiText, wetBulbTemperatureGasFragmentEditText, seaLevelPressureGasFragmentEditText;
+    private EditText dimension_1_WidthGasEditText,dimension_2_HeightGasEditText,pitotTubeCoefficientEditText, staticPressureFragmentEditText, temperatureGasFragmentEditText, ElevationAboveSeaLevelFragmentEdiText, wetBulbTemperatureGasFragmentEditText, seaLevelPressureGasFragmentEditText;
     public Boolean getStandardAirBoolean() {
         return standardAirBoolean;
     }
@@ -82,7 +77,7 @@ public class GasFragment extends Fragment  {
                 break;
         }
     }
-    public GasFragment() {
+    public InputFragment() {
 
         standardAirBoolean=false;
 
@@ -94,27 +89,7 @@ public class GasFragment extends Fragment  {
     public void instantiateViews() {
 
 
-        dynamicVelocityButton= (ButtonRectangle)mView.findViewById(R.id.dynamicVelocityButton);
-        dynamicVelocityButton.setSelected(true);
-        dynamicVelocityButton.setBackgroundColor(Color.RED);
 
-        molecularWeightTextView = (TextView) mView.findViewById(R.id.MolecularWeightTextView);
-
-        //Instantiating Layouts
-        layoutDuctPressure = mView.findViewById(R.id.layoutDuctPressure);
-        layoutDuctPressure.setVisibility(View.GONE);
-        layoutRelativeHumidity = mView.findViewById(R.id.layoutRelativeHumidity);
-        layoutRelativeHumidity.setVisibility(View.GONE);
-        layoutAtmosphericPressure = mView.findViewById(R.id.layoutAtmosphericPressure);
-        layoutAtmosphericPressure.setVisibility(View.GONE);
-        layoutGasDensityResult = mView.findViewById(R.id.layoutGasDensity);
-        layoutGasDensityResult.setVisibility(View.GONE);
-
-
-        unitsAverageVelocity = (TextView) mView.findViewById(R.id.UnitsactualAirFlowTextView);
-        unitsMassAirFlow = (TextView) mView.findViewById(R.id.UnitsmassAirFlowTextView);
-        unitsActualAirFlow = (TextView) mView.findViewById(R.id.UnitsactualAirFlowTextView);
-        unitsNormalAirFlow = (TextView) mView.findViewById(R.id.normalAirFlowValueUnits);
         UnitsDimensionHeightGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimension_2_HeightGasFragmentTextView);
         UnitsDimensionWidthGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimension_1_WidthGasFragmentTextView);
 
@@ -127,22 +102,8 @@ public class GasFragment extends Fragment  {
         unitsCalculatedGasDensity = (TextView) mView.findViewById(R.id.UnitsCalculatedGasDensityTextView);
 
 
-        dimensionHeader = (TextView) mView.findViewById(R.id.rectangularCircularGasFlowFragmentTextView);
-        dimension1TextView = (TextView) mView.findViewById(R.id.dimension_1_WidthGasFragmentTextView);
-        dimension2TextView = (TextView) mView.findViewById(R.id.dimension_2_GasFragmentTextView);
-        //dimension2EditText = (EditText) mView.findViewById(R.id.dimensionWidthGasFlowFragmentEditText);
-        dimension2UnitText = (TextView) mView.findViewById(R.id.UnitsactualAirFlowTextView);
-        dimesnion2LinearLayout = (LinearLayout) mView.findViewById(R.id.dimension2LinearLayout);
-        dimension2LinearLayoutFull = (CardView) mView.findViewById(R.id.dimension2LinearLayoutFull);
-        layoutArea = mView.findViewById(R.id.layoutArea);
-        layoutNormalAir = mView.findViewById(R.id.normalAirFlowLayout);
-        layoutAverageVelocity = mView.findViewById(R.id.layoutAverageVelocity);
-        massAirFlowLayout = mView.findViewById(R.id.massAirFlowLayout);
-        layoutActualAirFlow = mView.findViewById(R.id.layoutActualAirFlow);
-
-
-        dimensionWidthGasEditText= (EditText) mView.findViewById(R.id.dimension_1_WidthGasEditText);
-        dimensionHeightGasEditText= (EditText) mView.findViewById(R.id.dimension_2_HeightGasEditText);
+        dimension_1_WidthGasEditText= (EditText) mView.findViewById(R.id.dimension_1_WidthGasEditText);
+        dimension_2_HeightGasEditText= (EditText) mView.findViewById(R.id.dimension_2_HeightGasEditText);
         pitotTubeCoefficientEditText= (EditText) mView.findViewById(R.id.pitotTubeCoefficientEditText);
         staticPressureFragmentEditText= (EditText) mView.findViewById(R.id.staticPressureFragmentEditText);
         temperatureGasFragmentEditText= (EditText) mView.findViewById(R.id.temperatureGasFragmentEditText);
@@ -156,26 +117,25 @@ public class GasFragment extends Fragment  {
         rectangularOrCircularSwitch= (Switch) mView.findViewById(R.id.rectangularCircularGasFlowFragmentSwitch);
         standardAirSwitch = (Switch)mView.findViewById(R.id.standardAirSwitch);
 
-        molecularWeightTextView.setText("28.96");
+//        molecularWeightTextView.setText("28.96");
 
 
+    }
+
+    public Double[] getResults(){
+        Double[] inputArray = new Double[]{Double.valueOf(dimension_1_WidthGasEditText.getText().toString()),Double.valueOf(dimension_2_HeightGasEditText.getText().toString())
+                ,Double.valueOf(pitotTubeCoefficientEditText.getText().toString()),Double.valueOf(staticPressureFragmentEditText.getText().toString())
+                ,Double.valueOf(temperatureGasFragmentEditText.getText().toString()),Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())
+                ,Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()),Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())};
+        return inputArray;
     }
     public void clear(){
         Utility.clearAllFields((ViewGroup)this.mView);
 
-        layoutArea.setVisibility(View.GONE);
-        layoutNormalAir.setVisibility(View.GONE);
-        layoutAverageVelocity.setVisibility(View.GONE);
-        massAirFlowLayout.setVisibility(View.GONE);
-        layoutActualAirFlow.setVisibility(View.GONE);
-        layoutDuctPressure.setVisibility(View.GONE);
-        layoutRelativeHumidity.setVisibility(View.GONE);
-        layoutAtmosphericPressure.setVisibility(View.GONE);
-
 
     }
     @Nullable
-    public void showStandardAirDialog(){
+    public void showStandardAirDialog() {
         /*
         Refactor code so you only call the EditText Once.
          */
@@ -186,31 +146,23 @@ public class GasFragment extends Fragment  {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                Dialog standardAirDialog = (Dialog)dialog;
-                EditText C02EditText = (EditText)standardAirDialog.findViewById(R.id.C02EditText);
-                EditText O2EditText = (EditText)standardAirDialog.findViewById(R.id.O2EditText);
-                EditText N2EditText = (EditText)standardAirDialog.findViewById(R.id.N2EditText);
-                EditText ArEditText = (EditText)standardAirDialog.findViewById(R.id.ArEditText);
-                EditText H20EditText = (EditText)standardAirDialog.findViewById(R.id.H2OEditText);
-                standardAirResult= new double[5];
-                standardAirResult[0]= Double.valueOf(C02EditText.getText().toString());
-                standardAirResult[1]= Double.valueOf(O2EditText.getText().toString());
-                standardAirResult[2]= Double.valueOf(N2EditText.getText().toString());
-                standardAirResult[3]= Double.valueOf(ArEditText.getText().toString());
-                standardAirResult[4]= Double.valueOf(H20EditText.getText().toString());
-                for(int i=0; i<standardAirResult.length; i++)
+                Dialog standardAirDialog = (Dialog) dialog;
+                EditText C02EditText = (EditText) standardAirDialog.findViewById(R.id.C02EditText);
+                EditText O2EditText = (EditText) standardAirDialog.findViewById(R.id.O2EditText);
+                EditText N2EditText = (EditText) standardAirDialog.findViewById(R.id.N2EditText);
+                EditText ArEditText = (EditText) standardAirDialog.findViewById(R.id.ArEditText);
+                EditText H20EditText = (EditText) standardAirDialog.findViewById(R.id.H2OEditText);
+                standardAirResult = new double[5];
+                standardAirResult[0] = Double.valueOf(C02EditText.getText().toString());
+                standardAirResult[1] = Double.valueOf(O2EditText.getText().toString());
+                standardAirResult[2] = Double.valueOf(N2EditText.getText().toString());
+                standardAirResult[3] = Double.valueOf(ArEditText.getText().toString());
+                standardAirResult[4] = Double.valueOf(H20EditText.getText().toString());
+                for (int i = 0; i < standardAirResult.length; i++)
                     System.out.print(standardAirResult[i]);
-                Toast.makeText(getActivity(), "Molecular Weight ="+String.valueOf(standardAirResult[0]*44.01/100+standardAirResult[1]*32/100+standardAirResult[2]*28.02/100+standardAirResult[3]*39.94/100+standardAirResult[4]*18.01528/100),Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Molecular Weight =" + String.valueOf(standardAirResult[0] * 44.01 / 100 + standardAirResult[1] * 32 / 100 + standardAirResult[2] * 28.02 / 100 + standardAirResult[3] * 39.94 / 100 + standardAirResult[4] * 18.01528 / 100), Toast.LENGTH_LONG).show();
 
-                molecularWeightTextView.setText(String.valueOf(standardAirResult[0]*44.01/100+standardAirResult[1]*32/100+standardAirResult[2]*28.02/100+standardAirResult[3]*39.94/100+standardAirResult[4]*18.01528/100));
-
-
-
-
-
-
-
-
+                molecularWeightTextView.setText(String.valueOf(standardAirResult[0] * 44.01 / 100 + standardAirResult[1] * 32 / 100 + standardAirResult[2] * 28.02 / 100 + standardAirResult[3] * 39.94 / 100 + standardAirResult[4] * 18.01528 / 100));
 
 
             }
@@ -221,12 +173,12 @@ public class GasFragment extends Fragment  {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                Dialog standardAirDialog = (Dialog)dialog;
-                EditText C02EditText = (EditText)standardAirDialog.findViewById(R.id.C02EditText);
-                EditText O2EditText = (EditText)standardAirDialog.findViewById(R.id.O2EditText);
-                EditText N2EditText = (EditText)standardAirDialog.findViewById(R.id.N2EditText);
-                EditText ArEditText = (EditText)standardAirDialog.findViewById(R.id.ArEditText);
-                EditText H20EditText = (EditText)standardAirDialog.findViewById(R.id.H2OEditText);
+                Dialog standardAirDialog = (Dialog) dialog;
+                EditText C02EditText = (EditText) standardAirDialog.findViewById(R.id.C02EditText);
+                EditText O2EditText = (EditText) standardAirDialog.findViewById(R.id.O2EditText);
+                EditText N2EditText = (EditText) standardAirDialog.findViewById(R.id.N2EditText);
+                EditText ArEditText = (EditText) standardAirDialog.findViewById(R.id.ArEditText);
+                EditText H20EditText = (EditText) standardAirDialog.findViewById(R.id.H2OEditText);
                 C02EditText.setText("");
                 O2EditText.setText("");
                 N2EditText.setText("");
@@ -238,7 +190,7 @@ public class GasFragment extends Fragment  {
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Dialog standardAirDialog = (Dialog)dialog;
+                Dialog standardAirDialog = (Dialog) dialog;
                 molecularWeightTextView.setText("28.96");
                 standardAirDialog.hide();
                 standardAirSwitch.setChecked(false);
@@ -247,7 +199,7 @@ public class GasFragment extends Fragment  {
             }
         });
         AlertDialog dialog = builder.create();
-dialog.show();
+        dialog.show();
     }
 
 
@@ -296,54 +248,12 @@ dialog.show();
         dialog.show();
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_gas, container, false);
+        View view = inflater.inflate(R.layout.input_fragment, container, false);
         this.mView = view;
 
         instantiateViews();
-
-
-        dynamicVelocityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDyanamicVelocityInputDialog();
-
-            }
-        });
-        layoutArea.setVisibility(View.GONE);
-        layoutNormalAir.setVisibility(View.GONE);
-        layoutAverageVelocity.setVisibility(View.GONE);
-        massAirFlowLayout.setVisibility(View.GONE);
-        layoutActualAirFlow.setVisibility(View.GONE);
-
-
-        rectangularOrCircularSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    setDimensions("Circular");
-                }
-                else{
-                    setDimensions("Rectangular");
-
-                }
-            }
-        });
-
-        standardAirSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    standardAirBoolean=true;
-                    showStandardAirDialog();
-                } else {
-                    Toast.makeText(getActivity(), "Molecular Weight = 28.96",
-                            Toast.LENGTH_LONG).show();
-                    molecularWeightTextView.setText("28.96");
-
-                    standardAirBoolean=false;
-                }
-            }
-        });
-
-
+        //For test purposes
+        Double[] dynamicVelocityPresure = new Double[]{0.18,0.3,	0.29,	0.34,	0.16,	0.15	,0.27	,0.34,	0.26,	0.25, 0.16	,0.14};
         return view;
     }
 
@@ -355,59 +265,29 @@ dialog.show();
 
         switch (units) {
             case "Metric":
-                unitsAverageVelocity.setText("m/s");
-                unitsMassAirFlow.setText("kg/s");
-                unitsNormalAirFlow.setText("Nm³/h");
-                unitsActualAirFlow.setText("m³/h");
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
                 UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
                 unitsGasDensityTemperatureDB.setText("°C");
                 unitsGasDensityTemperatureWB.setText("°C");
                 unitsGasDensitySeaLevelPressure.setText("kPa");
                 unitsGasDensityElevationAboveSeaLevel.setText("m");
-                unitsGasDensityAtmosphericPressure.setText("kPa");
-                unitsDuctPressure.setText("kPa");
-                unitsCalculatedGasDensity.setText("kg/m³");
 
                 break;
             case "Imperial":
-                unitsAverageVelocity.setText("ft/s");
-                unitsMassAirFlow.setText("lb/min");
-                unitsNormalAirFlow.setText("ACFM");
-                unitsActualAirFlow.setText("SCFM");
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("inches");
                 UnitsDimensionWidthGasFlowFragmentTextView.setText("inches");
                 unitsGasDensityTemperatureDB.setText("°F");
                 unitsGasDensityTemperatureWB.setText("°F");
                 unitsGasDensitySeaLevelPressure.setText("in. Hg");
                 unitsGasDensityElevationAboveSeaLevel.setText("ft");
-                unitsGasDensityAtmosphericPressure.setText("in. Hg");
-                unitsDuctPressure.setText("in. Hg");
-                unitsCalculatedGasDensity.setText("lb/ft³");
                 break;
         }
     }
 
-    public void showResultView(){
-        if(!verifyInput())
-            return;
-        gas = new Gas(getActivity());
-        gas.calculateResult();
-
-        layoutDuctPressure.setVisibility(View.VISIBLE);
-        layoutRelativeHumidity.setVisibility(View.VISIBLE);
-        layoutAtmosphericPressure.setVisibility(View.VISIBLE);
-        layoutGasDensityResult.setVisibility(View.VISIBLE);
-        layoutArea.setVisibility(View.VISIBLE);
-        layoutNormalAir.setVisibility(View.VISIBLE);
-        layoutAverageVelocity.setVisibility(View.VISIBLE);
-        massAirFlowLayout.setVisibility(View.VISIBLE);
-        layoutActualAirFlow.setVisibility(View.VISIBLE);
-    }
 
     public boolean verifyInput(){
-
-        return !emptyEditText(dimensionWidthGasEditText)&& !emptyEditText(dimensionHeightGasEditText) && !emptyEditText(pitotTubeCoefficientEditText) && !emptyEditText( staticPressureFragmentEditText) &&!emptyEditText( temperatureGasFragmentEditText) && !emptyEditText(ElevationAboveSeaLevelFragmentEdiText) && !emptyEditText( wetBulbTemperatureGasFragmentEditText) && !emptyEditText(seaLevelPressureGasFragmentEditText);
+return true;
+        //return !emptyEditText(dimensionWidthGasEditText)&& !emptyEditText(dimensionHeightGasEditText) && !emptyEditText(pitotTubeCoefficientEditText) && !emptyEditText( staticPressureFragmentEditText) &&!emptyEditText( temperatureGasFragmentEditText) && !emptyEditText(ElevationAboveSeaLevelFragmentEdiText) && !emptyEditText( wetBulbTemperatureGasFragmentEditText) && !emptyEditText(seaLevelPressureGasFragmentEditText);
 
 
     }
@@ -429,7 +309,4 @@ dialog.show();
     public void setStandardAirBoolean(Boolean standardAirBoolean) {
         this.standardAirBoolean = standardAirBoolean;
     }
-
-
-
 }

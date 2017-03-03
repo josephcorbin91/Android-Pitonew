@@ -7,32 +7,37 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.jaredrummler.materialspinner.MaterialSpinner;
-import com.jco.pitonew.Fragments.GasFragment;
+import com.jco.pitonew.Fragments.InputFragment;
+import com.jco.pitonew.Fragments.PagerFragment;
+import com.jco.pitonew.Fragments.ResultFragment;
+import com.jco.pitonew.Models.Gas;
 import com.jco.pitonew.R;
 
 /**
  * Created by jco on 12/3/2016.
  */
-public class Activity extends AppCompatActivity{
+public class DisplayActivity extends AppCompatActivity{
         private MaterialSpinner spinner;
         private Toolbar actionToolBar;
         private AppCompatButton clearButton,calculateButton;
         private String currentCalculations,currentUnits;
         private MaterialMenuDrawable materialMenu;
         private Switch unitSwitch;
-        private GasFragment gasFragment;
+        private PagerFragment pagerFragment;
+        private FragmentManager fragmentManager;
+    private InputFragment inputFragment;
+    private ResultFragment resultFragment;
         private Switch circularOrRectangularSwitch;
     private DrawerLayout drawerLayout;
     private boolean isDrawerOpened;
@@ -52,6 +57,7 @@ public class Activity extends AppCompatActivity{
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -67,7 +73,10 @@ public class Activity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
-        gasFragment= new GasFragment();
+
+        inputFragment = new InputFragment();
+        resultFragment= new ResultFragment();
+        pagerFragment = new PagerFragment();
 
         if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
@@ -75,36 +84,37 @@ public class Activity extends AppCompatActivity{
             }
 
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
             transaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
-            transaction.add(R.id.fragment_container, gasFragment);
+            transaction.add(R.id.fragment_container, inputFragment);
             transaction.commit();
+            Log.i("FRAG TAG", "Fragment Commited");
 
 
         }
 
 
         unitSwitch = (Switch) findViewById(R.id.unitSwitch);
-        unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      /*  unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked)
                 {
-                    gasFragment.changeUnits("Imperial");
-                    gasFragment.clear();
+                    pagerFragment.getViewPagerAdapter().getItem(pagerFragment.getViewPagerAdapter().getCurrentPosition());
+                            changeUnits("Imperial");
                     currentUnits = "Imperial";
                 }
                 else
                 {
-                    gasFragment.changeUnits("Metric");
-                    gasFragment.clear();
+                    pagerFragment.changeUnits("Metric");
+                    pagerFragment.clear();
                     currentUnits = "Metric";
                 }
                 }
             });
 
-
+*/
         //Action Toolbar Code
         actionToolBar = (Toolbar) findViewById(R.id.action_bar_toolbar);
         setSupportActionBar(actionToolBar);
@@ -112,18 +122,28 @@ public class Activity extends AppCompatActivity{
 
         clearButton = (AppCompatButton)findViewById(R.id.toolbarClearButton);
         calculateButton = (AppCompatButton)findViewById(R.id.tooldbarCalculateButton);
-        clearButton.setOnClickListener(new View.OnClickListener() {
+        /*clearButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                        gasFragment.clear();
+                        pagerFragment.clear();
                 }
 
         });
+*/
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gasFragment.showResultView();}
+                FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+
+                transaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
+                transaction.add(R.id.fragment_container, resultFragment);
+                transaction.commit();
+                Gas gas = new Gas(inputFragment.getResults());
+                resultFragment.setResults(gas.getResults());
+            }
+
+
         });
 
 

@@ -18,15 +18,24 @@ import java.util.StringTokenizer;
 public class Gas implements Serializable {
 
 
+
+    public Double[] getResults() {
+        return new Double[]{averageVelocity,massAirFlow,normalAirFlow,ductPressure,gasDensity,molecularWeight};
+    }
     private String DuctUnits;
     private Boolean rectangularDuct;
     private double diameter;
     private double height;
+
+    private String pipeType;
+    private String units;
+
     private double width;
     private double area;
     private int pilotTubeCoeffecient;
     private boolean checkRule;
     private double ductPressure;
+    private double molecularWeight;
 
     //Air Type Variables
     private boolean isStandardAir;
@@ -72,88 +81,28 @@ public class Gas implements Serializable {
     //Average Flow/Velocty
     private double averageVelocity,massAirFlow,actualAirFlow, normalAirFlow;
 
-    //Application variables
-    Activity currentActivity;
 
-    //TextView
-    private TextView gasDensityResultTextView, gasAtmosphericPressureResultTextView, ductPressureResultTextView,areaTextView,relativeHumidityResultTextView,averageVelocityResultTextView, massAirFlowResultTextView,actualAirFlowResultTextView, normalAirFlowResultTextView;
-    //EditText
-    private EditText temperatureEditText, seaLevelPressureEditText, elevationAboveSeaLevelEditText,staticPressureEditText,temperatureWetBulbEditText,dimensionHeightEditText,pitotTubeCoefficientEditText, dynamicPressure, dimensionWidthEditText, dimensionDiameterEditText;
 
-    private Switch standardAirSwitch,WetBulbTemperatureGasDensityFragmentSwitch,unitSwitch,pipeTypeSwitch;
+
     private double [] gasCompositionInputArry;
 
 
 
+    private Double[] inputResults;
 
-    public Gas(Activity activity) {
+    public Gas(Double[] inputResults) {
+        this.inputResults = inputResults;
 
-        currentActivity = activity;
-
-
-        //Edit Texts
-        temperatureEditText = (EditText) activity.findViewById(R.id.temperatureGasFragmentEditText);
-        seaLevelPressureEditText = (EditText) activity.findViewById(R.id.seaLevelPressureGasFragmentEditText);
-        elevationAboveSeaLevelEditText = (EditText) activity.findViewById(R.id.ElevationAboveSeaLevelFragmentEdiText);
-        staticPressureEditText = (EditText) activity.findViewById(R.id.staticPressureFragmentEditText);
-        temperatureWetBulbEditText = (EditText) activity.findViewById(R.id.wetBulbTemperatureGasFragmentEditText);
-        dimensionHeightEditText = (EditText)activity.findViewById(R.id.dimension_2_HeightGasEditText);
-        pitotTubeCoefficientEditText =(EditText)activity.findViewById(R.id.pitotTubeCoefficientEditText);
-        dimensionWidthEditText =(EditText)activity.findViewById(R.id.dimension_1_WidthGasEditText);
-        areaTextView = (TextView)activity.findViewById(R.id.ductAreaGasFlowFragmentTextView);
-
-
-        //TextViews
-        gasDensityResultTextView = (TextView) activity.findViewById(R.id.ResultCalculatedGasDensityTextView);
-        ductPressureResultTextView = (TextView) activity.findViewById(R.id.ductPressureFragmentTextView);
-        relativeHumidityResultTextView = (TextView)activity.findViewById(R.id.relativeHumidityResultTextView);
-
-        averageVelocityResultTextView= (TextView) activity.findViewById(R.id.ResultCalculatedGasDensityTextView);
-        massAirFlowResultTextView= (TextView)activity.findViewById(R.id.massAirFlowResultTextView);
-        actualAirFlowResultTextView=(TextView)activity.findViewById(R.id.actualAirFlowResultTextView);
-        normalAirFlowResultTextView=(TextView)activity.findViewById(R.id.normalAirFlowResultTextView);
-
-        //Switches
-        standardAirSwitch = (Switch) activity.findViewById(R.id.standardAirSwitch);
-        WetBulbTemperatureGasDensityFragmentSwitch = (Switch) activity.findViewById(R.id.WetBulbTemperatureGasDensityFragmentSwitch);
-        unitSwitch = (Switch) activity.findViewById(R.id.unitSwitch);
-        pipeTypeSwitch = (Switch) activity.findViewById(R.id.unitSwitch);
-
-
-        //Retrieval Of Values
-        dryBulbTemperature = Integer.valueOf(temperatureEditText.getText().toString());
-        wetBulbWaterSaturationPressurePW = Integer.valueOf(temperatureWetBulbEditText.getText().toString());
-        seaLevelPressure = Integer.valueOf(seaLevelPressureEditText.getText().toString());
-        elevationAboveSeaLevel = Integer.valueOf(elevationAboveSeaLevelEditText.getText().toString());
-        staticPressure = Integer.valueOf(staticPressureEditText.getText().toString());
-        //gasCompositionInputArry = gasFragment.getStandardAirResult();
-        gasAtmosphericPressureResultTextView = (TextView) activity.findViewById(R.id.gasAtmosphericPressureResultTextView);
-
+        for (Double d : inputResults)
+            System.out.println("A" + d);
 
     }
-    //Current settings of calculator
-    public void calculateResult(){
-
-        gasDensityResultTextView.setText(String.valueOf(calculateGasDensity()));
-        //gasAtmosphericPressureResultTextView.setText(String .valueOf(calculateAtmosphericPressure()));
-        massAirFlowResultTextView.setText(String.valueOf(calculateMassAirFlow()));
-        normalAirFlowResultTextView.setText(String.valueOf(calculateNormalAirFlow()));
-        actualAirFlowResultTextView.setText(String.valueOf(calculateActualAirFlow()));
-        relativeHumidityResultTextView.setText(String.valueOf(calculateRelativeHumidtiy()));
-    }
-
     //Methods to determine status of switches
     public String getPipeType(){
-         if(pipeTypeSwitch.isChecked())
-             return "circular";
-        else
-             return "rectangular";
+        return pipeType;
     }
     public String getUnits(){
-        if(unitSwitch.isChecked())
-            return "SI";
-        else
-            return "US";
+            return units;
 
     }
 
@@ -177,9 +126,7 @@ public class Gas implements Serializable {
         partialWaterPressureDueToDepressionPM =0.000367*(1+(wetBulbTemperature-32)/1571)*(754.30-wetBulbWaterSaturationPressurePW)*(dryBulbTemperature -wetBulbTemperature);
         partialPressureOfWaterPA=relativeHumidity*dryBulbWaterSaturationPressurePD;
 
-        /*TODO
-        Create an error for when the dialog shows up
-         */
+
         if((wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD>=100 ||(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD<0)
             System.out.println("ERROR");
         else
@@ -194,8 +141,7 @@ public class Gas implements Serializable {
                 relativeHumidity = seaLevelPressure + ductPressure * 0.07355;
                 break;
         }
-        ductPressureResultTextView.setText(String.valueOf(ductPressure));
-        return ductPressure;
+        return relativeHumidity;
 
     }
 
@@ -218,16 +164,12 @@ public class Gas implements Serializable {
 
     //Area Calculations
     public double calculateArea(){
-        if(getPipeType() == "Circular"){
-            diameter = Double.valueOf(dimensionHeightEditText.getText().toString());
+        if(pipeType.equals("Circular")){
             area = Math.PI*diameter /2;
         }
-        else if(getPipeType() == "Rectangular"){
-            height = Double.valueOf(dimensionHeightEditText.getText().toString());
-            width = Double.valueOf(dimensionWidthEditText.getText().toString());
+        else if(pipeType.equals("Rectangular")){
             area = height *width;
         }
-        areaTextView.setText(String.valueOf(area));
         return area;
     }
 
@@ -286,17 +228,10 @@ public class Gas implements Serializable {
             return false;
     }
 
-    public void convertUnits(){
-        switch (getUnits()){
-            case "US":
-                width = Double.valueOf(dimensionWidthEditText.getText().toString());
-            case "SI":;
-        }
-
     }
 
 
 
 
 
-}
+

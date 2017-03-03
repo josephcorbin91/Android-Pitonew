@@ -5,8 +5,9 @@
     <dimen name="input_fragment_text_size">20sp</dimen>
     <dimen name="input_fragment_width">160dp</dimen>
     <dimen name="grid_input_width">50dp</dimen>
-    <dimen name="InputEditTextHeight">40dp</dimen>
-    <dimen name="InputEditTextWidth">120dp</dimen>
+    <dimen name="InputEditTextHeight">60dp</dimen>
+    <dimen name="InputEditTextWidth">200dp</dimen>
+    <dimen name="InputEditTextMargin">10dp</dimen>
     <dimen name="grid_input_height">40dp</dimen>
     <dimen name="grid_input_text_size">20dp</dimen>
     <dimen name="ms__padding_left">24dp</dimen>

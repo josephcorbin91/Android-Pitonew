@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.jco.pitonew.Activities.Activity;
+import com.jco.pitonew.Activities.DisplayActivity;
 
 public class InitialScreen extends AppCompatActivity {
     private Thread welcomeThread;
@@ -36,14 +36,14 @@ public class InitialScreen extends AppCompatActivity {
             public void run() {
                 try {
                     super.run();
-                    sleep(7000);  //Delay of 10 seconds
+                    sleep(500);  //Delay of 10 seconds
 
                 } catch (Exception e) {
 
                 } finally {
 
                     Intent i = new Intent(InitialScreen.this,
-                            Activity.class);
+                            DisplayActivity.class);
                     startActivity(i);
                     finish();
                 }

@@ -1,0 +1,256 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    android:id="@+id/resultFragmnet"
+    tools:context=".Fragments.ResultFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- TODO: Update blank fragment layout -->
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+
+            <TableRow
+                android:layout_margin="@dimen/InputEditTextMargin"
+                >
+                            <TextView
+                                android:id="@+id/averageVelocityResultTextView"
+                                android:textColor="@color/text_color"
+
+                                android:layout_width="@dimen/InputEditTextHeight"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/input_fragment_text_size"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="m/s"
+                                android:textColor="@color/text_color"
+                                android:id="@+id/UnitsaverageVelocityTextView"
+
+                                android:textSize="@dimen/input_fragment_text_size"/>
+            </TableRow>
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+
+
+
+                            <TextView
+                                android:id="@+id/massAirFlowResultTextView"
+                                android:textColor="@color/text_color"
+
+                                android:layout_width="100sp"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/input_fragment_text_size"/>
+                            <TextView
+                                android:textColor="@color/text_color"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="C"
+                                android:id="@+id/UnitsmassAirFlowTextView"
+
+                                android:textSize="@dimen/input_fragment_text_size"/>
+
+
+</TableRow>
+
+
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+
+                            <TextView
+                                android:layout_width="100sp"
+                                android:textColor="@color/text_color"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/actualAirFlowResultTextView"
+
+                                android:textSize="@dimen/input_fragment_text_size"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_color"
+                                android:text="C"
+                                android:id="@+id/UnitsactualAirFlowTextView"
+                                android:textSize="@dimen/input_fragment_text_size"/>
+
+            </TableRow>
+
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+
+                <TextView
+                    android:layout_width="100sp"
+                    android:textColor="@color/text_color"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/normalAirFlowResultTextView"
+
+                    android:textSize="@dimen/input_fragment_text_size"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:text="C"
+                    android:id="@+id/UnitsNormalAirFlowTextView"
+                    android:textSize="@dimen/input_fragment_text_size"/>
+
+            </TableRow>
+
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+                            <TextView
+                                android:layout_width="100sp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_color"
+                                android:id="@+id/MolecularWeightTextView"
+
+                                android:textSize="@dimen/input_fragment_text_size"/>
+
+
+            </TableRow>
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+
+                            <TextView
+                                android:layout_width="100sp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_color"
+                                android:id="@+id/TBD"
+
+                                android:textSize="@dimen/input_fragment_text_size"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:textColor="@color/text_color"
+                                android:layout_height="wrap_content"
+
+                                android:text="°KPa"
+                                android:id="@+id/TBD1"/>
+            </TableRow>
+
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+
+                            <TextView
+                                android:layout_width="100sp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_color"
+                                android:id="@+id/ductPressureFragmentTextView"
+
+                                android:textSize="@dimen/input_fragment_text_size"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:textColor="@color/text_color"
+                                android:layout_height="wrap_content"
+
+                                android:text="°KPa"
+                                android:id="@+id/UnitsDuctPressureFragmentTextView"/>
+
+            </TableRow>
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+
+
+                            <TextView
+                                android:layout_width="100sp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_color"
+                                android:id="@+id/ductAreaGasFlowFragmentTextView"
+                                android:textSize="@dimen/input_fragment_text_size"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:textColor="@color/text_color"
+                                android:id="@+id/ductAreaGasFlowFragmentTextViewUnits"
+                                android:layout_height="wrap_content"
+                                android:text="m²"
+                                android:textSize="@dimen/input_fragment_text_size"/>
+                </TableRow>
+
+
+            <TableRow
+                >
+                            <TextView
+                                android:layout_width="100sp"
+                                android:textColor="@color/text_color"
+                                android:layout_height="wrap_content"
+                                android:text="  "
+                                android:id="@+id/relativeHumidityResultTextView"
+                                android:textSize="@dimen/input_fragment_text_size"/>
+                            <TextView
+                                android:textColor="@color/text_color"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="%"
+                                android:id="@+id/UnitsRelativeHumiditytemperatureGasDensityFragmentTextView"/>
+                </TableRow>
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="      "
+                                android:id="@+id/gasAtmosphericPressureResultTextView"
+                                android:textColor="@color/text_color"
+
+                                android:textSize="@dimen/input_fragment_text_size"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ft"
+                                android:id="@+id/UnitsAtmosphericPressureFragmentTextViewUnits"
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/input_fragment_text_size"/>
+            </TableRow>
+
+
+
+
+
+
+
+
+
+
+
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+                <TextView
+                    android:layout_width="100sp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/molecularResultTextView"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/input_fragment_text_size"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="kg/m³"
+                    android:textColor="@color/text_color"
+                    android:id="@+id/UnitsCalculatedGasDensityTextView"
+                    android:textSize="@dimen/input_fragment_text_size"/>
+
+
+            </TableRow>
+
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+            <TextView
+                            android:layout_width="100sp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/gasDesnityResultTextView"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="kg/m³"
+                            android:textColor="@color/text_color"
+                            android:id="@+id/UnitsCalculatedGasDensityTextView"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+
+
+            </TableRow>
+
+        </TableLayout>
+
+    </ScrollView>
+</FrameLayout>

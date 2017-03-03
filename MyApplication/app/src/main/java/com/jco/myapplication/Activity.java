@@ -22,8 +22,8 @@ import android.widget.Toast;
  */
 public class Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
         private Spinner spinner;
-        private GasDensityFragment gasDensityFragment;
-        private GasFlowFragment gasFlowFragment;
+        private InputFragment inputFragment;
+        private ResultFragment resultFragment;
         private FragmentTransaction fragmentTransaction;
         private Toolbar actionToolBar;
         private ButtonRectangle clearButton, calculateButton;
@@ -82,6 +82,9 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
         gasDensityFragment = new GasDensityFragment();
         gasFlowFragment = new GasFlowFragment();
         actionToolBar = (Toolbar)findViewById(R.id.action_bar_toolbar);
+        inputFragment = new InputFragment();
+        resultFragment = new ResultFragment();
+
 
 /*
 
@@ -151,11 +154,8 @@ public class Activity extends AppCompatActivity implements AdapterView.OnItemSel
             @Override
             public void onClick(View v) {
 
-                switch (currentCalculations){
-                    case "gasFlow":
-                        gasFlowFragment.clear();
-                    case "gasDensity":
-                        gasDensityFragment.clear();
+
+
                 }
             }
         });

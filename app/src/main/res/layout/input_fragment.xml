@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+   android:layout_height="fill_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <!-- TODO: Update blank fragment layout -->
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <TableRow
+            android:layout_margin="@dimen/InputEditTextMargin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/input_fragment_text_size"
+                android:layout_height="wrap_content"
+                android:text="Rectangular / Circular"
+                android:layout_gravity="left"
+                android:id="@+id/rectangularCircularGasFlowFragmentTextView"/>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
+                android:gravity="right"
+                android:checked="false"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Standard Air"
+                android:textSize="@dimen/input_fragment_text_size"
+                android:layout_gravity="left" />
+            <Switch
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+
+                android:id="@+id/standardAirSwitch"
+                android:gravity="right"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="@dimen/InputEditTextMargin">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Wet Bulb Temperature"
+                android:textSize="@dimen/input_fragment_text_size"
+
+                android:id="@+id/WetBulbTemperatureGasDensityFragmentTextView"
+                android:layout_gravity="left" />
+
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:gravity="right"
+                android:id="@+id/WetBulbTemperatureGasDensityFragmentSwitch"
+                android:checked="false" />
+
+        </TableRow>
+        <TableRow
+            android:layout_margin="@dimen/InputEditTextMargin">
+                        <EditText
+                            android:layout_width="@dimen/InputEditTextWidth"
+                            android:maxLines="1"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+
+                            android:textColor="@color/text_color"
+                            android:layout_height="@dimen/InputEditTextHeight"
+                            android:id="@+id/dimension_1_WidthGasEditText"
+                            android:background="#ffffff"
+                            android:hint="Duct Width"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/text_color"
+                            android:layout_height="wrap_content"
+
+                            android:text="m"
+                            android:id="@+id/UnitsDimension_1_WidthGasFragmentTextView"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+        </TableRow>
+
+         <TableRow
+             android:layout_margin="@dimen/InputEditTextMargin">
+             <EditText
+                            android:layout_width="@dimen/InputEditTextWidth"
+                            android:textColor="@color/text_color"
+                            android:background="#ffffff"
+                            android:maxLines="1"
+
+                 android:imeOptions="actionNext"
+                 android:inputType="numberSigned"
+                            android:hint="Duct Height"
+                            android:id="@+id/dimension_2_HeightGasEditText"
+                            android:layout_height="@dimen/InputEditTextHeight"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color"
+
+                            android:text="m"
+                            android:id="@+id/UnitsDimension_2_HeightGasFragmentTextView"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="@dimen/InputEditTextMargin">
+                        <EditText
+                            android:textColor="@color/text_color"
+                            android:maxLines="1"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+                            android:background="#ffffff"
+                            android:hint="Pitot Tube Coeffecient"
+                            android:layout_width="@dimen/InputEditTextWidth"
+                            android:id="@+id/pitotTubeCoefficientEditText"
+                            android:layout_height="@dimen/InputEditTextHeight"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+        </TableRow>
+<TableRow
+    android:layout_margin="@dimen/InputEditTextMargin">
+                        <EditText
+                            android:background="#ffffff"
+                            android:maxLines="1"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+
+                            android:hint="Static Pressure"
+                            android:textColor="@color/text_color"
+                            android:id="@+id/staticPressureFragmentEditText"
+                            android:layout_width="@dimen/InputEditTextWidth"
+                            android:layout_height="@dimen/InputEditTextHeight"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_margin="@dimen/InputEditTextMargin">
+               <EditText
+                            android:layout_width="@dimen/InputEditTextWidth"
+                            android:layout_height="@dimen/InputEditTextHeight"
+                            android:id="@+id/temperatureGasFragmentEditText"
+                            android:textColor="@color/text_color"
+                            android:background="#ffffff"
+                            android:maxLines="1"
+
+                   android:imeOptions="actionNext"
+                   android:inputType="numberSigned"
+                            android:hint="Dry Bulb Temperature"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:textColor="@color/text_color"
+                            android:text="°C"
+                            android:id="@+id/UnitstemperatureGasDensityFragmentTextView"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+        </TableRow>
+
+<TableRow
+    android:layout_margin="@dimen/InputEditTextMargin">
+    <EditText
+                            android:id="@+id/ElevationAboveSeaLevelFragmentEdiText"
+                            android:background="#ffffff"
+                            android:hint="Elevation above Sea Level"
+                            android:layout_width="@dimen/InputEditTextWidth"
+                            android:maxLines="1"
+        android:imeOptions="actionNext"
+        android:inputType="numberSigned"
+                            android:textColor="@color/text_color"
+                            android:layout_height="@dimen/InputEditTextHeight"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color"
+
+                            android:text="ft"
+                            android:id="@+id/UnitsElevationAboveSeaLevelFragmentTextView"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_margin="@dimen/InputEditTextMargin">
+                        <EditText
+                            android:layout_width="@dimen/InputEditTextWidth"
+                            android:id="@+id/wetBulbTemperatureGasFragmentEditText"
+                            android:textColor="@color/text_color"
+
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+                            android:background="#ffffff"
+                            android:hint="Wet Bulb Temperature"
+                            android:maxLines="1"
+
+                            android:layout_height="@dimen/InputEditTextHeight"
+                            android:textSize="@dimen/input_fragment_text_size"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:textColor="@color/text_color"
+                            android:text="°C"
+                            android:id="@+id/UnitsWetBulbtemperatureGasDensityFragmentTextView"
+
+                            android:textSize="@dimen/input_fragment_text_size"/>
+
+
+
+        </TableRow>
+        <TableRow
+            android:layout_margin="@dimen/InputEditTextMargin">
+                        <EditText
+                            android:layout_width="@dimen/InputEditTextWidth"
+                            android:textColor="@color/text_color"
+                            android:background="#ffffff"
+                            android:hint="Pressure at Sea Level"
+                            android:maxLines="1"
+
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+                            android:textSize="@dimen/input_fragment_text_size"
+                            android:layout_height="@dimen/InputEditTextHeight"
+                            android:id="@+id/seaLevelPressureGasFragmentEditText"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_color"
+                            android:text="kPa"
+                            android:id="@+id/UnitsseaLevelPressureGasDensityFragmentTextView"
+
+                            android:textSize="@dimen/input_fragment_text_size"/>
+        </TableRow>
+
+
+
+
+
+
+    </TableLayout>
+</ScrollView>
+    </LinearLayout>
