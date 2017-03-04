@@ -56,7 +56,7 @@ public class InputFragment extends Fragment  {
     private Boolean standardAirBoolean;
     private Switch standardAirSwitch,rectangularOrCircularSwitch;
     private View mView;
-    private double molecularWeight;
+    private double molecularWeight=28.96;
 
     public void setDimensions(String dimensions){
         switch (dimensions) {

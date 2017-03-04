@@ -102,7 +102,7 @@ public class ResultFragment extends Fragment {
     }
 
     public void setResults(Double [] results){
-        /*
+
         averageVelocityResultTextView.setText(results[0].toString());
         massAirFlowResultTextView.setText(results[1].toString());
         normalAirFlowResultTextView.setText(results[2].toString());
@@ -110,7 +110,7 @@ public class ResultFragment extends Fragment {
         ductPressureFragmentTextView.setText(results[4].toString());
         gasDesnityResultTextView.setText(results[5].toString());
         molecularResultTextView.setText(results[6].toString());
-*/
+
 
 
     }
@@ -134,7 +134,7 @@ public class ResultFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-       
+
     }
 
     @Override

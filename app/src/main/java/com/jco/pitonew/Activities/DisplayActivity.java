@@ -136,12 +136,16 @@ public class DisplayActivity extends AppCompatActivity{
             public void onClick(View v) {
                 FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
 
+                Gas gas = new Gas(inputFragment.getResults(),inputFragment.getDynamicResults(),false /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
                 transaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
-                transaction.add(R.id.fragment_container, resultFragment);
+                transaction.replace(R.id.fragment_container, resultFragment);
                 transaction.commit();
+                Double[] results = gas.getResults();
+                for(int i=0; i< results.length;i++)
+                    System.out.println("RESULTS " + results[i]);
+                //resultFragment.setResults(gas.getResults());
 
-                Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicResults(),false /* unitSwitch.isChecked()*/, true/*circularOrRectangularSwitch.isChecked()*/);
-                resultFragment.setResults(gas.getResults());
+
             }
 
 

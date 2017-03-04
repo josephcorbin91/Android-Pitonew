@@ -9,6 +9,8 @@ import com.jco.pitonew.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -19,7 +21,15 @@ public class Gas implements Serializable {
 
 
     public Double[] getResults() {
-        return new Double[]{averageVelocity, massAirFlow, normalAirFlow, ductPressure, gasDensity, molecularWeight};
+        System.out.println("averageVelocity=inputResults" + averageVelocity);
+        System.out.println("Area=inputResults" + area);
+
+        System.out.println("massAirFlow=inputResults" + massAirFlow);
+        System.out.println("normalAirFlow" + normalAirFlow);
+        System.out.println("ductPressure" + ductPressure);
+        System.out.println("gasDensity" + gasDensity);
+        System.out.println("molecularWeight" + molecularWeight);
+        return new Double[]{this.averageVelocity,area, this.massAirFlow, this.normalAirFlow, this.ductPressure, this.gasDensity, this.molecularWeight};
     }
 
     private String DuctUnits;
@@ -68,9 +78,8 @@ public class Gas implements Serializable {
 
 
     //Dynamic Velocity
-    private ArrayList<Double> dynamicVelocityArrayList = new ArrayList<Double>();
-    private ArrayList<Double> dynamicPressureArrayList = new ArrayList<Double>();
-
+    private List<Double> dynamicVelocityArrayList = new ArrayList<Double>();
+    private List<Double> dynamicPressureArrayList;
 
     //Gas Density
     private double gasDensity;
@@ -89,6 +98,9 @@ public class Gas implements Serializable {
 
     public Gas(Double[] inputResults, Double[] dynamicResults, boolean unitsSwitch, boolean pipeTypeSwitch) {
 
+
+        dynamicPressureArrayList= Arrays.asList(dynamicResults);
+        dynamicVelocityArrayList = new ArrayList<Double>();
         if (unitsSwitch)
             this.units = "SI";
         else
@@ -98,6 +110,7 @@ public class Gas implements Serializable {
             this.pipeType = "CIRCULAR";
         else
             this.pipeType = "RECTANGULAR";
+
 
         this.inputResults = inputResults;
         width = inputResults[0];
@@ -126,13 +139,21 @@ public class Gas implements Serializable {
     }
 
     public void calculateResults() {
-        calculateAverageVelocity();
-        calculateMassAirFlow();
-        calculateNormalAirFlow();
-        calculateActualAirFlow();
+
+        calculateArea();
         calculateAtmosphericPressure();
         calculateDuctPressure();
+
         calculateGasDensity();
+        calculateDynamicVelocity();
+
+        calculateAverageVelocity();
+        calculateActualAirFlow();
+        calculateMassAirFlow();
+        calculateNormalAirFlow();
+
+        calculateAtmosphericPressure();
+
 
     }
 
@@ -207,12 +228,14 @@ public class Gas implements Serializable {
 
     }
     public double calculateArea(){
-        if(pipeType.equals("Circular")){
-            area = Math.PI*diameter /2;
+        System.out.println("PIPPE" +pipeType);
+        if(pipeType.equals("CIRCULAR")){
+            area = Math.PI*(diameter /2.0);
         }
-        else if(pipeType.equals("Rectangular")){
+        else if(pipeType.equals("RECTANGULAR")){
             area = height *width;
         }
+        System.out.println("AREA " + area);
         return area;
     }
 
@@ -221,7 +244,7 @@ public class Gas implements Serializable {
     public void calculateDynamicVelocity(){
         for(int i=0; i<dynamicPressureArrayList.size();i++)
         {
-            dynamicVelocityArrayList.set(i,pilotTubeCoeffecient*Math.pow(2*dynamicPressureArrayList.get(i)*1000/4.01864/gasDensity,0.5));
+            dynamicVelocityArrayList.add(pilotTubeCoeffecient*Math.pow(2*dynamicPressureArrayList.get(i)*1000/4.01864/gasDensity,0.5));
         }
     }
 
