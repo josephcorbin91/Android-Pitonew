@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,8 +64,6 @@ public class InputFragment extends Fragment  {
                 dimension2TextView.setVisibility(View.VISIBLE);
                 dimension2EditText.setVisibility(View.VISIBLE);
                 dimension2UnitText.setVisibility(View.VISIBLE);
-                dimesnion2LinearLayout.setVisibility(View.VISIBLE);
-                dimension2LinearLayoutFull.setVisibility(View.VISIBLE);
                 break;
             case "Circular":
 
@@ -75,8 +71,6 @@ public class InputFragment extends Fragment  {
                 dimension2TextView.setVisibility(View.INVISIBLE);
                 dimension2EditText.setVisibility(View.INVISIBLE);
                 dimension2UnitText.setVisibility(View.INVISIBLE);
-                dimesnion2LinearLayout.setVisibility(View.INVISIBLE);
-                dimension2LinearLayoutFull.setVisibility(View.INVISIBLE);
                 break;
         }
     }
@@ -86,8 +80,6 @@ public class InputFragment extends Fragment  {
 
     }
     private EditText dimension2EditText;
-    CardView dimension2LinearLayoutFull;
-    LinearLayout dimesnion2LinearLayout;
 
     public void instantiateViews() {
 
@@ -113,6 +105,15 @@ public class InputFragment extends Fragment  {
         ElevationAboveSeaLevelFragmentEdiText= (EditText) mView.findViewById(R.id.ElevationAboveSeaLevelFragmentEdiText);
         wetBulbTemperatureGasFragmentEditText= (EditText) mView.findViewById(R.id.wetBulbTemperatureGasFragmentEditText);
         seaLevelPressureGasFragmentEditText= (EditText) mView.findViewById(R.id.seaLevelPressureGasFragmentEditText);
+
+        dimension_1_WidthGasEditText.setText("1");
+        dimension_2_HeightGasEditText.setText("1");
+        pitotTubeCoefficientEditText.setText("1");
+        staticPressureFragmentEditText.setText("1");
+        temperatureGasFragmentEditText.setText("1");
+        ElevationAboveSeaLevelFragmentEdiText.setText("2000");
+        wetBulbTemperatureGasFragmentEditText.setText("1");
+        seaLevelPressureGasFragmentEditText.setText("1");
         ;
 
 
@@ -132,9 +133,9 @@ public class InputFragment extends Fragment  {
 
     }
 
-    private Double[] dynamicResults;
-    public Double[] getDynamicResults(){
-        return this.dynamicResults;
+    private Double[] dynamicPressure;
+    public Double[] getDynamicPressure(){
+        return this.dynamicPressure;
     }
 
     public Double[] getResults(){
@@ -272,7 +273,7 @@ public class InputFragment extends Fragment  {
 
         instantiateViews();
         //For test purposes
-        dynamicResults = new Double[]{0.18,0.3,	0.29,	0.34,	0.16,	0.15	,0.27	,0.34,	0.26,	0.25, 0.16	,0.14};
+        dynamicPressure = new Double[]{0.18,0.3,	0.29,	0.34,	0.16,	0.15	,0.27	,0.34,	0.26,	0.25, 0.16	,0.14};
         return view;
     }
 

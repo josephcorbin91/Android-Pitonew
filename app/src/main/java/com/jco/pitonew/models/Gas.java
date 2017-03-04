@@ -23,12 +23,13 @@ public class Gas implements Serializable {
     public Double[] getResults() {
         System.out.println("averageVelocity=inputResults" + averageVelocity);
         System.out.println("Area=inputResults" + area);
-
+        System.out.println("Armostpheric Pressure"+ atmosphericPressure);
         System.out.println("massAirFlow=inputResults" + massAirFlow);
         System.out.println("normalAirFlow" + normalAirFlow);
         System.out.println("ductPressure" + ductPressure);
         System.out.println("gasDensity" + gasDensity);
         System.out.println("molecularWeight" + molecularWeight);
+        System.out.println("Actual air flow" + actualAirFlow);
         return new Double[]{this.averageVelocity,area, this.massAirFlow, this.normalAirFlow, this.ductPressure, this.gasDensity, this.molecularWeight};
     }
 
@@ -106,12 +107,14 @@ public class Gas implements Serializable {
         else
             this.units = "US";
 
+        System.out.println("UNITS "+ this.units);
         if (pipeTypeSwitch)
             this.pipeType = "CIRCULAR";
         else
             this.pipeType = "RECTANGULAR";
 
 
+        System.out.println("PipeType "+ this.pipeType);
         this.inputResults = inputResults;
         width = inputResults[0];
         height = inputResults[1];
@@ -122,6 +125,7 @@ public class Gas implements Serializable {
         wetBulbTemperature = inputResults[6];
         seaLevelPressure = inputResults[7];
         molecularWeight = inputResults[8];
+
 
 
         System.out.println("width=inputResults" + inputResults[0]);
@@ -168,14 +172,13 @@ public class Gas implements Serializable {
     }
 
     private Double atmosphericPressure;
-
     public double calculateAtmosphericPressure() {
         switch (getUnits()) {
             case "SI":
                 this.atmosphericPressure = seaLevelPressure * (Math.pow(10, -0.00001696 * elevationAboveSeaLevel));
                 break;
             case "US":
-                this.atmosphericPressure = seaLevelPressure / 0.2952998 * (Math.pow(10, -0.00001696 * elevationAboveSeaLevel));
+                this.atmosphericPressure = (seaLevelPressure / 0.2952998) * (Math.pow(10, -0.00001696 * elevationAboveSeaLevel));
                 break;
         }
         return this.atmosphericPressure;
@@ -199,6 +202,8 @@ public class Gas implements Serializable {
             case "US":
                 gasDensity = 1000 * ductPressure / (273.15 + dryBulbTemperature) / (8314.3 / molecularWeight);
         }
+
+        this.gasDensity =Math.floor(gasDensity * 10000) / 10000;
         return gasDensity;
     }
 
@@ -244,7 +249,9 @@ public class Gas implements Serializable {
     public void calculateDynamicVelocity(){
         for(int i=0; i<dynamicPressureArrayList.size();i++)
         {
-            dynamicVelocityArrayList.add(pilotTubeCoeffecient*Math.pow(2*dynamicPressureArrayList.get(i)*1000/4.01864/gasDensity,0.5));
+            Double currentVelocity=pilotTubeCoeffecient*Math.pow(2*dynamicPressureArrayList.get(i)*1000/4.01864/gasDensity,0.5);
+            dynamicVelocityArrayList.add(currentVelocity);
+            System.out.println("DynamicVelocity  " + i  + " : " + currentVelocity);
         }
     }
 
@@ -252,22 +259,30 @@ public class Gas implements Serializable {
         int sum=0;
         for(Double velocity: dynamicVelocityArrayList)
             sum+=velocity;
-        averageVelocity=sum;
-        return averageVelocity;
+        averageVelocity=sum/dynamicVelocityArrayList.size();
+        if(getUnits().equals("US"))
+            this.averageVelocity=averageVelocity*(39.3701/12);
+        return this.averageVelocity;
     }
 
     public double calculateMassAirFlow(){
         massAirFlow=actualAirFlow*gasDensity/3600;
+        if(getUnits().equals("US"))
+            this.massAirFlow=massAirFlow*2.2046*60;
         return massAirFlow;
     }
 
     public double calculateActualAirFlow(){
         actualAirFlow= averageVelocity*area*3600;
+        if(getUnits().equals("US"))
+            this.actualAirFlow=this.actualAirFlow/60*Math.pow((39.3701/12),3);
         return actualAirFlow;
 
     }
     public double calculateNormalAirFlow(){
         normalAirFlow=actualAirFlow*ductPressure/101.325*273.15/(273.15+((dryBulbTemperature-32)/1.8));
+        if(getUnits().equals("US"))
+            this.normalAirFlow=normalAirFlow/60*Math.pow((39.3701/12),3)*(294.26/273.15);
         return normalAirFlow;
     }
 
