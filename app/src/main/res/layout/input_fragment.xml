@@ -242,7 +242,7 @@
                             android:hint="Pressure at Sea Level"
                             android:maxLines="1"
 
-                            android:imeOptions="actionNext"
+                            android:imeOptions="actionDone"
                             android:inputType="numberSigned"
                             android:textSize="@dimen/input_fragment_text_size"
                             android:layout_height="@dimen/InputEditTextHeight"

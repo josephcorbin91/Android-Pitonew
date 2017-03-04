@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -55,6 +56,8 @@ public class InputFragment extends Fragment  {
     private Boolean standardAirBoolean;
     private Switch standardAirSwitch,rectangularOrCircularSwitch;
     private View mView;
+    private double molecularWeight;
+
     public void setDimensions(String dimensions){
         switch (dimensions) {
             case "Rectangular":
@@ -117,16 +120,30 @@ public class InputFragment extends Fragment  {
         rectangularOrCircularSwitch= (Switch) mView.findViewById(R.id.rectangularCircularGasFlowFragmentSwitch);
         standardAirSwitch = (Switch)mView.findViewById(R.id.standardAirSwitch);
 
-//        molecularWeightTextView.setText("28.96");
+        standardAirSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    showStandardAirDialog();
+
+            }
+        });
 
 
+    }
+
+    private Double[] dynamicResults;
+    public Double[] getDynamicResults(){
+        return this.dynamicResults;
     }
 
     public Double[] getResults(){
         Double[] inputArray = new Double[]{Double.valueOf(dimension_1_WidthGasEditText.getText().toString()),Double.valueOf(dimension_2_HeightGasEditText.getText().toString())
                 ,Double.valueOf(pitotTubeCoefficientEditText.getText().toString()),Double.valueOf(staticPressureFragmentEditText.getText().toString())
                 ,Double.valueOf(temperatureGasFragmentEditText.getText().toString()),Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())
-                ,Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()),Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())};
+                ,Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()),Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString()),
+                molecularWeight
+        };
         return inputArray;
     }
     public void clear(){
@@ -162,7 +179,7 @@ public class InputFragment extends Fragment  {
                     System.out.print(standardAirResult[i]);
                 Toast.makeText(getActivity(), "Molecular Weight =" + String.valueOf(standardAirResult[0] * 44.01 / 100 + standardAirResult[1] * 32 / 100 + standardAirResult[2] * 28.02 / 100 + standardAirResult[3] * 39.94 / 100 + standardAirResult[4] * 18.01528 / 100), Toast.LENGTH_LONG).show();
 
-                molecularWeightTextView.setText(String.valueOf(standardAirResult[0] * 44.01 / 100 + standardAirResult[1] * 32 / 100 + standardAirResult[2] * 28.02 / 100 + standardAirResult[3] * 39.94 / 100 + standardAirResult[4] * 18.01528 / 100));
+                InputFragment.this.molecularWeight=standardAirResult[0] * 44.01 / 100 + standardAirResult[1] * 32 / 100 + standardAirResult[2] * 28.02 / 100 + standardAirResult[3] * 39.94 / 100 + standardAirResult[4] * 18.01528 / 100;
 
 
             }
@@ -184,6 +201,8 @@ public class InputFragment extends Fragment  {
                 N2EditText.setText("");
                 ArEditText.setText("");
                 H20EditText.setText("");
+                InputFragment.this.molecularWeight=28.96;
+
 
             }
         });
@@ -191,9 +210,9 @@ public class InputFragment extends Fragment  {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Dialog standardAirDialog = (Dialog) dialog;
-                molecularWeightTextView.setText("28.96");
+                InputFragment.this.molecularWeight=28.96;
                 standardAirDialog.hide();
-                standardAirSwitch.setChecked(false);
+                InputFragment.this.standardAirSwitch.setChecked(false);
 
 
             }
@@ -253,7 +272,7 @@ public class InputFragment extends Fragment  {
 
         instantiateViews();
         //For test purposes
-        Double[] dynamicVelocityPresure = new Double[]{0.18,0.3,	0.29,	0.34,	0.16,	0.15	,0.27	,0.34,	0.26,	0.25, 0.16	,0.14};
+        dynamicResults = new Double[]{0.18,0.3,	0.29,	0.34,	0.16,	0.15	,0.27	,0.34,	0.26,	0.25, 0.16	,0.14};
         return view;
     }
 

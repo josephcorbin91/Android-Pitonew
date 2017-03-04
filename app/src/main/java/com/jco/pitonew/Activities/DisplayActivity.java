@@ -139,7 +139,8 @@ public class DisplayActivity extends AppCompatActivity{
                 transaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
                 transaction.add(R.id.fragment_container, resultFragment);
                 transaction.commit();
-                Gas gas = new Gas(inputFragment.getResults());
+
+                Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicResults(),false /* unitSwitch.isChecked()*/, true/*circularOrRectangularSwitch.isChecked()*/);
                 resultFragment.setResults(gas.getResults());
             }
 

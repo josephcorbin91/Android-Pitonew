@@ -18,10 +18,10 @@ import java.util.StringTokenizer;
 public class Gas implements Serializable {
 
 
-
     public Double[] getResults() {
-        return new Double[]{averageVelocity,massAirFlow,normalAirFlow,ductPressure,gasDensity,molecularWeight};
+        return new Double[]{averageVelocity, massAirFlow, normalAirFlow, ductPressure, gasDensity, molecularWeight};
     }
+
     private String DuctUnits;
     private Boolean rectangularDuct;
     private double diameter;
@@ -32,7 +32,7 @@ public class Gas implements Serializable {
 
     private double width;
     private double area;
-    private int pilotTubeCoeffecient;
+    private double pilotTubeCoeffecient;
     private boolean checkRule;
     private double ductPressure;
     private double molecularWeight;
@@ -42,27 +42,25 @@ public class Gas implements Serializable {
     private boolean isWetBulbTemperature;
 
     //Gas Constants
-    public final double standardAirMolarWeight=28.96;
+    public final double standardAirMolarWeight = 28.96;
     private final double criticalPressureH20 = 166818;
-    private final double criticalTemperatureH20=1165.67;
+    private final double criticalTemperatureH20 = 1165.67;
 
 
     //AirCompositionVariables
-    private double airContentPercentageCO2,airContentPercentageO2,airContentPercentageN2,airContentPercentageAr,airContentPercentageH2O;
+    private double airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O;
 
-    //Molecular Weight
-    private double molarWeight;
 
     //Temperature
-    private double dryBulbTemperature,wetBulbTemperature;
+    private double dryBulbTemperature, wetBulbTemperature;
 
     //Pressure
-   private double seaLevelPressure;
-    private Integer staticPressure;
+    private double seaLevelPressure;
+    private Double staticPressure;
 
 
     //Relative Humidity
-    private double relativeHumidity,Kd,Kw,dryBulbWaterSaturationPressurePD,wetBulbWaterSaturationPressurePW,partialWaterPressureDueToDepressionPM,partialPressureOfWaterPA,dryAirHumidity,wetAFirHumidity;
+    private double relativeHumidity, Kd, Kw, dryBulbWaterSaturationPressurePD, wetBulbWaterSaturationPressurePW, partialWaterPressureDueToDepressionPM, partialPressureOfWaterPA, dryAirHumidity, wetAFirHumidity;
 
 
     //Altitutde
@@ -70,8 +68,8 @@ public class Gas implements Serializable {
 
 
     //Dynamic Velocity
-    private ArrayList<Double> dynamicVelocityArrayList= new ArrayList<Double>();
-    private ArrayList<Double> dynamicPressureArrayList= new ArrayList<Double>();
+    private ArrayList<Double> dynamicVelocityArrayList = new ArrayList<Double>();
+    private ArrayList<Double> dynamicPressureArrayList = new ArrayList<Double>();
 
 
     //Gas Density
@@ -79,42 +77,106 @@ public class Gas implements Serializable {
 
 
     //Average Flow/Velocty
-    private double averageVelocity,massAirFlow,actualAirFlow, normalAirFlow;
+    private double averageVelocity, massAirFlow, actualAirFlow, normalAirFlow;
 
 
-
-
-    private double [] gasCompositionInputArry;
-
+    private double[] gasCompositionInputArry;
 
 
     private Double[] inputResults;
+    private Double[] dynamicResults;
 
-    public Gas(Double[] inputResults) {
+
+    public Gas(Double[] inputResults, Double[] dynamicResults, boolean unitsSwitch, boolean pipeTypeSwitch) {
+
+        if (unitsSwitch)
+            this.units = "SI";
+        else
+            this.units = "US";
+
+        if (pipeTypeSwitch)
+            this.pipeType = "CIRCULAR";
+        else
+            this.pipeType = "RECTANGULAR";
+
         this.inputResults = inputResults;
+        width = inputResults[0];
+        height = inputResults[1];
+        pilotTubeCoeffecient = inputResults[2];
+        staticPressure = inputResults[3];
+        dryBulbTemperature = inputResults[4];
+        elevationAboveSeaLevel = inputResults[5];
+        wetBulbTemperature = inputResults[6];
+        seaLevelPressure = inputResults[7];
+        molecularWeight = inputResults[8];
 
-        for (Double d : inputResults)
-            System.out.println("A" + d);
+
+        System.out.println("width=inputResults" + inputResults[0]);
+        System.out.println("height=inputResults" + inputResults[1]);
+        System.out.println("pilotTubeCoeffecient" + inputResults[2]);
+        System.out.println("staticPressure" + inputResults[3]);
+        System.out.println("dryBulbTemperature" + inputResults[4]);
+        System.out.println("elevationAboveSeaLevel" + inputResults[5]);
+        System.out.println("wetBulbTemperature" + inputResults[6]);
+        System.out.println("seaLevelPressure" + inputResults[7]);
+        System.out.println("molecularWeight" + inputResults[8]);
+
+        calculateResults();
 
     }
+
+    public void calculateResults() {
+        calculateAverageVelocity();
+        calculateMassAirFlow();
+        calculateNormalAirFlow();
+        calculateActualAirFlow();
+        calculateAtmosphericPressure();
+        calculateDuctPressure();
+        calculateGasDensity();
+
+    }
+
     //Methods to determine status of switches
-    public String getPipeType(){
+    public String getPipeType() {
         return pipeType;
     }
-    public String getUnits(){
-            return units;
+
+    public String getUnits() {
+        return units;
 
     }
 
+    private Double atmosphericPressure;
+
+    public double calculateAtmosphericPressure() {
+        switch (getUnits()) {
+            case "SI":
+                this.atmosphericPressure = seaLevelPressure * (Math.pow(10, -0.00001696 * elevationAboveSeaLevel));
+                break;
+            case "US":
+                this.atmosphericPressure = seaLevelPressure / 0.2952998 * (Math.pow(10, -0.00001696 * elevationAboveSeaLevel));
+                break;
+        }
+        return this.atmosphericPressure;
+    }
+
+    public double calculateDuctPressure(){
+        switch (getUnits())
+        {
+            case "SI" :  this.ductPressure= atmosphericPressure + staticPressure*0.249088;break;
+            case "US" : this.ductPressure= atmosphericPressure + staticPressure*0.07355;break;
+        }
+        return this.ductPressure;
+    }
 
 
     public double calculateGasDensity() {
 
         switch (getUnits()) {
             case "SI":
-                gasDensity = 1000 * ductPressure / (273.15 + dryBulbTemperature) / (8314.3 / molarWeight);
+                gasDensity = 1000 * ductPressure / (273.15 + dryBulbTemperature) / (8314.3 / molecularWeight);
             case "US":
-                gasDensity = 1000 * ductPressure / (273.15 + dryBulbTemperature) / (8314.3 / molarWeight);
+                gasDensity = 1000 * ductPressure / (273.15 + dryBulbTemperature) / (8314.3 / molecularWeight);
         }
         return gasDensity;
     }
@@ -144,25 +206,6 @@ public class Gas implements Serializable {
         return relativeHumidity;
 
     }
-
-    public double calculateMolarWeight(){
-        if(!isStandardAir) {
-            airContentPercentageCO2 = gasCompositionInputArry[0];
-            airContentPercentageO2 = gasCompositionInputArry[1];
-            airContentPercentageN2 = gasCompositionInputArry[2];
-            airContentPercentageAr = gasCompositionInputArry[3];
-            airContentPercentageH2O = gasCompositionInputArry[4];
-            molarWeight= (airContentPercentageCO2*44.01/100)+(airContentPercentageAr*39.94/100)+(airContentPercentageH2O*18.01528/100)+(airContentPercentageO2*32/100)+(airContentPercentageN2*28.02/100);
-        }
-        else
-        {
-            molarWeight=standardAirMolarWeight;
-        }
-        return molarWeight;
-    }
-
-
-    //Area Calculations
     public double calculateArea(){
         if(pipeType.equals("Circular")){
             area = Math.PI*diameter /2;
