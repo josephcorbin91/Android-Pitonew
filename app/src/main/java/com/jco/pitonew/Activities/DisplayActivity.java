@@ -77,7 +77,6 @@ public class DisplayActivity extends AppCompatActivity{
 
 
         inputFragment = new InputFragment();
-        resultFragment= new ResultFragment();
         pagerFragment = new PagerFragment();
 
         if (findViewById(R.id.fragment_container) != null) {
@@ -137,12 +136,10 @@ public class DisplayActivity extends AppCompatActivity{
 
                 Gas gas = new Gas(inputFragment.getResults(),inputFragment.getDynamicPressure(),true /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
                 transaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
+                resultFragment= ResultFragment.newInstance(gas.getResults());
                 transaction.replace(R.id.fragment_container, resultFragment);
                 transaction.commit();
-                Double[] results = gas.getResults();
-                for(int i=0; i< results.length;i++)
-                    System.out.println("RESULTS " + results[i]);
-                resultFragment.setResults(results);
+
 
 
             }
