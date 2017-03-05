@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
@@ -23,6 +24,7 @@ import com.jco.pitonew.Fragments.PagerFragment;
 import com.jco.pitonew.Fragments.ResultFragment;
 import com.jco.pitonew.Models.Gas;
 import com.jco.pitonew.R;
+import com.jco.pitonew.Utilities.Utility;
 
 /**
  * Created by jco on 12/3/2016.
@@ -97,30 +99,35 @@ public class DisplayActivity extends AppCompatActivity{
 
 
         unitSwitch = (Switch) findViewById(R.id.unitSwitch);
-      /*  unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked)
                 {
-                    pagerFragment.getViewPagerAdapter().getItem(pagerFragment.getViewPagerAdapter().getCurrentPosition());
-                            changeUnits("Imperial");
+                    inputFragment.changeUnits("US");
+                    //resultFragment.changeUnits("US");
                     currentUnits = "Imperial";
                 }
                 else
                 {
-                    pagerFragment.changeUnits("Metric");
-                    pagerFragment.clear();
+                    inputFragment.changeUnits("SI");
+                  //  resultFragment.changeUnits("SI");
                     currentUnits = "Metric";
                 }
                 }
             });
 
-*/
         //Action Toolbar Code
         actionToolBar = (Toolbar) findViewById(R.id.action_bar_toolbar);
         setSupportActionBar(actionToolBar);
 
 
         clearButton = (AppCompatButton)findViewById(R.id.toolbarClearButton);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inputFragment.clear();
+            }
+        });
         calculateButton = (AppCompatButton)findViewById(R.id.tooldbarCalculateButton);
         /*clearButton.setOnClickListener(new View.OnClickListener() {
 

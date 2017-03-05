@@ -284,22 +284,55 @@ public class InputFragment extends Fragment  {
 
 
         switch (units) {
-            case "Metric":
+            case "SI":
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
                 UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
                 unitsGasDensityTemperatureDB.setText("°C");
                 unitsGasDensityTemperatureWB.setText("°C");
                 unitsGasDensitySeaLevelPressure.setText("kPa");
                 unitsGasDensityElevationAboveSeaLevel.setText("m");
+                if(dimension_1_WidthGasEditText.getText().toString().length()>0)
+                    dimension_1_WidthGasEditText.setText(String.valueOf(Double.valueOf(dimension_1_WidthGasEditText.getText().toString())*0.0254));
+                if(dimension_2_HeightGasEditText.getText().toString().length()>0)
+                    dimension_2_HeightGasEditText.setText(String.valueOf(Double.valueOf(dimension_2_HeightGasEditText.getText().toString())*0.0254));
+                if(staticPressureFragmentEditText.getText().toString().length()>0)
+                    staticPressureFragmentEditText.setText(String.valueOf(Double.valueOf(staticPressureFragmentEditText.getText().toString())*3.38639));
+                if(seaLevelPressureGasFragmentEditText.getText().toString().length()>0)
+                    seaLevelPressureGasFragmentEditText.setText(String.valueOf(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())*3.38639));
+                if(ElevationAboveSeaLevelFragmentEdiText.getText().toString().length()>0)
+                    ElevationAboveSeaLevelFragmentEdiText.setText(String.valueOf(Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())*0.3048));
+                if(temperatureGasFragmentEditText.getText().toString().length()>0)
+                    temperatureGasFragmentEditText.setText(String.valueOf(((Double.valueOf(temperatureGasFragmentEditText.getText().toString())-32)/1.8)));
+                if(wetBulbTemperatureGasFragmentEditText.getText().toString().length()>0)
+                    wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString())-32)/1.8)));
 
                 break;
-            case "Imperial":
+            case "US":
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("inches");
                 UnitsDimensionWidthGasFlowFragmentTextView.setText("inches");
                 unitsGasDensityTemperatureDB.setText("°F");
                 unitsGasDensityTemperatureWB.setText("°F");
                 unitsGasDensitySeaLevelPressure.setText("in. Hg");
                 unitsGasDensityElevationAboveSeaLevel.setText("ft");
+
+                if(dimension_1_WidthGasEditText.getText().toString().length()>0)
+                    dimension_1_WidthGasEditText.setText(String.valueOf(Double.valueOf(dimension_1_WidthGasEditText.getText().toString())/0.0254));
+                if(dimension_2_HeightGasEditText.getText().toString().length()>0)
+                    dimension_2_HeightGasEditText.setText(String.valueOf(Double.valueOf(dimension_2_HeightGasEditText.getText().toString())/0.0254));
+                if(staticPressureFragmentEditText.getText().toString().length()>0)
+                    staticPressureFragmentEditText.setText(String.valueOf(Double.valueOf(staticPressureFragmentEditText.getText().toString())*0.2952998751));
+                if(seaLevelPressureGasFragmentEditText.getText().toString().length()>0)
+                    seaLevelPressureGasFragmentEditText.setText(String.valueOf(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())*0.2952998751));
+                if(ElevationAboveSeaLevelFragmentEdiText.getText().toString().length()>0)
+                    ElevationAboveSeaLevelFragmentEdiText.setText(String.valueOf(Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())/0.3048));
+                if(temperatureGasFragmentEditText.getText().toString().length()>0)
+                    temperatureGasFragmentEditText.setText(String.valueOf(((Double.valueOf(temperatureGasFragmentEditText.getText().toString())*1.8)+32)));
+                if(wetBulbTemperatureGasFragmentEditText.getText().toString().length()>0)
+                    wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString())*1.8)+32)));
+
+
+
+
                 break;
         }
     }
