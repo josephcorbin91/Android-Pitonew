@@ -8,8 +8,10 @@
     <dimen name="InputEditTextHeight">60dp</dimen>
     <dimen name="InputEditTextWidth">100dp</dimen>
     <dimen name="InputTextViewTextWidth">100dp</dimen>
+    <dimen name="InputUnitsTextViewTextWidth">50dp</dimen>
 
-    <dimen name="InputEditTextMargin">10dp</dimen>
+
+    <dimen name="InputEditTextMargin">5dp</dimen>
     <dimen name="grid_input_height">40dp</dimen>
     <dimen name="grid_input_text_size">20dp</dimen>
     <dimen name="ms__padding_left">24dp</dimen>

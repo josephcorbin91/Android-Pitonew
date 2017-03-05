@@ -4,13 +4,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.jco.pitonew.ButtonRectangle;
@@ -73,7 +70,7 @@ public class ResultFragment extends Fragment {
         }
     }
     private TextView unitsAverageVelocity,unitsMassAirFlow,unitsNormalAirFlow,unitsActualAirFlow,unitsDuctPressure,unitsCalculatedGasDensity;
-    private TextView averageVelocityResultTextView,molecularResultTextView,massAirFlowResultTextView,normalAirFlowResultTextView,actualAirFlowResultTextView,ductPressureFragmentTextView,gasDesnityResultTextView;
+    private TextView averageVelocityResultTextView,ductAreaGasFlowFragmentTextView,molecularResultTextView,massAirFlowResultTextView,normalAirFlowResultTextView,actualAirFlowResultTextView,ductPressureFragmentTextView,gasDesnityResultTextView;
 
     public void instantiateViews() {
         unitsAverageVelocity = (TextView) mView.findViewById(R.id.UnitsaverageVelocityTextView);
@@ -85,12 +82,14 @@ public class ResultFragment extends Fragment {
 
 
         averageVelocityResultTextView = (TextView) mView.findViewById(R.id.averageVelocityResultTextView);
+        ductAreaGasFlowFragmentTextView=(TextView) mView.findViewById(R.id.ductAreaGasFlowFragmentTextView);
+
         massAirFlowResultTextView = (TextView) mView.findViewById(R.id.massAirFlowResultTextView);
         normalAirFlowResultTextView = (TextView) mView.findViewById(R.id.normalAirFlowResultTextView);
         actualAirFlowResultTextView = (TextView) mView.findViewById(R.id.actualAirFlowResultTextView);
         ductPressureFragmentTextView =(TextView)  mView.findViewById(R.id.ductPressureFragmentTextView);
         gasDesnityResultTextView =(TextView) mView.findViewById(R.id.gasDesnityResultTextView);
-        molecularResultTextView =(TextView) mView.findViewById(R.id.molecularResultTextView);
+        molecularResultTextView =(TextView) mView.findViewById(R.id.molecularWeightResultTextView);
 
 
 
@@ -110,6 +109,7 @@ public class ResultFragment extends Fragment {
         ductPressureFragmentTextView.setText(results[4].toString());
         gasDesnityResultTextView.setText(results[5].toString());
         molecularResultTextView.setText(results[6].toString());
+        ductAreaGasFlowFragmentTextView.setText(results[7].toString());
 
 
 

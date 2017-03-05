@@ -129,15 +129,7 @@ public class DisplayActivity extends AppCompatActivity{
             }
         });
         calculateButton = (AppCompatButton)findViewById(R.id.tooldbarCalculateButton);
-        /*clearButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                        pagerFragment.clear();
-                }
-
-        });
-*/
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,7 +142,7 @@ public class DisplayActivity extends AppCompatActivity{
                 Double[] results = gas.getResults();
                 for(int i=0; i< results.length;i++)
                     System.out.println("RESULTS " + results[i]);
-                //resultFragment.setResults(gas.getResults());
+                resultFragment.setResults(results);
 
 
             }

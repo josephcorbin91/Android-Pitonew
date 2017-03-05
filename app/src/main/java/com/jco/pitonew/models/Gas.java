@@ -30,7 +30,7 @@ public class Gas implements Serializable {
         System.out.println("gasDensity" + gasDensity);
         System.out.println("molecularWeight" + molecularWeight);
         System.out.println("Actual air flow" + actualAirFlow);
-        return new Double[]{this.averageVelocity,area, this.massAirFlow, this.normalAirFlow, this.ductPressure, this.gasDensity, this.molecularWeight};
+        return new Double[]{this.averageVelocity, this.massAirFlow, this.normalAirFlow,this.actualAirFlow, this.ductPressure, this.gasDensity, this.molecularWeight,this.area};
     }
 
     private String DuctUnits;

@@ -45,7 +45,7 @@ public class InputFragment extends Fragment  {
 
 
     //GUI Components
-    private TextView unitsGasDensityTemperatureDB, unitsGasDensityTemperatureWB, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView,dimension1TextView,dimension2UnitText,        unitsAverageVelocity,unitsMassAirFlow,unitsActualAirFlow,unitsNormalAirFlow,UnitsDimensionHeightGasFlowFragmentTextView,UnitsDimensionWidthGasFlowFragmentTextView;;
+    private TextView unitsGasDensityTemperatureDB, unitsGasDensityTemperatureWB,UnitStaticPressureGasDensityFragmentTextView, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView,dimension1TextView,dimension2UnitText,        unitsAverageVelocity,unitsMassAirFlow,unitsActualAirFlow,unitsNormalAirFlow,UnitsDimensionHeightGasFlowFragmentTextView,UnitsDimensionWidthGasFlowFragmentTextView;;
     private TextView molecularWeightTextView ;
     private EditText dimension_1_WidthGasEditText,dimension_2_HeightGasEditText,pitotTubeCoefficientEditText, staticPressureFragmentEditText, temperatureGasFragmentEditText, ElevationAboveSeaLevelFragmentEdiText, wetBulbTemperatureGasFragmentEditText, seaLevelPressureGasFragmentEditText;
     public Boolean getStandardAirBoolean() {
@@ -95,7 +95,7 @@ public class InputFragment extends Fragment  {
         unitsGasDensityAtmosphericPressure = (TextView) mView.findViewById(R.id.UnitsAtmosphericPressureFragmentTextViewUnits);
         unitsDuctPressure = (TextView) mView.findViewById(R.id.UnitsDuctPressureFragmentTextView);
         unitsCalculatedGasDensity = (TextView) mView.findViewById(R.id.UnitsCalculatedGasDensityTextView);
-
+        UnitStaticPressureGasDensityFragmentTextView = (TextView) mView.findViewById(R.id.UnitStaticPressureGasDensityFragmentTextView);
 
         dimension_1_WidthGasEditText= (EditText) mView.findViewById(R.id.dimension_1_WidthGasEditText);
         dimension_2_HeightGasEditText= (EditText) mView.findViewById(R.id.dimension_2_HeightGasEditText);
@@ -287,6 +287,7 @@ public class InputFragment extends Fragment  {
             case "SI":
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
                 UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
+                UnitStaticPressureGasDensityFragmentTextView.setText("kPa");
                 unitsGasDensityTemperatureDB.setText("°C");
                 unitsGasDensityTemperatureWB.setText("°C");
                 unitsGasDensitySeaLevelPressure.setText("kPa");
@@ -314,7 +315,7 @@ public class InputFragment extends Fragment  {
                 unitsGasDensityTemperatureWB.setText("°F");
                 unitsGasDensitySeaLevelPressure.setText("in. Hg");
                 unitsGasDensityElevationAboveSeaLevel.setText("ft");
-
+                UnitStaticPressureGasDensityFragmentTextView.setText("in. Hg");
                 if(dimension_1_WidthGasEditText.getText().toString().length()>0)
                     dimension_1_WidthGasEditText.setText(String.valueOf(Double.valueOf(dimension_1_WidthGasEditText.getText().toString())/0.0254));
                 if(dimension_2_HeightGasEditText.getText().toString().length()>0)
