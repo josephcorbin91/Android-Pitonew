@@ -37,7 +37,7 @@ public class ResultFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private double[] results;
+    private static Double[] results;
     private OnFragmentInteractionListener mListener;
 
     public ResultFragment() {
@@ -59,8 +59,9 @@ public class ResultFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static ResultFragment newInstance(Double[]results) {
         ResultFragment fragment = new ResultFragment();
+        ResultFragment.results=results;
         Bundle args = new Bundle();
-        args.putDoubleArray(RESULTS, results);
+        args.putSerializable(RESULTS, results);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,9 +69,7 @@ public class ResultFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            results = getArguments().getDoubleArray(RESULTS);
-        }
+
     }
     private TextView unitsAverageVelocity,unitsMassAirFlow,unitsNormalAirFlow,unitsActualAirFlow,unitsDuctPressure,unitsCalculatedGasDensity;
     private TextView averageVelocityResultTextView,ductAreaGasFlowFragmentTextView,molecularResultTextView,massAirFlowResultTextView,normalAirFlowResultTextView,actualAirFlowResultTextView,ductPressureFragmentTextView,gasDesnityResultTextView;
@@ -103,16 +102,16 @@ public class ResultFragment extends Fragment {
 
     }
 
-    public void setResults(Double [] results){
+    public void setResults(){
 
-        averageVelocityResultTextView.setText(results[0].toString());
-        massAirFlowResultTextView.setText(results[1].toString());
-        normalAirFlowResultTextView.setText(results[2].toString());
-        actualAirFlowResultTextView.setText(results[3].toString());
-        ductPressureFragmentTextView.setText(results[4].toString());
-        gasDesnityResultTextView.setText(results[5].toString());
-        molecularResultTextView.setText(results[6].toString());
-        ductAreaGasFlowFragmentTextView.setText(results[7].toString());
+        averageVelocityResultTextView.setText(ResultFragment.results[0].toString());
+        massAirFlowResultTextView.setText(ResultFragment.results[1].toString());
+        normalAirFlowResultTextView.setText(ResultFragment.results[2].toString());
+        actualAirFlowResultTextView.setText(ResultFragment.results[3].toString());
+        ductPressureFragmentTextView.setText(ResultFragment.results[4].toString());
+        gasDesnityResultTextView.setText(ResultFragment.results[5].toString());
+        molecularResultTextView.setText(ResultFragment.results[6].toString());
+        ductAreaGasFlowFragmentTextView.setText(ResultFragment.results[7].toString());
 
 
 
@@ -124,11 +123,8 @@ public class ResultFragment extends Fragment {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.result_fragment, container, false);
         instantiateViews();
-        Double[] resultsArray = new Double[results.length];
-        for(int i=0;i<resultsArray.length;i++)
-            resultsArray[i]=Double.valueOf(results[i]);
+        setResults();
 
-        setResults(resultsArray);
         return  mView;
     }
 
