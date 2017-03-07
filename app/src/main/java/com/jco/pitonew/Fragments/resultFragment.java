@@ -15,6 +15,8 @@ import com.jco.pitonew.Models.Gas;
 import com.jco.pitonew.R;
 import com.jco.pitonew.Utilities.Utility;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -72,7 +74,7 @@ public class ResultFragment extends Fragment {
 
     }
     private TextView unitsAverageVelocity,unitsMassAirFlow,unitsNormalAirFlow,unitsActualAirFlow,unitsDuctPressure,unitsCalculatedGasDensity;
-    private TextView averageVelocityResultTextView,ductAreaGasFlowFragmentTextView,molecularResultTextView,massAirFlowResultTextView,normalAirFlowResultTextView,actualAirFlowResultTextView,ductPressureFragmentTextView,gasDesnityResultTextView;
+    private TextView relativeHumidityResultTextView,atmosphericPressureTextView,averageVelocityResultTextView,ductAreaGasFlowFragmentTextView,molecularResultTextView,massAirFlowResultTextView,normalAirFlowResultTextView,actualAirFlowResultTextView,ductPressureFragmentTextView,gasDesnityResultTextView;
 
     public void instantiateViews() {
         unitsAverageVelocity = (TextView) mView.findViewById(R.id.UnitsaverageVelocityTextView);
@@ -82,10 +84,10 @@ public class ResultFragment extends Fragment {
         unitsDuctPressure =(TextView)  mView.findViewById(R.id.UnitsDuctPressureFragmentTextView);
         unitsCalculatedGasDensity =(TextView) mView.findViewById(R.id.UnitsCalculatedGasDensityTextView);
 
-
+        atmosphericPressureTextView = (TextView) mView.findViewById(R.id.gasAtmosphericPressureResultTextView);
         averageVelocityResultTextView = (TextView) mView.findViewById(R.id.averageVelocityResultTextView);
         ductAreaGasFlowFragmentTextView=(TextView) mView.findViewById(R.id.ductAreaGasFlowFragmentTextView);
-
+        relativeHumidityResultTextView = (TextView)mView.findViewById(R.id.relativeHumidityResultTextView);
         massAirFlowResultTextView = (TextView) mView.findViewById(R.id.massAirFlowResultTextView);
         normalAirFlowResultTextView = (TextView) mView.findViewById(R.id.normalAirFlowResultTextView);
         actualAirFlowResultTextView = (TextView) mView.findViewById(R.id.actualAirFlowResultTextView);
@@ -112,6 +114,8 @@ public class ResultFragment extends Fragment {
         gasDesnityResultTextView.setText(ResultFragment.results[5].toString());
         molecularResultTextView.setText(ResultFragment.results[6].toString());
         ductAreaGasFlowFragmentTextView.setText(ResultFragment.results[7].toString());
+        atmosphericPressureTextView.setText(ResultFragment.results[8].toString());
+        relativeHumidityResultTextView.setText(ResultFragment.results[9].toString());
 
 
 
