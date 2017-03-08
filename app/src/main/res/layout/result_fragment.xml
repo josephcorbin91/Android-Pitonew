@@ -131,7 +131,9 @@
 
             </TableRow>
 
-            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"                 >
+            <TableRow                 android:layout_margin="@dimen/InputEditTextMargin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
                 <TextView
@@ -154,7 +156,7 @@
                     android:textColor="@color/text_color"
                     android:layout_height="@dimen/InputEditTextHeight"
 
-                    android:text="kg/mol"
+                    android:text="g/mol"
                     android:id="@+id/UnitsMolarWeight"/>
 
 
@@ -258,7 +260,7 @@
                             <TextView
                                 android:layout_width="@dimen/InputUnitsTextViewTextWidth"
                                 android:layout_height="@dimen/InputEditTextHeight"
-                                android:text="ft"
+                                android:text="kPa"
                                 android:id="@+id/UnitsAtmosphericPressureFragmentTextViewUnits"
                                 android:textColor="@color/text_color"
                                 android:textSize="@dimen/input_fragment_text_size"/>

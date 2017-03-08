@@ -339,15 +339,15 @@ public class InputFragment extends Fragment  {
     }
 
 
-    public boolean verifyInput(){
-return true;
-        //return !emptyEditText(dimensionWidthGasEditText)&& !emptyEditText(dimensionHeightGasEditText) && !emptyEditText(pitotTubeCoefficientEditText) && !emptyEditText( staticPressureFragmentEditText) &&!emptyEditText( temperatureGasFragmentEditText) && !emptyEditText(ElevationAboveSeaLevelFragmentEdiText) && !emptyEditText( wetBulbTemperatureGasFragmentEditText) && !emptyEditText(seaLevelPressureGasFragmentEditText);
+    public boolean validInput(){
+        System.out.println("VALID INPUT" + String.valueOf(containsText(dimension_1_WidthGasEditText)&& containsText(dimension_2_HeightGasEditText) && containsText(pitotTubeCoefficientEditText) && containsText( staticPressureFragmentEditText) &&containsText( temperatureGasFragmentEditText) && containsText(ElevationAboveSeaLevelFragmentEdiText) && containsText( wetBulbTemperatureGasFragmentEditText) && containsText(seaLevelPressureGasFragmentEditText)));
+        return containsText(dimension_1_WidthGasEditText)&& containsText(dimension_2_HeightGasEditText) && containsText(pitotTubeCoefficientEditText) && containsText( staticPressureFragmentEditText) &&containsText( temperatureGasFragmentEditText) && containsText(ElevationAboveSeaLevelFragmentEdiText) && containsText( wetBulbTemperatureGasFragmentEditText) && containsText(seaLevelPressureGasFragmentEditText);
 
 
     }
 
-    public boolean emptyEditText(EditText editText){
-        return editText.getText().equals("");
+    public boolean containsText(EditText editText){
+        return !editText.getText().equals("");
     }
 
     public void setDynamicInputVaues(ArrayList<Double> dynamicInputVaues){

@@ -1,6 +1,7 @@
 package com.jco.pitonew.Activities;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -38,6 +40,7 @@ public class DisplayActivity extends AppCompatActivity{
         private Switch unitSwitch;
         private PagerFragment pagerFragment;
         private FragmentManager fragmentManager;
+        private String currentFragment;
     private InputFragment inputFragment;
     private ResultFragment resultFragment;
         private Switch circularOrRectangularSwitch;
@@ -78,7 +81,7 @@ public class DisplayActivity extends AppCompatActivity{
 
         inputFragment = new InputFragment();
         pagerFragment = new PagerFragment();
-
+        currentFragment = "inputFragment";
         if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
                 return;
@@ -88,7 +91,7 @@ public class DisplayActivity extends AppCompatActivity{
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-            transaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
+            transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
             transaction.add(R.id.fragment_container, inputFragment);
             transaction.commit();
             Log.i("FRAG TAG", "Fragment Commited");
@@ -100,59 +103,87 @@ public class DisplayActivity extends AppCompatActivity{
         unitSwitch = (Switch) findViewById(R.id.unitSwitch);
         unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked)
-                {
+                if (isChecked) {
                     inputFragment.changeUnits("US");
-                    //resultFragment.changeUnits("US");
-                    currentUnits = "Imperial";
-                }
-                else
-                {
+
+                    currentUnits = "US";
+                    if (currentFragment.equals("resultFragment")) {
+                        FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+                        Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressure(), false /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
+                        resultFragment = ResultFragment.newInstance(gas.getResults(), "US");
+                        transaction.replace(R.id.fragment_container, resultFragment);
+                        transaction.commit();
+                        DisplayActivity.this.currentFragment = "resultFragment";
+
+                    }
+
+                } else {
                     inputFragment.changeUnits("SI");
-                  //  resultFragment.changeUnits("SI");
-                    currentUnits = "Metric";
+
+                    currentUnits = "SI";
+                    if (currentFragment.equals("resultFragment")) {
+                        FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+                        Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressure(), true /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
+                        resultFragment = ResultFragment.newInstance(gas.getResults(), "SI");
+                        transaction.replace(R.id.fragment_container, resultFragment);
+                        transaction.commit();
+                        DisplayActivity.this.currentFragment = "resultFragment";
+                    }
                 }
-                }
-            });
+            }
+        });
 
         //Action Toolbar Code
         actionToolBar = (Toolbar) findViewById(R.id.action_bar_toolbar);
         setSupportActionBar(actionToolBar);
 
 
-        clearButton = (AppCompatButton)findViewById(R.id.toolbarClearButton);
+        clearButton = (AppCompatButton) findViewById(R.id.toolbarClearButton);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inputFragment.clear();
+                if (DisplayActivity.this.currentFragment.equals("resultFragment")) {
+                    FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+                    transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                    transaction.replace(R.id.fragment_container, inputFragment);
+                    transaction.commit();
+                }
+                else
+                    inputFragment.clear();
+
+
             }
         });
-        calculateButton = (AppCompatButton)findViewById(R.id.tooldbarCalculateButton);
+        calculateButton = (AppCompatButton) findViewById(R.id.tooldbarCalculateButton);
 
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
 
-                Gas gas = new Gas(inputFragment.getResults(),inputFragment.getDynamicPressure(),true /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
-                transaction.setCustomAnimations(R.anim.fadein,R.anim.fadeout);
-                resultFragment= ResultFragment.newInstance(gas.getResults());
-                transaction.replace(R.id.fragment_container, resultFragment);
-                transaction.commit();
-
-
+                if(inputFragment.validInput()) {
+                    FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+                    Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressure(), true /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
+                    transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                    resultFragment = ResultFragment.newInstance(gas.getResults(), getUnits());
+                    transaction.replace(R.id.fragment_container, resultFragment);
+                    transaction.commit();
+                    DisplayActivity.this.currentFragment = "resultFragment";
+                }
+                else
+                    Toast.makeText(DisplayActivity.this, "Please fill in all input fields", Toast.LENGTH_SHORT).show();
 
             }
 
 
         });
-
-
-
-
-
-
     }
+
+
+
+        public String getUnits(){
+        return this.currentUnits;
+    }
+
 
 
 

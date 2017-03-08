@@ -31,7 +31,7 @@ public class ResultFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String RESULTS = "resultsArray";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String UNITS = "units";
     private View mView;
 
 
@@ -40,6 +40,7 @@ public class ResultFragment extends Fragment {
     private String mParam2;
 
     private static Double[] results;
+    private static String units;
     private OnFragmentInteractionListener mListener;
 
     public ResultFragment() {
@@ -59,12 +60,11 @@ public class ResultFragment extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static ResultFragment newInstance(Double[]results) {
+    public static ResultFragment newInstance(Double[]results, String units) {
         ResultFragment fragment = new ResultFragment();
         ResultFragment.results=results;
-        Bundle args = new Bundle();
-        args.putSerializable(RESULTS, results);
-        fragment.setArguments(args);
+        ResultFragment.units =units;
+
         return fragment;
     }
 
@@ -72,8 +72,9 @@ public class ResultFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
-    private TextView unitsAverageVelocity,unitsMassAirFlow,unitsNormalAirFlow,unitsActualAirFlow,unitsDuctPressure,unitsCalculatedGasDensity;
+    private TextView unitsAtmosphericPressureTextView,unitsAreaTextView,unitsAverageVelocity,unitsMassAirFlow,unitsNormalAirFlow,unitsActualAirFlow,unitsDuctPressure,unitsCalculatedGasDensity,UnitsMolarWeight;
     private TextView relativeHumidityResultTextView,atmosphericPressureTextView,averageVelocityResultTextView,ductAreaGasFlowFragmentTextView,molecularResultTextView,massAirFlowResultTextView,normalAirFlowResultTextView,actualAirFlowResultTextView,ductPressureFragmentTextView,gasDesnityResultTextView;
 
     public void instantiateViews() {
@@ -83,6 +84,9 @@ public class ResultFragment extends Fragment {
         unitsActualAirFlow = (TextView) mView.findViewById(R.id.UnitsactualAirFlowTextView);
         unitsDuctPressure =(TextView)  mView.findViewById(R.id.UnitsDuctPressureFragmentTextView);
         unitsCalculatedGasDensity =(TextView) mView.findViewById(R.id.UnitsCalculatedGasDensityTextView);
+        UnitsMolarWeight =(TextView)mView.findViewById(R.id.UnitsMolarWeight);
+        unitsAtmosphericPressureTextView =(TextView)mView.findViewById(R.id.UnitsAtmosphericPressureFragmentTextViewUnits);
+                unitsAreaTextView =(TextView)mView.findViewById(R.id.ductAreaGasFlowFragmentTextViewUnits);
 
         atmosphericPressureTextView = (TextView) mView.findViewById(R.id.gasAtmosphericPressureResultTextView);
         averageVelocityResultTextView = (TextView) mView.findViewById(R.id.averageVelocityResultTextView);
@@ -94,6 +98,7 @@ public class ResultFragment extends Fragment {
         ductPressureFragmentTextView =(TextView)  mView.findViewById(R.id.ductPressureFragmentTextView);
         gasDesnityResultTextView =(TextView) mView.findViewById(R.id.gasDesnityResultTextView);
         molecularResultTextView =(TextView) mView.findViewById(R.id.molecularWeightResultTextView);
+        changeUnits(ResultFragment.units);
 
 
 
@@ -185,24 +190,31 @@ public class ResultFragment extends Fragment {
         public void changeUnits(String units) {
 
 
-
             switch (units) {
-                case "Metric":
+                case "SI":
                     unitsAverageVelocity.setText("m/s");
                     unitsMassAirFlow.setText("kg/s");
                     unitsNormalAirFlow.setText("Nm³/h");
                     unitsActualAirFlow.setText("m³/h");
                     unitsDuctPressure.setText("kPa");
+                    UnitsMolarWeight.setText("g/mol");
                     unitsCalculatedGasDensity.setText("kg/m³");
+                    unitsAtmosphericPressureTextView.setText("kPa");
+                    unitsAreaTextView.setText("m²");
+
 
                     break;
-                case "Imperial":
+                case "US":
                     unitsAverageVelocity.setText("ft/s");
                     unitsMassAirFlow.setText("lb/min");
                     unitsNormalAirFlow.setText("ACFM");
                     unitsActualAirFlow.setText("SCFM");
                     unitsDuctPressure.setText("in. Hg");
+                    UnitsMolarWeight.setText("g/mol");
                     unitsCalculatedGasDensity.setText("lb/ft³");
+                    unitsAreaTextView.setText("in²");
+                    unitsAtmosphericPressureTextView.setText("in. Hg");
+
                     break;
             }
         }
