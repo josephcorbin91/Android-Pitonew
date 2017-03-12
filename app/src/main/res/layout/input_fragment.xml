@@ -94,7 +94,7 @@
                             android:textColor="@color/text_color"
                             android:layout_height="@dimen/InputEditTextHeight"
                             android:id="@+id/dimension_1_WidthGasEditText"
-                            android:background="@android:color/transparent"
+                            android:background="@drawable/shape"
                             android:hint="Duct Width"
                             android:textSize="@dimen/input_fragment_text_size"/>
                         <TextView
@@ -124,7 +124,7 @@
              <EditText
                             android:layout_width="@dimen/InputEditTextWidth"
                             android:textColor="@color/text_color"
-                            android:background="@android:color/transparent"
+                 android:background="@drawable/shape"
                             android:maxLines="1"
 
                  android:imeOptions="actionNext"
@@ -162,7 +162,7 @@
                             android:maxLines="1"
                             android:imeOptions="actionNext"
                             android:inputType="numberSigned"
-                            android:background="@android:color/transparent"
+                            android:background="@drawable/shape"
                             android:hint="Pitot Tube Coeffecient"
                             android:layout_width="@dimen/InputEditTextWidth"
                             android:id="@+id/pitotTubeCoefficientEditText"
@@ -184,7 +184,7 @@
         android:layout_height="@dimen/InputEditTextHeight"
         />
                         <EditText
-                            android:background="@android:color/transparent"
+                            android:background="@drawable/shape"
                             android:maxLines="1"
                             android:imeOptions="actionNext"
                             android:inputType="numberSigned"
@@ -227,7 +227,7 @@
                             android:layout_height="@dimen/InputEditTextHeight"
                             android:id="@+id/temperatureGasFragmentEditText"
                             android:textColor="@color/text_color"
-                            android:background="@android:color/transparent"
+                   android:background="@drawable/shape"
                             android:maxLines="1"
 
                    android:imeOptions="actionNext"
@@ -260,7 +260,7 @@
         />
     <EditText
                             android:id="@+id/ElevationAboveSeaLevelFragmentEdiText"
-                            android:background="@android:color/transparent"
+        android:background="@drawable/shape"
                             android:hint="Elevation above Sea Level"
                             android:layout_width="@dimen/InputEditTextWidth"
                             android:maxLines="1"
@@ -303,7 +303,7 @@
 
                             android:imeOptions="actionNext"
                             android:inputType="numberSigned"
-                            android:background="@android:color/transparent"
+                            android:background="@drawable/shape"
                             android:hint="Wet Bulb Temperature"
                             android:maxLines="1"
 
@@ -339,7 +339,7 @@
                         <EditText
                             android:layout_width="@dimen/InputEditTextWidth"
                             android:textColor="@color/text_color"
-                            android:background="@android:color/transparent"
+                            android:background="@drawable/shape"
                             android:hint="Pressure at Sea Level"
                             android:maxLines="1"
 

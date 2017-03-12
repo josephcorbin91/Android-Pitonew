@@ -347,7 +347,7 @@ public class InputFragment extends Fragment  {
     }
 
     public boolean containsText(EditText editText){
-        return !editText.getText().equals("");
+        return editText.getText().toString().trim().length()>0;
     }
 
     public void setDynamicInputVaues(ArrayList<Double> dynamicInputVaues){
