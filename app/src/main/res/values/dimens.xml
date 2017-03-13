@@ -7,12 +7,14 @@
     <dimen name="grid_input_width">50dp</dimen>
     <dimen name="TileHeight">40dp</dimen>
     <dimen name="tile_height_full_width_single_line">48dp</dimen>
-    <dimen name="InputEditTextWidth">100dp</dimen>
-    <dimen name="InputTextViewTextWidth">100dp</dimen>
+    <dimen name="InputEditTextWidth">150dp</dimen>
+    <dimen name="InputTextViewTextWidth">150dp</dimen>
     <dimen name="InputUnitsTextViewTextWidth">50dp</dimen>
 
 
-    <dimen name="text_top_and_bottom_padding">16dp</dimen>
+    <dimen name="single_line_list_top_bottom_padding">4dp</dimen>
+    <dimen name="single_line_list_left_right_padding">16dp</dimen>
+
     <dimen name="grid_input_height">40dp</dimen>
     <dimen name="grid_input_text_size">20dp</dimen>
     <dimen name="ms__padding_left">24dp</dimen>

@@ -21,6 +21,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/tile_height_full_width_single_line"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:text="Gas Flow Calculations"
+                android:textSize="24dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/tile_height_full_width_single_line"
+                android:layout_marginBottom="4dp"
+                android:gravity="center_horizontal"
+                android:text="Press CLEAR to modify input values"
+                android:textSize="16dp" />
+
             <View
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
@@ -29,42 +46,38 @@
 
             <TableRow
                 android:layout_width="match_parent"
+                android:background="@color/SecondaryColor"
+
                 android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textView"
-                    android:layout_width="250dp"
+                    android:layout_width="fill_parent"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:paddingLeft="16dp"
-                    android:background="@color/SecondaryColor"
                     android:gravity="center|left"
                     android:text="Results"
                     android:textColor="#ffffff"
                     android:textSize="16dp" />
 
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="20dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center|right"
-                    android:background="?android:attr/colorBackground"
-                    android:elevation="2dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/theory_icon" />
+
 
 
             </TableRow>
 
 
             <TableRow
-                android:layout_margin="@dimen/text_top_and_bottom_padding"
-                >
+                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding" >
 
 
                 <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="@dimen/InputTextViewTextWidth"
-                    android:layout_height="@dimen/tile_height_full_width_single_line"
 
+                    android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:gravity="left|center"
                     android:text="Average Velocity"
                     android:textColor="@color/text_color"
@@ -91,7 +104,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
-            <TableRow                 android:layout_margin="@dimen/text_top_and_bottom_padding"                 >
+            <TableRow
+                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding"                 >
 
 
                 <TextView
@@ -128,7 +145,11 @@
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
 
-            <TableRow                 android:layout_margin="@dimen/text_top_and_bottom_padding"                 >
+            <TableRow
+                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding"                 >
 
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
@@ -159,7 +180,11 @@
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
 
-            <TableRow                 android:layout_margin="@dimen/text_top_and_bottom_padding"                 >
+            <TableRow
+                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding"                 >
 
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
@@ -190,9 +215,12 @@
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
 
-            <TableRow                 android:layout_margin="@dimen/text_top_and_bottom_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TableRow
+                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                >
 
 
                 <TextView
@@ -205,8 +233,8 @@
                     android:textSize="@dimen/hint_and_input_text" />
 
                 <TextView
-                    android:layout_width="100sp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/InputTextViewTextWidth"
+                    android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:id="@+id/molecularWeightResultTextView"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text"/>
@@ -227,7 +255,10 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
 
-            <TableRow                 android:layout_margin="@dimen/text_top_and_bottom_padding"                 >
+            <TableRow                 android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding"                 >
 
 
                 <TextView
@@ -258,7 +289,10 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
-            <TableRow                 android:layout_margin="@dimen/text_top_and_bottom_padding"                 >
+            <TableRow                  android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding"                 >
 
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
@@ -270,7 +304,7 @@
                     android:textSize="@dimen/hint_and_input_text" />
 
                             <TextView
-                                android:layout_width="100sp"
+                                android:layout_width="@dimen/InputTextViewTextWidth"
                                 android:layout_height="@dimen/tile_height_full_width_single_line"
                                 android:textColor="@color/text_color"
                                 android:id="@+id/ductAreaGasFlowFragmentTextView"
@@ -289,8 +323,10 @@
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
             <TableRow
-                android:layout_margin="@dimen/text_top_and_bottom_padding"
-            >
+                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding" >
 
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
@@ -301,9 +337,9 @@
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
                             <TextView
-                                android:layout_width="100sp"
+                                android:layout_width="@dimen/InputTextViewTextWidth"
                                 android:textColor="@color/text_color"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/tile_height_full_width_single_line"
 
                                 android:id="@+id/relativeHumidityResultTextView"
                                 android:textSize="@dimen/hint_and_input_text"/>
@@ -318,7 +354,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
-            <TableRow                 android:layout_margin="@dimen/text_top_and_bottom_padding"                 >
+            <TableRow                 android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding"                 >
 
                 <TextView
                     android:textColor="@color/text_color"
@@ -328,7 +367,7 @@
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:textSize="@dimen/hint_and_input_text"/>
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="@dimen/InputTextViewTextWidth"
                                 android:layout_height="@dimen/tile_height_full_width_single_line"
                                 android:id="@+id/gasAtmosphericPressureResultTextView"
                                 android:textColor="@color/text_color"
@@ -357,7 +396,10 @@
 
 
 
-            <TableRow                 android:layout_margin="@dimen/text_top_and_bottom_padding"                 >
+            <TableRow                 android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding"                 >
 
 
                 <TextView
@@ -369,13 +411,13 @@
                     android:textSize="@dimen/hint_and_input_text"/>
             <TextView
                             android:layout_width="100sp"
-                            android:layout_height="wrap_content"
+                android:layout_height="@dimen/tile_height_full_width_single_line"
                             android:id="@+id/gasDesnityResultTextView"
                             android:textColor="@color/text_color"
                             android:textSize="@dimen/hint_and_input_text"/>
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/tile_height_full_width_single_line"
                             android:text="kg/m³"
                             android:textColor="@color/text_color"
                             android:id="@+id/UnitsCalculatedGasDensityTextView"
