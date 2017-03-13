@@ -3,7 +3,7 @@
 <android.support.v7.widget.Toolbar android:id="@+id/action_bar_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/PrimaryColor"
     android:minHeight="50dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -11,51 +11,84 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+>
+
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/gaslogo" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="56dp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.03"
+                android:padding="12dp"
+                android:shadowRadius="1.2"
+
+                android:text="Pitonew"
+
+                android:textColor="@color/text_color"
+                android:textSize="15dp" />
+
+
+
+        </LinearLayout>
 
         <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="50dp">
-        <ImageView
-            android:layout_width="40dp"
-
-            android:layout_height="40dp"
-            android:id="@+id/logoImage"
-            android:src="@drawable/transparent_calculator"/>
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
 
 
+            <Switch
+                android:id="@+id/unitSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="0.26"
+                android:shadowColor="#ffffff"
+                android:showText="true"
+                android:textOff="SI"
+                android:textOn="US" />
 
-<Switch
-    android:id="@+id/unitSwitch"
-    android:layout_width="wrap_content"
-    android:layout_height="50dp"
-    android:shadowColor="#ffffff"
-    android:textOn="US"
-    android:textOff="SI"
-    android:showText="true"
-    />
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/toolbarClearButton"
-        android:layout_width="90dp"
-        android:layout_height="50dp"
-        android:textSize="15dp"
-        android:layout_gravity="right"
-        android:textColor="@color/text_color"
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/toolbarClearButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:layout_weight="0.03"
+                android:padding="12dp"
+                android:shadowRadius="1.2"
 
-        style="@style/Widget.AppCompat.Button.Borderless"
+                android:text="CLEAR"
 
-        android:text="Clear"  />
+                android:textColor="@color/text_color"
+                android:textSize="15dp" />
 
-    <android.support.v7.widget.AppCompatButton
-    android:id="@+id/tooldbarCalculateButton"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
-        android:textColor="@color/text_color"
-        android:textSize="15dp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:text="Calculate"
-        android:layout_gravity="right"/>
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/tooldbarCalculateButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
 
-</LinearLayout>
+                android:layout_weight="0.30"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:shadowRadius="1.2"
+                android:text="CALCULATE"
+                android:textColor="@color/text_color"
+                android:textSize="15dp" />
+
+        </LinearLayout>
     </LinearLayout>
 
     </android.support.v7.widget.Toolbar>

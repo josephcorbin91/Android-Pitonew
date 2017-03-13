@@ -19,7 +19,7 @@
     android:layout_height="100dp"
     android:textSize="70dp"
     android:text="Pitonew"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/SecondaryColor"
         android:id="@+id/loading_screen_textview"></com.jco.pitonew.TitanicTextView>
 
 </LinearLayout>

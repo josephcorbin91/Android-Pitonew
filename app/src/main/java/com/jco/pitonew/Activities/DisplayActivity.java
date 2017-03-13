@@ -1,5 +1,7 @@
 package com.jco.pitonew.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -185,6 +187,52 @@ public class DisplayActivity extends AppCompatActivity{
     }
 
 
+
+
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(DisplayActivity.this);
+        // builder.setCancelable(false);
+        builder.setTitle("Rate Pitonew if you like it.");
+        builder.setMessage("Do you want to exit Pitonew?");
+        builder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                finish();
+            }
+        });
+        builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                dialog.cancel();
+
+            }
+        });
+        builder.setNeutralButton("Rate",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+/*
+                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
+                }
+                */
+                finish();
+
+            }
+        });
+        AlertDialog alert=builder.create();
+        alert.show();
+    }
 
 
 
