@@ -2,63 +2,214 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    <ImageView
-        android:src="@drawable/gaslogo"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:scaleType="center"
-        android:background="#FFFFBB33"
-        android:contentDescription="@string/app_name" />
-    <EditText
-        android:id="@+id/C02EditText"
-        android:inputType="numberDecimal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="C02 % vol" />
 
-    <EditText
-        android:id="@+id/O2EditText"
-        android:inputType="numberDecimal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="02 % vol" />
-    <EditText
-        android:id="@+id/N2EditText"
-        android:inputType="numberDecimal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="N2 % vol" />
-    <EditText
-        android:id="@+id/ArEditText"
-        android:inputType="numberDecimal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="Ar % vol" />
 
-    <EditText
-        android:id="@+id/H2OEditText"
-        android:inputType="numberDecimal"
+    <!-- TODO: Update blank fragment layout -->
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="16dp"
-        android:hint="H2O % vol" />
+        android:orientation="vertical">
+
+        <TableRow
+            android:id="@+id/dimension_1_table_row"
+            android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+            android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+            android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+            <TextView
+
+                android:id="@+id/dimension1TextView"
+                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_height="@dimen/TileHeight"
+                android:background="@android:color/transparent"
+
+                android:maxLines="1"
+                android:text="C02 % vol"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/hint_and_input_text" />
+
+            <EditText
+                android:id="@+id/C02EditText"
+                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_height="@dimen/TileHeight"
+                android:background="@drawable/highlighted_shape"
+
+                android:imeOptions="actionNext"
+                android:inputType="numberSigned"
+                android:maxLines="1"
+                android:selectAllOnFocus="false"
+                android:singleLine="false"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/hint_and_input_text" />
+
+
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <TableRow
+            android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+            android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+            android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+            <TextView
+
+                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_height="@dimen/TileHeight"
+                android:background="@android:color/transparent"
+
+                android:maxLines="1"
+                android:text="02 % vol"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/hint_and_input_text" />
+
+            <EditText
+                android:id="@+id/O2EditText"
+                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_height="@dimen/TileHeight"
+                android:background="@drawable/highlighted_shape"
+
+                android:imeOptions="actionNext"
+                android:inputType="numberSigned"
+                android:maxLines="1"
+                android:selectAllOnFocus="false"
+                android:singleLine="false"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/hint_and_input_text" />
+
+
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <TableRow
+            android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+            android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+            android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+            <TextView
+
+                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_height="@dimen/TileHeight"
+                android:background="@android:color/transparent"
+
+                android:maxLines="1"
+                android:text="N2 % vol"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/hint_and_input_text" />
+
+            <EditText
+                android:id="@+id/N2EditText"
+                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_height="@dimen/TileHeight"
+                android:background="@drawable/highlighted_shape"
+
+                android:imeOptions="actionNext"
+                android:inputType="numberSigned"
+                android:maxLines="1"
+                android:selectAllOnFocus="false"
+                android:singleLine="false"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/hint_and_input_text" />
+
+
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <TableRow
+            android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+            android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+            android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+            <TextView
+
+                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_height="@dimen/TileHeight"
+                android:background="@android:color/transparent"
+
+                android:maxLines="1"
+                android:text="Ar % vol"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/hint_and_input_text" />
+
+            <EditText
+                android:id="@+id/ArEditText"
+                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_height="@dimen/TileHeight"
+                android:background="@drawable/highlighted_shape"
+
+                android:imeOptions="actionNext"
+                android:inputType="numberSigned"
+                android:maxLines="1"
+                android:selectAllOnFocus="false"
+                android:singleLine="false"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/hint_and_input_text" />
+
+
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+            android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+            android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+            android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+            <TextView
+
+                android:layout_width="@dimen/InputTextViewTextWidth"
+                android:layout_height="@dimen/TileHeight"
+                android:background="@android:color/transparent"
+
+                android:maxLines="1"
+                android:text="H20 % vol"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/hint_and_input_text" />
+
+            <EditText
+                android:id="@+id/H2OEditText"
+                android:layout_width="@dimen/InputEditTextWidth"
+                android:layout_height="@dimen/TileHeight"
+                android:background="@drawable/highlighted_shape"
+
+                android:imeOptions="actionNext"
+                android:inputType="numberSigned"
+                android:maxLines="1"
+                android:selectAllOnFocus="false"
+                android:singleLine="false"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/hint_and_input_text" />
+
+
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

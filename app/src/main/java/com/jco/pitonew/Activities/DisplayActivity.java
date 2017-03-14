@@ -1,8 +1,10 @@
 package com.jco.pitonew.Activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +20,7 @@ import android.view.View;
 
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -36,12 +39,15 @@ import com.jco.pitonew.Utilities.Utility;
 public class DisplayActivity extends AppCompatActivity{
         private MaterialSpinner spinner;
         private Toolbar actionToolBar;
-        private AppCompatButton clearButton,calculateButton;
+        private Toolbar bottomToolBar;
+        private AppCompatButton clearButton,calculateButton,returnButton;
         private String currentCalculations,currentUnits;
         private MaterialMenuDrawable materialMenu;
         private Switch unitSwitch;
         private PagerFragment pagerFragment;
-        private FragmentManager fragmentManager;
+    RelativeLayout ResultFragmentToolBarLayout,InputFragmentToolBarLayout;
+
+    private FragmentManager fragmentManager;
         private String currentFragment;
     private InputFragment inputFragment;
     private ResultFragment resultFragment;
@@ -81,6 +87,8 @@ public class DisplayActivity extends AppCompatActivity{
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
 
+        ResultFragmentToolBarLayout = (RelativeLayout)findViewById(R.id.ResultFragmentToolBarLayout);
+        InputFragmentToolBarLayout =(RelativeLayout)findViewById(R.id.InputFragmentToolBarLayout);
         inputFragment = new InputFragment();
         pagerFragment = new PagerFragment();
         currentFragment = "inputFragment";
@@ -96,6 +104,9 @@ public class DisplayActivity extends AppCompatActivity{
             transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
             transaction.add(R.id.fragment_container, inputFragment);
             transaction.commit();
+            InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
+            ResultFragmentToolBarLayout.setVisibility(View.GONE);
+
             Log.i("FRAG TAG", "Fragment Commited");
 
 
@@ -134,29 +145,35 @@ public class DisplayActivity extends AppCompatActivity{
                 }
             }
         });
-
         //Action Toolbar Code
         actionToolBar = (Toolbar) findViewById(R.id.action_bar_toolbar);
         setSupportActionBar(actionToolBar);
+        bottomToolBar = (Toolbar) findViewById(R.id.bottom_toolbar);
 
 
         clearButton = (AppCompatButton) findViewById(R.id.toolbarClearButton);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DisplayActivity.this.currentFragment.equals("resultFragment")) {
-                    FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-                    transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                    transaction.replace(R.id.fragment_container, inputFragment);
-                    transaction.commit();
-                }
-                else
                     inputFragment.clear();
 
 
             }
         });
         calculateButton = (AppCompatButton) findViewById(R.id.tooldbarCalculateButton);
+        returnButton = (AppCompatButton) findViewById(R.id.tooldbarReturnButton);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+                transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                transaction.replace(R.id.fragment_container, inputFragment);
+                transaction.commit();
+                ResultFragmentToolBarLayout.setVisibility(View.GONE);
+                InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
+
+            }
+        });
 
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,10 +187,16 @@ public class DisplayActivity extends AppCompatActivity{
                     transaction.replace(R.id.fragment_container, resultFragment);
                     transaction.commit();
                     DisplayActivity.this.currentFragment = "resultFragment";
-                }
-                else
-                    Toast.makeText(DisplayActivity.this, "Please fill in all input fields", Toast.LENGTH_SHORT).show();
 
+                    ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                    InputFragmentToolBarLayout.setVisibility(View.GONE);
+                }
+                else {
+                    Toast.makeText(DisplayActivity.this, "Please fill in all input fields", Toast.LENGTH_SHORT).show();
+                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                    // Vibrate for 500 milliseconds
+                    vibrator.vibrate(500);
+                }
             }
 
 

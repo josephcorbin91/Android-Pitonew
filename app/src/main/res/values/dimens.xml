@@ -9,7 +9,9 @@
     <dimen name="tile_height_full_width_single_line">48dp</dimen>
     <dimen name="InputEditTextWidth">150dp</dimen>
     <dimen name="InputTextViewTextWidth">150dp</dimen>
-    <dimen name="InputUnitsTextViewTextWidth">50dp</dimen>
+    <dimen name="InputTextViewTextWidthDialog">40dp</dimen>
+
+    <dimen name="InputUnitsTextViewTextWidth">20dp</dimen>
 
 
     <dimen name="single_line_list_top_bottom_padding">4dp</dimen>

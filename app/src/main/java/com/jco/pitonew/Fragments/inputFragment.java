@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ import com.jco.pitonew.ButtonRectangle;
 import com.jco.pitonew.Models.Gas;
 import com.jco.pitonew.R;
 import com.jco.pitonew.Utilities.Utility;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -45,14 +48,18 @@ public class InputFragment extends Fragment  {
 
 
     //GUI Components
+    TextView switchTextViewStandardAir,switchTextViewPipeShape,switchTextViewWetBulb;
+
     private TextView unitsGasDensityTemperatureDB, unitsGasDensityTemperatureWB,UnitStaticPressureGasDensityFragmentTextView, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView,dimension1TextView,dimension2UnitText,        unitsAverageVelocity,unitsMassAirFlow,unitsActualAirFlow,unitsNormalAirFlow,UnitsDimensionHeightGasFlowFragmentTextView,UnitsDimensionWidthGasFlowFragmentTextView;;
-    private TextView molecularWeightTextView ;
+    private TextView molecularWeightTextView ,wetBulbTemperatureTextView;
     private EditText dimension_1_WidthGasEditText,dimension_2_HeightGasEditText,pitotTubeCoefficientEditText, staticPressureFragmentEditText, temperatureGasFragmentEditText, ElevationAboveSeaLevelFragmentEdiText, wetBulbTemperatureGasFragmentEditText, seaLevelPressureGasFragmentEditText;
+    private TableRow dimension_1_table_row, dimension_2_table_row,wetBulbTemperatureTableRow;
     public Boolean getStandardAirBoolean() {
         return standardAirBoolean;
     }
+    private View first_separator;
     private Boolean standardAirBoolean;
-    private Switch standardAirSwitch,rectangularOrCircularSwitch;
+    private Switch standardAirSwitch,rectangularOrCircularSwitch,wetBulbTemperatureSwitch;
     private View mView;
     private double molecularWeight=28.96;
 
@@ -61,16 +68,22 @@ public class InputFragment extends Fragment  {
             case "Rectangular":
                 dimension1TextView.setText("Height");
                 dimension2TextView.setText("Width");
+                //switchTextViewPipeShape.setText("Pipe shape : " + dimensions);
                 dimension2TextView.setVisibility(View.VISIBLE);
-                dimension2EditText.setVisibility(View.VISIBLE);
-                dimension2UnitText.setVisibility(View.VISIBLE);
+                first_separator.setVisibility(View.VISIBLE);
+                dimension_2_HeightGasEditText.setVisibility(View.VISIBLE);
+                UnitsDimensionWidthGasFlowFragmentTextView.setVisibility(View.VISIBLE);
+                dimension_2_table_row.setVisibility(View.VISIBLE);
                 break;
             case "Circular":
+                //switchTextViewPipeShape.setText("Pipe shape : " + dimensions);
 
+                first_separator.setVisibility(View.GONE);
                 dimension1TextView.setText("Diameter");
-                dimension2TextView.setVisibility(View.INVISIBLE);
-                dimension2EditText.setVisibility(View.INVISIBLE);
-                dimension2UnitText.setVisibility(View.INVISIBLE);
+                dimension2TextView.setVisibility(View.GONE);
+                dimension_2_HeightGasEditText.setVisibility(View.GONE);
+                UnitsDimensionWidthGasFlowFragmentTextView.setVisibility(View.GONE);
+                dimension_2_table_row.setVisibility(View.GONE);
                 break;
         }
     }
@@ -84,10 +97,19 @@ public class InputFragment extends Fragment  {
     public void instantiateViews() {
 
 
-
+        first_separator = (View)mView.findViewById(R.id.first_separator);
         UnitsDimensionHeightGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimension_2_HeightGasFragmentTextView);
         UnitsDimensionWidthGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimension_1_WidthGasFragmentTextView);
 
+        switchTextViewStandardAir = (TextView)mView.findViewById(R.id.switchTextViewStandardAir);
+        switchTextViewPipeShape = (TextView)mView.findViewById(R.id.switchTextViewPipeShape);
+        switchTextViewWetBulb = (TextView)mView.findViewById(R.id.switchTextViewWetBulb);
+
+
+        dimension1TextView = (TextView)mView.findViewById(R.id.dimension1TextView);
+        dimension2TextView = (TextView)mView.findViewById(R.id.dimension2TextView);
+        dimension_1_table_row = (TableRow)mView.findViewById(R.id.dimension_1_table_row);
+        dimension_2_table_row = (TableRow)mView.findViewById(R.id.dimension_2_table_row);
         unitsGasDensityTemperatureDB = (TextView) mView.findViewById(R.id.UnitstemperatureGasDensityFragmentTextView);
         unitsGasDensityTemperatureWB = (TextView) mView.findViewById(R.id.UnitsWetBulbtemperatureGasDensityFragmentTextView);
         unitsGasDensitySeaLevelPressure = (TextView) mView.findViewById(R.id.UnitsseaLevelPressureGasDensityFragmentTextView);
@@ -106,6 +128,10 @@ public class InputFragment extends Fragment  {
         wetBulbTemperatureGasFragmentEditText= (EditText) mView.findViewById(R.id.wetBulbTemperatureGasFragmentEditText);
         seaLevelPressureGasFragmentEditText= (EditText) mView.findViewById(R.id.seaLevelPressureGasFragmentEditText);
 
+
+        wetBulbTemperatureTableRow = (TableRow)mView.findViewById(R.id.wetBulbTemperatureTableRow);
+        wetBulbTemperatureTextView = (TextView) mView.findViewById(R.id.wetBulbTemperatureTextView);
+
         dimension_1_WidthGasEditText.setText("1");
         dimension_2_HeightGasEditText.setText("1");
         pitotTubeCoefficientEditText.setText("1");
@@ -118,18 +144,62 @@ public class InputFragment extends Fragment  {
 
 
 
-        rectangularOrCircularSwitch= (Switch) mView.findViewById(R.id.rectangularCircularGasFlowFragmentSwitch);
-        standardAirSwitch = (Switch)mView.findViewById(R.id.standardAirSwitch);
 
+        rectangularOrCircularSwitch= (Switch) mView.findViewById(R.id.rectangularOrCircularSwitch);
+        standardAirSwitch = (Switch)mView.findViewById(R.id.standardAirSwitch);
+        wetBulbTemperatureSwitch = (Switch)mView.findViewById(R.id.wetBulbTemperatureSwitch);
         standardAirSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
+                if(isChecked) {
+                    //switchTextViewStandardAir.setText("Air Composition: Non-Standard Air");
                     showStandardAirDialog();
+                }
+                else {
+                    //switchTextViewStandardAir.setText("Air Composition: Standard Air");
+
+
+                }
 
             }
         });
 
+
+        rectangularOrCircularSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    setDimensions("Circular");
+                }
+                else
+                    setDimensions("Rectangular");
+
+            }
+        });
+        wetBulbTemperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    wetBulbTemperatureTableRow.setVisibility(View.VISIBLE);
+                    wetBulbTemperatureTextView.setVisibility(View.VISIBLE);
+                    wetBulbTemperatureGasFragmentEditText.setVisibility(View.VISIBLE);
+                    unitsGasDensityTemperatureWB.setVisibility(View.VISIBLE);
+                    //switchTextViewWetBulb.setText("Wet Bulb Temperature : ON");
+                }
+                else{
+                    //switchTextViewWetBulb.setText("Wet Bulb Temperature : OFF");
+
+                    wetBulbTemperatureTableRow.setVisibility(View.GONE);
+                    wetBulbTemperatureTextView.setVisibility(View.GONE);
+                    wetBulbTemperatureGasFragmentEditText.setVisibility(View.GONE);
+                    unitsGasDensityTemperatureWB.setVisibility(View.GONE);
+
+                }
+
+            }
+        });
 
     }
 
