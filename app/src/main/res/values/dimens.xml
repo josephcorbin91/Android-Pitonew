@@ -11,7 +11,7 @@
     <dimen name="InputTextViewTextWidth">150dp</dimen>
     <dimen name="InputTextViewTextWidthDialog">40dp</dimen>
 
-    <dimen name="InputUnitsTextViewTextWidth">20dp</dimen>
+    <dimen name="InputUnitsTextViewTextWidth">40dp</dimen>
 
 
     <dimen name="single_line_list_top_bottom_padding">4dp</dimen>

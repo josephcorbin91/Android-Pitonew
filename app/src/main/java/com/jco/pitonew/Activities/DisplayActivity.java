@@ -120,29 +120,22 @@ public class DisplayActivity extends AppCompatActivity{
                     inputFragment.changeUnits("US");
 
                     currentUnits = "US";
-                    if (currentFragment.equals("resultFragment")) {
-                        FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-                        Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressure(), false /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
-                        resultFragment = ResultFragment.newInstance(gas.getResults(), "US");
-                        transaction.replace(R.id.fragment_container, resultFragment);
-                        transaction.commit();
-                        DisplayActivity.this.currentFragment = "resultFragment";
+                    if (currentFragment.equals("resultFragment"))
+                        resultFragment.changeUnits("US");
 
-                    }
+                    else
+                        inputFragment.changeUnits("US");
+
 
                 } else {
-                    inputFragment.changeUnits("SI");
+                    if(currentFragment.equals("resultFragment"))
+                        resultFragment.changeUnits("SI");
+                    else
+                        inputFragment.changeUnits("SI");
 
-                    currentUnits = "SI";
-                    if (currentFragment.equals("resultFragment")) {
-                        FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-                        Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressure(), true /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
-                        resultFragment = ResultFragment.newInstance(gas.getResults(), "SI");
-                        transaction.replace(R.id.fragment_container, resultFragment);
-                        transaction.commit();
-                        DisplayActivity.this.currentFragment = "resultFragment";
+
                     }
-                }
+
             }
         });
         //Action Toolbar Code

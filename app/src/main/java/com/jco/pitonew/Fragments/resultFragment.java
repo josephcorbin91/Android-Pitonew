@@ -111,16 +111,16 @@ public class ResultFragment extends Fragment {
 
     public void setResults(){
 
-        averageVelocityResultTextView.setText(ResultFragment.results[0].toString());
-        massAirFlowResultTextView.setText(ResultFragment.results[1].toString());
-        normalAirFlowResultTextView.setText(ResultFragment.results[2].toString());
-        actualAirFlowResultTextView.setText(ResultFragment.results[3].toString());
-        ductPressureFragmentTextView.setText(ResultFragment.results[4].toString());
-        gasDesnityResultTextView.setText(ResultFragment.results[5].toString());
-        molecularResultTextView.setText(ResultFragment.results[6].toString());
-        ductAreaGasFlowFragmentTextView.setText(ResultFragment.results[7].toString());
-        atmosphericPressureTextView.setText(ResultFragment.results[8].toString());
-        relativeHumidityResultTextView.setText(ResultFragment.results[9].toString());
+        averageVelocityResultTextView.setText(String.format("%.4f", ResultFragment.results[0].toString()));
+        massAirFlowResultTextView.setText(String.format("%.4f",ResultFragment.results[1].toString()));
+        normalAirFlowResultTextView.setText(String.format("%.4f",ResultFragment.results[2].toString()));
+        actualAirFlowResultTextView.setText(String.format("%.4f",ResultFragment.results[3].toString()));
+        ductPressureFragmentTextView.setText(String.format("%.4f",ResultFragment.results[4].toString()));
+        gasDesnityResultTextView.setText(String.format("%.4f",ResultFragment.results[5].toString()));
+        molecularResultTextView.setText(String.format("%.4f",ResultFragment.results[6].toString()));
+        ductAreaGasFlowFragmentTextView.setText(String.format("%.4f",ResultFragment.results[7].toString()));
+        atmosphericPressureTextView.setText(String.format("%.4f",ResultFragment.results[8].toString()));
+        relativeHumidityResultTextView.setText(String.format("%.4f",ResultFragment.results[9].toString()));
 
 
 
@@ -192,6 +192,7 @@ public class ResultFragment extends Fragment {
 
             switch (units) {
                 case "SI":
+
                     unitsAverageVelocity.setText("m/s");
                     unitsMassAirFlow.setText("kg/s");
                     unitsNormalAirFlow.setText("Nm³/h");

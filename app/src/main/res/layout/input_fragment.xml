@@ -223,8 +223,8 @@
                     android:layout_width="@dimen/InputEditTextWidth"
                     android:layout_height="@dimen/TileHeight"
                     android:background="@drawable/highlighted_shape"
+                    android:maxLength="15"
 
-                    android:hint="Duct Width"
                     android:imeOptions="actionNext"
                     android:inputType="numberSigned"
                     android:maxLines="1"
@@ -276,8 +276,8 @@
                     android:layout_width="@dimen/InputEditTextWidth"
                     android:layout_height="@dimen/TileHeight"
                     android:background="@drawable/highlighted_shape"
+                    android:maxLength="15"
 
-                    android:hint="Duct Height"
                     android:imeOptions="actionNext"
                     android:inputType="numberSigned"
                     android:maxLines="1"
@@ -323,9 +323,9 @@
                     android:id="@+id/wetBulbTemperatureGasFragmentEditText"
                     android:layout_width="@dimen/InputEditTextWidth"
                     android:layout_height="@dimen/TileHeight"
+                    android:maxLength="15"
 
                     android:background="@drawable/highlighted_shape"
-                    android:hint="Wet Bulb Temperature"
                     android:imeOptions="actionNext"
                     android:inputType="numberSigned"
                     android:maxLines="1"
@@ -370,9 +370,10 @@
                 <EditText
                     android:id="@+id/pitotTubeCoefficientEditText"
                     android:layout_width="@dimen/InputEditTextWidth"
+                    android:maxLength="15"
+
                     android:layout_height="@dimen/TileHeight"
                     android:background="@drawable/highlighted_shape"
-                    android:hint="Pitot Tube Coeffecient"
                     android:imeOptions="actionNext"
                     android:inputType="numberSigned"
                     android:maxLines="1"
@@ -408,8 +409,8 @@
                     android:layout_width="@dimen/InputEditTextWidth"
                     android:layout_height="@dimen/TileHeight"
                     android:background="@drawable/highlighted_shape"
+                    android:maxLength="15"
 
-                    android:hint="Static Pressure"
                     android:imeOptions="actionNext"
                     android:inputType="numberSigned"
                     android:maxLines="1"
@@ -458,8 +459,8 @@
                     android:layout_width="@dimen/InputEditTextWidth"
                     android:layout_height="@dimen/TileHeight"
                     android:background="@drawable/highlighted_shape"
-                    android:hint="Dry Bulb Temperature"
                     android:imeOptions="actionNext"
+                    android:maxLength="15"
 
                     android:inputType="numberSigned"
                     android:maxLines="1"
@@ -503,8 +504,9 @@
                     android:id="@+id/ElevationAboveSeaLevelFragmentEdiText"
                     android:layout_width="@dimen/InputEditTextWidth"
                     android:layout_height="@dimen/TileHeight"
+                    android:maxLength="15"
+
                     android:background="@drawable/highlighted_shape"
-                    android:hint="Elevation above Sea Level"
                     android:imeOptions="actionNext"
                     android:inputType="numberSigned"
                     android:maxLines="1"
@@ -553,8 +555,8 @@
                     android:layout_width="@dimen/InputEditTextWidth"
                     android:layout_height="@dimen/TileHeight"
                     android:background="@drawable/highlighted_shape"
-                    android:hint="Pressure at Sea Level"
 
+                    android:maxLength="15"
                     android:imeOptions="actionDone"
                     android:inputType="numberSigned"
                     android:maxLines="1"

@@ -355,6 +355,7 @@ public class InputFragment extends Fragment  {
 
         switch (units) {
             case "SI":
+
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
                 UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
                 UnitStaticPressureGasDensityFragmentTextView.setText("kPa");
