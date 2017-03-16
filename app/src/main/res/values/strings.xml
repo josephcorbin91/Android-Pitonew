@@ -24,5 +24,7 @@
         <item>11</item>
     </string-array>
     <string name="title_activity_main_menu">MainMenu</string>
+    <string name="empty_field">This field is required.</string>
+
     <string name="title_activity_main__menu">Main_Menu</string>
 </resources>

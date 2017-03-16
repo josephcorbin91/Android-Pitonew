@@ -2,7 +2,7 @@
 <resources>
     <color name="PrimaryColor">#4caf50</color>
     <color name="SecondaryColor">#388e3c</color>
-    <color name="AccentColor">#FF4081</color>
+    <color name="AccentColor">#40a5ff</color>
     <color name="guillotine_background">#444153</color>
     <color name="guillotine_background_dark">#383547</color>
     <color name="selected_item_color">#30d1d5</color>

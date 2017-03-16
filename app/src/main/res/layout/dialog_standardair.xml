@@ -1,23 +1,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:elevation="2dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
 
     <!-- TODO: Update blank fragment layout -->
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TableRow
             android:id="@+id/dimension_1_table_row"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
             android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
             android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+            android:layout_marginTop="@dimen/single_line_list_top_bottom_padding"
+            android:gravity="center">
 
             <TextView
 
@@ -27,18 +30,20 @@
                 android:background="@android:color/transparent"
 
                 android:maxLines="1"
-                android:text="C02 % vol"
+                android:text="C02 %"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/hint_and_input_text" />
 
             <EditText
                 android:id="@+id/C02EditText"
-                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_width="@dimen/InputEditTextTextWidthDialog"
                 android:layout_height="@dimen/TileHeight"
                 android:background="@drawable/highlighted_shape"
-
+                android:gravity="center"
                 android:imeOptions="actionNext"
+
                 android:inputType="numberSigned"
+                android:maxLength="2"
                 android:maxLines="1"
                 android:selectAllOnFocus="false"
                 android:singleLine="false"
@@ -57,6 +62,7 @@
             android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
             android:layout_marginRight="@dimen/single_line_list_left_right_padding"
             android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
@@ -68,15 +74,18 @@
                 android:background="@android:color/transparent"
 
                 android:maxLines="1"
-                android:text="02 % vol"
+                android:text="02 %"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/hint_and_input_text" />
 
             <EditText
+                android:gravity="center"
+
                 android:id="@+id/O2EditText"
-                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_width="@dimen/InputEditTextTextWidthDialog"
                 android:layout_height="@dimen/TileHeight"
                 android:background="@drawable/highlighted_shape"
+                android:maxLength="2"
 
                 android:imeOptions="actionNext"
                 android:inputType="numberSigned"
@@ -97,6 +106,8 @@
         <TableRow
             android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
             android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+            android:gravity="center"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/single_line_list_left_right_padding"
@@ -109,15 +120,17 @@
                 android:background="@android:color/transparent"
 
                 android:maxLines="1"
-                android:text="N2 % vol"
+                android:text="N2 %"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/hint_and_input_text" />
 
             <EditText
                 android:id="@+id/N2EditText"
-                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_width="@dimen/InputEditTextTextWidthDialog"
                 android:layout_height="@dimen/TileHeight"
                 android:background="@drawable/highlighted_shape"
+                android:maxLength="2"
+                android:gravity="center"
 
                 android:imeOptions="actionNext"
                 android:inputType="numberSigned"
@@ -139,6 +152,8 @@
             android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
+
             android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
             android:layout_marginRight="@dimen/single_line_list_left_right_padding"
             android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
@@ -148,17 +163,20 @@
                 android:layout_width="@dimen/InputTextViewTextWidthDialog"
                 android:layout_height="@dimen/TileHeight"
                 android:background="@android:color/transparent"
+                android:maxLength="2"
 
                 android:maxLines="1"
-                android:text="Ar % vol"
+                android:text="Ar %"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/hint_and_input_text" />
 
             <EditText
                 android:id="@+id/ArEditText"
-                android:layout_width="@dimen/InputTextViewTextWidthDialog"
+                android:layout_width="@dimen/InputEditTextTextWidthDialog"
                 android:layout_height="@dimen/TileHeight"
                 android:background="@drawable/highlighted_shape"
+                android:maxLength="2"
+                android:gravity="center"
 
                 android:imeOptions="actionNext"
                 android:inputType="numberSigned"
@@ -182,26 +200,29 @@
             android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
             android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
             android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+            android:gravity="center"
+
             android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
 
             <TextView
 
-                android:layout_width="@dimen/InputTextViewTextWidth"
+                android:layout_width="@dimen/InputTextViewTextWidthDialog"
                 android:layout_height="@dimen/TileHeight"
                 android:background="@android:color/transparent"
 
                 android:maxLines="1"
-                android:text="H20 % vol"
+                android:text="H20 %"
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/hint_and_input_text" />
 
             <EditText
+                android:gravity="center"
                 android:id="@+id/H2OEditText"
-                android:layout_width="@dimen/InputEditTextWidth"
+                android:layout_width="@dimen/InputEditTextTextWidthDialog"
                 android:layout_height="@dimen/TileHeight"
                 android:background="@drawable/highlighted_shape"
-
-                android:imeOptions="actionNext"
+                android:maxLength="2"
+                android:imeOptions="actionDone"
                 android:inputType="numberSigned"
                 android:maxLines="1"
                 android:selectAllOnFocus="false"

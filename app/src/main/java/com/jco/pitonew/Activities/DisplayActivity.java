@@ -1,6 +1,8 @@
 package com.jco.pitonew.Activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -18,10 +20,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
@@ -33,6 +40,8 @@ import com.jco.pitonew.Models.Gas;
 import com.jco.pitonew.R;
 import com.jco.pitonew.Utilities.Utility;
 
+import java.util.ArrayList;
+
 /**
  * Created by jco on 12/3/2016.
  */
@@ -42,6 +51,8 @@ public class DisplayActivity extends AppCompatActivity{
         private Toolbar bottomToolBar;
         private AppCompatButton clearButton,calculateButton,returnButton;
         private String currentCalculations,currentUnits;
+        public ArrayList<Double> dynamicVelocityArrayList;
+
         private MaterialMenuDrawable materialMenu;
         private Switch unitSwitch;
         private PagerFragment pagerFragment;
@@ -89,6 +100,7 @@ public class DisplayActivity extends AppCompatActivity{
 
         ResultFragmentToolBarLayout = (RelativeLayout)findViewById(R.id.ResultFragmentToolBarLayout);
         InputFragmentToolBarLayout =(RelativeLayout)findViewById(R.id.InputFragmentToolBarLayout);
+
         inputFragment = new InputFragment();
         pagerFragment = new PagerFragment();
         currentFragment = "inputFragment";
@@ -151,6 +163,7 @@ public class DisplayActivity extends AppCompatActivity{
                     inputFragment.clear();
 
 
+
             }
         });
         calculateButton = (AppCompatButton) findViewById(R.id.tooldbarCalculateButton);
@@ -173,16 +186,8 @@ public class DisplayActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 if(inputFragment.validInput()) {
-                    FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-                    Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressure(), true /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
-                    transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                    resultFragment = ResultFragment.newInstance(gas.getResults(), getUnits());
-                    transaction.replace(R.id.fragment_container, resultFragment);
-                    transaction.commit();
-                    DisplayActivity.this.currentFragment = "resultFragment";
+                    showDyanamicVelocityInputDialog();
 
-                    ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
-                    InputFragmentToolBarLayout.setVisibility(View.GONE);
                 }
                 else {
                     Toast.makeText(DisplayActivity.this, "Please fill in all input fields", Toast.LENGTH_SHORT).show();
@@ -202,8 +207,89 @@ public class DisplayActivity extends AppCompatActivity{
         return this.currentUnits;
     }
 
+    private android.support.v7.app.AlertDialog dialog;
+    public void showDyanamicVelocityInputDialog(){
 
+        dynamicVelocityArrayList = new ArrayList<Double>();
+        final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage("Dynamic Velocity Input");
+        builder.setView(R.layout.dialog_dynamic_velocity);
+        builder.setPositiveButton("Done", null); //Set to null. We override the onclick
+        builder.setNegativeButton("Cancel", null);
+        builder.setNeutralButton("Next",null);
 
+        dialog = builder.create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button buttonPositive = ((android.support.v7.app.AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                buttonPositive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Dialog alertDialog = DisplayActivity.this.dialog;
+
+                        FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+                        Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressure(), true /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
+                        transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                        resultFragment = ResultFragment.newInstance(gas.getResults(), getUnits());
+                        transaction.replace(R.id.fragment_container, resultFragment);
+                        transaction.commit();
+                        DisplayActivity.this.currentFragment = "resultFragment";
+
+                        ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                        InputFragmentToolBarLayout.setVisibility(View.GONE);
+                        alertDialog.hide();
+                    }
+                });
+
+                Button negativeButton = ((android.support.v7.app.AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                negativeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Dialog alertDialog = DisplayActivity.this.dialog;
+                        TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
+                        EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
+                        dynamicVelocityInputEditText.setText("");
+                        dynamicVelocityTextView.setText("");
+                        alertDialog.hide();
+                    }
+                });
+
+                Button neutralButton = ((android.support.v7.app.AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEUTRAL);
+                neutralButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Dialog alertDialog = DisplayActivity.this.dialog;
+
+                        TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
+                        for (Double dynamicVelocity : dynamicVelocityArrayList) {
+                            
+                            dynamicVelocityTextView.setText(dynamicVelocityTextView.getText().toString() + "\n" + String.valueOf(dynamicVelocity));
+                        }
+                        EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
+                        System.out.println("VELOCITIES " + dynamicVelocityInputEditText.getText().toString());
+
+                        dynamicVelocityArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
+                        dynamicVelocityInputEditText.setText("");
+                    }
+                });
+
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
+    }
 
 
     @Override

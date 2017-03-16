@@ -1,11 +1,14 @@
-package com.jco.pitonew;
+package com.jco.pitonew.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.jco.pitonew.Activities.DisplayActivity;
+import com.jco.pitonew.R;
+import com.jco.pitonew.Titanic;
+import com.jco.pitonew.TitanicTextView;
+import com.jco.pitonew.Typefaces;
 
 public class InitialScreen extends AppCompatActivity {
     private Thread welcomeThread;
@@ -18,26 +21,25 @@ public class InitialScreen extends AppCompatActivity {
         setContentView(R.layout.activity_loading_screen);
         TitanicTextView loadingScreenTextView = (TitanicTextView) findViewById(R.id.loading_screen_textview);
 /*
-        Typeface font = Typeface.createFromAsset(
-                getApplicationContext().getAssets(),
-                "fonts/trench100free.ttf");
+                    Typeface font = Typeface.createFromAsset(
+                            getApplicationContext().getAssets(),
+                            "fonts/trench100free.ttf");
 */
-        loadingScreenTextView.setTypeface(Typefaces.get(this, "trench100free.ttf"));
-       // loadingScreenTextView .setTypeface(font);
-        new Titanic().start(loadingScreenTextView);
+                    loadingScreenTextView.setTypeface(Typefaces.get(this, "trench100free.ttf"));
+                    // loadingScreenTextView .setTypeface(font);
+                    new Titanic().start(loadingScreenTextView);
 
 
 
 
 
-        Thread welcomeThread = new Thread() {
+                    Thread welcomeThread = new Thread() {
 
-            @Override
-            public void run() {
-                try {
-                    super.run();
-                    sleep(500);  //Delay of 10 seconds
-
+                        @Override
+                        public void run() {
+                            try {
+                                super.run();
+                                sleep(3500);
                 } catch (Exception e) {
 
                 } finally {
