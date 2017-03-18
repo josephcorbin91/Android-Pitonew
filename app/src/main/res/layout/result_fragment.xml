@@ -70,6 +70,36 @@
 
 
                 <TextView
+                    android:layout_width="@dimen/InputTextViewTextWidth"
+
+                    android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:gravity="left|center"
+                    android:text="Dynamic Velocity"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/hint_and_input_text" />
+
+                <TextView
+                    android:id="@+id/dynamicVelocityResultTextView"
+                    android:layout_width="@dimen/InputTextViewTextWidth"
+
+                    android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/hint_and_input_text" />
+
+            </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+            <TableRow
+                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+
+                <TextView
                     android:id="@+id/textView3"
                     android:layout_width="@dimen/InputTextViewTextWidth"
 

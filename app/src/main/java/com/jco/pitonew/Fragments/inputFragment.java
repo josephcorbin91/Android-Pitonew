@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,10 +29,12 @@ import com.jco.pitonew.Activities.DisplayActivity;
 import com.jco.pitonew.ButtonRectangle;
 import com.jco.pitonew.Models.Gas;
 import com.jco.pitonew.R;
+import com.jco.pitonew.Utilities.DecimalDigitsInputFilter;
 import com.jco.pitonew.Utilities.Utility;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -140,6 +143,18 @@ public class InputFragment extends Fragment  {
         wetBulbTemperatureGasFragmentEditText= (EditText) mView.findViewById(R.id.wetBulbTemperatureGasFragmentEditText);
         seaLevelPressureGasFragmentEditText= (EditText) mView.findViewById(R.id.seaLevelPressureGasFragmentEditText);
 
+        InputFilter[] decimalInputFilter = new InputFilter[]{new DecimalDigitsInputFilter(8,2)};
+
+        dimension_1_WidthGasEditText.setFilters(decimalInputFilter);
+        dimension_2_HeightGasEditText.setFilters(decimalInputFilter);
+        pitotTubeCoefficientEditText.setFilters(decimalInputFilter);
+        staticPressureFragmentEditText.setFilters(decimalInputFilter);
+        temperatureGasFragmentEditText.setFilters(decimalInputFilter);
+        ElevationAboveSeaLevelFragmentEdiText.setFilters(decimalInputFilter);
+        wetBulbTemperatureGasFragmentEditText.setFilters(decimalInputFilter);
+        seaLevelPressureGasFragmentEditText.setFilters(decimalInputFilter);
+
+
         wetBulbTemperatureDivider= (View)mView.findViewById(R.id.wetBulbTemperatureDivider);
         wetBulbTemperatureTableRow = (TableRow)mView.findViewById(R.id.wetBulbTemperatureTableRow);
         wetBulbTemperatureTextView = (TextView) mView.findViewById(R.id.wetBulbTemperatureTextView);
@@ -223,10 +238,6 @@ public class InputFragment extends Fragment  {
 
     }
 
-    private Double[] dynamicPressure;
-    public Double[] getDynamicPressure(){
-        return this.dynamicPressure;
-    }
 
     public Double[] getResults(){
         Double[] inputArray = new Double[]{Double.valueOf(dimension_1_WidthGasEditText.getText().toString()),Double.valueOf(dimension_2_HeightGasEditText.getText().toString())
@@ -393,13 +404,15 @@ public class InputFragment extends Fragment  {
         instantiateViews();
         //For test purposes
 
-        dynamicPressure = new Double[]{0.18,0.3,	0.29,	0.34,	0.16,	0.15	,0.27	,0.34,	0.26,	0.25, 0.16	,0.14};
+        //dynamicPressure = new Double[]{0.18,0.3,	0.29,	0.34,	0.16,	0.15	,0.27	,0.34,	0.26,	0.25, 0.16	,0.14};
         return view;
     }
 
 
 
     public void changeUnits(String units) {
+
+        DecimalFormat doubleTwoDigitsDecimalFormat = new DecimalFormat("#.00");
 
 
 
@@ -414,19 +427,19 @@ public class InputFragment extends Fragment  {
                 unitsGasDensitySeaLevelPressure.setText("kPa");
                 unitsGasDensityElevationAboveSeaLevel.setText("m");
                 if(dimension_1_WidthGasEditText.getText().toString().length()>0)
-                    dimension_1_WidthGasEditText.setText(String.valueOf(Double.valueOf(dimension_1_WidthGasEditText.getText().toString())*0.0254));
+                    dimension_1_WidthGasEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(dimension_1_WidthGasEditText.getText().toString())*0.0254)));
                 if(dimension_2_HeightGasEditText.getText().toString().length()>0)
-                    dimension_2_HeightGasEditText.setText(String.valueOf(Double.valueOf(dimension_2_HeightGasEditText.getText().toString())*0.0254));
+                    dimension_2_HeightGasEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(dimension_2_HeightGasEditText.getText().toString())*0.0254)));
                 if(staticPressureFragmentEditText.getText().toString().length()>0)
-                    staticPressureFragmentEditText.setText(String.valueOf(Double.valueOf(staticPressureFragmentEditText.getText().toString())*3.38639));
+                    staticPressureFragmentEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(staticPressureFragmentEditText.getText().toString())*3.38639)));
                 if(seaLevelPressureGasFragmentEditText.getText().toString().length()>0)
-                    seaLevelPressureGasFragmentEditText.setText(String.valueOf(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())*3.38639));
+                    seaLevelPressureGasFragmentEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())*3.38639)));
                 if(ElevationAboveSeaLevelFragmentEdiText.getText().toString().length()>0)
-                    ElevationAboveSeaLevelFragmentEdiText.setText(String.valueOf(Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())*0.3048));
+                    ElevationAboveSeaLevelFragmentEdiText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())*0.3048)));
                 if(temperatureGasFragmentEditText.getText().toString().length()>0)
-                    temperatureGasFragmentEditText.setText(String.valueOf(((Double.valueOf(temperatureGasFragmentEditText.getText().toString())-32)/1.8)));
+                    temperatureGasFragmentEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format((Double.valueOf(temperatureGasFragmentEditText.getText().toString())-32)/1.8)));
                 if(wetBulbTemperatureGasFragmentEditText.getText().toString().length()>0)
-                    wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString())-32)/1.8)));
+                    wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString())-32)/1.8)));
 
                 break;
             case "US":
@@ -438,19 +451,19 @@ public class InputFragment extends Fragment  {
                 unitsGasDensityElevationAboveSeaLevel.setText("ft");
                 UnitStaticPressureGasDensityFragmentTextView.setText("in. Hg");
                 if(dimension_1_WidthGasEditText.getText().toString().length()>0)
-                    dimension_1_WidthGasEditText.setText(String.valueOf(Double.valueOf(dimension_1_WidthGasEditText.getText().toString())/0.0254));
+                    dimension_1_WidthGasEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(dimension_1_WidthGasEditText.getText().toString())/0.0254)));
                 if(dimension_2_HeightGasEditText.getText().toString().length()>0)
-                    dimension_2_HeightGasEditText.setText(String.valueOf(Double.valueOf(dimension_2_HeightGasEditText.getText().toString())/0.0254));
+                    dimension_2_HeightGasEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(dimension_2_HeightGasEditText.getText().toString())/0.0254)));
                 if(staticPressureFragmentEditText.getText().toString().length()>0)
-                    staticPressureFragmentEditText.setText(String.valueOf(Double.valueOf(staticPressureFragmentEditText.getText().toString())*0.2952998751));
+                    staticPressureFragmentEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(staticPressureFragmentEditText.getText().toString())*0.2952998751)));
                 if(seaLevelPressureGasFragmentEditText.getText().toString().length()>0)
-                    seaLevelPressureGasFragmentEditText.setText(String.valueOf(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())*0.2952998751));
+                    seaLevelPressureGasFragmentEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())*0.2952998751)));
                 if(ElevationAboveSeaLevelFragmentEdiText.getText().toString().length()>0)
-                    ElevationAboveSeaLevelFragmentEdiText.setText(String.valueOf(Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())/0.3048));
+                    ElevationAboveSeaLevelFragmentEdiText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())/0.3048)));
                 if(temperatureGasFragmentEditText.getText().toString().length()>0)
-                    temperatureGasFragmentEditText.setText(String.valueOf(((Double.valueOf(temperatureGasFragmentEditText.getText().toString())*1.8)+32)));
+                    temperatureGasFragmentEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(((Double.valueOf(temperatureGasFragmentEditText.getText().toString())*1.8)+32))));
                 if(wetBulbTemperatureGasFragmentEditText.getText().toString().length()>0)
-                    wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString())*1.8)+32)));
+                    wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString())*1.8)+32))));
 
 
 

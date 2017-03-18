@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import android.view.inputmethod.InputMethodManager;
@@ -51,7 +52,7 @@ public class DisplayActivity extends AppCompatActivity{
         private Toolbar bottomToolBar;
         private AppCompatButton clearButton,calculateButton,returnButton;
         private String currentCalculations,currentUnits;
-        public ArrayList<Double> dynamicVelocityArrayList;
+        public ArrayList<Double> dynamicPressureArrayList;
 
         private MaterialMenuDrawable materialMenu;
         private Switch unitSwitch;
@@ -129,23 +130,16 @@ public class DisplayActivity extends AppCompatActivity{
         unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    inputFragment.changeUnits("US");
-
-                    currentUnits = "US";
-                    if (currentFragment.equals("resultFragment"))
-                        resultFragment.changeUnits("US");
-
-                    else
+                    if(currentFragment.equals("inputFragment"))
                         inputFragment.changeUnits("US");
-
-
+                    else if(currentFragment.equals("resultFragment"))
+                        resultFragment.changeUnits("US");
+                    currentUnits = "US";
                 } else {
                     if(currentFragment.equals("resultFragment"))
                         resultFragment.changeUnits("SI");
                     else
                         inputFragment.changeUnits("SI");
-
-
                     }
 
             }
@@ -177,6 +171,7 @@ public class DisplayActivity extends AppCompatActivity{
                 transaction.commit();
                 ResultFragmentToolBarLayout.setVisibility(View.GONE);
                 InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                currentFragment="inputFragment";
 
             }
         });
@@ -187,6 +182,7 @@ public class DisplayActivity extends AppCompatActivity{
 
                 if(inputFragment.validInput()) {
                     showDyanamicVelocityInputDialog();
+
 
                 }
                 else {
@@ -210,7 +206,7 @@ public class DisplayActivity extends AppCompatActivity{
     private android.support.v7.app.AlertDialog dialog;
     public void showDyanamicVelocityInputDialog(){
 
-        dynamicVelocityArrayList = new ArrayList<Double>();
+        dynamicPressureArrayList = new ArrayList<Double>();
         final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
         builder.setMessage("Dynamic Velocity Input");
         builder.setView(R.layout.dialog_dynamic_velocity);
@@ -222,7 +218,7 @@ public class DisplayActivity extends AppCompatActivity{
 
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
-            public void onShow(DialogInterface dialog) {
+            public void onShow(final DialogInterface dialog) {
                 Button buttonPositive = ((android.support.v7.app.AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
                 buttonPositive.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -230,9 +226,9 @@ public class DisplayActivity extends AppCompatActivity{
                         Dialog alertDialog = DisplayActivity.this.dialog;
 
                         FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-                        Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressure(), true /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
+                        Gas gas = new Gas(inputFragment.getResults(), dynamicPressureArrayList, true /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
                         transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                        resultFragment = ResultFragment.newInstance(gas.getResults(), getUnits());
+                        resultFragment = ResultFragment.newInstance(gas.getResults(), getUnits(),gas.getDynamicVelocity());
                         transaction.replace(R.id.fragment_container, resultFragment);
                         transaction.commit();
                         DisplayActivity.this.currentFragment = "resultFragment";
@@ -263,15 +259,23 @@ public class DisplayActivity extends AppCompatActivity{
                         Dialog alertDialog = DisplayActivity.this.dialog;
 
                         TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
-                        for (Double dynamicVelocity : dynamicVelocityArrayList) {
-                            
-                            dynamicVelocityTextView.setText(dynamicVelocityTextView.getText().toString() + "\n" + String.valueOf(dynamicVelocity));
-                        }
+
                         EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
                         System.out.println("VELOCITIES " + dynamicVelocityInputEditText.getText().toString());
 
-                        dynamicVelocityArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
+                        dynamicPressureArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
                         dynamicVelocityInputEditText.setText("");
+                        String currentString="";
+                        for (Double dynamicVelocity : dynamicPressureArrayList) {
+
+                            System.out.println("VELL"+dynamicVelocity);
+                            currentString+= String.valueOf(dynamicVelocity)+" , ";
+
+                        }
+                        System.out.println("VEL"+currentString);
+                        dynamicVelocityTextView.setText(currentString);
+
+
                     }
                 });
 

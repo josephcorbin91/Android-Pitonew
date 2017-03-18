@@ -26,6 +26,8 @@ public class Utility {
     }
 
 
+
+
     public static boolean containsText(EditText editText){
         return !editText.getText().toString().equals("");
     }

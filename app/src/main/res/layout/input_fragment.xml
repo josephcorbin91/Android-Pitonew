@@ -13,662 +13,648 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!-- TODO: Update blank fragment layout -->
+
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_horizontal"
-                android:text="Gas Flow Calculations"
-                android:textSize="24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center_horizontal"
-                android:text="Enter all values and press CALCULATE"
-                android:textSize="16dp" />
-
-
-            <!--
-            <TableRow
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                <TextView
-                    android:id="@+id/rectangularCircularGasFlowFragmentTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_gravity="left"
-                    android:text="Rectangular / Circular"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <Switch
-                    android:id="@+id/rectangularCircularGasFlowFragmentSwitch"
-                    android:layout_width="@dimen/TileHeight"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:gravity="right" />
-            </TableRow>
--->
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/PrimaryColor" />
-
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:background="@color/SecondaryColor">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/tile_height_full_width_single_line"
-                    android:gravity="center|left"
-                    android:paddingLeft="16dp"
-                    android:text="Input"
-                    android:textColor="#ffffff"
-                    android:textSize="16dp" />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                <ImageView
-                    android:id="@+id/pipeShapeIcon"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="left|center"
-                    android:adjustViewBounds="true"
-                    android:cropToPadding="false"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/air_icon"
-                    app:srcCompat="@drawable/rectangular_shape" />
-
-                <TextView
-                    android:id="@+id/switchTextViewPipeShape"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="-72dp"
-                    android:gravity="center"
-                    android:text="Pipe shape"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <Switch
-                    android:id="@+id/rectangularOrCircularSwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_gravity="right"
-                    android:layout_marginStart="24dp" />
-            </TableRow>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                <ImageView
-                    android:id="@+id/standardAirIcon"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="left|center"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/air_icon" />
-
-                <TextView
-                    android:id="@+id/switchTextViewStandardAir"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="-72dp"
-                    android:gravity="left|center"
-                    android:text="Standard Air"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <Switch
-                    android:id="@+id/standardAirSwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_gravity="right"
-                    android:layout_marginStart="24dp" />
-            </TableRow>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-
-                android:background="@android:color/darker_gray" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                <ImageView
-                    android:id="@+id/wetBulbIcon"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="left|center"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/wet_bulb_enabled" />
-
-                <TextView
-                    android:id="@+id/switchTextViewWetBulb"
-
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="-72dp"
-                    android:gravity="left|center"
-                    android:text="Wet Bulb Temperature"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <Switch
-                    android:id="@+id/wetBulbTemperatureSwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_gravity="right"
-                    android:layout_marginStart="24dp" />
-            </TableRow>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/PrimaryColor" />
-
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:background="@color/SecondaryColor">
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/tile_height_full_width_single_line"
-                    android:gravity="center|left"
-                    android:paddingLeft="16dp"
-                    android:text="Theory"
-                    android:textColor="#ffffff"
-                    android:textSize="16dp" />
-
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="right|center"
-                    android:layout_marginLeft="55dp"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/highlighted_shape"
-                    android:cropToPadding="false"
-                    android:scaleType="fitStart"
-                    android:src="@drawable/air_icon"
-                    app:srcCompat="@drawable/ic_action_name" />
-
-            </TableRow>
-
-            <View
-                android:id="@+id/wetBulbTemperatureDivider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <TableRow
-                android:id="@+id/dimension_1_table_row"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                <TextView
-
-                    android:id="@+id/dimension1TextView"
-                    android:layout_width="@dimen/InputTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.6"
-                    android:background="@android:color/transparent"
-
-                    android:maxLines="1"
-                    android:text="Duct Width"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <EditText
-                    android:id="@+id/dimension_1_WidthGasEditText"
-                    android:layout_width="@dimen/InputEditTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.3"
-                    android:background="@drawable/highlighted_shape"
-                    android:gravity="center"
-                    android:imeOptions="actionNext"
-
-                    android:inputType="numberSigned"
-                    android:maxLength="15"
-                    android:maxLines="1"
-                    android:selectAllOnFocus="false"
-                    android:singleLine="false"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <TextView
-                    android:id="@+id/UnitsDimension_1_WidthGasFragmentTextView"
-                    android:layout_width="@dimen/InputUnitsTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.1"
-                    android:text="m"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-            </TableRow>
-
-            <View
-                android:id="@+id/first_separator"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <TableRow
-                android:id="@+id/dimension_2_table_row"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                <TextView
-
-                    android:id="@+id/dimension2TextView"
-                    android:layout_width="@dimen/InputTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.6"
-                    android:background="@android:color/transparent"
-                    android:maxLines="1"
-                    android:text="Duct Height"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <EditText
-                    android:id="@+id/dimension_2_HeightGasEditText"
-                    android:layout_width="@dimen/InputEditTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.3"
-
-                    android:background="@drawable/highlighted_shape"
-                    android:gravity="center"
-                    android:imeOptions="actionNext"
-
-                    android:inputType="numberSigned"
-                    android:maxLength="15"
-                    android:maxLines="1"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <TextView
-                    android:id="@+id/UnitsDimension_2_HeightGasFragmentTextView"
-                    android:layout_width="@dimen/InputUnitsTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.1"
-
-                    android:text="m"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-            </TableRow>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <TableRow
-                android:id="@+id/wetBulbTemperatureTableRow"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                <TextView
-
-                    android:id="@+id/wetBulbTemperatureTextView"
-                    android:layout_width="@dimen/InputTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.6"
-
-                    android:background="@android:color/transparent"
-                    android:maxLines="1"
-                    android:text="Wet Bulb Temperature"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <EditText
-                    android:id="@+id/wetBulbTemperatureGasFragmentEditText"
-                    android:layout_width="@dimen/InputEditTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.3"
-                    android:background="@drawable/highlighted_shape"
-
-                    android:gravity="center"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberSigned"
-                    android:maxLength="15"
-
-                    android:maxLines="1"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <TextView
-                    android:id="@+id/UnitsWetBulbtemperatureGasDensityFragmentTextView"
-                    android:layout_width="@dimen/InputUnitsTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.1"
-                    android:text="°C"
-                    android:textColor="@color/text_color"
-
-                    android:textSize="@dimen/hint_and_input_text" />
-
-
-            </TableRow>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                <TextView
-
-                    android:id="@+id/textView4"
-                    android:layout_width="@dimen/InputTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.6"
-
-                    android:background="@android:color/transparent"
-                    android:maxLines="1"
-                    android:text="Pitot Tube Coeffecient"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <EditText
-                    android:id="@+id/pitotTubeCoefficientEditText"
-                    android:layout_width="@dimen/InputEditTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.3"
-
-                    android:background="@drawable/highlighted_shape"
-                    android:gravity="center"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberSigned"
-                    android:maxLength="15"
-                    android:maxLines="1"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
+            <TableLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.1" />
-            </TableRow>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal"
+                    android:text="Gas Flow Calculations"
+                    android:textSize="24dp" />
 
                 <TextView
-
-                    android:id="@+id/textView5"
-                    android:layout_width="@dimen/InputTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.6"
-
-                    android:background="@android:color/transparent"
-                    android:maxLines="1"
-                    android:text="Static Pressure"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <EditText
-                    android:id="@+id/staticPressureFragmentEditText"
-                    android:layout_width="@dimen/InputEditTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.3"
-                    android:background="@drawable/highlighted_shape"
-                    android:gravity="center"
-
-                    android:imeOptions="actionNext"
-                    android:inputType="numberSigned"
-                    android:maxLength="15"
-                    android:maxLines="1"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:gravity="center_horizontal"
+                    android:text="Enter all values and press CALCULATE"
+                    android:textSize="16dp" />
 
 
-                <TextView
-                    android:id="@+id/UnitStaticPressureGasDensityFragmentTextView"
-                    android:layout_width="@dimen/InputUnitsTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_marginLeft="10dp"
-
-                    android:layout_weight="0.1"
-                    android:text="kPa"
-                    android:textColor="@color/text_color"
-
-                    android:textSize="@dimen/hint_and_input_text" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/PrimaryColor" />
 
 
-            </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
-            <View
+                    android:background="@color/SecondaryColor">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/tile_height_full_width_single_line"
+                        android:gravity="center|left"
+                        android:paddingLeft="16dp"
+                        android:text="Input"
+                        android:textColor="#ffffff"
+                        android:textSize="16dp" />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+                    <ImageView
+                        android:id="@+id/pipeShapeIcon"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="left|center"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="false"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/rectangular_shape" />
+
+                    <TextView
+                        android:id="@+id/switchTextViewPipeShape"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="72dp"
+                        android:gravity="center"
+                        android:text="Pipe shape"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <Switch
+                        android:id="@+id/rectangularOrCircularSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_gravity="right" />
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+                    <ImageView
+                        android:id="@+id/standardAirIcon"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="left|center"
+                        android:scaleType="fitStart"
+                        app:srcCompat="@drawable/air_icon" />
+
+                    <TextView
+                        android:id="@+id/switchTextViewStandardAir"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="72dp"
+                        android:gravity="left|center"
+                        android:text="Standard Air"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <Switch
+                        android:id="@+id/standardAirSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_gravity="left" />
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+
+                    android:background="@android:color/darker_gray" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+                    <ImageView
+                        android:id="@+id/wetBulbIcon"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="left|center"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitStart"
+                        app:srcCompat="@drawable/wet_bulb_enabled" />
+
+                    <TextView
+                        android:id="@+id/switchTextViewWetBulb"
+
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="72dp"
+                        android:gravity="left|center"
+                        android:text="Wet Bulb Temperature"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <Switch
+                        android:id="@+id/wetBulbTemperatureSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="64dp" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                <TextView
-
-                    android:layout_width="@dimen/InputTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.6"
-                    android:background="@android:color/transparent"
-                    android:maxLines="1"
-                    android:text="Dry Bulb Temperature"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <EditText
-                    android:id="@+id/temperatureGasFragmentEditText"
-                    android:layout_width="@dimen/InputEditTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.3"
-                    android:background="@drawable/highlighted_shape"
-                    android:gravity="center"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberSigned"
-                    android:maxLength="15"
-                    android:maxLines="1"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <TextView
-                    android:id="@+id/UnitstemperatureGasDensityFragmentTextView"
-                    android:layout_width="@dimen/InputUnitsTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_marginLeft="10dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/PrimaryColor" />
 
 
-                    android:layout_weight="0.1"
-                    android:text="°C"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-            </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                    android:background="@color/SecondaryColor">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                <TextView
-
-                    android:layout_width="@dimen/InputTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.6"
-                    android:background="@android:color/transparent"
-                    android:maxLines="1"
-                    android:text="Elevation above Sea Level"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <EditText
-                    android:id="@+id/ElevationAboveSeaLevelFragmentEdiText"
-                    android:layout_width="@dimen/InputEditTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.3"
-                    android:background="@drawable/highlighted_shape"
-                    android:gravity="center"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberSigned"
-                    android:maxLength="15"
-                    android:maxLines="1"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
-
-                <TextView
-                    android:id="@+id/UnitsElevationAboveSeaLevelFragmentTextView"
-                    android:layout_width="@dimen/InputUnitsTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.1"
-
-                    android:text="ft"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/tile_height_full_width_single_line"
+                        android:gravity="center|left"
+                        android:paddingLeft="16dp"
+                        android:text="Theory"
+                        android:textColor="#ffffff"
+                        android:textSize="16dp" />
 
 
-            </TableRow>
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="40dp"
+
+                        android:layout_height="40dp"
+                        android:layout_gravity="right|center"
+                        android:layout_marginLeft="55dp"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="false"
+                        android:scaleType="fitStart"
+                        app:srcCompat="@drawable/theory_icon" />
+
+                </TableRow>
+
+                <View
+                    android:id="@+id/wetBulbTemperatureDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <TableRow
+                    android:id="@+id/dimension_1_table_row"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+                    <TextView
+
+                        android:id="@+id/dimension1TextView"
+                        android:layout_width="@dimen/InputTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.6"
+                        android:background="@android:color/transparent"
+
+                        android:maxLines="1"
+                        android:text="Duct Width"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <EditText
+                        android:id="@+id/dimension_1_WidthGasEditText"
+                        android:layout_width="@dimen/InputEditTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/highlighted_shape"
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+
+                        android:inputType="numberDecimal"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        android:selectAllOnFocus="false"
+                        android:singleLine="false"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <TextView
+                        android:id="@+id/UnitsDimension_1_WidthGasFragmentTextView"
+                        android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.1"
+                        android:text="m"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                </TableRow>
+
+                <View
+                    android:id="@+id/first_separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <TableRow
+                    android:id="@+id/dimension_2_table_row"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+                    <TextView
+
+                        android:id="@+id/dimension2TextView"
+                        android:layout_width="@dimen/InputTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.6"
+                        android:background="@android:color/transparent"
+                        android:maxLines="1"
+
+                        android:text="Duct Height"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <EditText
+                        android:id="@+id/dimension_2_HeightGasEditText"
+                        android:layout_width="@dimen/InputEditTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.3"
+
+                        android:background="@drawable/highlighted_shape"
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+
+                        android:inputType="numberDecimal"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <TextView
+                        android:id="@+id/UnitsDimension_2_HeightGasFragmentTextView"
+                        android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.1"
+
+                        android:text="m"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <TableRow
+                    android:id="@+id/wetBulbTemperatureTableRow"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+                    <TextView
+
+                        android:id="@+id/wetBulbTemperatureTextView"
+                        android:layout_width="@dimen/InputTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.6"
+
+                        android:background="@android:color/transparent"
+                        android:maxLines="1"
+                        android:text="Wet Bulb Temperature"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <EditText
+                        android:id="@+id/wetBulbTemperatureGasFragmentEditText"
+                        android:layout_width="@dimen/InputEditTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/highlighted_shape"
+
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberSigned|numberDecimal"
+                        android:maxLength="15"
+
+                        android:maxLines="1"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <TextView
+                        android:id="@+id/UnitsWetBulbtemperatureGasDensityFragmentTextView"
+                        android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.1"
+                        android:text="°C"
+                        android:textColor="@color/text_color"
+
+                        android:textSize="@dimen/hint_and_input_text" />
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
 
-                <TextView
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
 
-                    android:layout_width="@dimen/InputTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.6"
-                    android:background="@android:color/transparent"
-                    android:maxLines="1"
-                    android:text="Pressure at Sea Level"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
+                    <TextView
 
-                <EditText
-                    android:id="@+id/seaLevelPressureGasFragmentEditText"
-                    android:layout_width="@dimen/InputEditTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_weight="0.3"
-                    android:background="@drawable/highlighted_shape"
-                    android:gravity="center"
-                    android:imeOptions="actionDone"
-                    android:inputType="numberSigned"
-                    android:maxLength="15"
-                    android:maxLines="1"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/hint_and_input_text" />
+                        android:id="@+id/textView4"
+                        android:layout_width="@dimen/InputTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.6"
 
-                <TextView
-                    android:id="@+id/UnitsseaLevelPressureGasDensityFragmentTextView"
-                    android:layout_width="@dimen/InputUnitsTextViewTextWidth"
-                    android:layout_height="@dimen/TileHeight"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.1"
+                        android:background="@android:color/transparent"
+                        android:maxLines="1"
+                        android:text="Pitot Tube Coeffecient"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
 
-                    android:text="kPa"
-                    android:textColor="@color/text_color"
+                    <EditText
+                        android:id="@+id/pitotTubeCoefficientEditText"
+                        android:layout_width="@dimen/InputEditTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.3"
 
-                    android:textSize="@dimen/hint_and_input_text" />
-            </TableRow>
+                        android:background="@drawable/highlighted_shape"
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1" />
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+
+                    <TextView
+
+                        android:id="@+id/textView5"
+                        android:layout_width="@dimen/InputTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.6"
+
+                        android:background="@android:color/transparent"
+                        android:maxLines="1"
+                        android:text="Static Pressure"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <EditText
+                        android:id="@+id/staticPressureFragmentEditText"
+                        android:layout_width="@dimen/InputEditTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/highlighted_shape"
+                        android:gravity="center"
+
+                        android:imeOptions="actionNext"
+                        android:inputType="numberSigned|numberDecimal"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+
+                    <TextView
+                        android:id="@+id/UnitStaticPressureGasDensityFragmentTextView"
+                        android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_marginLeft="10dp"
+
+                        android:layout_weight="0.1"
+                        android:text="kPa"
+                        android:textColor="@color/text_color"
+
+                        android:textSize="@dimen/hint_and_input_text" />
+
+
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+                    <TextView
+
+                        android:layout_width="@dimen/InputTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.6"
+                        android:background="@android:color/transparent"
+                        android:maxLines="1"
+                        android:text="Dry Bulb Temperature"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <EditText
+                        android:id="@+id/temperatureGasFragmentEditText"
+                        android:layout_width="@dimen/InputEditTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/highlighted_shape"
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberSigned|numberDecimal"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <TextView
+                        android:id="@+id/UnitstemperatureGasDensityFragmentTextView"
+                        android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_marginLeft="10dp"
+
+
+                        android:layout_weight="0.1"
+                        android:text="°C"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+                    <TextView
+
+                        android:layout_width="@dimen/InputTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.6"
+                        android:background="@android:color/transparent"
+                        android:maxLines="1"
+                        android:text="Elevation above Sea Level"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <EditText
+                        android:id="@+id/ElevationAboveSeaLevelFragmentEdiText"
+                        android:layout_width="@dimen/InputEditTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/highlighted_shape"
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <TextView
+                        android:id="@+id/UnitsElevationAboveSeaLevelFragmentTextView"
+                        android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.1"
+
+                        android:text="ft"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+
+                </TableRow>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
+                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+
+                    <TextView
+
+                        android:layout_width="@dimen/InputTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.6"
+                        android:background="@android:color/transparent"
+                        android:maxLines="1"
+                        android:text="Pressure at Sea Level"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <EditText
+                        android:id="@+id/seaLevelPressureGasFragmentEditText"
+                        android:layout_width="@dimen/InputEditTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.3"
+                        android:background="@drawable/highlighted_shape"
+                        android:gravity="center"
+                        android:imeOptions="actionDone"
+                        android:inputType="numberDecimal"
+                        android:maxLength="15"
+                        android:maxLines="1"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/hint_and_input_text" />
+
+                    <TextView
+                        android:id="@+id/UnitsseaLevelPressureGasDensityFragmentTextView"
+                        android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.1"
+
+                        android:text="kPa"
+                        android:textColor="@color/text_color"
+
+                        android:textSize="@dimen/hint_and_input_text" />
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+
+            </TableLayout>
 
 
         </TableLayout>
+
     </ScrollView>
 </LinearLayout>

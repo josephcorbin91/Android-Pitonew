@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.jco.pitonew.R;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +32,15 @@ public class Gas implements Serializable {
         System.out.println("molecularWeight" + molecularWeight);
         System.out.println("Actual air flow" + actualAirFlow);
         return new Double[]{this.averageVelocity, this.massAirFlow, this.normalAirFlow,this.actualAirFlow, this.ductPressure, this.gasDensity, this.molecularWeight,this.area,this.atmosphericPressure, this.relativeHumidity};
+    }
+
+    public String getDynamicVelocity(){
+        DecimalFormat doubleTwoDigitsDecimalFormat = new DecimalFormat("#.00");
+
+        String dynamicVelocity = "";
+        for(Double velocity : dynamicVelocityArrayList)
+            dynamicVelocity+=doubleTwoDigitsDecimalFormat.format(velocity) + "\n";
+        return dynamicVelocity;
     }
 
     private String DuctUnits;
@@ -97,10 +107,10 @@ public class Gas implements Serializable {
     private Double[] dynamicResults;
 
 
-    public Gas(Double[] inputResults, Double[] dynamicResults, boolean unitsSwitch, boolean pipeTypeSwitch) {
+    public Gas(Double[] inputResults, ArrayList<Double> dynamicResults, boolean unitsSwitch, boolean pipeTypeSwitch) {
 
 
-        dynamicPressureArrayList= Arrays.asList(dynamicResults);
+        dynamicPressureArrayList= dynamicResults;
         dynamicVelocityArrayList = new ArrayList<Double>();
         if (unitsSwitch)
             this.units = "SI";
