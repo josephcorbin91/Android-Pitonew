@@ -79,23 +79,20 @@ public class InputFragment extends Fragment  {
     public void setDimensions(String dimensions){
         switch (dimensions) {
             case "Rectangular":
-                dimension1TextView.setText("Height");
-                dimension2TextView.setText("Width");
-                //switchTextViewPipeShape.setText("Pipe shape : " + dimensions);
+                dimension1TextView.setText("Width");
+                dimension2TextView.setText("Height");
                 dimension2TextView.setVisibility(View.VISIBLE);
                 first_separator.setVisibility(View.VISIBLE);
                 dimension_2_HeightGasEditText.setVisibility(View.VISIBLE);
-                UnitsDimensionWidthGasFlowFragmentTextView.setVisibility(View.VISIBLE);
+                UnitsDimensionHeightGasFlowFragmentTextView.setVisibility(View.VISIBLE);
                 dimension_2_table_row.setVisibility(View.VISIBLE);
                 break;
             case "Circular":
-                //switchTextViewPipeShape.setText("Pipe shape : " + dimensions);
-
                 first_separator.setVisibility(View.GONE);
                 dimension1TextView.setText("Diameter");
                 dimension2TextView.setVisibility(View.GONE);
                 dimension_2_HeightGasEditText.setVisibility(View.GONE);
-                UnitsDimensionWidthGasFlowFragmentTextView.setVisibility(View.GONE);
+                UnitsDimensionHeightGasFlowFragmentTextView.setVisibility(View.GONE);
                 dimension_2_table_row.setVisibility(View.GONE);
                 break;
         }
@@ -263,7 +260,7 @@ public class InputFragment extends Fragment  {
         Refactor code so you only call the EditText Once.
          */
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Molecular weight of air.");
+        builder.setTitle("Air Composition");
         builder.setMessage("Enter volumetric %.");
 
         builder.setView(R.layout.dialog_standardair);
@@ -339,6 +336,8 @@ public class InputFragment extends Fragment  {
                         }
 
                         if (cancel) {
+                            Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(500);
                             // There was an error; don't attempt login and focus the first
                             // form field with an error.
                             focusView.requestFocus();

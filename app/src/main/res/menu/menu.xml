@@ -2,32 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item
-        android:id="@+id/Help"
-        android:icon="@drawable/ic_profile"
-        android:title="Help" />
-    <item
-        android:id="@+id/Settings"
-        android:title="Settings"
-        />
-    <item
-        android:id="@+id/about_developper"
-        android:title="About Developper"/>
-    <item
-        android:id="@+id/contact_Me"
-        android:icon="@drawable/ic_feed"
-        android:title="Contact Me" />
-    <item
-        android:id="@+id/unit_converter"
-        android:title="Unit C" />
-    <item
-        android:id="@+id/rate_This"
-        android:icon="@drawable/ic_activity_active"
-        android:title="Rate This" />
+
     <item
         android:id="@+id/settings_group"
-        android:icon="@drawable/ic_settings"
-        android:title="Settings" />
+        android:icon="@drawable/theory_icon"
+        android:title="Theory" />
 
 
 
