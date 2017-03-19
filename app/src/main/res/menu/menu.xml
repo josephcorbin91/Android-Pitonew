@@ -6,6 +6,7 @@
     <item
         android:id="@+id/settings_group"
         android:icon="@drawable/theory_icon"
+        android:onClick="onTheoryClick"
         android:title="Theory" />
 
 

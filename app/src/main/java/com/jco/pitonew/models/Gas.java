@@ -37,9 +37,16 @@ public class Gas implements Serializable {
     public String getDynamicVelocity(){
         DecimalFormat doubleTwoDigitsDecimalFormat = new DecimalFormat("#.00");
 
+        String unit;
+        if(getUnits().equals("SI"))
+            unit=" m/s,";
+        else
+            unit=" ft/s,";
         String dynamicVelocity = "";
         for(Double velocity : dynamicVelocityArrayList)
-            dynamicVelocity+=doubleTwoDigitsDecimalFormat.format(velocity) + "\n";
+            dynamicVelocity+=doubleTwoDigitsDecimalFormat.format(velocity) +unit;
+        if(dynamicVelocity.charAt(dynamicVelocity.length())==',')
+            dynamicVelocity = dynamicVelocity.substring(0, dynamicVelocity.length()-1);
         return dynamicVelocity;
     }
 

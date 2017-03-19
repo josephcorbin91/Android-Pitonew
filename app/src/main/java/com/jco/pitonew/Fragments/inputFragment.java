@@ -97,6 +97,10 @@ public class InputFragment extends Fragment  {
                 break;
         }
     }
+
+    public boolean pipeType(){
+        return rectangularOrCircularSwitch.isChecked();
+    }
     public InputFragment() {
 
         standardAirBoolean=false;

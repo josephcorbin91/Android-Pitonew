@@ -5,9 +5,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -15,17 +15,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -35,11 +35,10 @@ import android.widget.Toast;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.jco.pitonew.Fragments.InputFragment;
-import com.jco.pitonew.Fragments.PagerFragment;
 import com.jco.pitonew.Fragments.ResultFragment;
+import com.jco.pitonew.Fragments.TheoryFragment;
 import com.jco.pitonew.Models.Gas;
 import com.jco.pitonew.R;
-import com.jco.pitonew.Utilities.Utility;
 
 import java.util.ArrayList;
 
@@ -56,17 +55,13 @@ public class DisplayActivity extends AppCompatActivity{
 
         private MaterialMenuDrawable materialMenu;
         private Switch unitSwitch;
-        private PagerFragment pagerFragment;
+
     RelativeLayout ResultFragmentToolBarLayout,InputFragmentToolBarLayout;
 
     private FragmentManager fragmentManager;
         private String currentFragment;
     private InputFragment inputFragment;
     private ResultFragment resultFragment;
-        private Switch circularOrRectangularSwitch;
-    private DrawerLayout drawerLayout;
-    private boolean isDrawerOpened;
-        //private MaterialMenuDrawable materialMenu;
 
     public boolean onOptionsItemSelected(MenuItem item) {
         /* Handle item selection
@@ -103,7 +98,6 @@ public class DisplayActivity extends AppCompatActivity{
         InputFragmentToolBarLayout =(RelativeLayout)findViewById(R.id.InputFragmentToolBarLayout);
 
         inputFragment = new InputFragment();
-        pagerFragment = new PagerFragment();
         currentFragment = "inputFragment";
         if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null) {
@@ -165,6 +159,8 @@ public class DisplayActivity extends AppCompatActivity{
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
                 transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 transaction.replace(R.id.fragment_container, inputFragment);
@@ -216,9 +212,39 @@ public class DisplayActivity extends AppCompatActivity{
 
         dialog = builder.create();
 
+
+
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(final DialogInterface dialog) {
+                Dialog alertDialog = DisplayActivity.this.dialog;
+
+                EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
+
+                dynamicVelocityInputEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                            Dialog alertDialog = DisplayActivity.this.dialog;
+
+                            TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
+
+                            EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
+
+                            dynamicPressureArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
+                            dynamicVelocityInputEditText.setText("");
+                            String currentString="";
+                            for (Double dynamicVelocity : dynamicPressureArrayList) {
+                                currentString+= String.valueOf(dynamicVelocity)+" , ";
+                            }
+                            dynamicVelocityTextView.setText(currentString);
+                            return false;
+                        }
+                        else
+                            return true;
+                    }
+                });
+
                 Button buttonPositive = ((android.support.v7.app.AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
                 buttonPositive.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -226,7 +252,7 @@ public class DisplayActivity extends AppCompatActivity{
                         Dialog alertDialog = DisplayActivity.this.dialog;
 
                         FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-                        Gas gas = new Gas(inputFragment.getResults(), dynamicPressureArrayList, true /* unitSwitch.isChecked()*/, false/*circularOrRectangularSwitch.isChecked()*/);
+                        Gas gas = new Gas(inputFragment.getResults(), dynamicPressureArrayList, unitSwitch.isChecked(), inputFragment.pipeType());
                         transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                         resultFragment = ResultFragment.newInstance(gas.getResults(), getUnits(),gas.getDynamicVelocity());
                         transaction.replace(R.id.fragment_container, resultFragment);
@@ -257,22 +283,14 @@ public class DisplayActivity extends AppCompatActivity{
                     @Override
                     public void onClick(View v) {
                         Dialog alertDialog = DisplayActivity.this.dialog;
-
                         TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
-
                         EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
-                        System.out.println("VELOCITIES " + dynamicVelocityInputEditText.getText().toString());
-
                         dynamicPressureArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
                         dynamicVelocityInputEditText.setText("");
                         String currentString="";
                         for (Double dynamicVelocity : dynamicPressureArrayList) {
-
-                            System.out.println("VELL"+dynamicVelocity);
                             currentString+= String.valueOf(dynamicVelocity)+" , ";
-
                         }
-                        System.out.println("VEL"+currentString);
                         dynamicVelocityTextView.setText(currentString);
 
 
@@ -293,6 +311,19 @@ public class DisplayActivity extends AppCompatActivity{
                         Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(
                 activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    public void onTheoryClick(MenuItem mi) {
+        FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+        TheoryFragment theoryFragment = TheoryFragment.newInstance();
+        transaction.replace(R.id.fragment_container, theoryFragment);
+        transaction.commit();
+        DisplayActivity.this.currentFragment = "theoryFragment";
+
+        InputFragmentToolBarLayout.setVisibility(View.GONE);
+        ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
+
     }
 
 

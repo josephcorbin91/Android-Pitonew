@@ -65,14 +65,17 @@
             <TableRow
                 android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
                 android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/single_line_list_left_right_padding"
                 android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
 
 
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
+                    android:layout_weight="0.6"
 
-                    android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/tile_height_full_width_single_line"
                     android:gravity="left|center"
                     android:text="Dynamic Velocity"
                     android:textColor="@color/text_color"
@@ -81,8 +84,21 @@
                 <TextView
                     android:id="@+id/dynamicVelocityResultTextView"
                     android:layout_width="@dimen/InputTextViewTextWidth"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/tile_height_full_width_single_line"
+                    android:layout_weight="0.3"
 
-                    android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/hint_and_input_text" />
+
+                <TextView
+                    android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                    android:minHeight="@dimen/tile_height_full_width_single_line"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="0.1"
+
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -106,14 +122,19 @@
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:gravity="left|center"
                     android:text="Average Velocity"
+                    android:layout_weight="0.6"
+
+
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
 
                 <TextView
                     android:id="@+id/averageVelocityResultTextView"
                     android:layout_width="@dimen/InputTextViewTextWidth"
-
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:layout_weight="0.3"
+
+                    android:gravity="center"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -121,9 +142,11 @@
                     android:id="@+id/UnitsaverageVelocityTextView"
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:gravity="center"
                     android:text="m/s"
-                    android:textColor="@color/text_color"
+                    android:layout_weight="0.1"
 
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
             </TableRow>
 
@@ -142,6 +165,7 @@
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="@dimen/InputTextViewTextWidth"
+                    android:layout_weight="0.6"
 
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:gravity="left|center"
@@ -152,6 +176,8 @@
                 <TextView
                     android:id="@+id/massAirFlowResultTextView"
                     android:layout_width="@dimen/InputTextViewTextWidth"
+                    android:gravity="center"
+                    android:layout_weight="0.3"
 
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:textColor="@color/text_color"
@@ -160,10 +186,13 @@
                 <TextView
                     android:id="@+id/UnitsmassAirFlowTextView"
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                    android:gravity="center"
+
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:text="C"
-                    android:textColor="@color/text_color"
+                    android:layout_weight="0.1"
 
+                    android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
 
 
@@ -183,6 +212,7 @@
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:layout_weight="0.6"
 
                     android:gravity="left|center"
                     android:text="Actual Air Flow"
@@ -194,12 +224,17 @@
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:textColor="@color/text_color"
+                    android:gravity="center"
+                    android:layout_weight="0.3"
 
                     android:textSize="@dimen/hint_and_input_text" />
 
                 <TextView
                     android:id="@+id/UnitsactualAirFlowTextView"
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                    android:gravity="center"
+                    android:layout_weight="0.1"
+
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:text="C"
                     android:textColor="@color/text_color"
@@ -221,6 +256,7 @@
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:layout_weight="0.6"
 
                     android:gravity="left|center"
                     android:text="Normal Air Flow"
@@ -231,6 +267,9 @@
                     android:id="@+id/normalAirFlowResultTextView"
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:gravity="center"
+                    android:layout_weight="0.3"
+
                     android:textColor="@color/text_color"
 
                     android:textSize="@dimen/hint_and_input_text" />
@@ -240,6 +279,9 @@
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:text="C"
+                    android:gravity="center"
+                    android:layout_weight="0.1"
+
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -260,6 +302,7 @@
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:layout_weight="0.6"
 
                     android:gravity="left|center"
                     android:text="Molar Weight"
@@ -270,6 +313,9 @@
                     android:id="@+id/molecularWeightResultTextView"
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:gravity="center"
+                    android:layout_weight="0.3"
+
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -277,6 +323,8 @@
                     android:id="@+id/UnitsMolarWeight"
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:gravity="center"
+                    android:layout_weight="0.1"
 
                     android:text="g/mol"
                     android:textColor="@color/text_color" />
@@ -299,6 +347,7 @@
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:layout_weight="0.6"
 
                     android:gravity="left|center"
                     android:text="Duct Presure"
@@ -310,6 +359,8 @@
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:textColor="@color/text_color"
+                    android:gravity="center"
+                    android:layout_weight="0.3"
 
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -317,6 +368,8 @@
                     android:id="@+id/UnitsDuctPressureFragmentTextView"
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:gravity="center"
+                    android:layout_weight="0.1"
 
                     android:text="°KPa"
                     android:textColor="@color/text_color" />
@@ -337,6 +390,7 @@
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:layout_weight="0.6"
 
                     android:gravity="left|center"
                     android:text="Area"
@@ -348,6 +402,9 @@
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:textColor="@color/text_color"
+                    android:gravity="center"
+                    android:layout_weight="0.3"
+
                     android:textSize="@dimen/hint_and_input_text" />
 
                 <TextView
@@ -355,6 +412,9 @@
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:text="m²"
+                    android:gravity="center"
+                    android:layout_weight="0.1"
+
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
             </TableRow>
@@ -373,6 +433,7 @@
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:layout_weight="0.6"
 
                     android:gravity="left|center"
                     android:text="Relative Humidity"
@@ -383,6 +444,8 @@
                     android:id="@+id/relativeHumidityResultTextView"
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:gravity="center"
+                    android:layout_weight="0.3"
 
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
@@ -390,8 +453,12 @@
                 <TextView
                     android:id="@+id/UnitsRelativeHumiditytemperatureGasDensityFragmentTextView"
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                    android:layout_weight="0.1"
+
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:text="%"
+                    android:gravity="center"
+
                     android:textColor="@color/text_color" />
             </TableRow>
 
@@ -409,6 +476,8 @@
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:gravity="center"
+                    android:layout_weight="0.6"
 
                     android:text="Atmospheric Pressure"
                     android:textColor="@color/text_color"
@@ -419,6 +488,8 @@
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:textColor="@color/text_color"
+                    android:gravity="center"
+                    android:layout_weight="0.3"
 
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -427,6 +498,9 @@
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:text="kPa"
+                    android:gravity="center"
+                    android:layout_weight="0.1"
+
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
             </TableRow>
@@ -448,6 +522,8 @@
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:gravity="center"
+                    android:layout_weight="0.6"
 
                     android:text="Gas Density"
                     android:textColor="@color/text_color"
@@ -456,6 +532,9 @@
                 <TextView
                     android:id="@+id/gasDesnityResultTextView"
                     android:layout_width="100sp"
+                    android:gravity="center"
+                    android:layout_weight="0.3"
+
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
@@ -464,6 +543,9 @@
                     android:id="@+id/UnitsCalculatedGasDensityTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
+                    android:gravity="center"
+
+                    android:layout_weight="0.1"
                     android:text="kg/m³"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
