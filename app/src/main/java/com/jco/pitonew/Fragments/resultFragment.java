@@ -117,14 +117,14 @@ public class ResultFragment extends Fragment {
 
 
         DecimalFormat doubleTwoDigitsDecimalFormat = new DecimalFormat("#.00");
-        DecimalFormat doubleFiveDigitsDecimalFormat = new DecimalFormat("#.00000");
+        DecimalFormat doubleFourDigitsDecimalFormat = new DecimalFormat("#.0000");
 
         averageVelocityResultTextView.setText(String.valueOf(ResultFragment.results[0]));
-        massAirFlowResultTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(ResultFragment.results[1])));
+        massAirFlowResultTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(ResultFragment.results[1]*1000)));
         normalAirFlowResultTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(ResultFragment.results[2])));
         actualAirFlowResultTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(ResultFragment.results[3])));
         ductPressureFragmentTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(ResultFragment.results[4])));
-        gasDesnityResultTextView.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(ResultFragment.results[5])));
+        gasDesnityResultTextView.setText(String.valueOf(doubleFourDigitsDecimalFormat.format(ResultFragment.results[5])));
         molecularResultTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(ResultFragment.results[6])));
         ductAreaGasFlowFragmentTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(ResultFragment.results[7])));
         atmosphericPressureTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(ResultFragment.results[8])));

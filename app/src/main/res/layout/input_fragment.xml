@@ -168,7 +168,7 @@
                         android:layout_weight="0.3"
                         android:adjustViewBounds="true"
                         android:scaleType="fitStart"
-                        app:srcCompat="@drawable/wet_bulb_enabled" />
+                        app:srcCompat="@drawable/wet_bulb_disabled" />
 
                     <Switch
                         android:id="@+id/wetBulbTemperatureSwitch"

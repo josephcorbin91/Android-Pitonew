@@ -1,18 +1,9 @@
 package com.jco.pitonew.Models;
 
-import android.app.Activity;
-import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TextView;
-
-import com.jco.pitonew.R;
-
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * Created by jco on 2/6/2017.
@@ -45,7 +36,7 @@ public class Gas implements Serializable {
         String dynamicVelocity = "";
         for(Double velocity : dynamicVelocityArrayList)
             dynamicVelocity+=doubleTwoDigitsDecimalFormat.format(velocity) +unit;
-        if(dynamicVelocity.charAt(dynamicVelocity.length())==',')
+        if(dynamicVelocity.charAt(dynamicVelocity.length()-1)==',')
             dynamicVelocity = dynamicVelocity.substring(0, dynamicVelocity.length()-1);
         return dynamicVelocity;
     }
@@ -73,7 +64,10 @@ public class Gas implements Serializable {
     public final double standardAirMolarWeight = 28.96;
     private final double criticalPressureH20 = 166818;
     private final double criticalTemperatureH20 = 1165.67;
+    private static double pressMmHg=754.30;
 
+    private double humidityH20DryAir;
+    private double humidityH20WetAir;
 
     //AirCompositionVariables
     private double airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O;
@@ -107,22 +101,20 @@ public class Gas implements Serializable {
     private double averageVelocity, massAirFlow, actualAirFlow, normalAirFlow;
 
 
-    private double[] gasCompositionInputArry;
-
-
     private Double[] inputResults;
-    private Double[] dynamicResults;
 
+    private boolean wetBulbTemperatureEnabled;
 
-    public Gas(Double[] inputResults, ArrayList<Double> dynamicResults, boolean unitsSwitch, boolean pipeTypeSwitch) {
+    public Gas(Double[] inputResults, ArrayList<Double> dynamicResults, boolean unitsSwitch, boolean pipeTypeSwitch, boolean wetBulbTemperatureEnabled) {
 
+        this.wetBulbTemperatureEnabled=wetBulbTemperatureEnabled;
 
         dynamicPressureArrayList= dynamicResults;
         dynamicVelocityArrayList = new ArrayList<Double>();
         if (unitsSwitch)
-            this.units = "SI";
-        else
             this.units = "US";
+        else
+            this.units = "SI";
 
         System.out.println("UNITS "+ this.units);
         if (pipeTypeSwitch)
@@ -141,8 +133,12 @@ public class Gas implements Serializable {
         elevationAboveSeaLevel = inputResults[5];
         wetBulbTemperature = inputResults[6];
         seaLevelPressure = inputResults[7];
-        molecularWeight = inputResults[8];
 
+        airContentPercentageCO2= inputResults[8];
+        airContentPercentageO2= inputResults[9];
+        airContentPercentageN2= inputResults[10];
+        airContentPercentageAr= inputResults[11];
+        airContentPercentageH2O= inputResults[12];
 
 
         System.out.println("width=inputResults" + inputResults[0]);
@@ -153,13 +149,39 @@ public class Gas implements Serializable {
         System.out.println("elevationAboveSeaLevel" + inputResults[5]);
         System.out.println("wetBulbTemperature" + inputResults[6]);
         System.out.println("seaLevelPressure" + inputResults[7]);
-        System.out.println("molecularWeight" + inputResults[8]);
 
         calculateResults();
 
     }
+    private double C02WetBasis,O2WetBasis,N2WetBasis,ArWetBasis,H20WetBasis;
+
+    public void calculateMolecularWeight() {
+
+        if(isStandardAir) {
+            if(wetBulbTemperatureEnabled) {
+                this.molecularWeight =0.03*(1-H20WetBasis)+20.95*(1-H20WetBasis)+78.09*(1-H20WetBasis)+0.93*(1-H20WetBasis)+100*H20WetBasis;
+            }
+            else {
+                this.molecularWeight = 28.96;
+            }
+        }
+        else if(!isStandardAir) {
+            if(wetBulbTemperatureEnabled) {
+                this.molecularWeight=(44.01*airContentPercentageCO2*(1-H20WetBasis)+31.999*airContentPercentageO2*(1-H20WetBasis)+28.013*airContentPercentageN2*(1-H20WetBasis)+39.948*airContentPercentageAr*(1-H20WetBasis)+18.016*100*H20WetBasis)/100;
+            }
+            else {
+                this.molecularWeight = (44.01 * airContentPercentageCO2 + 31.999 * airContentPercentageO2 + 28.013 * airContentPercentageN2 + 39.948 * airContentPercentageAr) / 100;
+            }
+
+        }
+    }
 
     public void calculateResults() {
+        if(wetBulbTemperatureEnabled)
+            calculateRelativeHumidtiy();
+
+        calculateMolecularWeight();
+
 
         calculateArea();
         calculateAtmosphericPressure();
@@ -225,17 +247,52 @@ public class Gas implements Serializable {
     }
 
 
+    private double dryBulbRankine, wetBulbRankine,dryMolecularWeight;
     public double calculateRelativeHumidtiy(){
-        dryBulbWaterSaturationPressurePD =criticalPressureH20*Math.pow(10,Kd*(1-criticalTemperatureH20)/ dryBulbTemperature);
-        wetBulbWaterSaturationPressurePW=criticalPressureH20*Math.pow(10,Kw*(1-criticalTemperatureH20)/wetBulbTemperature);
-        partialWaterPressureDueToDepressionPM =0.000367*(1+(wetBulbTemperature-32)/1571)*(754.30-wetBulbWaterSaturationPressurePW)*(dryBulbTemperature -wetBulbTemperature);
-        partialPressureOfWaterPA=relativeHumidity*dryBulbWaterSaturationPressurePD;
 
+        System.out.println("UNITS"+units);
+        if(units.equals("SI")) {
+            dryBulbRankine = (dryBulbTemperature*1.8+32)  + 459.67;
+            wetBulbRankine = (wetBulbTemperature*1.8+32) + 459.67;
+        }
+        else {
+            dryBulbRankine=dryBulbTemperature+459.67;
+            wetBulbRankine=wetBulbTemperature+459.67;
+        }
 
-        if((wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD>=100 ||(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD<0)
+        Kd =-0.0000000008833*Math.pow(dryBulbRankine,3)+0.000003072*Math.pow(dryBulbRankine,2)-0.003469*dryBulbRankine+4.39553;
+        Kw =-0.0000000008833*Math.pow(wetBulbRankine,3)+0.000003072*Math.pow(wetBulbRankine,2)-0.003469*wetBulbRankine+4.39553;
+        dryBulbWaterSaturationPressurePD =criticalPressureH20*Math.pow(10,Kd*(1-(criticalTemperatureH20/dryBulbRankine)));
+        wetBulbWaterSaturationPressurePW=criticalPressureH20*Math.pow(10,Kw*(1-(criticalTemperatureH20/wetBulbRankine)));
+        partialWaterPressureDueToDepressionPM =0.000367*(1+((wetBulbRankine-459.67)-32)/1571)*(pressMmHg-wetBulbWaterSaturationPressurePW)*((dryBulbRankine-459.67) -(wetBulbRankine-459.67));
+         if((wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD>=100 ||(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD<0)
             System.out.println("ERROR");
         else
-            relativeHumidity=(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD;
+            relativeHumidity=100*(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD;
+        partialPressureOfWaterPA=0.01*relativeHumidity*dryBulbWaterSaturationPressurePD;
+
+        this.dryMolecularWeight=(44.01*(airContentPercentageCO2*(1-humidityH20WetAir))+31.999*(airContentPercentageO2*(1-humidityH20WetAir))+28.013*(airContentPercentageN2*(1-humidityH20WetAir))+39.948*(airContentPercentageAr*(1-humidityH20WetAir)))/100;
+
+        humidityH20DryAir=(18.02/this.dryMolecularWeight)*(partialPressureOfWaterPA/(pressMmHg-partialPressureOfWaterPA));
+        if(wetBulbTemperatureEnabled)
+            humidityH20WetAir=partialPressureOfWaterPA/pressMmHg;
+        else
+            humidityH20WetAir=0;
+
+        System.out.println("PDD");
+        System.out.println("DryMolecularWeight: "+dryMolecularWeight);
+        System.out.println("DryBulbRankine: "+dryBulbRankine);
+        System.out.println("WetBulbRankine: "+wetBulbRankine);
+        System.out.println("KD: dryBulbWaterSaturationPressurePD"+Kd);
+        System.out.println("KW: dryBulbWaterSaturationPressurePD"+Kw);
+        System.out.println("PD: dryBulbWaterSaturationPressurePD"+dryBulbWaterSaturationPressurePD);
+        System.out.println("PW: wetBulbWaterSaturationPressurePW"+wetBulbWaterSaturationPressurePW);
+        System.out.println("PM: partialWaterPressureDueToDepressionPM"+partialWaterPressureDueToDepressionPM);
+        System.out.println("PA: partialPressureOfWaterPA"+partialPressureOfWaterPA);
+        System.out.println("RH: relative humidity "+relativeHumidity);
+        System.out.println("RH: humidityH20DryAir"+humidityH20DryAir);
+        System.out.println("RH: humidityH20WetAir"+humidityH20WetAir);
+
 
 
         switch(getUnits()) {
@@ -252,10 +309,10 @@ public class Gas implements Serializable {
     public double calculateArea(){
         System.out.println("PIPPE" +pipeType);
         if(pipeType.equals("CIRCULAR")){
-            area = Math.PI*(diameter /2.0);
+            area = Math.PI*(diameter /2.0)/1000;
         }
         else if(pipeType.equals("RECTANGULAR")){
-            area = height *width;
+            area = height *width/1000;
         }
         System.out.println("AREA " + area);
         return area;
@@ -304,20 +361,6 @@ public class Gas implements Serializable {
     }
 
     //Verify Data Integrity
-    public boolean verifyDataPressureRule(){
-        double maxPressureValue;
-        double currentMax=dynamicPressureArrayList.get(0);
-        for(int i=0; i< dynamicPressureArrayList.size();i++)
-            if(dynamicPressureArrayList.get(i)>currentMax)
-                currentMax=dynamicPressureArrayList.get(i);
-
-        maxPressureValue=currentMax;
-        int unacceptablePressureValue=0;
-        for(int i=0; i< dynamicPressureArrayList.size();i++)
-            if(dynamicPressureArrayList.get(i)<=0.1*maxPressureValue)
-                unacceptablePressureValue++;
-        return unacceptablePressureValue/dynamicPressureArrayList.size()>0.75;
-    }
 
     public boolean verifyRelativeHumidity(){
         if(relativeHumidity>0)

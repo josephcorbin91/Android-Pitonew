@@ -189,7 +189,7 @@ android:layout_height="wrap_content"
                     android:gravity="center"
 
                     android:layout_height="@dimen/tile_height_full_width_single_line"
-                    android:text="C"
+                    android:text="kg/s"
                     android:layout_weight="0.1"
 
                     android:textColor="@color/text_color"
@@ -236,7 +236,7 @@ android:layout_height="wrap_content"
                     android:layout_weight="0.1"
 
                     android:layout_height="@dimen/tile_height_full_width_single_line"
-                    android:text="C"
+                    android:text="m³/h"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -278,7 +278,7 @@ android:layout_height="wrap_content"
                     android:id="@+id/UnitsNormalAirFlowTextView"
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
-                    android:text="C"
+                    android:text="Nm³/h"
                     android:gravity="center"
                     android:layout_weight="0.1"
 
@@ -345,10 +345,11 @@ android:layout_height="wrap_content"
 
 
                 <TextView
+                    android:id="@+id/textView8"
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
-                    android:layout_weight="0.6"
 
+                    android:layout_weight="0.6"
                     android:gravity="left|center"
                     android:text="Duct Presure"
                     android:textColor="@color/text_color"
@@ -411,9 +412,9 @@ android:layout_height="wrap_content"
                     android:id="@+id/ductAreaGasFlowFragmentTextViewUnits"
                     android:layout_width="@dimen/InputUnitsTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
-                    android:text="m²"
-                    android:gravity="center"
                     android:layout_weight="0.1"
+                    android:gravity="center"
+                    android:text="m²"
 
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
@@ -522,8 +523,8 @@ android:layout_height="wrap_content"
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
-                    android:gravity="center"
                     android:layout_weight="0.6"
+                    android:gravity="left|center"
 
                     android:text="Gas Density"
                     android:textColor="@color/text_color"

@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.os.health.SystemHealthManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -40,7 +41,10 @@ import com.jco.pitonew.Fragments.TheoryFragment;
 import com.jco.pitonew.Models.Gas;
 import com.jco.pitonew.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by jco on 12/3/2016.
@@ -53,7 +57,6 @@ public class DisplayActivity extends AppCompatActivity{
         private String currentCalculations,currentUnits;
         public ArrayList<Double> dynamicPressureArrayList;
 
-        private MaterialMenuDrawable materialMenu;
         private Switch unitSwitch;
 
     RelativeLayout ResultFragmentToolBarLayout,InputFragmentToolBarLayout;
@@ -64,17 +67,7 @@ public class DisplayActivity extends AppCompatActivity{
     private ResultFragment resultFragment;
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        /* Handle item selection
-        switch (item.getItemId()) {
-            case R.id.new_game:
-                newGame();
-                return tru99999999999992                      p            case R.id.help:
-                showHelp();
-                return true;
-                */
-                return super.onOptionsItemSelected(item);
-
-
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -251,17 +244,43 @@ public class DisplayActivity extends AppCompatActivity{
                     public void onClick(View v) {
                         Dialog alertDialog = DisplayActivity.this.dialog;
 
-                        FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-                        Gas gas = new Gas(inputFragment.getResults(), dynamicPressureArrayList, unitSwitch.isChecked(), inputFragment.pipeType());
-                        transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                        resultFragment = ResultFragment.newInstance(gas.getResults(), getUnits(),gas.getDynamicVelocity());
-                        transaction.replace(R.id.fragment_container, resultFragment);
-                        transaction.commit();
-                        DisplayActivity.this.currentFragment = "resultFragment";
 
-                        ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
-                        InputFragmentToolBarLayout.setVisibility(View.GONE);
-                        alertDialog.hide();
+                        if(dynamicPressureArrayList.size()==0){
+
+                            Vibrator vibrator = (Vibrator) getApplication().getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(500);
+                            EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
+                            dynamicVelocityInputEditText.setError(getString(R.string.dynamic_velocity_required));
+                            dynamicVelocityInputEditText.requestFocus();
+
+                        }
+
+                        else if(verifyDataPressureRule()) {
+                            FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+                            Gas gas = new Gas(inputFragment.getResults(), dynamicPressureArrayList, unitSwitch.isChecked(), inputFragment.pipeType(), inputFragment.wetBulbEnabled());
+                            transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                            resultFragment = ResultFragment.newInstance(gas.getResults(), getUnits(), gas.getDynamicVelocity());
+                            transaction.replace(R.id.fragment_container, resultFragment);
+                            transaction.commit();
+                            DisplayActivity.this.currentFragment = "resultFragment";
+
+                            for(double value : dynamicPressureArrayList)
+                                System.out.println("Dynamic Pressure:"+value);
+                            ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                            InputFragmentToolBarLayout.setVisibility(View.GONE);
+                            alertDialog.hide();
+                        }
+                        else
+                        {Toast.makeText(getApplicationContext(), "75% of the velocity pressures should be greater than 10% of maximum velocity pressure.", Toast.LENGTH_LONG).show();
+                            Vibrator vibrator = (Vibrator) getApplication().getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(500);
+                            TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
+                            EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
+                            dynamicVelocityInputEditText.setText("");
+                            dynamicVelocityTextView.setText("");
+                            dynamicPressureArrayList.clear();
+
+                        }
                     }
                 });
 
@@ -274,6 +293,7 @@ public class DisplayActivity extends AppCompatActivity{
                         EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
                         dynamicVelocityInputEditText.setText("");
                         dynamicVelocityTextView.setText("");
+                        dynamicPressureArrayList.clear();
                         alertDialog.hide();
                     }
                 });
@@ -311,6 +331,29 @@ public class DisplayActivity extends AppCompatActivity{
                         Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(
                 activity.getCurrentFocus().getWindowToken(), 0);
+    }
+    public boolean verifyDataPressureRule(){
+        double maxPressureValue;
+        double currentMax=dynamicPressureArrayList.get(0);
+        for(int i=0; i< dynamicPressureArrayList.size();i++)
+            if(dynamicPressureArrayList.get(i)>currentMax)
+                currentMax=dynamicPressureArrayList.get(i);
+
+        System.out.println("DynamicPressure: currentMax " + currentMax);
+        maxPressureValue=currentMax;
+        double acceptablePressureValue=0;
+        for(int i=0; i< dynamicPressureArrayList.size();i++) {
+            System.out.println("DynamicPressure: " + dynamicPressureArrayList.get(i));
+            if (dynamicPressureArrayList.get(i) > 0.1 * maxPressureValue)
+                acceptablePressureValue++;
+        }
+        System.out.println("DynamicPressure: acceptablePressureValue" + acceptablePressureValue);
+
+        System.out.println("DynamicPressure: dynamicPressureArrayList" + dynamicPressureArrayList.size());
+        double percentageOfAcceptableValues = acceptablePressureValue/(double)dynamicPressureArrayList.size();
+        System.out.println("DynamicPressure: percentageOfacceptableValues " + percentageOfAcceptableValues);
+
+        return percentageOfAcceptableValues>=0.75;
     }
 
     public void onTheoryClick(MenuItem mi) {
