@@ -22,6 +22,8 @@ public class Gas implements Serializable {
         System.out.println("gasDensity" + gasDensity);
         System.out.println("molecularWeight" + molecularWeight);
         System.out.println("Actual air flow" + actualAirFlow);
+        System.out.println("Relative Humidity" + this.relativeHumidity);
+
         return new Double[]{this.averageVelocity, this.massAirFlow, this.normalAirFlow,this.actualAirFlow, this.ductPressure, this.gasDensity, this.molecularWeight,this.area,this.atmosphericPressure, this.relativeHumidity};
     }
 
@@ -82,7 +84,7 @@ public class Gas implements Serializable {
 
 
     //Relative Humidity
-    private double relativeHumidity, Kd, Kw, dryBulbWaterSaturationPressurePD, wetBulbWaterSaturationPressurePW, partialWaterPressureDueToDepressionPM, partialPressureOfWaterPA, dryAirHumidity, wetAFirHumidity;
+    private double relativeHumidity, Kd, Kw, dryBulbWaterSaturationPressurePD, wetBulbWaterSaturationPressurePW, partialWaterPressureDueToDepressionPM, partialPressureOfWaterPA;
 
 
     //Altitutde
@@ -268,8 +270,8 @@ public class Gas implements Serializable {
          if((wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD>=100 ||(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD<0)
             System.out.println("ERROR");
         else
-            relativeHumidity=100*(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD;
-        partialPressureOfWaterPA=0.01*relativeHumidity*dryBulbWaterSaturationPressurePD;
+            this.relativeHumidity=100*(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD;
+        partialPressureOfWaterPA=0.01*this.relativeHumidity*dryBulbWaterSaturationPressurePD;
 
         this.dryMolecularWeight=(44.01*(airContentPercentageCO2*(1-humidityH20WetAir))+31.999*(airContentPercentageO2*(1-humidityH20WetAir))+28.013*(airContentPercentageN2*(1-humidityH20WetAir))+39.948*(airContentPercentageAr*(1-humidityH20WetAir)))/100;
 
@@ -289,30 +291,31 @@ public class Gas implements Serializable {
         System.out.println("PW: wetBulbWaterSaturationPressurePW"+wetBulbWaterSaturationPressurePW);
         System.out.println("PM: partialWaterPressureDueToDepressionPM"+partialWaterPressureDueToDepressionPM);
         System.out.println("PA: partialPressureOfWaterPA"+partialPressureOfWaterPA);
-        System.out.println("RH: relative humidity "+relativeHumidity);
+        System.out.println("RH: relative humidity "+this.relativeHumidity);
         System.out.println("RH: humidityH20DryAir"+humidityH20DryAir);
         System.out.println("RH: humidityH20WetAir"+humidityH20WetAir);
 
 
-
+/*
         switch(getUnits()) {
             case "SI":
-                relativeHumidity = seaLevelPressure + ductPressure * 0.249088;
+                this.relativeHumidity = seaLevelPressure + ductPressure * 0.249088;
                 break;
             case "US":
-                relativeHumidity = seaLevelPressure + ductPressure * 0.07355;
+                this.relativeHumidity = seaLevelPressure + ductPressure * 0.07355;
                 break;
         }
-        return relativeHumidity;
+        */
+        return this.relativeHumidity;
 
     }
     public double calculateArea(){
         System.out.println("PIPPE" +pipeType);
         if(pipeType.equals("CIRCULAR")){
-            area = Math.PI*(diameter /2.0)/1000;
+            area = Math.PI*(diameter /2.0);
         }
         else if(pipeType.equals("RECTANGULAR")){
-            area = height *width/1000;
+            area = height *width;
         }
         System.out.println("AREA " + area);
         return area;
@@ -354,20 +357,13 @@ public class Gas implements Serializable {
 
     }
     public double calculateNormalAirFlow(){
-        normalAirFlow=actualAirFlow*ductPressure/101.325*273.15/(273.15+((dryBulbTemperature-32)/1.8));
+        normalAirFlow=(actualAirFlow*ductPressure/101.325)*2732.15/(273.15+dryBulbTemperature);
         if(getUnits().equals("US"))
             this.normalAirFlow=normalAirFlow/60*Math.pow((39.3701/12),3)*(294.26/273.15);
         return normalAirFlow;
     }
 
-    //Verify Data Integrity
 
-    public boolean verifyRelativeHumidity(){
-        if(relativeHumidity>0)
-            return true;
-        else
-            return false;
-    }
 
     }
 

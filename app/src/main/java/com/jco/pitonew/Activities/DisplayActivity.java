@@ -160,6 +160,8 @@ public class DisplayActivity extends AppCompatActivity{
                 transaction.commit();
                 ResultFragmentToolBarLayout.setVisibility(View.GONE);
                 InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                if(unitSwitch.isChecked())
+                    inputFragment.changeUnits("US");
                 currentFragment="inputFragment";
 
             }
