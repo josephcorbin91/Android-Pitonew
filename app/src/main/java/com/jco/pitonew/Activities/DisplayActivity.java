@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -220,11 +221,13 @@ public class DisplayActivity extends AppCompatActivity{
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         if (actionId == EditorInfo.IME_ACTION_NEXT) {
+
                             Dialog alertDialog = DisplayActivity.this.dialog;
 
                             TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
 
                             EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
+
 
                             dynamicPressureArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
                             dynamicVelocityInputEditText.setText("");
@@ -307,17 +310,24 @@ public class DisplayActivity extends AppCompatActivity{
                         Dialog alertDialog = DisplayActivity.this.dialog;
                         TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
                         EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
-                        dynamicPressureArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
-                        dynamicVelocityInputEditText.setText("");
-                        String currentString="";
-                        for (Double dynamicVelocity : dynamicPressureArrayList) {
-                            currentString+= String.valueOf(dynamicVelocity)+" , ";
+                        if(TextUtils.isEmpty(dynamicVelocityInputEditText.getText().toString()))
+                        {
+                            dynamicVelocityInputEditText.setError(getString(R.string.dynamic_velocity_required));
+                            dynamicVelocityInputEditText.requestFocus();
                         }
-                        dynamicVelocityTextView.setText(currentString);
+                        else {
 
+                            dynamicPressureArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
+                            dynamicVelocityInputEditText.setText("");
+                            String currentString = "";
+                            for (Double dynamicVelocity : dynamicPressureArrayList) {
+                                currentString += String.valueOf(dynamicVelocity) + " , ";
+                            }
+                            dynamicVelocityTextView.setText(currentString);
+                        }
 
-                    }
-                });
+                }
+            });
 
             }
         });
