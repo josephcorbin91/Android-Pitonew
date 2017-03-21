@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,12 @@ public class TheoryFragment extends Fragment  {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.theory_fragment, container, false);
+
+
+
+
+        TextView t2 = (TextView) view.findViewById(R.id.hyperlink);
+        t2.setMovementMethod(LinkMovementMethod.getInstance());
   return view;
     }
 

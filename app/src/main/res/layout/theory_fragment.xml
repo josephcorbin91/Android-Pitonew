@@ -26,7 +26,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center_horizontal"
-                    android:text="Gas Flow Theory (To Be Completed)"
+                    android:text="Theory : Gas Flow "
                     android:textSize="24dp" />
 
                 <TextView
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:gravity="center_horizontal"
-                    android:text="Formulas and Properties of Gas Flow"
+                    android:text="Academic theory pertaining to gas flow calculations"
                     android:textSize="16dp" />
 
 
@@ -78,166 +78,30 @@
                     android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
 
                     <TextView
-                        android:id="@+id/switchTextViewStandardAir"
+                        android:id="@+id/airCompositionTheory"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_weight="0.6"
                         android:gravity="left|center"
-                        android:text=" Dry air is a mixture of gases where the molecular weight can be calculated by adding the weight of each component.
-                        The molecular mass of a substance is the mass of one molecule of the substance. Molecular mass is expressed with the unit u (equal to 1/12 the mass of one atom of carbon-12) and the molecular mass can be calculated by summarizing the atomic masses of all the atoms in the molecule.
-                        Components in Dry Air. The two most dominant components in dry air are Oxygen and Nitrogen. Oxygen has an atomic unit mass of 16 and Nitrogen has an atomic units mass of 14. Since both of these elements are diatomic in air - O2 and N2, the molecular mass of Oxygen is 32 and the molecular mass of Nitrogen is 28."
-                        android:textSize="@dimen/hint_and_input_text" />
+                        android:text=" Dry air is a mixture of gases where the molecular weight can be calculated by adding the weight of each component.\n The molecular mass of a substance is the mass of one molecule of the substance. Molecular mass is expressed with the unit u (equal to 1/12 the mass of one atom of carbon-12) and the molecular mass can be calculated by summarizing the atomic masses of all the atoms in the molecule.Components in Dry Air. \nThe two most dominant components in dry air are Oxygen and Nitrogen. Oxygen has an atomic unit mass of 16 and Nitrogen has an atomic units mass of 14. Since both of these elements are diatomic in air - O2 and N2, the molecular mass of Oxygen is 32 and the molecular mass of Nitrogen is 28."
+                        android:textSize="@dimen/hint_and_input_text"
+                        />
 
 
                 </TableRow>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@color/PrimaryColor" />
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="@color/SecondaryColor">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="@dimen/tile_height_full_width_single_line"
-                        android:gravity="center|left"
-                        android:paddingLeft="16dp"
-                        android:text="Pitot Tube Coeffecient"
-                        android:textSize="16dp" />
-
-
-                </TableRow>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                <TextView
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
                     android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
 
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_weight="0.6"
-                        android:gravity="left|center"
-                        android:text=" Dry air is a mixture of gases where the molecular weight can be calculated by adding the weight of each component.
-                        The molecular mass of a substance is the mass of one molecule of the substance. Molecular mass is expressed with the unit u (equal to 1/12 the mass of one atom of carbon-12) and the molecular mass can be calculated by summarizing the atomic masses of all the atoms in the molecule.
-                        Components in Dry Air. The two most dominant components in dry air are Oxygen and Nitrogen. Oxygen has an atomic unit mass of 16 and Nitrogen has an atomic units mass of 14. Since both of these elements are diatomic in air - O2 and N2, the molecular mass of Oxygen is 32 and the molecular mass of Nitrogen is 28."
-                        android:textSize="@dimen/hint_and_input_text" />
-
-
-                </TableRow>   <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/PrimaryColor" />
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="@color/SecondaryColor">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="@dimen/tile_height_full_width_single_line"
-                        android:gravity="center|left"
-                        android:paddingLeft="16dp"
-                        android:text="Pitot Tube Coeffecient"
-                        android:textSize="16dp" />
-
-
-                </TableRow>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
-
-                <TableRow
-                    android:layout_width="match_parent"
+                    android:id="@+id/hyperlink"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+                    android:layout_gravity="left"
+                    android:gravity="left|center"
+                    android:linksClickable="true"
+                    android:autoLink="web"
+                    android:text="@string/txtCredits"
+                    android:textSize="@dimen/hint_and_input_text" />
 
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_weight="0.6"
-                        android:gravity="left|center"
-                        android:text=" Dry air is a mixture of gases where the molecular weight can be calculated by adding the weight of each component.
-                        The molecular mass of a substance is the mass of one molecule of the substance. Molecular mass is expressed with the unit u (equal to 1/12 the mass of one atom of carbon-12) and the molecular mass can be calculated by summarizing the atomic masses of all the atoms in the molecule.
-                        Components in Dry Air. The two most dominant components in dry air are Oxygen and Nitrogen. Oxygen has an atomic unit mass of 16 and Nitrogen has an atomic units mass of 14. Since both of these elements are diatomic in air - O2 and N2, the molecular mass of Oxygen is 32 and the molecular mass of Nitrogen is 28."
-                        android:textSize="@dimen/hint_and_input_text" />
-
-
-                </TableRow>   <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/PrimaryColor" />
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:background="@color/SecondaryColor">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="@dimen/tile_height_full_width_single_line"
-                        android:gravity="center|left"
-                        android:paddingLeft="16dp"
-                        android:text="Pitot Tube Coeffecient"
-                        android:textSize="16dp" />
-
-
-                </TableRow>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
-                    android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_weight="0.6"
-                        android:gravity="left|center"
-                        android:text=" Dry air is a mixture of gases where the molecular weight can be calculated by adding the weight of each component.
-                        The molecular mass of a substance is the mass of one molecule of the substance. Molecular mass is expressed with the unit u (equal to 1/12 the mass of one atom of carbon-12) and the molecular mass can be calculated by summarizing the atomic masses of all the atoms in the molecule.
-                        Components in Dry Air. The two most dominant components in dry air are Oxygen and Nitrogen. Oxygen has an atomic unit mass of 16 and Nitrogen has an atomic units mass of 14. Since both of these elements are diatomic in air - O2 and N2, the molecular mass of Oxygen is 32 and the molecular mass of Nitrogen is 28."
-                        android:textSize="@dimen/hint_and_input_text" />
-
-
-            </TableRow>
 
 
 

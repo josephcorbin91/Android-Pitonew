@@ -8,12 +8,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:textSize="@dimen/hint_and_input_text"
-        android:text="Dynamic Velocity"/>
+        android:text="Dynamic Velocities : "/>
 
         <TextView
             android:layout_width="match_parent"
@@ -21,20 +21,21 @@
             android:id="@+id/listOfDynamicVelocities"
 
             android:layout_marginTop="4dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="24dp"
             android:layout_marginRight="4dp"
             android:layout_marginBottom="4dp"/>
-        <EditText
-            android:id="@+id/dynamicVelocityInput"
-            android:inputType="numberDecimal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
-            android:imeOptions="actionNext"
-            android:layout_marginTop="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="4dp"
-            android:hint="Enter Dynamic Velocity" />
+    <EditText
+        android:id="@+id/dynamicVelocityInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:hint="Enter Dynamic Velocity"
+        android:imeOptions="actionNext"
+        android:inputType="numberDecimal" />
 
 </LinearLayout>

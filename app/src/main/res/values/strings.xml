@@ -23,9 +23,10 @@
         <item>10</item>
         <item>11</item>
     </string-array>
+    <string name="txtCredits">For more information: <a href="http://www.engineeringtoolbox.com/air-composition-d_212.html">click here</a></string>
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="empty_field">This field is required.</string>
-    <string name="dynamic_velocity_required">Please enter at least one velocity.</string>
+    <string name="dynamic_velocity_required">No input.</string>
 
 
     <string name="title_activity_main__menu">Main_Menu</string>

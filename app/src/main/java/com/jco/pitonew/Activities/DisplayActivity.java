@@ -157,13 +157,28 @@ public class DisplayActivity extends AppCompatActivity{
 
                 FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
                 transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                transaction.replace(R.id.fragment_container, inputFragment);
+                if(returnFragment.equals("inputFragment")) {
+                    transaction.replace(R.id.fragment_container, inputFragment);
+                    ResultFragmentToolBarLayout.setVisibility(View.GONE);
+                    InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                    currentFragment="inputFragment";
+
+                    if(unitSwitch.isChecked())
+                        inputFragment.changeUnits("US");
+
+                }
+                else if(returnFragment.equals("resultFragment")) {
+                    transaction.replace(R.id.fragment_container, resultFragment);
+                    ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                    InputFragmentToolBarLayout.setVisibility(View.GONE);
+                    currentFragment="resultFragment";
+
+
+                    if(unitSwitch.isChecked())
+                        resultFragment.changeUnits("US");
+                }
                 transaction.commit();
-                ResultFragmentToolBarLayout.setVisibility(View.GONE);
-                InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
-                if(unitSwitch.isChecked())
-                    inputFragment.changeUnits("US");
-                currentFragment="inputFragment";
+
 
             }
         });
@@ -261,6 +276,7 @@ public class DisplayActivity extends AppCompatActivity{
                         }
 
                         else if(verifyDataPressureRule()) {
+                            returnFragment="inputFragment";
                             FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
                             Gas gas = new Gas(inputFragment.getResults(), dynamicPressureArrayList, unitSwitch.isChecked(), inputFragment.pipeType(), inputFragment.wetBulbEnabled());
                             transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
@@ -368,13 +384,16 @@ public class DisplayActivity extends AppCompatActivity{
         return percentageOfAcceptableValues>=0.75;
     }
 
+    private String returnFragment;
     public void onTheoryClick(MenuItem mi) {
+        returnFragment=DisplayActivity.this.currentFragment;
         FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
         TheoryFragment theoryFragment = TheoryFragment.newInstance();
         transaction.replace(R.id.fragment_container, theoryFragment);
         transaction.commit();
         DisplayActivity.this.currentFragment = "theoryFragment";
+        unitSwitch.setVisibility(View.INVISIBLE);
 
         InputFragmentToolBarLayout.setVisibility(View.GONE);
         ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
