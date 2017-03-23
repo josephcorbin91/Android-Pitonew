@@ -41,8 +41,8 @@
                 android:gravity="center"
                 android:imeOptions="actionNext"
 
-                android:inputType="numberSigned"
-                android:maxLength="2"
+                android:inputType="numberDecimal"
+                android:maxLength="5"
                 android:maxLines="1"
                 android:selectAllOnFocus="false"
                 android:singleLine="false"
@@ -85,8 +85,8 @@
                 android:gravity="center"
                 android:imeOptions="actionNext"
 
-                android:inputType="numberSigned"
-                android:maxLength="2"
+                android:inputType="numberDecimal"
+                android:maxLength="4"
                 android:maxLines="1"
                 android:selectAllOnFocus="false"
                 android:singleLine="false"
@@ -129,8 +129,8 @@
                 android:gravity="center"
                 android:imeOptions="actionNext"
 
-                android:inputType="numberSigned"
-                android:maxLength="2"
+                android:inputType="numberSigned|numberDecimal"
+                android:maxLength="4"
                 android:maxLines="1"
                 android:selectAllOnFocus="false"
                 android:singleLine="false"
@@ -161,7 +161,7 @@
                 android:background="@android:color/transparent"
                 android:gravity="left|center"
 
-                android:maxLength="2"
+                android:maxLength="4"
                 android:maxLines="1"
                 android:text="Ar %"
                 android:textSize="@dimen/hint_and_input_text" />
@@ -174,8 +174,8 @@
                 android:gravity="center"
                 android:imeOptions="actionNext"
 
-                android:inputType="numberSigned"
-                android:maxLength="2"
+                android:inputType="numberDecimal"
+                android:maxLength="4"
                 android:maxLines="1"
                 android:selectAllOnFocus="false"
                 android:singleLine="false"
@@ -219,7 +219,7 @@
                 android:gravity="center"
                 android:imeOptions="actionDone"
                 android:inputType="numberSigned"
-                android:maxLength="2"
+                android:maxLength="4"
                 android:maxLines="1"
                 android:selectAllOnFocus="false"
                 android:singleLine="false"

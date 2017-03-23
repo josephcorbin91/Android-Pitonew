@@ -61,6 +61,7 @@ public class DisplayActivity extends AppCompatActivity{
         private Switch unitSwitch;
 
     RelativeLayout ResultFragmentToolBarLayout,InputFragmentToolBarLayout;
+    private Double[] previousResults;
 
     private FragmentManager fragmentManager;
         private String currentFragment;
@@ -82,7 +83,7 @@ public class DisplayActivity extends AppCompatActivity{
 
     private LinearLayout activityMainRootLayout;
     protected void onCreate(Bundle savedInstanceState) {
-        currentUnits = "Metric";
+        currentUnits = "SI";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -103,7 +104,7 @@ public class DisplayActivity extends AppCompatActivity{
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 
             transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-            transaction.add(R.id.fragment_container, inputFragment);
+            transaction.replace(R.id.fragment_container, inputFragment);
             transaction.commit();
             InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
             ResultFragmentToolBarLayout.setVisibility(View.GONE);
@@ -128,6 +129,7 @@ public class DisplayActivity extends AppCompatActivity{
                         resultFragment.changeUnits("SI");
                     else
                         inputFragment.changeUnits("SI");
+                    currentUnits = "SI";
                     }
 
             }
@@ -153,82 +155,65 @@ public class DisplayActivity extends AppCompatActivity{
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                ResultFragmentToolBarLayout.setVisibility(View.GONE);
+                InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
                 FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
                 transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                if(returnFragment.equals("inputFragment")) {
-                    transaction.replace(R.id.fragment_container, inputFragment);
-                    ResultFragmentToolBarLayout.setVisibility(View.GONE);
-                    InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
-                    currentFragment="inputFragment";
-
-                    if(unitSwitch.isChecked())
-                        inputFragment.changeUnits("US");
-
-                }
-                else if(returnFragment.equals("resultFragment")) {
-                    transaction.replace(R.id.fragment_container, resultFragment);
-                    ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
-                    InputFragmentToolBarLayout.setVisibility(View.GONE);
-                    currentFragment="resultFragment";
-
-
-                    if(unitSwitch.isChecked())
-                        resultFragment.changeUnits("US");
-                }
-                transaction.commit();
-
-
-            }
-        });
+                System.out.print("UNITSS: RETURN" +currentUnits);
+                inputFragment = InputFragment.newInstance(DisplayActivity.this.previousResults,currentUnits);
+                Toast.makeText(DisplayActivity.this, "currentUnits", Toast.LENGTH_SHORT).show();
+        currentFragment="inputFragment";
+        transaction.replace(R.id.fragment_container,inputFragment);
+        transaction.commit();
+    }
+});
 
         calculateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+@Override
+public void onClick(View v) {
 
-                if(inputFragment.validInput()) {
-                    showDyanamicVelocityInputDialog();
+        if(inputFragment.validInput()) {
+        showDyanamicVelocityInputDialog();
 
 
-                }
-                else {
-                    Toast.makeText(DisplayActivity.this, "Please fill in all input fields", Toast.LENGTH_SHORT).show();
-                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    // Vibrate for 500 milliseconds
-                    vibrator.vibrate(500);
-                }
-            }
+        }
+        else {
+        Toast.makeText(DisplayActivity.this, "Please fill in all input fields", Toast.LENGTH_SHORT).show();
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        vibrator.vibrate(500);
+        }
+        }
 
 
         });
-    }
+        }
 
 
 
-        public String getUnits(){
+public String getUnits(){
         return this.currentUnits;
-    }
+        }
 
-    private android.support.v7.app.AlertDialog dialog;
-    public void showDyanamicVelocityInputDialog(){
+private android.support.v7.app.AlertDialog dynamicVelocityDialog;
+public void showDyanamicVelocityInputDialog(){
 
         dynamicPressureArrayList = new ArrayList<Double>();
-        final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
         builder.setMessage("Dynamic Velocity Input");
         builder.setView(R.layout.dialog_dynamic_velocity);
         builder.setPositiveButton("Done", null); //Set to null. We override the onclick
         builder.setNegativeButton("Cancel", null);
         builder.setNeutralButton("Next",null);
 
-        dialog = builder.create();
+        dynamicVelocityDialog = builder.create();
 
 
 
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        dynamicVelocityDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(final DialogInterface dialog) {
-                Dialog alertDialog = DisplayActivity.this.dialog;
+                Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
 
                 EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
 
@@ -237,32 +222,35 @@ public class DisplayActivity extends AppCompatActivity{
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         if (actionId == EditorInfo.IME_ACTION_NEXT) {
 
-                            Dialog alertDialog = DisplayActivity.this.dialog;
+                            Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
 
                             TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
 
                             EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
 
 
-                            dynamicPressureArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
-                            dynamicVelocityInputEditText.setText("");
-                            String currentString="";
-                            for (Double dynamicVelocity : dynamicPressureArrayList) {
-                                currentString+= String.valueOf(dynamicVelocity)+" , ";
+                            if (!dynamicVelocityInputEditText.getText().toString().equals("")) {
+                                dynamicPressureArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
+                                dynamicVelocityInputEditText.setText("");
+                                String currentString = "";
+                                for (Double dynamicVelocity : dynamicPressureArrayList) {
+                                    currentString += String.valueOf(dynamicVelocity) + " , ";
+
+                                    dynamicVelocityTextView.setText(currentString);
+                                }
+                                    return false;
+
                             }
-                            dynamicVelocityTextView.setText(currentString);
-                            return false;
                         }
-                        else
                             return true;
-                    }
-                });
+
+                }});
 
                 Button buttonPositive = ((android.support.v7.app.AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
                 buttonPositive.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Dialog alertDialog = DisplayActivity.this.dialog;
+                        Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
 
 
                         if(dynamicPressureArrayList.size()==0){
@@ -276,17 +264,29 @@ public class DisplayActivity extends AppCompatActivity{
                         }
 
                         else if(verifyDataPressureRule()) {
-                            returnFragment="inputFragment";
+
                             FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+                            System.out.println("UNITSS: " + unitSwitch.isChecked());
+
                             Gas gas = new Gas(inputFragment.getResults(), dynamicPressureArrayList, unitSwitch.isChecked(), inputFragment.pipeType(), inputFragment.wetBulbEnabled());
-                            transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+
+                            DisplayActivity.this.previousResults = inputFragment.getResults();
+                            /**
+                            inputFragment.changePipeTypeSwitch(false);
+                            inputFragment.changeStandardAirSwitch(false);
+                            inputFragment.changeWetBulbSwitch(false);
+
+                             */
+                            //transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                            System.out.println("UNITSS: " + getUnits());
                             resultFragment = ResultFragment.newInstance(gas.getResults(), getUnits(), gas.getDynamicVelocity());
+                            DisplayActivity.this.currentFragment = "resultFragment";
                             transaction.replace(R.id.fragment_container, resultFragment);
                             transaction.commit();
-                            DisplayActivity.this.currentFragment = "resultFragment";
 
-                            for(double value : dynamicPressureArrayList)
-                                System.out.println("Dynamic Pressure:"+value);
+
+
+
                             ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
                             InputFragmentToolBarLayout.setVisibility(View.GONE);
                             alertDialog.hide();
@@ -309,7 +309,7 @@ public class DisplayActivity extends AppCompatActivity{
                 negativeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Dialog alertDialog = DisplayActivity.this.dialog;
+                        Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
                         TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
                         EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
                         dynamicVelocityInputEditText.setText("");
@@ -323,7 +323,7 @@ public class DisplayActivity extends AppCompatActivity{
                 neutralButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Dialog alertDialog = DisplayActivity.this.dialog;
+                        Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
                         TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
                         EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
                         if(TextUtils.isEmpty(dynamicVelocityInputEditText.getText().toString()))
@@ -347,9 +347,9 @@ public class DisplayActivity extends AppCompatActivity{
 
             }
         });
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
+        dynamicVelocityDialog.setCancelable(false);
+        dynamicVelocityDialog.setCanceledOnTouchOutside(false);
+        dynamicVelocityDialog.show();
 
     }
 
@@ -383,10 +383,8 @@ public class DisplayActivity extends AppCompatActivity{
 
         return percentageOfAcceptableValues>=0.75;
     }
-
-    private String returnFragment;
+/**
     public void onTheoryClick(MenuItem mi) {
-        returnFragment=DisplayActivity.this.currentFragment;
         FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
         TheoryFragment theoryFragment = TheoryFragment.newInstance();
@@ -399,10 +397,16 @@ public class DisplayActivity extends AppCompatActivity{
         ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
 
     }
+*/
 
 
     @Override
     public void onBackPressed() {
+
+        if(dynamicVelocityDialog!=null && dynamicVelocityDialog.isShowing())
+        {
+            dynamicVelocityDialog.hide();
+        }
         AlertDialog.Builder builder=new AlertDialog.Builder(DisplayActivity.this);
         // builder.setCancelable(false);
         builder.setTitle("Rate Pitonew if you like it.");

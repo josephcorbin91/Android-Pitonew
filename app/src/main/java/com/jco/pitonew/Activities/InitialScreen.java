@@ -39,7 +39,7 @@ public class InitialScreen extends AppCompatActivity {
                         public void run() {
                             try {
                                 super.run();
-                                sleep(3500);
+                                sleep(6000);
                 } catch (Exception e) {
 
                 } finally {

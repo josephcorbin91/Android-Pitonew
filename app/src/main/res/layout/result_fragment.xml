@@ -99,6 +99,7 @@ android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_weight="0.1"
 
+                    android:id="@+id/UnitsDynamicVelocityTextView"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -423,9 +424,11 @@ android:layout_height="wrap_content"
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:id="@+id/relativeHumidityResultDivider"
                 android:background="@android:color/darker_gray" />
 
             <TableRow
+                android:id="@+id/relativeHumidityTableRow"
                 android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
                 android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
                 android:layout_marginRight="@dimen/single_line_list_left_right_padding"

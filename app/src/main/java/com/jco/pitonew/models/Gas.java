@@ -27,19 +27,12 @@ public class Gas implements Serializable {
         return new Double[]{this.averageVelocity, this.massAirFlow, this.normalAirFlow,this.actualAirFlow, this.ductPressure, this.gasDensity, this.molecularWeight,this.area,this.atmosphericPressure, this.relativeHumidity};
     }
 
-    public String getDynamicVelocity(){
-        DecimalFormat doubleTwoDigitsDecimalFormat = new DecimalFormat("#.00");
+    public Double[] getDynamicVelocity(){
 
-        String unit;
-        if(getUnits().equals("SI"))
-            unit=" m/s,";
-        else
-            unit=" ft/s,";
-        String dynamicVelocity = "";
-        for(Double velocity : dynamicVelocityArrayList)
-            dynamicVelocity+=doubleTwoDigitsDecimalFormat.format(velocity) +unit;
-        if(dynamicVelocity.charAt(dynamicVelocity.length()-1)==',')
-            dynamicVelocity = dynamicVelocity.substring(0, dynamicVelocity.length()-1);
+        Double[] dynamicVelocity= new Double[dynamicVelocityArrayList.size()];
+
+        for(int i=0;i<dynamicVelocity.length;i++)
+            dynamicVelocity[i]=dynamicVelocityArrayList.get(i);
         return dynamicVelocity;
     }
 
@@ -333,10 +326,10 @@ public class Gas implements Serializable {
     }
 
     public double calculateAverageVelocity(){
-        int sum=0;
+        double sum=0;
         for(Double velocity: dynamicVelocityArrayList)
             sum+=velocity;
-        averageVelocity=sum/dynamicVelocityArrayList.size();
+        averageVelocity=sum/(double)dynamicVelocityArrayList.size();
         if(getUnits().equals("US"))
             this.averageVelocity=averageVelocity*(39.3701/12);
         return this.averageVelocity;
