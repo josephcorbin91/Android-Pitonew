@@ -57,8 +57,8 @@ public class DisplayActivity extends AppCompatActivity{
         private AppCompatButton clearButton,calculateButton,returnButton;
         private String currentCalculations,currentUnits;
         public ArrayList<Double> dynamicPressureArrayList;
-        private String previousUnits;
         private Switch unitSwitch;
+        private boolean originalUnits;
 
     RelativeLayout ResultFragmentToolBarLayout,InputFragmentToolBarLayout;
     private Double[] previousResults;
@@ -99,6 +99,7 @@ public class DisplayActivity extends AppCompatActivity{
                 return;
             }
 
+            inputFragment.setPreviousUnits(false);
 
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -123,13 +124,11 @@ public class DisplayActivity extends AppCompatActivity{
                         inputFragment.changeUnits("US");
                     else if(currentFragment.equals("resultFragment")) {
                         resultFragment.changeUnits("US");
-                        inputFragment.changeUnits("US");
                     }
                     currentUnits = "US";
                 } else {
                     if(currentFragment.equals("resultFragment")) {
                         resultFragment.changeUnits("SI");
-                        inputFragment.changeUnits("si");
                     }
                     else
                         inputFragment.changeUnits("SI");
@@ -162,20 +161,24 @@ public class DisplayActivity extends AppCompatActivity{
             public void onClick(View v) {
                 ResultFragmentToolBarLayout.setVisibility(View.GONE);
                 InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                /*
                 FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
                 transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                System.out.print("UNITSS: RETURN" +currentUnits);
+                System.out.print("UNITSS: RETURN" + unitSwitch.isChecked());
+                currentFragment="inputFragment";
+                transaction.replace(R.id.fragment_container,inputFragment);
+                transaction.commit();
 
-                if(DisplayActivity.this.previousResults[DisplayActivity.this.previousResults.length-1]==1.0)
-                    previousUnits="US";
-                else
-                    previousUnits="SI";
-
-                if(previousUnits.equals(currentUnits))
-                inputFragment = InputFragment.newInstance(DisplayActivity.this.previousResults,currentUnits);
-]        currentFragment="inputFragment";
-        transaction.replace(R.id.fragment_container,inputFragment);
-        transaction.commit();
+                System.out.println("UNITS! Original"+originalUnits);
+                System.out.println("UNITS! unitSwitch"+unitSwitch.isChecked());
+                if(originalUnits!=unitSwitch.isChecked()) {
+                    if (unitSwitch.isChecked())
+                        inputFragment.changeUnits("US");
+                    else
+                        inputFragment.changeUnits("SI");
+                }
+                */
+                onBackPressed();
     }
 });
 
@@ -205,6 +208,10 @@ public void onClick(View v) {
 
 public String getUnits(){
         return this.currentUnits;
+        }
+
+        public boolean getUnitSwitchState(){
+            return unitSwitch.isChecked();
         }
 
 private android.support.v7.app.AlertDialog dynamicVelocityDialog;
@@ -281,25 +288,20 @@ final android.support.v7.app.AlertDialog.Builder builder = new android.support.v
                             System.out.println("UNITSS: " + unitSwitch.isChecked());
 
                             Gas gas = new Gas(inputFragment.getResults(), dynamicPressureArrayList, unitSwitch.isChecked(), inputFragment.pipeType(), inputFragment.wetBulbEnabled());
+                            inputFragment.setPreviousUnits(unitSwitch.isChecked());
 
-                            DisplayActivity.this.previousResults = inputFragment.getResults();
-                            /**
-                            inputFragment.changePipeTypeSwitch(false);
-                            inputFragment.changeStandardAirSwitch(false);
-                            inputFragment.changeWetBulbSwitch(false);
+                            System.out.println("UNITS ON CALCULAT: " + originalUnits);
 
-                             */
-                            //transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                            System.out.println("UNITSS: " + getUnits());
                             resultFragment = ResultFragment.newInstance(gas.getResults(), getUnits(), gas.getDynamicVelocity());
                             DisplayActivity.this.currentFragment = "resultFragment";
                             transaction.replace(R.id.fragment_container, resultFragment);
+                            transaction.addToBackStack(null);
                             transaction.commit();
 
 
 
 
-                            ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                                    ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
                             InputFragmentToolBarLayout.setVisibility(View.GONE);
                             alertDialog.hide();
                         }
@@ -415,53 +417,55 @@ final android.support.v7.app.AlertDialog.Builder builder = new android.support.v
     @Override
     public void onBackPressed() {
 
-        if(dynamicVelocityDialog!=null && dynamicVelocityDialog.isShowing())
-        {
+        System.out.println("Back Pressed");
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            System.out.println("Back Pressed"+getSupportFragmentManager().getBackStackEntryCount());
+            getSupportFragmentManager().popBackStack();
+
+            currentFragment="inputFragment";
+            ResultFragmentToolBarLayout.setVisibility(View.GONE);
+            InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
+            System.out.println("UNITS! Original"+originalUnits);
+            System.out.println("UNITS! unitSwitch"+unitSwitch.isChecked());
+
+        } else if (dynamicVelocityDialog != null && dynamicVelocityDialog.isShowing()) {
             dynamicVelocityDialog.hide();
-        }
-        AlertDialog.Builder builder=new AlertDialog.Builder(DisplayActivity.this);
-        // builder.setCancelable(false);
-        builder.setTitle("Rate Pitonew if you like it.");
-        builder.setMessage("Do you want to exit Pitonew?");
-        builder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(DisplayActivity.this);
+            // builder.setCancelable(false);
+            builder.setTitle("Rate Pitonew if you like it.");
+            builder.setMessage("Do you want to exit Pitonew?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-                finish();
-            }
-        });
-        builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-                dialog.cancel();
-
-            }
-        });
-        builder.setNeutralButton("Rate",new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-/*
-                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
-                } catch (android.content.ActivityNotFoundException anfe) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
+                    finish();
                 }
-                */
-                finish();
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
 
-            }
-        });
-        AlertDialog alert=builder.create();
-        alert.show();
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                    dialog.cancel();
+
+                }
+            });
+            builder.setNeutralButton("Rate", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                    finish();
+
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+
     }
-
-
 
 
 

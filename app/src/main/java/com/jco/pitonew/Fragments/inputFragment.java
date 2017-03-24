@@ -294,20 +294,32 @@ public class InputFragment extends Fragment {
     private double units;
     public Double[] getResults() {
 
-        if(currentUnits.equals("US"))
-            units=1;
-        else
-            units=0;
 
         Double[] inputArray = new Double[]{Double.valueOf(dimension_1_WidthGasEditText.getText().toString()), Double.valueOf(dimension_2_HeightGasEditText.getText().toString())
                 , Double.valueOf(pitotTubeCoefficientEditText.getText().toString()), Double.valueOf(staticPressureFragmentEditText.getText().toString())
                 , Double.valueOf(temperatureGasFragmentEditText.getText().toString()), Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())
                 , Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()), Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())
-                , airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O,units};
+                , airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O};
         return inputArray;
     }
 
+    private boolean previousUnits;
+    public void setPreviousUnits(boolean previousUnits)
+    {
+        this.previousUnits= previousUnits;
+    }
 
+
+    @Override
+    public void onStart() {
+
+        if(((DisplayActivity)getActivity()).getUnitSwitchState() &&((DisplayActivity)getActivity()).getUnitSwitchState()!=previousUnits)
+            changeUnits("US");
+        else if(!((DisplayActivity)getActivity()).getUnitSwitchState() &&((DisplayActivity)getActivity()).getUnitSwitchState()!=previousUnits)
+            changeUnits("SI");
+        super.onStart();
+
+    }
 
     public void clear() {
         Utility.clearAllFields((ViewGroup) this.mView);
