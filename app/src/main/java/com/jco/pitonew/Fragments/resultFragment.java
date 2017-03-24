@@ -150,11 +150,12 @@ public class ResultFragment extends Fragment {
             relativeHumidityResultTextView.setText(String.valueOf(doubleThreeDigitsDecimalFormat.format(ResultFragment.results[9])));
 
         }
+
         String dynamicVelocityString="";
         for(int i=0;i<dynamicVelocity.length;i++)
-            dynamicVelocityString+= String.valueOf(dynamicVelocity[i])+ "\n";
+            dynamicVelocityString+= String.valueOf(doubleTwoDigitsDecimalFormat.format(dynamicVelocity[i])+ "\n");
         dynamicVelocityResultTextView.setText(dynamicVelocityString);
-        changeUnits(ResultFragment.units);
+        //changeUnits(ResultFragment.units);
 
 
 

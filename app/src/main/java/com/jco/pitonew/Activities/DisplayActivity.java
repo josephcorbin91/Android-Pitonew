@@ -57,7 +57,7 @@ public class DisplayActivity extends AppCompatActivity{
         private AppCompatButton clearButton,calculateButton,returnButton;
         private String currentCalculations,currentUnits;
         public ArrayList<Double> dynamicPressureArrayList;
-
+        private String previousUnits;
         private Switch unitSwitch;
 
     RelativeLayout ResultFragmentToolBarLayout,InputFragmentToolBarLayout;
@@ -121,12 +121,16 @@ public class DisplayActivity extends AppCompatActivity{
                 if (isChecked) {
                     if(currentFragment.equals("inputFragment"))
                         inputFragment.changeUnits("US");
-                    else if(currentFragment.equals("resultFragment"))
+                    else if(currentFragment.equals("resultFragment")) {
                         resultFragment.changeUnits("US");
+                        inputFragment.changeUnits("US");
+                    }
                     currentUnits = "US";
                 } else {
-                    if(currentFragment.equals("resultFragment"))
+                    if(currentFragment.equals("resultFragment")) {
                         resultFragment.changeUnits("SI");
+                        inputFragment.changeUnits("si");
+                    }
                     else
                         inputFragment.changeUnits("SI");
                     currentUnits = "SI";
@@ -150,6 +154,7 @@ public class DisplayActivity extends AppCompatActivity{
 
             }
         });
+
         calculateButton = (AppCompatButton) findViewById(R.id.tooldbarCalculateButton);
         returnButton = (AppCompatButton) findViewById(R.id.tooldbarReturnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
@@ -160,13 +165,20 @@ public class DisplayActivity extends AppCompatActivity{
                 FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
                 transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 System.out.print("UNITSS: RETURN" +currentUnits);
+
+                if(DisplayActivity.this.previousResults[DisplayActivity.this.previousResults.length-1]==1.0)
+                    previousUnits="US";
+                else
+                    previousUnits="SI";
+
+                if(previousUnits.equals(currentUnits))
                 inputFragment = InputFragment.newInstance(DisplayActivity.this.previousResults,currentUnits);
-                Toast.makeText(DisplayActivity.this, "currentUnits", Toast.LENGTH_SHORT).show();
-        currentFragment="inputFragment";
+]        currentFragment="inputFragment";
         transaction.replace(R.id.fragment_container,inputFragment);
         transaction.commit();
     }
 });
+
 
         calculateButton.setOnClickListener(new View.OnClickListener() {
 @Override

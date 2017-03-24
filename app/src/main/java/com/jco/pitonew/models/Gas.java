@@ -311,6 +311,8 @@ public class Gas implements Serializable {
             area = height *width;
         }
         System.out.println("AREA " + area);
+        if(getUnits().equals("US"))
+            this.area=1550*area;
         return area;
     }
 
@@ -350,7 +352,7 @@ public class Gas implements Serializable {
 
     }
     public double calculateNormalAirFlow(){
-        normalAirFlow=(actualAirFlow*ductPressure/101.325)*2732.15/(273.15+dryBulbTemperature);
+        normalAirFlow=(actualAirFlow*ductPressure/101.325)*273.15/(273.15+dryBulbTemperature);
         if(getUnits().equals("US"))
             this.normalAirFlow=normalAirFlow/60*Math.pow((39.3701/12),3)*(294.26/273.15);
         return normalAirFlow;

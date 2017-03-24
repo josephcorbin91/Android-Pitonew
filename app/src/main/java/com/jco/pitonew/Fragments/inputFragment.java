@@ -291,14 +291,19 @@ public class InputFragment extends Fragment {
     }
 
 
+    private double units;
     public Double[] getResults() {
 
+        if(currentUnits.equals("US"))
+            units=1;
+        else
+            units=0;
 
         Double[] inputArray = new Double[]{Double.valueOf(dimension_1_WidthGasEditText.getText().toString()), Double.valueOf(dimension_2_HeightGasEditText.getText().toString())
                 , Double.valueOf(pitotTubeCoefficientEditText.getText().toString()), Double.valueOf(staticPressureFragmentEditText.getText().toString())
                 , Double.valueOf(temperatureGasFragmentEditText.getText().toString()), Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())
                 , Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()), Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())
-                , airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O};
+                , airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O,units};
         return inputArray;
     }
 
@@ -477,13 +482,36 @@ public class InputFragment extends Fragment {
         wetBulbTemperatureSwitch.setChecked(false);
         standardAirSwitch.setChecked(false);
         rectangularOrCircularSwitch.setChecked(false);
-        changeUnits(currentUnits);
+        changeUnitString(currentUnits);
     }
     public boolean wetBulbEnabled() {
         return wetBulbTemperatureSwitch.isChecked();
     }
 
 
+    public void changeUnitString(String units){
+        switch (units) {
+            case "SI":
+                UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
+                UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
+                UnitStaticPressureGasDensityFragmentTextView.setText("kPa");
+                unitsGasDensityTemperatureDB.setText("°C");
+                unitsGasDensityTemperatureWB.setText("°C");
+                unitsGasDensitySeaLevelPressure.setText("kPa");
+                unitsGasDensityElevationAboveSeaLevel.setText("m");
+                break;
+            case "US":
+                UnitsDimensionHeightGasFlowFragmentTextView.setText("inches");
+                UnitsDimensionWidthGasFlowFragmentTextView.setText("inches");
+                unitsGasDensityTemperatureDB.setText("°F");
+                unitsGasDensityTemperatureWB.setText("°F");
+                unitsGasDensitySeaLevelPressure.setText("in. Hg");
+                unitsGasDensityElevationAboveSeaLevel.setText("ft");
+                UnitStaticPressureGasDensityFragmentTextView.setText("in. Hg");
+
+                break;
+        }
+    }
     public void changeUnits(String units) {
         DecimalFormat doubleTwoDigitsDecimalFormat = new DecimalFormat("#.00");
 
