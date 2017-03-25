@@ -274,7 +274,14 @@ public class InputFragment extends Fragment {
         rectangularOrCircularSwitch.setChecked(checked);
     }
     public void testApps() {
-
+        dimension_1_WidthGasEditText.setText("1");
+        dimension_2_HeightGasEditText.setText("1");
+        pitotTubeCoefficientEditText.setText("1");
+        staticPressureFragmentEditText.setText("100");
+        temperatureGasFragmentEditText.setText("1");
+        wetBulbTemperatureGasFragmentEditText.setText("1");
+        ElevationAboveSeaLevelFragmentEdiText.setText("1");
+        seaLevelPressureGasFragmentEditText.setText("1");
 
     }
 
@@ -284,6 +291,8 @@ public class InputFragment extends Fragment {
 
         if(!wetBulbTemperatureSwitch.isChecked())
             wetBulbTemperatureGasFragmentEditText.setText("0");
+        if(rectangularOrCircularSwitch.isChecked())
+            dimension_2_HeightGasEditText.setText("0");
 
 
         Double[] inputArray = new Double[]{Double.valueOf(dimension_1_WidthGasEditText.getText().toString()), Double.valueOf(dimension_2_HeightGasEditText.getText().toString())
@@ -304,6 +313,9 @@ public class InputFragment extends Fragment {
     @Override
     public void onStart() {
 
+        System.out.println("UNS ON START CALLED INPUT");
+        System.out.println("UNS CURRENT"+((DisplayActivity)getActivity()).UnitSwitch().isChecked());
+        System.out.println("UNS PREVIOUS"+previousUnits);
         if(((DisplayActivity)getActivity()).UnitSwitch().isChecked() &&((DisplayActivity)getActivity()).UnitSwitch().isChecked()!=previousUnits) {
             System.out.println("UNS CURRENT"+((DisplayActivity)getActivity()).UnitSwitch().isChecked());
             System.out.println("UNS PREVIOUS"+previousUnits);
@@ -318,10 +330,9 @@ public class InputFragment extends Fragment {
             changeUnits("SI");
         }
         if(standardAirSwitch.isChecked()) {
-            standardAirSwitch.setChecked(false);
             standardAirDialog.hide();
         }
-        super.onStart();
+           super.onStart();
 
     }
 
@@ -331,6 +342,7 @@ public class InputFragment extends Fragment {
         standardAirSwitch.setChecked(false);
         wetBulbTemperatureSwitch.setChecked(false);
         wetBulbTemperatureGasFragmentEditText.setText("0");
+
     }
 
     @Override
@@ -510,11 +522,9 @@ public class InputFragment extends Fragment {
             case "SI":
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
                 UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
-                UnitStaticPressureGasDensityFragmentTextView.setText("kPa");
                 unitsGasDensityTemperatureDB.setText("°C");
                 unitsGasDensityTemperatureWB.setText("°C");
                 unitsGasDensitySeaLevelPressure.setText("kPa");
-                unitsGasDensityElevationAboveSeaLevel.setText("m");
                 break;
             case "US":
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("inches");
@@ -522,8 +532,6 @@ public class InputFragment extends Fragment {
                 unitsGasDensityTemperatureDB.setText("°F");
                 unitsGasDensityTemperatureWB.setText("°F");
                 unitsGasDensitySeaLevelPressure.setText("in. Hg");
-                unitsGasDensityElevationAboveSeaLevel.setText("ft");
-                UnitStaticPressureGasDensityFragmentTextView.setText("in. Hg");
 
                 break;
         }
@@ -540,7 +548,6 @@ public class InputFragment extends Fragment {
                 unitsGasDensityTemperatureDB.setText("°C");
                 unitsGasDensityTemperatureWB.setText("°C");
                 unitsGasDensitySeaLevelPressure.setText("kPa");
-                //unitsGasDensityElevationAboveSeaLevel.setText("m");
                 if (dimension_1_WidthGasEditText.getText().toString().length() > 0)
                     dimension_1_WidthGasEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(dimension_1_WidthGasEditText.getText().toString()) * 0.0254)));
                 if (dimension_2_HeightGasEditText.getText().toString().length() > 0)
@@ -561,8 +568,7 @@ public class InputFragment extends Fragment {
                 unitsGasDensityTemperatureDB.setText("°F");
                 unitsGasDensityTemperatureWB.setText("°F");
                 unitsGasDensitySeaLevelPressure.setText("in. Hg");
-                //unitsGasDensityElevationAboveSeaLevel.setText("ft");
-                UnitStaticPressureGasDensityFragmentTextView.setText("in. Hg");
+                UnitStaticPressureGasDensityFragmentTextView.setText("\"H2O");
                 if (dimension_1_WidthGasEditText.getText().toString().length() > 0)
                     dimension_1_WidthGasEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(dimension_1_WidthGasEditText.getText().toString()) / 0.0254)));
                 if (dimension_2_HeightGasEditText.getText().toString().length() > 0)

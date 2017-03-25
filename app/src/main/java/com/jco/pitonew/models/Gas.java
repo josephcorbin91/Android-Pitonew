@@ -310,7 +310,7 @@ public class Gas implements Serializable {
     public double calculateArea(){
         System.out.println("PIPPE" +pipeType);
         if(pipeType.equals("CIRCULAR")){
-            area = Math.PI*(diameter /2.0);
+            area = Math.PI*Math.pow((width /2.0),2.0);
         }
         else if(pipeType.equals("RECTANGULAR")){
             area = height *width;
@@ -356,7 +356,7 @@ public class Gas implements Serializable {
         if(getUnits().equals("SI"))
             massAirFlow=actualAirFlow*gasDensity/3600;
         else if(getUnits().equals("US"))
-            this.massAirFlow=(actualAirFlow*60*Math.pow((39.3701/12),3)*(gasDensity/0.062428)/3600)*2.2046*60;
+            this.massAirFlow=(actualAirFlow*60/Math.pow((39.3701/12),3)*(gasDensity/0.062428)/3600)*2.2046*60;
 
         System.out.println("CACL: MassAirfLOW " + massAirFlow);
 
@@ -366,10 +366,10 @@ public class Gas implements Serializable {
     public double calculateActualAirFlow(){
 
         if(getUnits().equals("SI"))
-        actualAirFlow= averageVelocity*area*3600;
+                 actualAirFlow= averageVelocity*area*3600;
         else if(getUnits().equals("US"))
             actualAirFlow= ((averageVelocity*0.3048)*(area*0.00064516)*3600)*Math.pow((39.3701/12),3)/60;
-         System.out.println("CACL: AirFlow " + actualAirFlow);
+        System.out.println("CACL: AirFlow " + actualAirFlow);
 
         return actualAirFlow;
 

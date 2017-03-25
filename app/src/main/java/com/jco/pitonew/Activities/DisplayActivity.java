@@ -464,8 +464,6 @@ public String getUnits(){
             currentFragment="inputFragment";
             ResultFragmentToolBarLayout.setVisibility(View.GONE);
             InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
-            System.out.println("UNITS! Original"+originalUnits);
-            System.out.println("UNITS! unitSwitch"+unitSwitch.isChecked());
 
         } else if (dynamicVelocityDialog != null && dynamicVelocityDialog.isShowing()) {
             dynamicVelocityDialog.hide();
