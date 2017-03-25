@@ -449,7 +449,7 @@
 
 
                         android:gravity="center"
-                        android:text="kPa"
+                        android:text="H20"
                         android:textSize="@dimen/hint_and_input_text" />
 
 

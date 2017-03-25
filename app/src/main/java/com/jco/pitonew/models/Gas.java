@@ -136,14 +136,14 @@ public class Gas implements Serializable {
         airContentPercentageH2O= inputResults[12];
 
 
-        System.out.println("width=inputResults" + inputResults[0]);
-        System.out.println("height=inputResults" + inputResults[1]);
-        System.out.println("pilotTubeCoeffecient" + inputResults[2]);
-        System.out.println("staticPressure" + inputResults[3]);
-        System.out.println("dryBulbTemperature" + inputResults[4]);
-        System.out.println("elevationAboveSeaLevel" + inputResults[5]);
-        System.out.println("wetBulbTemperature" + inputResults[6]);
-        System.out.println("seaLevelPressure" + inputResults[7]);
+        System.out.println("CACL width=inputResults" + inputResults[0]);
+        System.out.println("CACL height=inputResults" + inputResults[1]);
+        System.out.println("CACL pilotTubeCoeffecient" + inputResults[2]);
+        System.out.println("CACL staticPressure" + inputResults[3]);
+        System.out.println("CACL dryBulbTemperature" + inputResults[4]);
+        System.out.println("CACL elevationAboveSeaLevel" + inputResults[5]);
+        System.out.println("CACL wetBulbTemperature" + inputResults[6]);
+        System.out.println("CACL seaLevelPressure" + inputResults[7]);
 
         calculateResults();
 
@@ -169,9 +169,12 @@ public class Gas implements Serializable {
             }
 
         }
+        System.out.println("CACL: MOLECULAR WEIGHT " + molecularWeight);
+
     }
 
     public void calculateResults() {
+        System.out.println("CACL UNITS"+getUnits());
         if(wetBulbTemperatureEnabled)
             calculateRelativeHumidtiy();
 
@@ -212,9 +215,11 @@ public class Gas implements Serializable {
                 this.atmosphericPressure = seaLevelPressure * (Math.pow(10, -0.00001696 * elevationAboveSeaLevel));
                 break;
             case "US":
-                this.atmosphericPressure = (seaLevelPressure / 0.2952998) * (Math.pow(10, -0.00001696 * elevationAboveSeaLevel));
+                this.atmosphericPressure = seaLevelPressure* (Math.pow(10, -0.00001696 * elevationAboveSeaLevel));
                 break;
         }
+        System.out.println("CACL: atmosphericPressure " + atmosphericPressure);
+
         return this.atmosphericPressure;
     }
 
@@ -224,20 +229,20 @@ public class Gas implements Serializable {
             case "SI" :  this.ductPressure= atmosphericPressure + staticPressure*0.249088;break;
             case "US" : this.ductPressure= atmosphericPressure + staticPressure*0.07355;break;
         }
+        System.out.println("CACL: DUCT PRESSURE " + ductPressure);
+
         return this.ductPressure;
     }
 
 
     public double calculateGasDensity() {
-
-        switch (getUnits()) {
-            case "SI":
-                gasDensity = 1000 * ductPressure / (273.15 + dryBulbTemperature) / (8314.3 / molecularWeight);
-            case "US":
-                gasDensity = 1000 * ductPressure / (273.15 + dryBulbTemperature) / (8314.3 / molecularWeight);
-        }
-
+        if(getUnits().equals("SI"))
+            gasDensity = 1000 * ductPressure / (273.15 + dryBulbTemperature) / (8314.3 / molecularWeight);
+        else if(getUnits().equals("US"))
+            gasDensity = 0.062428*(1000 * (ductPressure*3.386375) / (273.15 + ((dryBulbTemperature-32)*(5/9))) / (8314.3 / molecularWeight));
         this.gasDensity =Math.floor(gasDensity * 10000) / 10000;
+        System.out.println("CACL: Gas density " + gasDensity);
+
         return gasDensity;
     }
 
@@ -310,51 +315,73 @@ public class Gas implements Serializable {
         else if(pipeType.equals("RECTANGULAR")){
             area = height *width;
         }
-        System.out.println("AREA " + area);
-        if(getUnits().equals("US"))
-            this.area=1550*area;
+        System.out.println("CACL: AREA " + area);
+
         return area;
     }
 
 
     //Dyanmic Velocity
     public void calculateDynamicVelocity(){
-        for(int i=0; i<dynamicPressureArrayList.size();i++)
-        {
-            Double currentVelocity=pilotTubeCoeffecient*Math.pow(2*dynamicPressureArrayList.get(i)*1000/4.01864/gasDensity,0.5);
-            dynamicVelocityArrayList.add(currentVelocity);
-            System.out.println("DynamicVelocity  " + i  + " : " + currentVelocity);
+
+        if(getUnits().equals("SI")) {
+            for (int i = 0; i < dynamicPressureArrayList.size(); i++) {
+                Double currentVelocity = pilotTubeCoeffecient * Math.pow(2 * dynamicPressureArrayList.get(i) * 1000 / 4.01864 / gasDensity, 0.5);
+                dynamicVelocityArrayList.add(currentVelocity);
+                System.out.println("CACL DynamicVelocity  " + i + " : " + currentVelocity);
+            }
+        }
+        else if(getUnits().equals("US")) {
+            for (int i = 0; i < dynamicPressureArrayList.size(); i++) {
+                Double currentVelocity = (pilotTubeCoeffecient * Math.pow(2 * dynamicPressureArrayList.get(i) * 1000 / 4.01864 / (gasDensity / 0.062428), 0.5) * 3.28084);
+                dynamicVelocityArrayList.add(currentVelocity);
+                System.out.println("CACL DynamicVelocity  " + i + " : " + currentVelocity);
+            }
         }
     }
+
 
     public double calculateAverageVelocity(){
         double sum=0;
         for(Double velocity: dynamicVelocityArrayList)
             sum+=velocity;
         averageVelocity=sum/(double)dynamicVelocityArrayList.size();
-        if(getUnits().equals("US"))
-            this.averageVelocity=averageVelocity*(39.3701/12);
+        System.out.println("CACL: average velocity " + averageVelocity);
+
         return this.averageVelocity;
     }
 
     public double calculateMassAirFlow(){
-        massAirFlow=actualAirFlow*gasDensity/3600;
-        if(getUnits().equals("US"))
-            this.massAirFlow=massAirFlow*2.2046*60;
+
+        if(getUnits().equals("SI"))
+            massAirFlow=actualAirFlow*gasDensity/3600;
+        else if(getUnits().equals("US"))
+            this.massAirFlow=(actualAirFlow*60*Math.pow((39.3701/12),3)*(gasDensity/0.062428)/3600)*2.2046*60;
+
+        System.out.println("CACL: MassAirfLOW " + massAirFlow);
+
         return massAirFlow;
     }
 
     public double calculateActualAirFlow(){
+
+        if(getUnits().equals("SI"))
         actualAirFlow= averageVelocity*area*3600;
-        if(getUnits().equals("US"))
-            this.actualAirFlow=this.actualAirFlow/60*Math.pow((39.3701/12),3);
+        else if(getUnits().equals("US"))
+            actualAirFlow= ((averageVelocity*0.3048)*(area*0.00064516)*3600)*Math.pow((39.3701/12),3)/60;
+         System.out.println("CACL: AirFlow " + actualAirFlow);
+
         return actualAirFlow;
 
     }
     public double calculateNormalAirFlow(){
-        normalAirFlow=(actualAirFlow*ductPressure/101.325)*273.15/(273.15+dryBulbTemperature);
+        if(getUnits().equals("SI"))
+            normalAirFlow=(actualAirFlow*ductPressure/101.325)*273.15/(273.15+dryBulbTemperature);
         if(getUnits().equals("US"))
-            this.normalAirFlow=normalAirFlow/60*Math.pow((39.3701/12),3)*(294.26/273.15);
+            this.normalAirFlow=(actualAirFlow*60/(Math.pow(39.3701/12,3))*(ductPressure/0.2953)/101.325)*273.15/(273.15+dryBulbTemperature) /60*Math.pow((39.3701/12),3)*(294.26/273.15);
+
+        System.out.println("CACL: normalAirFlow " +  normalAirFlow);
+
         return normalAirFlow;
     }
 
