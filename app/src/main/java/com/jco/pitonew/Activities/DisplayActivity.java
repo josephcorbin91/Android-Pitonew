@@ -50,6 +50,10 @@ import static java.security.AccessController.getContext;
 /**
  * Created by jco on 12/3/2016.
  */
+
+
+/*
+ */
 public class DisplayActivity extends AppCompatActivity{
         private MaterialSpinner spinner;
         private Toolbar actionToolBar;
@@ -224,8 +228,8 @@ public String getUnits(){
                             builder.setMessage("Dynamic Velocity Input");
                             builder.setView(R.layout.dialog_dynamic_velocity);
                             builder.setPositiveButton("Done", null); //Set to null. We override the onclick
-                            builder.setNegativeButton("Cancel", null);
-                            builder.setNeutralButton("Next",null);
+                            builder.setNegativeButton(" - ", null);
+                            builder.setNeutralButton(" + ",null);
 
                             dynamicVelocityDialog = builder.create();
 
@@ -330,10 +334,27 @@ public String getUnits(){
                         Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
                         TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
                         EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
-                        dynamicVelocityInputEditText.setText("");
-                        dynamicVelocityTextView.setText("");
-                        dynamicPressureArrayList.clear();
-                        alertDialog.hide();
+                          if(dynamicPressureArrayList.size()==0)
+                        {
+                            dynamicVelocityInputEditText.setError(getString(R.string.dynamic_velocity_required));
+                            dynamicVelocityInputEditText.requestFocus();
+                            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                            // Vibrate for 500 milliseconds
+                            vibrator.vibrate(500);
+
+                        }
+                        else {
+
+                            dynamicPressureArrayList.remove(dynamicPressureArrayList.size()-1);
+                            dynamicVelocityInputEditText.setText("");
+                            String currentString = "";
+                            for (Double dynamicVelocity : dynamicPressureArrayList) {
+                                currentString += String.valueOf(dynamicVelocity) + " , ";
+                            }
+                            dynamicVelocityTextView.setText(currentString);
+                        }
+
+                    
                     }
                 });
 
@@ -365,9 +386,7 @@ public String getUnits(){
 
             }
         });
-        dynamicVelocityDialog.setCancelable(false);
-        dynamicVelocityDialog.setCanceledOnTouchOutside(false);
-        dynamicVelocityDialog.show();
+         dynamicVelocityDialog.show();
 
     }
 

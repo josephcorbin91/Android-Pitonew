@@ -6,9 +6,9 @@
     app:contentInsetStart="0dp"
     android:elevation="10dp"
 
-    android:layout_height="56dp"
+    android:layout_height="48dp"
     android:background="@color/PrimaryColor"
-    android:minHeight="50dp"
+    android:minHeight="48dp"
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -66,7 +66,7 @@
             android:layout_margin="8dp"
             android:background="@drawable/highlighted_shape"
             android:elevation="2dp"
-            android:text="RETURN"
+            android:text="BACK"
             android:textColor="@color/text_color"
             android:textSize="15dp" />
     </RelativeLayout>

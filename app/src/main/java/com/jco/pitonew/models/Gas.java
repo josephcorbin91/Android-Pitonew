@@ -148,13 +148,13 @@ public class Gas implements Serializable {
         calculateResults();
 
     }
-    private double C02WetBasis,O2WetBasis,N2WetBasis,ArWetBasis,H20WetBasis;
 
     public void calculateMolecularWeight() {
 
+        System.out.println("CACL standard air"+ isStandardAir + " wet bulb " + wetBulbTemperatureEnabled);
         if(isStandardAir) {
             if(wetBulbTemperatureEnabled) {
-                this.molecularWeight =0.03*(1-H20WetBasis)+20.95*(1-H20WetBasis)+78.09*(1-H20WetBasis)+0.93*(1-H20WetBasis)+100*H20WetBasis;
+                this.molecularWeight =0.03*(1-humidityH20WetAir)+20.95*(1-humidityH20WetAir)+78.09*(1-humidityH20WetAir)+0.93*(1-humidityH20WetAir)+100*humidityH20WetAir;
             }
             else {
                 this.molecularWeight = 28.96;
@@ -162,14 +162,14 @@ public class Gas implements Serializable {
         }
         else if(!isStandardAir) {
             if(wetBulbTemperatureEnabled) {
-                this.molecularWeight=(44.01*airContentPercentageCO2*(1-H20WetBasis)+31.999*airContentPercentageO2*(1-H20WetBasis)+28.013*airContentPercentageN2*(1-H20WetBasis)+39.948*airContentPercentageAr*(1-H20WetBasis)+18.016*100*H20WetBasis)/100;
+                    this.molecularWeight=(44.01*airContentPercentageCO2*(1-humidityH20WetAir)+31.999*airContentPercentageO2*(1-humidityH20WetAir)+28.013*airContentPercentageN2*(1-humidityH20WetAir)+39.948*airContentPercentageAr*(1-humidityH20WetAir)+18.016*100*humidityH20WetAir)/100;
             }
             else {
                 this.molecularWeight = (44.01 * airContentPercentageCO2 + 31.999 * airContentPercentageO2 + 28.013 * airContentPercentageN2 + 39.948 * airContentPercentageAr) / 100;
             }
 
         }
-        System.out.println("CACL: MOLECULAR WEIGHT " + molecularWeight);
+        System.out.println("CACL: MOLECULAR WEIGHT " + this.molecularWeight);
 
     }
 
@@ -280,30 +280,20 @@ public class Gas implements Serializable {
             humidityH20WetAir=0;
 
         System.out.println("PDD");
-        System.out.println("DryMolecularWeight: "+dryMolecularWeight);
-        System.out.println("DryBulbRankine: "+dryBulbRankine);
-        System.out.println("WetBulbRankine: "+wetBulbRankine);
-        System.out.println("KD: dryBulbWaterSaturationPressurePD"+Kd);
-        System.out.println("KW: dryBulbWaterSaturationPressurePD"+Kw);
-        System.out.println("PD: dryBulbWaterSaturationPressurePD"+dryBulbWaterSaturationPressurePD);
-        System.out.println("PW: wetBulbWaterSaturationPressurePW"+wetBulbWaterSaturationPressurePW);
-        System.out.println("PM: partialWaterPressureDueToDepressionPM"+partialWaterPressureDueToDepressionPM);
-        System.out.println("PA: partialPressureOfWaterPA"+partialPressureOfWaterPA);
-        System.out.println("RH: relative humidity "+this.relativeHumidity);
-        System.out.println("RH: humidityH20DryAir"+humidityH20DryAir);
-        System.out.println("RH: humidityH20WetAir"+humidityH20WetAir);
+        System.out.println("CACL DryMolecularWeight: "+dryMolecularWeight);
+        System.out.println(" DryBulbRankine: "+dryBulbRankine);
+        System.out.println("CACL WetBulbRankine: "+wetBulbRankine);
+        System.out.println("CACL KD: dryBulbWaterSaturationPressurePD"+Kd);
+        System.out.println("CACL KW: dryBulbWaterSaturationPressurePD"+Kw);
+        System.out.println("CACL PD: dryBulbWaterSaturationPressurePD"+dryBulbWaterSaturationPressurePD);
+        System.out.println("CACL PW: wetBulbWaterSaturationPressurePW"+wetBulbWaterSaturationPressurePW);
+        System.out.println("CACL PM: partialWaterPressureDueToDepressionPM"+partialWaterPressureDueToDepressionPM);
+        System.out.println("CACL PA: partialPressureOfWaterPA"+partialPressureOfWaterPA);
+        System.out.println("CACL RH: relative humidity "+this.relativeHumidity);
+        System.out.println("CACL RH: humidityH20DryAir"+humidityH20DryAir);
+        System.out.println("CACL RH: humidityH20WetAir"+humidityH20WetAir);
 
 
-/*
-        switch(getUnits()) {
-            case "SI":
-                this.relativeHumidity = seaLevelPressure + ductPressure * 0.249088;
-                break;
-            case "US":
-                this.relativeHumidity = seaLevelPressure + ductPressure * 0.07355;
-                break;
-        }
-        */
         return this.relativeHumidity;
 
     }

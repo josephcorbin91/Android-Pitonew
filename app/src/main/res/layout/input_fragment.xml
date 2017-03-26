@@ -192,6 +192,9 @@
 
                 <TableRow
                     android:id="@+id/dimension_1_table_row"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
@@ -252,6 +255,8 @@
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
                     android:layout_marginRight="@dimen/single_line_list_left_right_padding"
 
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
 
                     <TextView
@@ -305,6 +310,9 @@
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_marginRight="@dimen/single_line_list_left_right_padding"
                     android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
 
@@ -359,6 +367,9 @@
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
+                    android:id="@+id/TableRowPitotTubeCoeffecient"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_marginRight="@dimen/single_line_list_left_right_padding"
                     android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
 
@@ -405,6 +416,10 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+
+                    android:id="@+id/TableRowStaticPressure"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
                     android:layout_marginRight="@dimen/single_line_list_left_right_padding"
                     android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
@@ -462,6 +477,10 @@
 
                 <TableRow
                     android:layout_width="match_parent"
+
+                    android:id="@+id/TableRowDryBulbTemperature"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
                     android:layout_marginRight="@dimen/single_line_list_left_right_padding"
@@ -511,6 +530,10 @@
 
                 <TableRow
                     android:layout_width="match_parent"
+
+                    android:id="@+id/TableRowElevationAboveSeaLevel"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
                     android:layout_marginRight="@dimen/single_line_list_left_right_padding"
@@ -560,6 +583,10 @@
                     android:background="@android:color/darker_gray" />
 
                 <TableRow
+
+                    android:id="@+id/TableRowPressureAtSeaLevel"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"

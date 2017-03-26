@@ -72,7 +72,7 @@ public class InputFragment extends Fragment {
     private double airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O;
 
     private LinearLayout parentLinearLayout;
-    private TextView unitsGasDensityTemperatureDB, unitsGasDensityTemperatureWB, UnitStaticPressureGasDensityFragmentTextView, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView, dimension1TextView, dimension2UnitText, unitsAverageVelocity, unitsMassAirFlow, unitsActualAirFlow, unitsNormalAirFlow, UnitsDimensionHeightGasFlowFragmentTextView, UnitsDimensionWidthGasFlowFragmentTextView;
+    private TextView unitsGasDensityTemperatureDB, unitsGasDensityTemperatureWB, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView, dimension1TextView, dimension2UnitText, unitsAverageVelocity, unitsMassAirFlow, unitsActualAirFlow, unitsNormalAirFlow, UnitsDimensionHeightGasFlowFragmentTextView, UnitsDimensionWidthGasFlowFragmentTextView;
     ;
     private TextView wetBulbTemperatureTextView;
     private EditText dimension_1_WidthGasEditText, dimension_2_HeightGasEditText, pitotTubeCoefficientEditText, staticPressureFragmentEditText, temperatureGasFragmentEditText, ElevationAboveSeaLevelFragmentEdiText, wetBulbTemperatureGasFragmentEditText, seaLevelPressureGasFragmentEditText;
@@ -159,7 +159,6 @@ public class InputFragment extends Fragment {
         unitsGasDensityAtmosphericPressure = (TextView) mView.findViewById(R.id.UnitsAtmosphericPressureFragmentTextViewUnits);
         unitsDuctPressure = (TextView) mView.findViewById(R.id.UnitsDuctPressureFragmentTextView);
         unitsCalculatedGasDensity = (TextView) mView.findViewById(R.id.UnitsCalculatedGasDensityTextView);
-        UnitStaticPressureGasDensityFragmentTextView = (TextView) mView.findViewById(R.id.UnitStaticPressureGasDensityFragmentTextView);
 
         dimension_1_WidthGasEditText = (EditText) mView.findViewById(R.id.dimension_1_WidthGasEditText);
         dimension_2_HeightGasEditText = (EditText) mView.findViewById(R.id.dimension_2_HeightGasEditText);
@@ -279,7 +278,7 @@ public class InputFragment extends Fragment {
         pitotTubeCoefficientEditText.setText("1");
         staticPressureFragmentEditText.setText("100");
         temperatureGasFragmentEditText.setText("1");
-        wetBulbTemperatureGasFragmentEditText.setText("1");
+        wetBulbTemperatureGasFragmentEditText.setText("2");
         ElevationAboveSeaLevelFragmentEdiText.setText("1");
         seaLevelPressureGasFragmentEditText.setText("1");
 
@@ -329,6 +328,9 @@ public class InputFragment extends Fragment {
 
             changeUnits("SI");
         }
+
+        changeUnitString(((DisplayActivity)getActivity()).UnitSwitch().isChecked());
+
         if(standardAirSwitch.isChecked()) {
             standardAirDialog.hide();
         }
@@ -497,6 +499,7 @@ public class InputFragment extends Fragment {
 
     public void setInput(Double[] previousResults,String currentUnits){
 
+        System.out.println("UNS setInput called");
 
         dimension_1_WidthGasEditText.setText(String.valueOf(previousResults[0]));
         dimension_2_HeightGasEditText.setText(String.valueOf(previousResults[1]));
@@ -510,30 +513,29 @@ public class InputFragment extends Fragment {
         wetBulbTemperatureSwitch.setChecked(false);
         standardAirSwitch.setChecked(false);
         rectangularOrCircularSwitch.setChecked(false);
-        changeUnitString(currentUnits);
+        changeUnitString(((DisplayActivity)getActivity()).UnitSwitch().isChecked());
     }
     public boolean wetBulbEnabled() {
         return wetBulbTemperatureSwitch.isChecked();
     }
 
 
-    public void changeUnitString(String units){
-        switch (units) {
-            case "SI":
-                UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
-                UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
-                unitsGasDensityTemperatureDB.setText("°C");
-                unitsGasDensityTemperatureWB.setText("°C");
-                unitsGasDensitySeaLevelPressure.setText("kPa");
-                break;
-            case "US":
+    public void changeUnitString(boolean units){
+    if(!units) {
+        UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
+        UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
+        unitsGasDensityTemperatureDB.setText("°C");
+        unitsGasDensityTemperatureWB.setText("°C");
+        unitsGasDensitySeaLevelPressure.setText("kPa");
+    }
+    else {
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("inches");
                 UnitsDimensionWidthGasFlowFragmentTextView.setText("inches");
                 unitsGasDensityTemperatureDB.setText("°F");
                 unitsGasDensityTemperatureWB.setText("°F");
                 unitsGasDensitySeaLevelPressure.setText("in. Hg");
 
-                break;
+
         }
     }
     public void changeUnits(String units) {
@@ -544,7 +546,6 @@ public class InputFragment extends Fragment {
             case "SI":
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
                 UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
-                UnitStaticPressureGasDensityFragmentTextView.setText("kPa");
                 unitsGasDensityTemperatureDB.setText("°C");
                 unitsGasDensityTemperatureWB.setText("°C");
                 unitsGasDensitySeaLevelPressure.setText("kPa");
@@ -568,7 +569,6 @@ public class InputFragment extends Fragment {
                 unitsGasDensityTemperatureDB.setText("°F");
                 unitsGasDensityTemperatureWB.setText("°F");
                 unitsGasDensitySeaLevelPressure.setText("in. Hg");
-                UnitStaticPressureGasDensityFragmentTextView.setText("\"H2O");
                 if (dimension_1_WidthGasEditText.getText().toString().length() > 0)
                     dimension_1_WidthGasEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(dimension_1_WidthGasEditText.getText().toString()) / 0.0254)));
                 if (dimension_2_HeightGasEditText.getText().toString().length() > 0)

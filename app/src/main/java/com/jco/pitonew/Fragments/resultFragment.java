@@ -142,10 +142,11 @@ public class ResultFragment extends Fragment {
             ductAreaGasFlowFragmentTextView.setText(String.valueOf(doubleThreeDigitsDecimalFormat.format(results[7])));
             atmosphericPressureTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(results[8])));
 
-            String dynamicVelocityString="";
-            for(int i=0;i<dynamicVelocity.length;i++)
-                dynamicVelocityString+= String.valueOf(doubleTwoDigitsDecimalFormat.format(dynamicVelocity[i])+ "\n");
+             String dynamicVelocityString = "";
+            for (int i = 0; i < dynamicVelocity.length; i++)
+                dynamicVelocityString += String.valueOf(doubleTwoDigitsDecimalFormat.format(dynamicVelocity[i]) + "\n");
             dynamicVelocityResultTextView.setText(dynamicVelocityString);
+
 
             if(results[9].equals(.000)) {
             relativeHumidityResultDivider.setVisibility(View.GONE);
@@ -294,8 +295,11 @@ public class ResultFragment extends Fragment {
                     unitsAreaTextView.setText("m²");
                     UnitsDynamicVelocityTextView.setText("m/s");
                     String dynamicVelocityString="";
-                    for(int i=0;i<dynamicVelocity.length;i++)
-                        dynamicVelocityString+= String.valueOf(doubleTwoDigitsDecimalFormat.format(dynamicVelocity[i]/3.28084))+ "\n";
+                    for(int i=0;i<dynamicVelocity.length;i++){
+                        dynamicVelocity[i]=dynamicVelocity[i]/3.28084;
+                        dynamicVelocityString+= String.valueOf(doubleTwoDigitsDecimalFormat.format(dynamicVelocity[i]))+ "\n";
+
+                    }
                     dynamicVelocityResultTextView.setText(dynamicVelocityString);
 
 
@@ -327,9 +331,13 @@ public class ResultFragment extends Fragment {
                     UnitsDynamicVelocityTextView.setText("ft/s");
 
                     dynamicVelocityString="";
-                    for(int i=0;i<dynamicVelocity.length;i++)
-                        dynamicVelocityString+= String.valueOf(doubleTwoDigitsDecimalFormat.format(dynamicVelocity[i]*3.28084))+ "\n";
+                    for(int i=0;i<dynamicVelocity.length;i++){
+                        dynamicVelocity[i]=dynamicVelocity[i]*3.28084;
+                        dynamicVelocityString+= String.valueOf(doubleTwoDigitsDecimalFormat.format(dynamicVelocity[i]))+ "\n";
+
+                    }
                     dynamicVelocityResultTextView.setText(dynamicVelocityString);
+
 
                     averageVelocityResultTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(averageVelocityResultTextView.getText().toString())*39.3701/12)));
                     massAirFlowResultTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(massAirFlowResultTextView.getText().toString())*(2.2046*60))));
