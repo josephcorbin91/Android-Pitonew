@@ -354,7 +354,7 @@ public String getUnits(){
                             dynamicVelocityTextView.setText(currentString);
                         }
 
-                    
+
                     }
                 });
 

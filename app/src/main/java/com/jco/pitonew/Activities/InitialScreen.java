@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.jco.pitonew.R;
 import com.jco.pitonew.Titanic;
 import com.jco.pitonew.TitanicTextView;
@@ -19,15 +20,14 @@ public class InitialScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_loading_screen);
-        TitanicTextView loadingScreenTextView = (TitanicTextView) findViewById(R.id.loading_screen_textview);
-/*
-                    Typeface font = Typeface.createFromAsset(
-                            getApplicationContext().getAssets(),
-                            "fonts/trench100free.ttf");
-*/
-                    loadingScreenTextView.setTypeface(Typefaces.get(this, "trench100free.ttf"));
-                    // loadingScreenTextView .setTypeface(font);
-                    new Titanic().start(loadingScreenTextView);
+
+
+
+        ShimmerFrameLayout container =
+                (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
+        container.setDuration(4000);
+        container.setBaseAlpha(0.7f);
+        container.startShimmerAnimation();
 
 
 
@@ -39,7 +39,7 @@ public class InitialScreen extends AppCompatActivity {
                         public void run() {
                             try {
                                 super.run();
-                                sleep(6000);
+                                sleep(5000);
                 } catch (Exception e) {
 
                 } finally {

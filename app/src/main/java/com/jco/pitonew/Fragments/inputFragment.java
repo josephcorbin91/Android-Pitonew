@@ -334,6 +334,8 @@ public class InputFragment extends Fragment {
         if(standardAirSwitch.isChecked()) {
             standardAirDialog.hide();
         }
+
+        standardAirSwitch.setChecked(false);
            super.onStart();
 
     }

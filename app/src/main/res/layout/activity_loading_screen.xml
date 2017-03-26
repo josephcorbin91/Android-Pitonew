@@ -1,25 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerVertical="true"
-    android:paddingTop="200dp"
+    android:orientation="vertical"
 
     >
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-         android:src="@drawable/gaslogo"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="false"
 
-        android:layout_gravity="center_horizontal" />
+        >
 
-    <com.jco.pitonew.TitanicTextView
-    android:layout_width="wrap_content"
-    android:layout_height="100dp"
-    android:textSize="70dp"
-    android:text="Pitonew"
-        android:textColor="@color/SecondaryColor"
-        android:id="@+id/loading_screen_textview"></com.jco.pitonew.TitanicTextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/loading_screen_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Pitonew"
+                android:textColor="@color/PrimaryColor"
+                android:textSize="60dp">
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@drawable/gaslogo" />
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
 
 </LinearLayout>
