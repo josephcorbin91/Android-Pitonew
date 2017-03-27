@@ -1,5 +1,6 @@
 package com.jco.pitonew.Activities;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +27,8 @@ public class InitialScreen extends AppCompatActivity {
         ShimmerFrameLayout container =
                 (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
         container.setDuration(4000);
-        container.setBaseAlpha(0.7f);
+        container.setBaseAlpha(0.6f);
+        container.setRepeatCount(1);
         container.startShimmerAnimation();
 
 
@@ -39,7 +41,7 @@ public class InitialScreen extends AppCompatActivity {
                         public void run() {
                             try {
                                 super.run();
-                                sleep(5000);
+                                sleep(3000);
                 } catch (Exception e) {
 
                 } finally {

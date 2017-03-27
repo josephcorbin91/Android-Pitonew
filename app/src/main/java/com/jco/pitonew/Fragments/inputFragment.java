@@ -258,7 +258,7 @@ public class InputFragment extends Fragment {
             wetBulbTemperatureDivider.setVisibility(View.GONE);
             wetBulbTemperatureGasFragmentEditText.setText("0");
         }
-       testApps();
+       //testApps();
     }
 
 
