@@ -190,25 +190,50 @@ public class DisplayActivity extends AppCompatActivity{
 
 
         calculateButton.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
-        if(inputFragment.validInput()) {
-        showDyanamicVelocityInputDialog();
+                if (inputFragment.validInput()) {
 
+                    if (inputFragment.verifyDataPressureRule()) {
 
-        }
-        else {
-        Toast.makeText(DisplayActivity.this, "Please fill in all input fields", Toast.LENGTH_SHORT).show();
-        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        // Vibrate for 500 milliseconds
-        vibrator.vibrate(500);
-        }
-        }
+                        FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+
+                        Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressureArray(), unitSwitch.isChecked(), inputFragment.pipeType(), inputFragment.wetBulbEnabled());
+                        inputFragment.setPreviousUnits(unitSwitch.isChecked());
+
+                        resultFragment.setResultValues(gas.getResults(), getUnits(), gas.getDynamicVelocity());
 
 
-        });
-        }
+                        DisplayActivity.this.currentFragment = "resultFragment";
+                        transaction.replace(R.id.fragment_container, resultFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+
+
+                        ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                        InputFragmentToolBarLayout.setVisibility(View.GONE);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "75% of the velocity pressures should be greater than 10% of maximum velocity pressure.", Toast.LENGTH_LONG).show();
+                        Vibrator vibrator = (Vibrator) getApplication().getSystemService(Context.VIBRATOR_SERVICE);
+                        vibrator.vibrate(500);
+
+
+                    }
+
+                } else {
+                    Toast.makeText(DisplayActivity.this, "Please fill in all input fields", Toast.LENGTH_SHORT).show();
+                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                    // Vibrate for 500 milliseconds
+                    vibrator.vibrate(500);
+                }
+            }
+        });}
+
+
+
+
+
 
 
 
@@ -220,175 +245,7 @@ public String getUnits(){
             return unitSwitch;
         }
 
-                            private android.support.v7.app.AlertDialog dynamicVelocityDialog;
-                        public void showDyanamicVelocityInputDialog(){
 
-                            dynamicPressureArrayList = new ArrayList<Double>();
-                            final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
-                            builder.setMessage("Dynamic Velocity Input");
-                            builder.setView(R.layout.dialog_dynamic_velocity);
-                            builder.setPositiveButton("Done", null); //Set to null. We override the onclick
-                            builder.setNegativeButton(" - ", null);
-                            builder.setNeutralButton(" + ",null);
-
-                            dynamicVelocityDialog = builder.create();
-
-
-
-                            dynamicVelocityDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                                @Override
-                                public void onShow(final DialogInterface dialog) {
-                                    Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
-
-                                    EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
-
-                                    dynamicVelocityInputEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-                                        @Override
-                                        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                                            if (actionId == EditorInfo.IME_ACTION_NEXT) {
-
-                                                Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
-
-                                                TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
-
-                                                EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
-
-
-                                                if (!dynamicVelocityInputEditText.getText().toString().equals("")) {
-                                                    dynamicPressureArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
-                                                    dynamicVelocityInputEditText.setText("");
-                                                    String currentString = "";
-                                                    for (Double dynamicVelocity : dynamicPressureArrayList) {
-                                                        currentString += String.valueOf(dynamicVelocity) + " , ";
-
-                                                        dynamicVelocityTextView.setText(currentString);
-                                                    }
-                                                    return false;
-
-                                                }
-                                            }
-                                            return true;
-
-                                        }});
-
-                                    Button buttonPositive = ((android.support.v7.app.AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-                                    buttonPositive.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
-
-
-                                            if(dynamicPressureArrayList.size()==0){
-
-                                                Vibrator vibrator = (Vibrator) getApplication().getSystemService(Context.VIBRATOR_SERVICE);
-                                                vibrator.vibrate(500);
-                                                EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
-                                                dynamicVelocityInputEditText.setError(getString(R.string.dynamic_velocity_required));
-                                                dynamicVelocityInputEditText.requestFocus();
-
-                                            }
-
-                                            else if(verifyDataPressureRule()) {
-
-                                                FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-                            System.out.println("UNITSS: " + unitSwitch.isChecked());
-
-                            Gas gas = new Gas(inputFragment.getResults(), dynamicPressureArrayList, unitSwitch.isChecked(), inputFragment.pipeType(), inputFragment.wetBulbEnabled());
-                            inputFragment.setPreviousUnits(unitSwitch.isChecked());
-
-                            System.out.println("UNITS ON CALCULAT: " + originalUnits);
-                            resultFragment.setResultValues(gas.getResults(),getUnits(),gas.getDynamicVelocity());
-
-
-                            DisplayActivity.this.currentFragment = "resultFragment";
-                            transaction.replace(R.id.fragment_container, resultFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-
-
-
-
-
-                            ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
-                            InputFragmentToolBarLayout.setVisibility(View.GONE);
-                            alertDialog.hide();
-                        }
-                        else
-                        {Toast.makeText(getApplicationContext(), "75% of the velocity pressures should be greater than 10% of maximum velocity pressure.", Toast.LENGTH_LONG).show();
-                            Vibrator vibrator = (Vibrator) getApplication().getSystemService(Context.VIBRATOR_SERVICE);
-                            vibrator.vibrate(500);
-                            TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
-                            EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
-                            dynamicVelocityInputEditText.setText("");
-                            dynamicVelocityTextView.setText("");
-                            dynamicPressureArrayList.clear();
-
-                        }
-                    }
-                });
-
-                Button negativeButton = ((android.support.v7.app.AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-                negativeButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
-                        TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
-                        EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
-                          if(dynamicPressureArrayList.size()==0)
-                        {
-                            dynamicVelocityInputEditText.setError(getString(R.string.dynamic_velocity_required));
-                            dynamicVelocityInputEditText.requestFocus();
-                            Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                            // Vibrate for 500 milliseconds
-                            vibrator.vibrate(500);
-
-                        }
-                        else {
-
-                            dynamicPressureArrayList.remove(dynamicPressureArrayList.size()-1);
-                            dynamicVelocityInputEditText.setText("");
-                            String currentString = "";
-                            for (Double dynamicVelocity : dynamicPressureArrayList) {
-                                currentString += String.valueOf(dynamicVelocity) + " , ";
-                            }
-                            dynamicVelocityTextView.setText(currentString);
-                        }
-
-
-                    }
-                });
-
-                Button neutralButton = ((android.support.v7.app.AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEUTRAL);
-                neutralButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog alertDialog = DisplayActivity.this.dynamicVelocityDialog;
-                        TextView dynamicVelocityTextView = (TextView) alertDialog.findViewById(R.id.listOfDynamicVelocities);
-                        EditText dynamicVelocityInputEditText = (EditText) alertDialog.findViewById(R.id.dynamicVelocityInput);
-                        if(TextUtils.isEmpty(dynamicVelocityInputEditText.getText().toString()))
-                        {
-                            dynamicVelocityInputEditText.setError(getString(R.string.dynamic_velocity_required));
-                            dynamicVelocityInputEditText.requestFocus();
-                        }
-                        else {
-
-                            dynamicPressureArrayList.add(Double.valueOf(dynamicVelocityInputEditText.getText().toString()));
-                            dynamicVelocityInputEditText.setText("");
-                            String currentString = "";
-                            for (Double dynamicVelocity : dynamicPressureArrayList) {
-                                currentString += String.valueOf(dynamicVelocity) + " , ";
-                            }
-                            dynamicVelocityTextView.setText(currentString);
-                        }
-
-                }
-            });
-
-            }
-        });
-         dynamicVelocityDialog.show();
-
-    }
 
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager =
@@ -397,29 +254,7 @@ public String getUnits(){
         inputMethodManager.hideSoftInputFromWindow(
                 activity.getCurrentFocus().getWindowToken(), 0);
     }
-    public boolean verifyDataPressureRule(){
-        double maxPressureValue;
-        double currentMax=dynamicPressureArrayList.get(0);
-        for(int i=0; i< dynamicPressureArrayList.size();i++)
-            if(dynamicPressureArrayList.get(i)>currentMax)
-                currentMax=dynamicPressureArrayList.get(i);
 
-        System.out.println("DynamicPressure: currentMax " + currentMax);
-        maxPressureValue=currentMax;
-        double acceptablePressureValue=0;
-        for(int i=0; i< dynamicPressureArrayList.size();i++) {
-            System.out.println("DynamicPressure: " + dynamicPressureArrayList.get(i));
-            if (dynamicPressureArrayList.get(i) > 0.1 * maxPressureValue)
-                acceptablePressureValue++;
-        }
-        System.out.println("DynamicPressure: acceptablePressureValue" + acceptablePressureValue);
-
-        System.out.println("DynamicPressure: dynamicPressureArrayList" + dynamicPressureArrayList.size());
-        double percentageOfAcceptableValues = acceptablePressureValue/(double)dynamicPressureArrayList.size();
-        System.out.println("DynamicPressure: percentageOfacceptableValues " + percentageOfAcceptableValues);
-
-        return percentageOfAcceptableValues>=0.75;
-    }
 /**
     public void onTheoryClick(MenuItem mi) {
         FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
@@ -484,8 +319,6 @@ public String getUnits(){
             ResultFragmentToolBarLayout.setVisibility(View.GONE);
             InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
 
-        } else if (dynamicVelocityDialog != null && dynamicVelocityDialog.isShowing()) {
-            dynamicVelocityDialog.hide();
         }
     }
 

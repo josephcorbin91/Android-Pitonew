@@ -697,7 +697,9 @@
                         android:layout_weight="0.3"
                         android:background="@drawable/highlighted_shape"
                         android:gravity="center"
-                        android:imeOptions="actionNext"
+
+
+                        android:imeOptions="actionNext|actionDone"
                         android:inputType="numberDecimal"
                         android:maxLength="15"
                         android:maxLines="1"

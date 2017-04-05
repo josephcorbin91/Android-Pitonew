@@ -73,7 +73,7 @@ public class InputFragment extends Fragment {
     private TextView switchTextViewStandardAir, switchTextViewPipeShape, switchTextViewWetBulb,dynamicVelocityResultTextView;
     private ImageView wetBulbIcon, standardAirIcon, pipeShapeIcon;
     private double airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O;
-    private ImageButton dynamicVelocityAddButton,dynamicVelocityDeleteButton;
+    private ImageButton dynamicVelocityDeleteButton;
 
     private LinearLayout parentLinearLayout;
     private TextView unitsGasDensityTemperatureDB,dynamicVelocityResultTextViewUnits, unitsGasDensityTemperatureWB, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView, dimension1TextView, dimension2UnitText, unitsAverageVelocity, unitsMassAirFlow, unitsActualAirFlow, unitsNormalAirFlow, UnitsDimensionHeightGasFlowFragmentTextView, UnitsDimensionWidthGasFlowFragmentTextView;
@@ -140,7 +140,6 @@ public class InputFragment extends Fragment {
         airContentPercentageAr = 0.93;
         airContentPercentageH2O = 0.00;
 
-        dynamicVelocityAddButton= (ImageButton) mView.findViewById(R.id.dynamicVelocityAddButton);
         dynamicVelocityDeleteButton = (ImageButton) mView.findViewById(R.id.dynamicVelocityDeleteButton);
 
 
@@ -171,6 +170,8 @@ public class InputFragment extends Fragment {
 
 
         DynamicVelocityEditText = (EditText)mView.findViewById(R.id.DynamicVelocityEditText);
+
+
         DynamicVelocityEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
                                                               @Override
                                                               public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -182,17 +183,19 @@ public class InputFragment extends Fragment {
                                                                           DynamicVelocityEditText.setText("");
                                                                           String currentString = "";
                                                                           for (int i = 0; i < dynamicPressureArrayList.size(); i++) {
-                                                                              currentString += String.valueOf(dynamicPressureArrayList.get(i)) + "  ";
                                                                               if (i % 10 == 0)
                                                                                   currentString += "\n";
+                                                                              currentString += String.valueOf(dynamicPressureArrayList.get(i)) + "  ";
+
                                                                           }
 
                                                                           dynamicVelocityResultTextView.setText(currentString);
 
-                                                                          return false;
+                                                                          return true;
                                                                       }
                                                                       return true;
                                                                   }
+
                                                                   return true;
                                                               }
 
@@ -285,43 +288,6 @@ public class InputFragment extends Fragment {
 
             }
         });
-        dynamicVelocityAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DynamicVelocityEditText.setError(null);
-                boolean cancel = false;
-                View focusView = null;
-
-                    // Check for a valid password, if the user entered one.
-                if (TextUtils.isEmpty(DynamicVelocityEditText.getText().toString())) {
-                    DynamicVelocityEditText.setError(getString(R.string.empty_field));
-                    focusView = DynamicVelocityEditText;
-                    cancel = true;
-                }
-
-                if (cancel) {
-                    Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-                    vibrator.vibrate(500);
-                    focusView.requestFocus();
-                }
-                else {
-
-                    dynamicPressureArrayList.add(Double.valueOf(DynamicVelocityEditText.getText().toString()));
-                    DynamicVelocityEditText.setText("");
-                    String currentString = "";
-                    for (int i = 0; i < dynamicPressureArrayList.size(); i++) {
-                        currentString += String.valueOf(dynamicPressureArrayList.get(i)) + "  ";
-                        if (i % 10 == 0)
-                            currentString += "\n";
-                    }
-
-                    dynamicVelocityResultTextView.setText(currentString);
-
-                }
-
-
-            }
-        });
 
         dynamicVelocityDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -347,9 +313,10 @@ public class InputFragment extends Fragment {
                     String currentString = "";
 
                     for (int i = 0; i < dynamicPressureArrayList.size(); i++) {
-                        currentString += String.valueOf(dynamicPressureArrayList.get(i)) + "  ";
                         if (i % 10 == 0)
                             currentString += "\n";
+                        currentString += String.valueOf(dynamicPressureArrayList.get(i)) + "  ";
+
                     }
 
                     dynamicVelocityResultTextView.setText(currentString);
@@ -458,6 +425,8 @@ public class InputFragment extends Fragment {
         standardAirSwitch.setChecked(false);
         wetBulbTemperatureSwitch.setChecked(false);
         wetBulbTemperatureGasFragmentEditText.setText("0");
+        dynamicPressureArrayList.clear();
+        dynamicVelocityResultTextView.setText("");
 
     }
 
@@ -761,6 +730,12 @@ public class InputFragment extends Fragment {
             focusView = seaLevelPressureGasFragmentEditText;
             cancel = true;
         }
+        if(dynamicVelocityResultTextView.getText().equals(""))
+        {
+            DynamicVelocityEditText.setError(getString(R.string.empty_field));
+            focusView = DynamicVelocityEditText;
+            cancel = true;
+        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -769,6 +744,33 @@ public class InputFragment extends Fragment {
             return false;
         } else
             return true;
+    }
+
+    public  ArrayList<Double> getDynamicPressureArray(){
+        return this.dynamicPressureArrayList;
+    }
+    public boolean verifyDataPressureRule(){
+        double maxPressureValue;
+        double currentMax=dynamicPressureArrayList.get(0);
+        for(int i=0; i< dynamicPressureArrayList.size();i++)
+            if(dynamicPressureArrayList.get(i)>currentMax)
+                currentMax=dynamicPressureArrayList.get(i);
+
+        System.out.println("DynamicPressure: currentMax " + currentMax);
+        maxPressureValue=currentMax;
+        double acceptablePressureValue=0;
+        for(int i=0; i< dynamicPressureArrayList.size();i++) {
+            System.out.println("DynamicPressure: " + dynamicPressureArrayList.get(i));
+            if (dynamicPressureArrayList.get(i) > 0.1 * maxPressureValue)
+                acceptablePressureValue++;
+        }
+        System.out.println("DynamicPressure: acceptablePressureValue" + acceptablePressureValue);
+
+        System.out.println("DynamicPressure: dynamicPressureArrayList" + dynamicPressureArrayList.size());
+        double percentageOfAcceptableValues = acceptablePressureValue/(double)dynamicPressureArrayList.size();
+        System.out.println("DynamicPressure: percentageOfacceptableValues " + percentageOfAcceptableValues);
+
+        return percentageOfAcceptableValues>=0.75;
     }
 }
 
