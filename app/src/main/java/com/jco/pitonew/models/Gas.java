@@ -265,19 +265,21 @@ public class Gas implements Serializable {
         dryBulbWaterSaturationPressurePD =criticalPressureH20*Math.pow(10,Kd*(1-(criticalTemperatureH20/dryBulbRankine)));
         wetBulbWaterSaturationPressurePW=criticalPressureH20*Math.pow(10,Kw*(1-(criticalTemperatureH20/wetBulbRankine)));
         partialWaterPressureDueToDepressionPM =0.000367*(1+((wetBulbRankine-459.67)-32)/1571)*(pressMmHg-wetBulbWaterSaturationPressurePW)*((dryBulbRankine-459.67) -(wetBulbRankine-459.67));
-         if((wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD>=100 ||(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD<0)
+        if((wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD>=100 ||(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD<0)
             System.out.println("ERROR");
         else
             this.relativeHumidity=100*(wetBulbWaterSaturationPressurePW-partialWaterPressureDueToDepressionPM)/dryBulbWaterSaturationPressurePD;
         partialPressureOfWaterPA=0.01*this.relativeHumidity*dryBulbWaterSaturationPressurePD;
 
-        this.dryMolecularWeight=(44.01*(airContentPercentageCO2*(1-humidityH20WetAir))+31.999*(airContentPercentageO2*(1-humidityH20WetAir))+28.013*(airContentPercentageN2*(1-humidityH20WetAir))+39.948*(airContentPercentageAr*(1-humidityH20WetAir)))/100;
 
-        humidityH20DryAir=(18.02/this.dryMolecularWeight)*(partialPressureOfWaterPA/(pressMmHg-partialPressureOfWaterPA));
         if(wetBulbTemperatureEnabled)
             humidityH20WetAir=partialPressureOfWaterPA/pressMmHg;
         else
             humidityH20WetAir=0;
+        this.dryMolecularWeight=(44.01*(airContentPercentageCO2*(1-humidityH20WetAir))+31.999*(airContentPercentageO2*(1-humidityH20WetAir))+28.013*(airContentPercentageN2*(1-humidityH20WetAir))+39.948*(airContentPercentageAr*(1-humidityH20WetAir)))/100;
+        humidityH20DryAir=(18.02/this.dryMolecularWeight)*(partialPressureOfWaterPA/(pressMmHg-partialPressureOfWaterPA));
+
+
 
         System.out.println("PDD");
         System.out.println("CACL DryMolecularWeight: "+dryMolecularWeight);
@@ -292,6 +294,9 @@ public class Gas implements Serializable {
         System.out.println("CACL RH: relative humidity "+this.relativeHumidity);
         System.out.println("CACL RH: humidityH20DryAir"+humidityH20DryAir);
         System.out.println("CACL RH: humidityH20WetAir"+humidityH20WetAir);
+        System.out.println("CACL RH: DRYMOLECULAR WEIGHT"+dryMolecularWeight);
+
+
 
 
         return this.relativeHumidity;

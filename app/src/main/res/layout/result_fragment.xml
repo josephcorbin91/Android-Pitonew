@@ -480,7 +480,7 @@ android:layout_height="wrap_content"
                 <TextView
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
-                    android:gravity="center"
+                    android:gravity="left|center"
                     android:layout_weight="0.6"
 
                     android:text="Atmospheric Pressure"

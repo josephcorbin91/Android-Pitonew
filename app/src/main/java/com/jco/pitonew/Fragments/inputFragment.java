@@ -10,13 +10,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -67,15 +70,17 @@ public class InputFragment extends Fragment {
     public static Double[] previousResults;
     public static String currentUnits;
     //GUI Components
-    TextView switchTextViewStandardAir, switchTextViewPipeShape, switchTextViewWetBulb;
+    private TextView switchTextViewStandardAir, switchTextViewPipeShape, switchTextViewWetBulb,dynamicVelocityResultTextView;
     private ImageView wetBulbIcon, standardAirIcon, pipeShapeIcon;
     private double airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O;
+    private ImageButton dynamicVelocityAddButton,dynamicVelocityDeleteButton;
 
     private LinearLayout parentLinearLayout;
-    private TextView unitsGasDensityTemperatureDB, unitsGasDensityTemperatureWB, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView, dimension1TextView, dimension2UnitText, unitsAverageVelocity, unitsMassAirFlow, unitsActualAirFlow, unitsNormalAirFlow, UnitsDimensionHeightGasFlowFragmentTextView, UnitsDimensionWidthGasFlowFragmentTextView;
-    ;
+    private TextView unitsGasDensityTemperatureDB,dynamicVelocityResultTextViewUnits, unitsGasDensityTemperatureWB, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView, dimension1TextView, dimension2UnitText, unitsAverageVelocity, unitsMassAirFlow, unitsActualAirFlow, unitsNormalAirFlow, UnitsDimensionHeightGasFlowFragmentTextView, UnitsDimensionWidthGasFlowFragmentTextView;
+    private ArrayList<Double> dynamicPressureArrayList = new ArrayList<Double>();
+
     private TextView wetBulbTemperatureTextView;
-    private EditText dimension_1_WidthGasEditText, dimension_2_HeightGasEditText, pitotTubeCoefficientEditText, staticPressureFragmentEditText, temperatureGasFragmentEditText, ElevationAboveSeaLevelFragmentEdiText, wetBulbTemperatureGasFragmentEditText, seaLevelPressureGasFragmentEditText;
+    private EditText dimension_1_WidthGasEditText,DynamicVelocityEditText, dimension_2_HeightGasEditText, pitotTubeCoefficientEditText, staticPressureFragmentEditText, temperatureGasFragmentEditText, ElevationAboveSeaLevelFragmentEdiText, wetBulbTemperatureGasFragmentEditText, seaLevelPressureGasFragmentEditText;
     private TableRow dimension_1_table_row, dimension_2_table_row, wetBulbTemperatureTableRow;
 
     public Boolean getStandardAirBoolean() {
@@ -135,6 +140,10 @@ public class InputFragment extends Fragment {
         airContentPercentageAr = 0.93;
         airContentPercentageH2O = 0.00;
 
+        dynamicVelocityAddButton= (ImageButton) mView.findViewById(R.id.dynamicVelocityAddButton);
+        dynamicVelocityDeleteButton = (ImageButton) mView.findViewById(R.id.dynamicVelocityDeleteButton);
+
+
         parentLinearLayout = (LinearLayout) mView.findViewById(R.id.parentLinearLayout);
         wetBulbIcon = (ImageView) mView.findViewById(R.id.wetBulbIcon);
         standardAirIcon = (ImageView) mView.findViewById(R.id.standardAirIcon);
@@ -147,7 +156,7 @@ public class InputFragment extends Fragment {
         switchTextViewStandardAir = (TextView) mView.findViewById(R.id.switchTextViewStandardAir);
         switchTextViewPipeShape = (TextView) mView.findViewById(R.id.switchTextViewPipeShape);
         switchTextViewWetBulb = (TextView) mView.findViewById(R.id.switchTextViewWetBulb);
-
+        dynamicVelocityResultTextViewUnits = (TextView)mView.findViewById(R.id.dynamicVelocityResultTextViewUnits);
         dimension1TextView = (TextView) mView.findViewById(R.id.dimension1TextView);
         dimension2TextView = (TextView) mView.findViewById(R.id.dimension2TextView);
         dimension_1_table_row = (TableRow) mView.findViewById(R.id.dimension_1_table_row);
@@ -160,6 +169,34 @@ public class InputFragment extends Fragment {
         unitsDuctPressure = (TextView) mView.findViewById(R.id.UnitsDuctPressureFragmentTextView);
         unitsCalculatedGasDensity = (TextView) mView.findViewById(R.id.UnitsCalculatedGasDensityTextView);
 
+
+        DynamicVelocityEditText = (EditText)mView.findViewById(R.id.DynamicVelocityEditText);
+        DynamicVelocityEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+                                                              @Override
+                                                              public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                                                                  if (actionId == EditorInfo.IME_ACTION_NEXT) {
+
+                                                                      if (!DynamicVelocityEditText.getText().toString().equals("")) {
+
+                                                                          dynamicPressureArrayList.add(Double.valueOf(DynamicVelocityEditText.getText().toString()));
+                                                                          DynamicVelocityEditText.setText("");
+                                                                          String currentString = "";
+                                                                          for (int i = 0; i < dynamicPressureArrayList.size(); i++) {
+                                                                              currentString += String.valueOf(dynamicPressureArrayList.get(i)) + "  ";
+                                                                              if (i % 10 == 0)
+                                                                                  currentString += "\n";
+                                                                          }
+
+                                                                          dynamicVelocityResultTextView.setText(currentString);
+
+                                                                          return false;
+                                                                      }
+                                                                      return true;
+                                                                  }
+                                                                  return true;
+                                                              }
+
+                                                              });
         dimension_1_WidthGasEditText = (EditText) mView.findViewById(R.id.dimension_1_WidthGasEditText);
         dimension_2_HeightGasEditText = (EditText) mView.findViewById(R.id.dimension_2_HeightGasEditText);
         pitotTubeCoefficientEditText = (EditText) mView.findViewById(R.id.pitotTubeCoefficientEditText);
@@ -168,7 +205,6 @@ public class InputFragment extends Fragment {
         ElevationAboveSeaLevelFragmentEdiText = (EditText) mView.findViewById(R.id.ElevationAboveSeaLevelFragmentEdiText);
         wetBulbTemperatureGasFragmentEditText = (EditText) mView.findViewById(R.id.wetBulbTemperatureGasFragmentEditText);
         seaLevelPressureGasFragmentEditText = (EditText) mView.findViewById(R.id.seaLevelPressureGasFragmentEditText);
-
         InputFilter[] decimalInputFilter = new InputFilter[]{new DecimalDigitsInputFilter(8, 3)};
 
         dimension_1_WidthGasEditText.setFilters(decimalInputFilter);
@@ -184,6 +220,7 @@ public class InputFragment extends Fragment {
         wetBulbTemperatureDivider = (View) mView.findViewById(R.id.wetBulbTemperatureDivider);
         wetBulbTemperatureTableRow = (TableRow) mView.findViewById(R.id.wetBulbTemperatureTableRow);
         wetBulbTemperatureTextView = (TextView) mView.findViewById(R.id.wetBulbTemperatureTextView);
+        dynamicVelocityResultTextView= (TextView) mView.findViewById(R.id.dynamicVelocityResultTextView);
         wetBulbTemperatureGasFragmentEditText.setText("0");
 
 
@@ -242,6 +279,81 @@ public class InputFragment extends Fragment {
                     unitsGasDensityTemperatureWB.setVisibility(View.GONE);
                     wetBulbTemperatureDivider.setVisibility(View.GONE);
                     wetBulbTemperatureGasFragmentEditText.setText("0");
+
+
+                }
+
+            }
+        });
+        dynamicVelocityAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DynamicVelocityEditText.setError(null);
+                boolean cancel = false;
+                View focusView = null;
+
+                    // Check for a valid password, if the user entered one.
+                if (TextUtils.isEmpty(DynamicVelocityEditText.getText().toString())) {
+                    DynamicVelocityEditText.setError(getString(R.string.empty_field));
+                    focusView = DynamicVelocityEditText;
+                    cancel = true;
+                }
+
+                if (cancel) {
+                    Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                    vibrator.vibrate(500);
+                    focusView.requestFocus();
+                }
+                else {
+
+                    dynamicPressureArrayList.add(Double.valueOf(DynamicVelocityEditText.getText().toString()));
+                    DynamicVelocityEditText.setText("");
+                    String currentString = "";
+                    for (int i = 0; i < dynamicPressureArrayList.size(); i++) {
+                        currentString += String.valueOf(dynamicPressureArrayList.get(i)) + "  ";
+                        if (i % 10 == 0)
+                            currentString += "\n";
+                    }
+
+                    dynamicVelocityResultTextView.setText(currentString);
+
+                }
+
+
+            }
+        });
+
+        dynamicVelocityDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DynamicVelocityEditText.setError(null);
+                boolean cancel = false;
+                View focusView = null;
+
+                if(dynamicPressureArrayList.isEmpty()) {
+
+                    DynamicVelocityEditText.setError(getString(R.string.empty_field));
+                    focusView = DynamicVelocityEditText;
+                    cancel = true;
+                }
+
+                if (cancel) {
+                    Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                    vibrator.vibrate(500);
+                    focusView.requestFocus();
+                }
+                else {  dynamicPressureArrayList.remove(dynamicPressureArrayList.size() - 1);
+                    String currentString = "";
+
+                    for (int i = 0; i < dynamicPressureArrayList.size(); i++) {
+                        currentString += String.valueOf(dynamicPressureArrayList.get(i)) + "  ";
+                        if (i % 10 == 0)
+                            currentString += "\n";
+                    }
+
+                    dynamicVelocityResultTextView.setText(currentString);
+
 
 
                 }
@@ -551,6 +663,7 @@ public class InputFragment extends Fragment {
                 unitsGasDensityTemperatureDB.setText("°C");
                 unitsGasDensityTemperatureWB.setText("°C");
                 unitsGasDensitySeaLevelPressure.setText("kPa");
+
                 if (dimension_1_WidthGasEditText.getText().toString().length() > 0)
                     dimension_1_WidthGasEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(Double.valueOf(dimension_1_WidthGasEditText.getText().toString()) * 0.0254)));
                 if (dimension_2_HeightGasEditText.getText().toString().length() > 0)
@@ -564,11 +677,14 @@ public class InputFragment extends Fragment {
                 if (wetBulbTemperatureGasFragmentEditText.getText().toString().length() > 0)
                     wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()) - 32) / 1.8)));
 
+
+
                 break;
             case "US":
                 UnitsDimensionHeightGasFlowFragmentTextView.setText("inches");
                 UnitsDimensionWidthGasFlowFragmentTextView.setText("inches");
                 unitsGasDensityTemperatureDB.setText("°F");
+
                 unitsGasDensityTemperatureWB.setText("°F");
                 unitsGasDensitySeaLevelPressure.setText("in. Hg");
                 if (dimension_1_WidthGasEditText.getText().toString().length() > 0)
