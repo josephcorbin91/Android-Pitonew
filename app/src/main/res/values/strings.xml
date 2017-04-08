@@ -26,7 +26,7 @@
     <string name="txtCredits">For more information: <a href="http://www.engineeringtoolbox.com/air-composition-d_212.html">click here</a></string>
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="empty_field">This field is required.</string>
-    <string name="dynamic_velocity_required">No input.</string>
+    <string name="dynamic_velocity_required">Dynamic velocity required.</string>
 
 
     <string name="title_activity_main__menu">Main_Menu</string>

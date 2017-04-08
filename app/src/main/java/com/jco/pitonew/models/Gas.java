@@ -240,7 +240,6 @@ public class Gas implements Serializable {
             gasDensity = 1000 * ductPressure / (273.15 + dryBulbTemperature) / (8314.3 / molecularWeight);
         else if(getUnits().equals("US"))
             gasDensity = 0.062428*(1000 * (ductPressure*3.386375) / (273.15 + ((dryBulbTemperature-32)*(5/9))) / (8314.3 / molecularWeight));
-        this.gasDensity =Math.floor(gasDensity * 10000) / 10000;
         System.out.println("CACL: Gas density " + gasDensity);
 
         return gasDensity;
@@ -311,6 +310,7 @@ public class Gas implements Serializable {
             area = height *width;
         }
         System.out.println("CACL: AREA " + area);
+
 
         return area;
     }

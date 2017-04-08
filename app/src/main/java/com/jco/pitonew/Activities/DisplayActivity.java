@@ -57,12 +57,13 @@ import static java.security.AccessController.getContext;
 public class DisplayActivity extends AppCompatActivity{
         private MaterialSpinner spinner;
         private Toolbar actionToolBar;
-        private Toolbar bottomToolBar;
+        private LinearLayout bottomToolBar;
         private AppCompatButton clearButton,calculateButton,returnButton;
         private String currentCalculations,currentUnits;
         public ArrayList<Double> dynamicPressureArrayList;
         private Switch unitSwitch;
         private boolean originalUnits;
+
 
     RelativeLayout ResultFragmentToolBarLayout,InputFragmentToolBarLayout;
     private Double[] previousResults;
@@ -104,7 +105,7 @@ public class DisplayActivity extends AppCompatActivity{
                 return;
             }
 
-            inputFragment.setPreviousUnits(false);
+            inputFragment.setPreviousUnits(false,null);
 
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -115,7 +116,7 @@ public class DisplayActivity extends AppCompatActivity{
             InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
             ResultFragmentToolBarLayout.setVisibility(View.GONE);
 
-            Log.i("FRAG TAG", "Fragment Commited");
+
 
 
         }
@@ -146,7 +147,7 @@ public class DisplayActivity extends AppCompatActivity{
         //Action Toolbar Code
         actionToolBar = (Toolbar) findViewById(R.id.action_bar_toolbar);
         setSupportActionBar(actionToolBar);
-        bottomToolBar = (Toolbar) findViewById(R.id.bottom_toolbar);
+        bottomToolBar = (LinearLayout) findViewById(R.id.bottom_toolbar);
 
 
         clearButton = (AppCompatButton) findViewById(R.id.toolbarClearButton);
@@ -167,23 +168,7 @@ public class DisplayActivity extends AppCompatActivity{
             public void onClick(View v) {
                 ResultFragmentToolBarLayout.setVisibility(View.GONE);
                 InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
-                /*
-                FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-                transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                System.out.print("UNITSS: RETURN" + unitSwitch.isChecked());
-                currentFragment="inputFragment";
-                transaction.replace(R.id.fragment_container,inputFragment);
-                transaction.commit();
 
-                System.out.println("UNITS! Original"+originalUnits);
-                System.out.println("UNITS! unitSwitch"+unitSwitch.isChecked());
-                if(originalUnits!=unitSwitch.isChecked()) {
-                    if (unitSwitch.isChecked())
-                        inputFragment.changeUnits("US");
-                    else
-                        inputFragment.changeUnits("SI");
-                }
-                */
                 onBackPressed();
     }
 });
@@ -198,9 +183,11 @@ public class DisplayActivity extends AppCompatActivity{
                     if (inputFragment.verifyDataPressureRule()) {
 
                         FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-
+                        dynamicPressureArrayList = inputFragment.getDynamicPressureArray();
+                        for(Double value : dynamicPressureArrayList)
+                            System.out.println("PRES "+value);
                         Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressureArray(), unitSwitch.isChecked(), inputFragment.pipeType(), inputFragment.wetBulbEnabled());
-                        inputFragment.setPreviousUnits(unitSwitch.isChecked());
+                        inputFragment.setPreviousUnits(unitSwitch.isChecked(),inputFragment.getDynamicPressureArray());
 
                         resultFragment.setResultValues(gas.getResults(), getUnits(), gas.getDynamicVelocity());
 
@@ -255,22 +242,6 @@ public String getUnits(){
                 activity.getCurrentFocus().getWindowToken(), 0);
     }
 
-/**
-    public void onTheoryClick(MenuItem mi) {
-        FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-        TheoryFragment theoryFragment = TheoryFragment.newInstance();
-        transaction.replace(R.id.fragment_container, theoryFragment);
-        transaction.commit();
-        DisplayActivity.this.currentFragment = "theoryFragment";
-        unitSwitch.setVisibility(View.INVISIBLE);
-
-        InputFragmentToolBarLayout.setVisibility(View.GONE);
-        ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
-
-    }
-*/
-
 
     @Override
     public void onBackPressed() {
@@ -318,6 +289,8 @@ public String getUnits(){
             currentFragment="inputFragment";
             ResultFragmentToolBarLayout.setVisibility(View.GONE);
             InputFragmentToolBarLayout.setVisibility(View.VISIBLE);
+
+
 
         }
     }

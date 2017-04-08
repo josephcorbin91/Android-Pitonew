@@ -592,7 +592,7 @@
                         android:layout_weight="0.3"
                         android:background="@drawable/highlighted_shape"
                         android:gravity="center"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
                         android:maxLength="15"
                         android:maxLines="1"
@@ -628,6 +628,8 @@
                     android:id="@+id/TableRowDynamicVelocityResults"
                     android:layout_width="match_parent"
 
+                    android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginTop="4dp"
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
                     android:layout_marginRight="@dimen/single_line_list_left_right_padding">
 
@@ -647,9 +649,9 @@
                     android:id="@+id/TableRowDynamicVelocity"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/single_line_list_top_bottom_padding"
+                    android:layout_marginTop="4dp"
                     android:layout_marginLeft="@dimen/single_line_list_left_right_padding"
-                    android:layout_marginRight="@dimen/single_line_list_left_right_padding"
-                    android:layout_marginTop="@dimen/single_line_list_top_bottom_padding">
+                    android:layout_marginRight="@dimen/single_line_list_left_right_padding">
 
                     <TextView
 
@@ -693,6 +695,10 @@
                 </TableRow>
 
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    />
 
 
 
