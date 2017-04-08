@@ -77,8 +77,8 @@ public class InputFragment extends Fragment {
 
     private LinearLayout parentLinearLayout;
     private TextView unitsGasDensityTemperatureDB,dynamicVelocityResultTextViewUnits, unitsGasDensityTemperatureWB, unitsCalculatedGasDensity, unitsGasDensitySeaLevelPressure, unitsGasDensityElevationAboveSeaLevel, unitsGasDensityAtmosphericPressure, unitsStaticPressure, unitsDuctPressure, dimensionHeader, dimension2TextView, dimension1TextView, dimension2UnitText, unitsAverageVelocity, unitsMassAirFlow, unitsActualAirFlow, unitsNormalAirFlow, UnitsDimensionHeightGasFlowFragmentTextView, UnitsDimensionWidthGasFlowFragmentTextView;
-    private ArrayList<Double> dynamicPressureArrayList = new ArrayList<>();
-
+    private ArrayList<Double> dynamicPressureArrayList;
+    private ArrayList<Double> previousDynamicPressureArrayList;
     private TextView wetBulbTemperatureTextView;
     private EditText dimension_1_WidthGasEditText,DynamicVelocityEditText, dimension_2_HeightGasEditText, pitotTubeCoefficientEditText, staticPressureFragmentEditText, temperatureGasFragmentEditText, ElevationAboveSeaLevelFragmentEdiText, wetBulbTemperatureGasFragmentEditText, seaLevelPressureGasFragmentEditText;
     private TableRow dimension_1_table_row, dimension_2_table_row, wetBulbTemperatureTableRow;
@@ -132,6 +132,9 @@ public class InputFragment extends Fragment {
     }
 
     public void instantiateViews() {
+
+
+
 
 
         System.out.println("instantiate view called");
@@ -275,6 +278,7 @@ public class InputFragment extends Fragment {
                     wetBulbTemperatureDivider.setVisibility(View.VISIBLE);
                     unitsGasDensityTemperatureWB.setVisibility(View.VISIBLE);
                     wetBulbIcon.setImageResource(R.drawable.wet_bulb_enabled);
+                    wetBulbTemperatureGasFragmentEditText.setText("");
 
                 } else {
                     wetBulbIcon.setImageResource(R.drawable.wet_bulb_disabled);
@@ -340,6 +344,14 @@ public class InputFragment extends Fragment {
             wetBulbTemperatureGasFragmentEditText.setText("0");
         }
 
+        if(previousDynamicPressureArrayList==null) {
+            dynamicPressureArrayList = new ArrayList<Double>();
+        }
+        else {
+            dynamicPressureArrayList = previousDynamicPressureArrayList;
+            updateVelocity(dynamicPressureArrayList);
+
+        }
 
        //testApps();
     }
@@ -391,6 +403,7 @@ public class InputFragment extends Fragment {
     }
 
     public void testApps(){
+
         wetBulbTemperatureSwitch.setChecked(true);
 
         standardAirSwitch.setChecked(true);
@@ -411,10 +424,12 @@ public class InputFragment extends Fragment {
 
 
     }
+
+
     private boolean previousUnits;
     public void setPreviousUnits(boolean previousUnits, ArrayList<Double> dynamicPressureArrayList)
     {
-        this.dynamicPressureArrayList = dynamicPressureArrayList;
+        this.previousDynamicPressureArrayList = dynamicPressureArrayList;
         this.previousUnits= previousUnits;
     }
 
@@ -425,18 +440,14 @@ public class InputFragment extends Fragment {
         System.out.println("UNS ON START CALLED INPUT");
         System.out.println("UNS CURRENT"+((DisplayActivity)getActivity()).UnitSwitch().isChecked());
         System.out.println("UNS PREVIOUS"+previousUnits);
-//        updateVelocity(this.dynamicPressureArrayList);
         if(((DisplayActivity)getActivity()).UnitSwitch().isChecked() &&((DisplayActivity)getActivity()).UnitSwitch().isChecked()!=previousUnits) {
             System.out.println("UNS CURRENT"+((DisplayActivity)getActivity()).UnitSwitch().isChecked());
             System.out.println("UNS PREVIOUS"+previousUnits);
-
-
             changeUnits("US");
         }
         else if(!((DisplayActivity)getActivity()).UnitSwitch().isChecked() &&((DisplayActivity)getActivity()).UnitSwitch().isChecked()!=previousUnits) {
             System.out.println("UNS CURRENT" + ((DisplayActivity) getActivity()).UnitSwitch().isChecked());
             System.out.println("UNS PREVIOUS" + previousUnits);
-
             changeUnits("SI");
         }
 
@@ -619,30 +630,10 @@ public class InputFragment extends Fragment {
         System.out.println("On Create View");
         this.mView = view;
         instantiateViews();
-        if(previousResults!=null)
-            setInput(previousResults,currentUnits);
         return view;
     }
 
 
-    public void setInput(Double[] previousResults,String currentUnits){
-
-
-        System.out.println("previousResultsCalled");
-        dimension_1_WidthGasEditText.setText(String.valueOf(previousResults[0]));
-        dimension_2_HeightGasEditText.setText(String.valueOf(previousResults[1]));
-        pitotTubeCoefficientEditText.setText(String.valueOf(previousResults[2]));
-        staticPressureFragmentEditText.setText(String.valueOf(previousResults[3]));
-        temperatureGasFragmentEditText.setText(String.valueOf(previousResults[4]));
-        wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(previousResults[5]));
-
-        ElevationAboveSeaLevelFragmentEdiText.setText(String.valueOf(previousResults[6]));
-        seaLevelPressureGasFragmentEditText.setText(String.valueOf(previousResults[7]));
-        wetBulbTemperatureSwitch.setChecked(false);
-        standardAirSwitch.setChecked(false);
-        rectangularOrCircularSwitch.setChecked(false);
-        changeUnitString(((DisplayActivity)getActivity()).UnitSwitch().isChecked());
-    }
     public boolean wetBulbEnabled() {
         return wetBulbTemperatureSwitch.isChecked();
     }

@@ -189,6 +189,8 @@ public class DisplayActivity extends AppCompatActivity{
                         Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressureArray(), unitSwitch.isChecked(), inputFragment.pipeType(), inputFragment.wetBulbEnabled());
                         inputFragment.setPreviousUnits(unitSwitch.isChecked(),inputFragment.getDynamicPressureArray());
 
+                        for(Double pressure : inputFragment.getDynamicPressureArray())
+                            System.out.println("PRESSUREs"+ pressure);
                         resultFragment.setResultValues(gas.getResults(), getUnits(), gas.getDynamicVelocity());
 
 
