@@ -238,8 +238,12 @@ public class Gas implements Serializable {
     public double calculateGasDensity() {
         if(getUnits().equals("SI"))
             gasDensity = 1000 * ductPressure / (273.15 + dryBulbTemperature) / (8314.3 / molecularWeight);
-        else if(getUnits().equals("US"))
-            gasDensity = 0.062428*(1000 * (ductPressure*3.386375) / (273.15 + ((dryBulbTemperature-32)*(5/9))) / (8314.3 / molecularWeight));
+        else if(getUnits().equals("US")) {
+            System.out.println("GAS DUCT" +(ductPressure * 3.386375) );
+            System.out.println("GAS MOLAR WEIGHT" + molecularWeight );
+            System.out.println("GAS TEMP" + ((dryBulbTemperature - 32) * (5.0 / 9.0)) );
+            gasDensity = 0.062428 * (1000 * (ductPressure * 3.386375) / (273.15 + ((dryBulbTemperature - 32) * (5.0 / 9.0))) / (8314.3 / molecularWeight));
+        }
         System.out.println("CACL: Gas density " + gasDensity);
 
         return gasDensity;
