@@ -12,6 +12,7 @@ import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -36,6 +37,7 @@ import com.jco.pitonew.Utilities.Utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -151,6 +153,21 @@ public class InputFragment extends Fragment {
         wetBulbIcon = (ImageView) mView.findViewById(R.id.wetBulbIcon);
         standardAirIcon = (ImageView) mView.findViewById(R.id.standardAirIcon);
         pipeShapeIcon = (ImageView) mView.findViewById(R.id.pipeShapeIcon);
+
+        //
+
+
+
+
+
+
+
+
+
+
+
+
+        //
 
         first_separator = (View) mView.findViewById(R.id.first_separator);
         UnitsDimensionHeightGasFlowFragmentTextView = (TextView) mView.findViewById(R.id.UnitsDimension_2_HeightGasFragmentTextView);
@@ -386,9 +403,64 @@ public class InputFragment extends Fragment {
             updateVelocity(dynamicPressureArrayList);
 
         }
+        dimension_1_WidthGasEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                widthTouched=true;
+                System.out.println("WithTouched");
 
-       //testApps();
+                return false;
+            }
+    });
+        dimension_2_HeightGasEditText.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            heightTouched=true;
+            System.out.println("HeightTouched");
+
+            return false;
+        }
+    });
+        seaLevelPressureGasFragmentEditText.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            seaLevelPressureTouched=true;
+            System.out.println("SeaLevelPressureTouched");
+
+            return false;
+        }
+    });
+        temperatureGasFragmentEditText.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            temperatureDryTouched=true;
+            System.out.println("DryBulbTouched");
+
+            return false;
+        }
+    });
+        wetBulbTemperatureGasFragmentEditText.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            wetBulbTouched = true;
+            System.out.println("WetBulbTouched");
+            return false;
+        }
+    });
+
+        wetBulbTouched=false;
+        temperatureDryTouched=false;
+        seaLevelPressureTouched=false;
+        heightTouched=false;
+        widthTouched=false;
+
+        clickedOnReturnToPreviousUnitsSwitch=0;
+
+        testApps();
     }
+
+    private boolean[] editTextTouched;
+    private boolean widthTouched,seaLevelPressureTouched, temperatureDryTouched,wetBulbTouched,heightTouched;
 
 
     public void changeStandardAirSwitch(boolean checked){
@@ -512,6 +584,8 @@ public class InputFragment extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         super.onCreate(savedInstanceState);
+
+
     }
 
     private Dialog standardAirDialog;
@@ -692,109 +766,143 @@ public class InputFragment extends Fragment {
         }
     }
 
-    private Double[] inputNumbers;
+    private Double[] previousInputValues;
+    private int clickedOnReturnToPreviousUnitsSwitch;
+
+
     private boolean flagSwitchPreviousUnits =false;
+
     public void changeUnits(String units) {
         DecimalFormat doubleTwoDigitsDecimalFormat = new DecimalFormat("#.00");
         DecimalFormat doubleThreeDigitsDecimalFormat = new DecimalFormat("#.000");
+        DecimalFormat doubleFiveDigitsDecimalFormat = new DecimalFormat("#.00000");
 
-*/
-        if(flagSwitchPreviousUnits){
-            switch (units) {
+
+        clickedOnReturnToPreviousUnitsSwitch++;
+        wetBulbTouched=false;
+        temperatureDryTouched=false;
+        seaLevelPressureTouched=false;
+        heightTouched=false;
+        widthTouched=false;
+
+        if(clickedOnReturnToPreviousUnitsSwitch!=2) {
+            previousInputValues = new Double[5];
+            try {
+                if (!TextUtils.isEmpty(dimension_1_WidthGasEditText.getText().toString()))
+                    previousInputValues[0] = Double.valueOf(dimension_1_WidthGasEditText.getText().toString());
+                if (!TextUtils.isEmpty(dimension_2_HeightGasEditText.getText().toString()))
+                    previousInputValues[1] = Double.valueOf(dimension_2_HeightGasEditText.getText().toString());
+                if (!TextUtils.isEmpty(temperatureGasFragmentEditText.getText().toString()))
+                    previousInputValues[2] = Double.valueOf(temperatureGasFragmentEditText.getText().toString());
+                if (!TextUtils.isEmpty(wetBulbTemperatureGasFragmentEditText.getText().toString()))
+                    previousInputValues[3] = Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString());
+                if (!TextUtils.isEmpty(seaLevelPressureGasFragmentEditText.getText().toString()))
+                    previousInputValues[4] = Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString());
+
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+            for(Double values : previousInputValues)
+                System.out.println("PREVIOUS VALUES" + values);
+        System.out.println("PREVIOUS VALUES CLICKS" + clickedOnReturnToPreviousUnitsSwitch);
+
+
+
+
+
+
+
+
+
+        switch (units) {
+
                 case "SI":
                     UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
                     UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
                     unitsGasDensityTemperatureDB.setText("°C");
                     unitsGasDensityTemperatureWB.setText("°C");
                     unitsGasDensitySeaLevelPressure.setText("kPa");
+
+                    if (dimension_1_WidthGasEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
+                        dimension_1_WidthGasEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(dimension_1_WidthGasEditText.getText().toString()) * 0.0254)));
+                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !widthTouched)
+                        dimension_1_WidthGasEditText.setText(String.valueOf(previousInputValues[0]));
+                    if (dimension_2_HeightGasEditText.getText().toString().length() > 0  && clickedOnReturnToPreviousUnitsSwitch == 1)
+                        dimension_2_HeightGasEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(dimension_2_HeightGasEditText.getText().toString()) * 0.0254)));
+                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !heightTouched)
+                        dimension_2_HeightGasEditText.setText(String.valueOf(previousInputValues[1]));
+
+                    if(seaLevelPressureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
+                        seaLevelPressureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString()) / 0.2952998751)));
+                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !seaLevelPressureTouched)
+                        seaLevelPressureGasFragmentEditText.setText(String.valueOf(previousInputValues[2]));
+
+                    if (temperatureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
+                        temperatureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format((Double.valueOf(temperatureGasFragmentEditText.getText().toString()) - 32) / 1.8)));
+                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !temperatureDryTouched)
+                        temperatureGasFragmentEditText.setText(String.valueOf(previousInputValues[3]));
+
+                    if (wetBulbTemperatureGasFragmentEditText.getText().toString().length() > 0  && clickedOnReturnToPreviousUnitsSwitch == 1)
+                        wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()) - 32) / 1.8)));
+                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !wetBulbTouched)
+                        wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(previousInputValues[4]));
+
+                    widthTouched=false;
+                    heightTouched=false;
+                    seaLevelPressureTouched=false;
+                    temperatureDryTouched=false;
+                    wetBulbTouched=false;
+
+
                     break;
                 case "US":
+
                     UnitsDimensionHeightGasFlowFragmentTextView.setText("inches");
                     UnitsDimensionWidthGasFlowFragmentTextView.setText("inches");
                     unitsGasDensityTemperatureDB.setText("°F");
-                    unitsGasDensityTemperatureWB.setText("°F");
-                    unitsGasDensitySeaLevelPressure.setText("in. Hg");
-                    break;
-            }
-
-                dimension_1_WidthGasEditText.setText(String.valueOf(previousUnitsArray[0]));
-                dimension_2_HeightGasEditText.setText(String.valueOf(previousUnitsArray[1]));
-                seaLevelPressureGasFragmentEditText.setText(String.valueOf(previousUnitsArray[2]));
-                temperatureGasFragmentEditText.setText(String.valueOf(previousUnitsArray[3]));
-                wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(previousUnitsArray[4]));
-            flagSwitchPreviousUnits=false;
-
-        }
-        else {
-
-
-            previousUnitsArray = new Double[]{Double.valueOf(dimension_1_WidthGasEditText.getText().toString()),
-                    Double.valueOf(dimension_1_WidthGasEditText.getText().toString()),
-                    Double.valueOf(dimension_2_HeightGasEditText.getText().toString()),
-                    Double.valueOf(temperatureGasFragmentEditText.getText().toString()),
-                    Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()),
-                    Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())
-            };
-            flagSwitchPreviousUnits=true;
-*/
-
-            switch (units) {
-
-                case "SI":
-                    UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
-                    UnitsDimensionWidthGasFlowFragmentTextView.setText("m");
-                    unitsGasDensityTemperatureDB.setText("°C");
-                    unitsGasDensityTemperatureWB.setText("°C");
-                    unitsGasDensitySeaLevelPressure.setText("kPa");
-
-                    if (dimension_1_WidthGasEditText.getText().toString().length() > 0)
-                        dimension_1_WidthGasEditText.setText(String.valueOf(Double.valueOf(dimension_1_WidthGasEditText.getText().toString()) * 0.0254));
-                    if (dimension_2_HeightGasEditText.getText().toString().length() > 0)
-                        dimension_2_HeightGasEditText.setText(String.valueOf(Double.valueOf(dimension_2_HeightGasEditText.getText().toString()) * 0.0254));
-                    if (seaLevelPressureGasFragmentEditText.getText().toString().length() > 0) {
-                        seaLevelPressureGasFragmentEditText.setText(String.valueOf(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())));
-
-                        System.out.println("SWITCH TO C" + seaLevelPressureGasFragmentEditText.getText());
-                        seaLevelPressureGasFragmentEditText.setText(String.valueOf(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString()) / 0.2952998751));
-                        System.out.println("SWITCH TO C" + seaLevelPressureGasFragmentEditText.getText().toString());
-
-                    }
-                    if (temperatureGasFragmentEditText.getText().toString().length() > 0)
-                        temperatureGasFragmentEditText.setText(String.valueOf((Double.valueOf(temperatureGasFragmentEditText.getText().toString()) - 32) / 1.8));
-                    if (wetBulbTemperatureGasFragmentEditText.getText().toString().length() > 0)
-                        wetBulbTemperatureGasFragmentEditText.setText(String.valueOf((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()) - 32) / 1.8));
-
-
-                    break;
-                case "US":
-
-                        UnitsDimensionHeightGasFlowFragmentTextView.setText("inches");
-                    UnitsDimensionWidthGasFlowFragmentTextView.setText("inches");
-                    unitsGasDensityTemperatureDB.setText("°F");
 
                     unitsGasDensityTemperatureWB.setText("°F");
                     unitsGasDensitySeaLevelPressure.setText("in. Hg");
-                    if (dimension_1_WidthGasEditText.getText().toString().length() > 0)
-                        dimension_1_WidthGasEditText.setText(String.valueOf(Double.valueOf(dimension_1_WidthGasEditText.getText().toString()) / 0.0254));
-                    if (dimension_2_HeightGasEditText.getText().toString().length() > 0)
-                        dimension_2_HeightGasEditText.setText(String.valueOf(Double.valueOf(dimension_2_HeightGasEditText.getText().toString()) / 0.0254));
-                    if (seaLevelPressureGasFragmentEditText.getText().toString().length() > 0) {
-                        seaLevelPressureGasFragmentEditText.setText(String.valueOf(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())));
-                        System.out.println("SWITCH TO F" + seaLevelPressureGasFragmentEditText.getText().toString());
-                        seaLevelPressureGasFragmentEditText.setText(String.valueOf(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString()) * 0.2952998751));
-
-                        System.out.println("SWITCH TO F" + seaLevelPressureGasFragmentEditText.getText().toString());
 
 
-                    }
-                    if (temperatureGasFragmentEditText.getText().toString().length() > 0)
-                        temperatureGasFragmentEditText.setText(String.valueOf(((Double.valueOf(temperatureGasFragmentEditText.getText().toString()) * 1.8) + 32)));
-                    if (wetBulbTemperatureGasFragmentEditText.getText().toString().length() > 0)
-                        wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()) * 1.8) + 32)));
+                    if (dimension_1_WidthGasEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
+                        dimension_1_WidthGasEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(dimension_1_WidthGasEditText.getText().toString()) / 0.0254)));
+                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !widthTouched)
+                        dimension_1_WidthGasEditText.setText(String.valueOf(previousInputValues[0]));
+
+                    if (dimension_2_HeightGasEditText.getText().toString().length() > 0  && clickedOnReturnToPreviousUnitsSwitch == 1)
+                        dimension_2_HeightGasEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(dimension_2_HeightGasEditText.getText().toString()) / 0.0254)));
+                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !heightTouched)
+                        dimension_2_HeightGasEditText.setText(String.valueOf(previousInputValues[1]));
+
+                    if(seaLevelPressureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
+                        seaLevelPressureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString()) * 0.2952998751)));
+                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !seaLevelPressureTouched)
+                        seaLevelPressureGasFragmentEditText.setText(String.valueOf(previousInputValues[2]));
+
+                    if (temperatureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
+                        temperatureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format((Double.valueOf(temperatureGasFragmentEditText.getText().toString()) - 32) / 1.8)));
+                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !temperatureDryTouched)
+                        temperatureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(((Double.valueOf(temperatureGasFragmentEditText.getText().toString()) * 1.8) + 32))));
+                    if (wetBulbTemperatureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
+                        wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()) * 1.8) + 32))));
+                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !wetBulbTouched)
+                        wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(previousInputValues[4]));
+
+                    widthTouched=false;
+                    heightTouched=false;
+                    seaLevelPressureTouched=false;
+                    temperatureDryTouched=false;
+                    wetBulbTouched=false;
 
 
                     break;
+
             }
+
+        if(clickedOnReturnToPreviousUnitsSwitch==2)
+            clickedOnReturnToPreviousUnitsSwitch=0;
 
 
     }

@@ -122,8 +122,12 @@ public class ResultFragment extends Fragment {
         this.units =units;
         this.dynamicVelocity = dynamicVelocity;
     }
+
+    private String[] SIResults;
+    private String[] USResults;
     public void setResults(){
 
+        DecimalFormat doubleOneDigitsDecimalFormat = new DecimalFormat("#.0");
 
         DecimalFormat doubleTwoDigitsDecimalFormat = new DecimalFormat("#.00");
         DecimalFormat doubleSixDigitsDecimalFormat = new DecimalFormat("#.000000");
@@ -132,17 +136,84 @@ public class ResultFragment extends Fragment {
 
 
 
-        averageVelocityResultTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(results[0])));
-            massAirFlowResultTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(results[1])));
-            normalAirFlowResultTextView.setText(String.valueOf(results[2].intValue()));
-            actualAirFlowResultTextView.setText(String.valueOf(results[3].intValue()));
-            ductPressureFragmentTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(results[4])));
-            gasDesnityResultTextView.setText(String.valueOf(doubleFourDigitsDecimalFormat.format(Math.floor(results[5] * 1000000) / 1000000)));
-            molecularResultTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(results[6])));
-            ductAreaGasFlowFragmentTextView.setText(String.valueOf(doubleThreeDigitsDecimalFormat.format(Math.ceil(results[7] * 100) / 100)));
-            atmosphericPressureTextView.setText(String.valueOf(doubleTwoDigitsDecimalFormat.format(results[8])));
+        if(this.units.equals("SI")){
+            SIResults = new String[]{String.valueOf(doubleTwoDigitsDecimalFormat.format(results[0])),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[1])),
+                    String.valueOf(doubleOneDigitsDecimalFormat.format(results[2])),
+                    String.valueOf(doubleOneDigitsDecimalFormat.format(results[3])),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[4])),
+                    String.valueOf(doubleFourDigitsDecimalFormat.format(results[5])),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[6])),
+                    String.valueOf(doubleThreeDigitsDecimalFormat.format(results[7])),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[8])),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[9]))};
+            USResults = new String[]{String.valueOf(doubleTwoDigitsDecimalFormat.format(results[0]*39.3701/12)),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[1]*(2.2046*60))),
+                    String.valueOf(doubleOneDigitsDecimalFormat.format(results[2]*((Math.pow(39.3701/12,3)*(294.26/273.15)))/60)),
+                    String.valueOf(doubleOneDigitsDecimalFormat.format(results[3]/60*(Math.pow(39.3701/12,3)))),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[4]/3.38639)),
+                    String.valueOf(doubleFourDigitsDecimalFormat.format(results[5]/16.018463)),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[6])),
+                    String.valueOf(doubleThreeDigitsDecimalFormat.format(results[7]/0.00064516)),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[8]*3.38639 )),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[9]))
+            };
 
-             String dynamicVelocityString = "";
+            averageVelocityResultTextView.setText(SIResults[0]);
+            massAirFlowResultTextView.setText(SIResults[1]);
+            normalAirFlowResultTextView.setText(SIResults[2]);
+            actualAirFlowResultTextView.setText(SIResults[3]);
+            ductPressureFragmentTextView.setText(SIResults[4]);
+            gasDesnityResultTextView.setText(SIResults[5]);
+            molecularResultTextView.setText(SIResults[6]);
+            ductAreaGasFlowFragmentTextView.setText(SIResults[7]);
+            atmosphericPressureTextView.setText(SIResults[8]);
+            relativeHumidityResultTextView.setText(SIResults[9]);
+        }
+
+
+
+        else if(this.units.equals("US")) {
+            USResults = new String[]{String.valueOf(doubleTwoDigitsDecimalFormat.format(results[0])),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[1])),
+                    String.valueOf(doubleOneDigitsDecimalFormat.format(results[2])),
+                    String.valueOf(doubleOneDigitsDecimalFormat.format(results[3])),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[4])),
+                    String.valueOf(doubleFourDigitsDecimalFormat.format(results[5])),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[6])),
+                    String.valueOf(doubleThreeDigitsDecimalFormat.format(results[7])),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[8])),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[9]))};
+            SIResults = new String[]{String.valueOf(doubleTwoDigitsDecimalFormat.format(results[0] * 12 / 39.3701)),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[1] / (2.2046 * 60))),
+                    String.valueOf(doubleOneDigitsDecimalFormat.format(results[2] * 60 / ((Math.pow(39.3701 / 12, 3) * (294.26 / 273.15))))),
+                    String.valueOf(doubleOneDigitsDecimalFormat.format(results[3] * 60 / (Math.pow(39.3701 / 12, 3)))),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[4]* 3.38639)),
+                    String.valueOf(doubleFourDigitsDecimalFormat.format(results[5] * 16.018463)),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[6] )),
+                    String.valueOf(doubleThreeDigitsDecimalFormat.format(results[7] * 0.00064516)),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[8]/3.38639 )),
+                    String.valueOf(doubleTwoDigitsDecimalFormat.format(results[9] ))};
+
+            averageVelocityResultTextView.setText(USResults[0].toString());
+            massAirFlowResultTextView.setText(USResults[1].toString());
+            normalAirFlowResultTextView.setText(USResults[2].toString());
+            actualAirFlowResultTextView.setText(USResults[3].toString());
+            ductPressureFragmentTextView.setText(USResults[4].toString());
+            gasDesnityResultTextView.setText(USResults[5].toString());
+            molecularResultTextView.setText(USResults[6].toString());
+            ductAreaGasFlowFragmentTextView.setText(USResults[7].toString());
+            atmosphericPressureTextView.setText(USResults[8].toString());
+            relativeHumidityResultTextView.setText(USResults[9].toString());
+
+        }
+
+
+
+
+
+
+        String dynamicVelocityString = "";
             for (int i = 0; i < dynamicVelocity.length; i++)
                 dynamicVelocityString += String.valueOf(doubleTwoDigitsDecimalFormat.format(dynamicVelocity[i]) + "\n");
             dynamicVelocityResultTextView.setText(dynamicVelocityString);
@@ -279,6 +350,8 @@ public class ResultFragment extends Fragment {
             DecimalFormat doubleThreeDigitsDecimalFormat = new DecimalFormat("#.000");
             DecimalFormat doubleFourDigitsDecimalFormat = new DecimalFormat("#.0000");
 
+            DecimalFormat doubleFiveDigitsDecimalFormat = new DecimalFormat("#.00000");
+
 
 
             switch (units) {
@@ -302,18 +375,16 @@ public class ResultFragment extends Fragment {
                     }
                     dynamicVelocityResultTextView.setText(dynamicVelocityString);
 
-
-                    averageVelocityResultTextView.setText(String.valueOf(Double.valueOf(averageVelocityResultTextView.getText().toString())*12/39.3701));
-                    massAirFlowResultTextView.setText(String.valueOf(Double.valueOf(massAirFlowResultTextView.getText().toString())/(2.2046*60)));
-
-                    normalAirFlowResultTextView.setText(String.valueOf((Double.valueOf(normalAirFlowResultTextView.getText().toString())*60/((Math.pow(39.3701/12,3)*(294.26/273.15))))));
-                    actualAirFlowResultTextView.setText(String.valueOf((Double.valueOf(actualAirFlowResultTextView.getText().toString())*60/(Math.pow(39.3701/12,3)))));
-                    ductPressureFragmentTextView.setText(String.valueOf(Double.valueOf(ductPressureFragmentTextView.getText().toString())*3.38639));
-
-                    gasDesnityResultTextView.setText(String.valueOf(Double.valueOf(gasDesnityResultTextView.getText().toString())*16.018463));
-                    atmosphericPressureTextView.setText(String.valueOf(Double.valueOf(atmosphericPressureTextView.getText().toString())*3.38639));
-                    ductAreaGasFlowFragmentTextView.setText(String.valueOf(Double.valueOf(ductAreaGasFlowFragmentTextView.getText().toString())*0.00064516));
-
+                    averageVelocityResultTextView.setText(SIResults[0]);
+                    massAirFlowResultTextView.setText(SIResults[1]);
+                    normalAirFlowResultTextView.setText(SIResults[2]);
+                    actualAirFlowResultTextView.setText(SIResults[3]);
+                    ductPressureFragmentTextView.setText(SIResults[4]);
+                    gasDesnityResultTextView.setText(SIResults[5]);
+                    molecularResultTextView.setText(SIResults[6]);
+                    ductAreaGasFlowFragmentTextView.setText(SIResults[7]);
+                    atmosphericPressureTextView.setText(SIResults[8]);
+                    relativeHumidityResultTextView.setText(SIResults[9]);
 
 
                     break;
@@ -339,17 +410,19 @@ public class ResultFragment extends Fragment {
                     dynamicVelocityResultTextView.setText(dynamicVelocityString);
 
 
-                    averageVelocityResultTextView.setText(String.valueOf(Double.valueOf(averageVelocityResultTextView.getText().toString())*39.3701/12));
-                    massAirFlowResultTextView.setText(String.valueOf(Double.valueOf(massAirFlowResultTextView.getText().toString())*(2.2046*60)));
+                    averageVelocityResultTextView.setText(USResults[0].toString());
+                    massAirFlowResultTextView.setText(USResults[1].toString());
+                    normalAirFlowResultTextView.setText(USResults[2].toString());
+                    actualAirFlowResultTextView.setText(USResults[3].toString());
+                    ductPressureFragmentTextView.setText(USResults[4].toString());
+                    gasDesnityResultTextView.setText(USResults[5].toString());
+                    molecularResultTextView.setText(USResults[6].toString());
+                    ductAreaGasFlowFragmentTextView.setText(USResults[7].toString());
+                    atmosphericPressureTextView.setText(USResults[8].toString());
+                    relativeHumidityResultTextView.setText(USResults[9].toString());
 
 
-                    normalAirFlowResultTextView.setText(String.valueOf((Double.valueOf(normalAirFlowResultTextView.getText().toString())*((Math.pow(39.3701/12,3)*(294.26/273.15)))/60)));
-                    actualAirFlowResultTextView.setText(String.valueOf((Double.valueOf(actualAirFlowResultTextView.getText().toString())/60*(Math.pow(39.3701/12,3)))));
-                    ductPressureFragmentTextView.setText(String.valueOf(Double.valueOf(ductPressureFragmentTextView.getText().toString())/3.38639));
 
-                    gasDesnityResultTextView.setText(String.valueOf(Double.valueOf(gasDesnityResultTextView.getText().toString())/16.018463));
-                    atmosphericPressureTextView.setText(String.valueOf(Double.valueOf(atmosphericPressureTextView.getText().toString())/3.38639));
-                    ductAreaGasFlowFragmentTextView.setText(String.valueOf(Double.valueOf(ductAreaGasFlowFragmentTextView.getText().toString())/0.00064516));
 
                     break;
             }
