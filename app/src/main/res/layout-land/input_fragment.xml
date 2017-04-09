@@ -629,24 +629,47 @@
 
                         android:id="@+id/dynamicVelocityResultTextView"
                         android:layout_width="@dimen/InputTextViewTextWidth"
-                        android:layout_height="80dp"
-                        android:layout_weight="0.9"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.6"
                         android:background="@android:color/transparent"
                         android:gravity="left|center"
                         android:text=""
                         android:textSize="@dimen/hint_and_input_text" />
 
+
+
+                    <ImageButton
+                        android:id="@+id/dynamicVelocityAddButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:background="@drawable/background_transparent"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:src="@drawable/add_button" />
+
+                    <ImageButton
+                        android:id="@+id/dynamicVelocityDeleteButton"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:layout_gravity="center"
+                        android:background="@drawable/background_transparent"
+                        android:gravity="center"
+                        android:src="@drawable/remove_button" />
+
                     <TextView
-                        android:id="@+id/dynamicVelocityResultTextViewUnits"
                         android:layout_width="@dimen/InputUnitsTextViewTextWidth"
                         android:layout_height="@dimen/TileHeight"
                         android:layout_weight="0.1"
                         android:gravity="center"
 
                         android:text="kPa"
+                        android:textSize="@dimen/hint_and_input_text"
 
 
-                        android:textSize="@dimen/hint_and_input_text" />
+                        android:visibility="invisible" />
 
                 </TableRow>
 
@@ -660,6 +683,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TableRow
 
                     android:id="@+id/TableRowDynamicVelocity"
@@ -671,9 +695,9 @@
 
                     <TextView
 
-                        android:layout_width="130dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
+                        android:layout_width="@dimen/InputTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.6"
                         android:background="@android:color/transparent"
                         android:gravity="left|center"
                         android:maxLines="1"
@@ -681,14 +705,6 @@
                         android:text="Dynamic Velocity Pressure"
                         android:textSize="@dimen/hint_and_input_text" />
 
-                    <ImageButton
-                        android:id="@+id/dynamicVelocityAddButton"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_weight="0.1"
-                        android:background="@drawable/background_transparent"
-                        android:gravity="center"
-                        android:src="@drawable/add_icon" />
 
                     <EditText
                         android:id="@+id/DynamicVelocityEditText"
@@ -706,16 +722,19 @@
 
                         android:textSize="@dimen/hint_and_input_text" />
 
-
-                    <ImageButton
-                        android:id="@+id/dynamicVelocityDeleteButton"
-
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                    <TextView
+                        android:layout_width="@dimen/InputUnitsTextViewTextWidth"
+                        android:layout_height="@dimen/TileHeight"
                         android:layout_weight="0.1"
-                        android:background="@drawable/background_transparent"
                         android:gravity="center"
-                        android:src="@drawable/remove_icon" />
+
+                        android:text="kPa"
+                        android:textSize="@dimen/hint_and_input_text"
+
+
+                        android:visibility="invisible" />
+
+
                 </TableRow>
 
                 <View

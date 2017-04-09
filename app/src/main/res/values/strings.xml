@@ -4,11 +4,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="max_lines">8</string>
 
     <string-array name="functionality_array">
         <item>Gas Flow</item>
         <item>Gas Density</item>
-
+        android:maxLength="10"
     </string-array>
     <string-array name="numbers_array">
         <item>1</item>

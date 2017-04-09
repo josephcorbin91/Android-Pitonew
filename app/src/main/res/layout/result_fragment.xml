@@ -134,6 +134,7 @@ android:layout_height="wrap_content"
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:layout_weight="0.3"
+                    android:maxLength="8"
 
                     android:gravity="center"
                     android:textColor="@color/text_color"
@@ -179,6 +180,7 @@ android:layout_height="wrap_content"
                     android:layout_width="@dimen/InputTextViewTextWidth"
                     android:gravity="center"
                     android:layout_weight="0.3"
+                    android:maxLength="8"
 
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:textColor="@color/text_color"
@@ -227,6 +229,7 @@ android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
                     android:gravity="center"
                     android:layout_weight="0.3"
+                    android:maxLength="8"
 
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -270,6 +273,7 @@ android:layout_height="wrap_content"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:gravity="center"
                     android:layout_weight="0.3"
+                    android:maxLength="8"
 
                     android:textColor="@color/text_color"
 
@@ -316,6 +320,7 @@ android:layout_height="wrap_content"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:gravity="center"
                     android:layout_weight="0.3"
+                    android:maxLength="8"
 
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
@@ -363,6 +368,7 @@ android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
                     android:gravity="center"
                     android:layout_weight="0.3"
+                    android:maxLength="8"
 
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -406,6 +412,7 @@ android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
                     android:gravity="center"
                     android:layout_weight="0.3"
+                    android:maxLength="8"
 
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -450,6 +457,7 @@ android:layout_height="wrap_content"
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:gravity="center"
                     android:layout_weight="0.3"
+                    android:maxLength="8"
 
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/hint_and_input_text" />
@@ -494,6 +502,7 @@ android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
                     android:gravity="center"
                     android:layout_weight="0.3"
+                    android:maxLength="8"
 
                     android:textSize="@dimen/hint_and_input_text" />
 
@@ -538,6 +547,7 @@ android:layout_height="wrap_content"
                     android:layout_width="100sp"
                     android:gravity="center"
                     android:layout_weight="0.3"
+                    android:maxLength="8"
 
                     android:layout_height="@dimen/tile_height_full_width_single_line"
                     android:textColor="@color/text_color"

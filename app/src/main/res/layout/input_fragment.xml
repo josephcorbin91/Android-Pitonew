@@ -218,7 +218,7 @@
                         android:imeOptions="actionNext"
 
                         android:inputType="numberDecimal"
-                        android:maxLength="15"
+                        android:maxLength="@string/max_lines"
                         android:maxLines="1"
                         android:selectAllOnFocus="false"
                         android:singleLine="false"
@@ -275,7 +275,8 @@
                         android:imeOptions="actionNext"
 
                         android:inputType="numberDecimal"
-                        android:maxLength="15"
+                        
+                        android:maxLength="@string/max_lines"
                         android:maxLines="1"
                         android:textSize="@dimen/hint_and_input_text" />
 
@@ -328,7 +329,7 @@
                         android:gravity="center"
                         android:imeOptions="actionNext"
                         android:inputType="numberSigned|numberDecimal"
-                        android:maxLength="15"
+                        android:maxLength="@string/max_lines"
 
                         android:maxLines="1"
                         android:textSize="@dimen/hint_and_input_text" />
@@ -384,7 +385,7 @@
                         android:gravity="center"
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
-                        android:maxLength="15"
+                        android:maxLength="8"
                         android:maxLines="1"
 
                         android:textSize="@dimen/hint_and_input_text" />
@@ -434,7 +435,7 @@
 
                         android:imeOptions="actionNext"
                         android:inputType="numberSigned|numberDecimal"
-                        android:maxLength="15"
+                        android:maxLength="@string/max_lines"
                         android:maxLines="1"
 
                         android:textSize="@dimen/hint_and_input_text" />
@@ -490,7 +491,7 @@
                         android:gravity="center"
                         android:imeOptions="actionNext"
                         android:inputType="numberSigned|numberDecimal"
-                        android:maxLength="15"
+                        android:maxLength="@string/max_lines"
                         android:maxLines="1"
                         android:textSize="@dimen/hint_and_input_text" />
 
@@ -540,7 +541,7 @@
                         android:gravity="center"
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
-                        android:maxLength="15"
+                        android:maxLength="@string/max_lines"
                         android:maxLines="1"
                         android:textSize="@dimen/hint_and_input_text" />
 
@@ -594,7 +595,7 @@
                         android:gravity="center"
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
-                        android:maxLength="15"
+                        android:maxLength="@string/max_lines"
                         android:maxLines="1"
 
                         android:textSize="@dimen/hint_and_input_text" />
@@ -638,10 +639,28 @@
                         android:id="@+id/dynamicVelocityResultTextView"
                         android:layout_width="@dimen/InputTextViewTextWidth"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.9"
+                        android:layout_weight="0.6"
                         android:background="@android:color/transparent"
                         android:gravity="left|center"
                         android:textSize="@dimen/hint_and_input_text" />
+                    <View
+                        android:layout_width="@dimen/InputEditTextWidth"
+                        android:layout_height="@dimen/TileHeight"
+                        android:layout_weight="0.3"
+                        android:visibility="invisible"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/dynamicVelocityAddButton"
+
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"
+                        android:background="@drawable/background_transparent"
+                        android:gravity="center"
+                        android:src="@drawable/add_button" />
+
 
                 </TableRow>
                 <TableRow
@@ -675,7 +694,7 @@
                         android:gravity="center"
                         android:imeOptions="actionNext"
                         android:inputType="numberDecimal"
-                        android:maxLength="15"
+                        android:maxLength="@string/max_lines"
                         android:maxLines="1"
 
                         android:textSize="@dimen/hint_and_input_text" />
