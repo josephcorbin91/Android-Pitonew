@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -543,6 +544,7 @@ public class InputFragment extends Fragment {
     @Override
     public void onStart() {
 
+
         System.out.println("UNS ON START CALLED INPUT");
         System.out.println("UNS CURRENT"+((DisplayActivity)getActivity()).UnitSwitch().isChecked());
         System.out.println("UNS PREVIOUS"+previousUnits);
@@ -773,49 +775,44 @@ public class InputFragment extends Fragment {
     private boolean flagSwitchPreviousUnits =false;
 
     public void changeUnits(String units) {
-        DecimalFormat doubleTwoDigitsDecimalFormat = new DecimalFormat("#.00");
-        DecimalFormat doubleThreeDigitsDecimalFormat = new DecimalFormat("#.000");
-        DecimalFormat doubleFiveDigitsDecimalFormat = new DecimalFormat("#.00000");
+
+        try {
+            DecimalFormat doubleTwoDigitsDecimalFormat = new DecimalFormat("#.00");
+            DecimalFormat doubleThreeDigitsDecimalFormat = new DecimalFormat("#.000");
+            DecimalFormat doubleFiveDigitsDecimalFormat = new DecimalFormat("#.00000");
 
 
-        clickedOnReturnToPreviousUnitsSwitch++;
-        wetBulbTouched=false;
-        temperatureDryTouched=false;
-        seaLevelPressureTouched=false;
-        heightTouched=false;
-        widthTouched=false;
+            clickedOnReturnToPreviousUnitsSwitch++;
+            wetBulbTouched = false;
+            temperatureDryTouched = false;
+            seaLevelPressureTouched = false;
+            heightTouched = false;
+            widthTouched = false;
 
-        if(clickedOnReturnToPreviousUnitsSwitch!=2) {
-            previousInputValues = new Double[5];
-            try {
-                if (!TextUtils.isEmpty(dimension_1_WidthGasEditText.getText().toString()))
-                    previousInputValues[0] = Double.valueOf(dimension_1_WidthGasEditText.getText().toString());
-                if (!TextUtils.isEmpty(dimension_2_HeightGasEditText.getText().toString()))
-                    previousInputValues[1] = Double.valueOf(dimension_2_HeightGasEditText.getText().toString());
-                if (!TextUtils.isEmpty(temperatureGasFragmentEditText.getText().toString()))
-                    previousInputValues[2] = Double.valueOf(temperatureGasFragmentEditText.getText().toString());
-                if (!TextUtils.isEmpty(wetBulbTemperatureGasFragmentEditText.getText().toString()))
-                    previousInputValues[3] = Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString());
-                if (!TextUtils.isEmpty(seaLevelPressureGasFragmentEditText.getText().toString()))
-                    previousInputValues[4] = Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString());
+            if (clickedOnReturnToPreviousUnitsSwitch != 2) {
+                previousInputValues = new Double[5];
+                try {
+                    if (!TextUtils.isEmpty(dimension_1_WidthGasEditText.getText().toString()))
+                        previousInputValues[0] = Double.valueOf(dimension_1_WidthGasEditText.getText().toString());
+                    if (!TextUtils.isEmpty(dimension_2_HeightGasEditText.getText().toString()))
+                        previousInputValues[1] = Double.valueOf(dimension_2_HeightGasEditText.getText().toString());
+                    if (!TextUtils.isEmpty(temperatureGasFragmentEditText.getText().toString()))
+                        previousInputValues[2] = Double.valueOf(temperatureGasFragmentEditText.getText().toString());
+                    if (!TextUtils.isEmpty(wetBulbTemperatureGasFragmentEditText.getText().toString()))
+                        previousInputValues[3] = Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString());
+                    if (!TextUtils.isEmpty(seaLevelPressureGasFragmentEditText.getText().toString()))
+                        previousInputValues[4] = Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString());
 
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
             }
-        }
-            for(Double values : previousInputValues)
+            for (Double values : previousInputValues)
                 System.out.println("PREVIOUS VALUES" + values);
-        System.out.println("PREVIOUS VALUES CLICKS" + clickedOnReturnToPreviousUnitsSwitch);
+            System.out.println("PREVIOUS VALUES CLICKS" + clickedOnReturnToPreviousUnitsSwitch);
 
 
-
-
-
-
-
-
-
-        switch (units) {
+            switch (units) {
 
                 case "SI":
                     UnitsDimensionHeightGasFlowFragmentTextView.setText("m");
@@ -826,33 +823,33 @@ public class InputFragment extends Fragment {
 
                     if (dimension_1_WidthGasEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
                         dimension_1_WidthGasEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(dimension_1_WidthGasEditText.getText().toString()) * 0.0254)));
-                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !widthTouched)
+                    else if (clickedOnReturnToPreviousUnitsSwitch == 2 && !widthTouched)
                         dimension_1_WidthGasEditText.setText(String.valueOf(previousInputValues[0]));
-                    if (dimension_2_HeightGasEditText.getText().toString().length() > 0  && clickedOnReturnToPreviousUnitsSwitch == 1)
+                    if (dimension_2_HeightGasEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
                         dimension_2_HeightGasEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(dimension_2_HeightGasEditText.getText().toString()) * 0.0254)));
-                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !heightTouched)
+                    else if (clickedOnReturnToPreviousUnitsSwitch == 2 && !heightTouched)
                         dimension_2_HeightGasEditText.setText(String.valueOf(previousInputValues[1]));
 
-                    if(seaLevelPressureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
+                    if (seaLevelPressureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
                         seaLevelPressureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString()) / 0.2952998751)));
-                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !seaLevelPressureTouched)
+                    else if (clickedOnReturnToPreviousUnitsSwitch == 2 && !seaLevelPressureTouched)
                         seaLevelPressureGasFragmentEditText.setText(String.valueOf(previousInputValues[2]));
 
                     if (temperatureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
                         temperatureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format((Double.valueOf(temperatureGasFragmentEditText.getText().toString()) - 32) / 1.8)));
-                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !temperatureDryTouched)
+                    else if (clickedOnReturnToPreviousUnitsSwitch == 2 && !temperatureDryTouched)
                         temperatureGasFragmentEditText.setText(String.valueOf(previousInputValues[3]));
 
-                    if (wetBulbTemperatureGasFragmentEditText.getText().toString().length() > 0  && clickedOnReturnToPreviousUnitsSwitch == 1)
+                    if (wetBulbTemperatureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
                         wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()) - 32) / 1.8)));
-                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !wetBulbTouched)
+                    else if (clickedOnReturnToPreviousUnitsSwitch == 2 && !wetBulbTouched)
                         wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(previousInputValues[4]));
 
-                    widthTouched=false;
-                    heightTouched=false;
-                    seaLevelPressureTouched=false;
-                    temperatureDryTouched=false;
-                    wetBulbTouched=false;
+                    widthTouched = false;
+                    heightTouched = false;
+                    seaLevelPressureTouched = false;
+                    temperatureDryTouched = false;
+                    wetBulbTouched = false;
 
 
                     break;
@@ -868,42 +865,46 @@ public class InputFragment extends Fragment {
 
                     if (dimension_1_WidthGasEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
                         dimension_1_WidthGasEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(dimension_1_WidthGasEditText.getText().toString()) / 0.0254)));
-                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !widthTouched)
+                    else if (clickedOnReturnToPreviousUnitsSwitch == 2 && !widthTouched)
                         dimension_1_WidthGasEditText.setText(String.valueOf(previousInputValues[0]));
 
-                    if (dimension_2_HeightGasEditText.getText().toString().length() > 0  && clickedOnReturnToPreviousUnitsSwitch == 1)
+                    if (dimension_2_HeightGasEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
                         dimension_2_HeightGasEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(dimension_2_HeightGasEditText.getText().toString()) / 0.0254)));
-                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !heightTouched)
+                    else if (clickedOnReturnToPreviousUnitsSwitch == 2 && !heightTouched)
                         dimension_2_HeightGasEditText.setText(String.valueOf(previousInputValues[1]));
 
-                    if(seaLevelPressureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
+                    if (seaLevelPressureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
                         seaLevelPressureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString()) * 0.2952998751)));
-                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !seaLevelPressureTouched)
+                    else if (clickedOnReturnToPreviousUnitsSwitch == 2 && !seaLevelPressureTouched)
                         seaLevelPressureGasFragmentEditText.setText(String.valueOf(previousInputValues[2]));
 
                     if (temperatureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
                         temperatureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format((Double.valueOf(temperatureGasFragmentEditText.getText().toString()) - 32) / 1.8)));
-                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !temperatureDryTouched)
+                    else if (clickedOnReturnToPreviousUnitsSwitch == 2 && !temperatureDryTouched)
                         temperatureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(((Double.valueOf(temperatureGasFragmentEditText.getText().toString()) * 1.8) + 32))));
                     if (wetBulbTemperatureGasFragmentEditText.getText().toString().length() > 0 && clickedOnReturnToPreviousUnitsSwitch == 1)
                         wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(doubleFiveDigitsDecimalFormat.format(((Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()) * 1.8) + 32))));
-                    else if(clickedOnReturnToPreviousUnitsSwitch ==2 && !wetBulbTouched)
+                    else if (clickedOnReturnToPreviousUnitsSwitch == 2 && !wetBulbTouched)
                         wetBulbTemperatureGasFragmentEditText.setText(String.valueOf(previousInputValues[4]));
 
-                    widthTouched=false;
-                    heightTouched=false;
-                    seaLevelPressureTouched=false;
-                    temperatureDryTouched=false;
-                    wetBulbTouched=false;
+                    widthTouched = false;
+                    heightTouched = false;
+                    seaLevelPressureTouched = false;
+                    temperatureDryTouched = false;
+                    wetBulbTouched = false;
 
 
                     break;
 
             }
 
-        if(clickedOnReturnToPreviousUnitsSwitch==2)
-            clickedOnReturnToPreviousUnitsSwitch=0;
-
+            if (clickedOnReturnToPreviousUnitsSwitch == 2)
+                clickedOnReturnToPreviousUnitsSwitch = 0;
+        }
+        catch (Exception exception){
+            Log.e("InputFragment","changeUnits",exception);
+            getActivity().recreate();
+        }
 
     }
 
