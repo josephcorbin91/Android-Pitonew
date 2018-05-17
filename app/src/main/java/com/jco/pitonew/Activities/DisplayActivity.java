@@ -214,43 +214,48 @@ private FrameLayout fragmentContainer;
             @Override
             public void onClick(View v) {
 
-                if (inputFragment.validInput()) {
+                try {
+                    if (inputFragment.validInput()) {
 
-                    if (inputFragment.verifyDataPressureRule()) {
+                        if (inputFragment.verifyDataPressureRule()) {
 
-                        FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
-                        dynamicPressureArrayList = inputFragment.getDynamicPressureArray();
-                        for(Double value : dynamicPressureArrayList)
-                            System.out.println("PRES "+value);
-                        Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressureArray(), unitSwitch.isChecked(), inputFragment.pipeType(), inputFragment.wetBulbEnabled());
-                        inputFragment.setPreviousUnits(unitSwitch.isChecked(),inputFragment.getDynamicPressureArray());
+                            FragmentTransaction transaction = DisplayActivity.this.fragmentManager.beginTransaction();
+                            dynamicPressureArrayList = inputFragment.getDynamicPressureArray();
+                            for (Double value : dynamicPressureArrayList)
+                                System.out.println("PRES " + value);
+                            Gas gas = new Gas(inputFragment.getResults(), inputFragment.getDynamicPressureArray(), unitSwitch.isChecked(), inputFragment.pipeType(), inputFragment.wetBulbEnabled());
+                            inputFragment.setPreviousUnits(unitSwitch.isChecked(), inputFragment.getDynamicPressureArray());
 
-                        for(Double pressure : inputFragment.getDynamicPressureArray())
-                            System.out.println("PRESSUREs"+ pressure);
-                        resultFragment.setResultValues(gas.getResults(), getUnits(), gas.getDynamicVelocity());
-
-
-                        DisplayActivity.this.currentFragment = "resultFragment";
-                        transaction.replace(R.id.fragment_container, resultFragment);
-                        transaction.addToBackStack(null);
-                        transaction.commit();
+                            for (Double pressure : inputFragment.getDynamicPressureArray())
+                                System.out.println("PRESSUREs" + pressure);
+                            resultFragment.setResultValues(gas.getResults(), getUnits(), gas.getDynamicVelocity());
 
 
-                        ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
-                        InputFragmentToolBarLayout.setVisibility(View.GONE);
+                            DisplayActivity.this.currentFragment = "resultFragment";
+                            transaction.replace(R.id.fragment_container, resultFragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+
+
+                            ResultFragmentToolBarLayout.setVisibility(View.VISIBLE);
+                            InputFragmentToolBarLayout.setVisibility(View.GONE);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "75% of the velocity pressures should be greater than 10% of maximum velocity pressure.", Toast.LENGTH_LONG).show();
+                            Vibrator vibrator = (Vibrator) getApplication().getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(500);
+
+
+                        }
+
                     } else {
-                        Toast.makeText(getApplicationContext(), "75% of the velocity pressures should be greater than 10% of maximum velocity pressure.", Toast.LENGTH_LONG).show();
-                        Vibrator vibrator = (Vibrator) getApplication().getSystemService(Context.VIBRATOR_SERVICE);
+                        Toast.makeText(DisplayActivity.this, "Please fill in all input fields", Toast.LENGTH_SHORT).show();
+                        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        // Vibrate for 500 milliseconds
                         vibrator.vibrate(500);
-
-
                     }
+                }catch (Exception exception){
 
-                } else {
-                    Toast.makeText(DisplayActivity.this, "Please fill in all input fields", Toast.LENGTH_SHORT).show();
-                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    // Vibrate for 500 milliseconds
-                    vibrator.vibrate(500);
+                    inputFragment.clear();
                 }
             }
         });}
