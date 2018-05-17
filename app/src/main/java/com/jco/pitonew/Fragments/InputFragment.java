@@ -495,18 +495,26 @@ public class InputFragment extends Fragment {
     private double units;
     public Double[] getResults() {
 
-        if(!wetBulbTemperatureSwitch.isChecked())
-            wetBulbTemperatureGasFragmentEditText.setText("0");
-        if(rectangularOrCircularSwitch.isChecked())
-            dimension_2_HeightGasEditText.setText("0");
+        try {
+            if (!wetBulbTemperatureSwitch.isChecked())
+                wetBulbTemperatureGasFragmentEditText.setText("0");
+            if (rectangularOrCircularSwitch.isChecked())
+                dimension_2_HeightGasEditText.setText("0");
 
 
-        Double[] inputArray = new Double[]{Double.valueOf(dimension_1_WidthGasEditText.getText().toString()), Double.valueOf(dimension_2_HeightGasEditText.getText().toString())
-                , Double.valueOf(pitotTubeCoefficientEditText.getText().toString()), Double.valueOf(staticPressureFragmentEditText.getText().toString())
-                , Double.valueOf(temperatureGasFragmentEditText.getText().toString()), Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())
-                , wetBulbTemperatureSwitch.isChecked()? Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()) : 0, Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())
-                , airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O};
-        return inputArray;
+            Double[] inputArray = new Double[]{Double.valueOf(dimension_1_WidthGasEditText.getText().toString()), Double.valueOf(dimension_2_HeightGasEditText.getText().toString())
+                    , Double.valueOf(pitotTubeCoefficientEditText.getText().toString()), Double.valueOf(staticPressureFragmentEditText.getText().toString())
+                    , Double.valueOf(temperatureGasFragmentEditText.getText().toString()), Double.valueOf(ElevationAboveSeaLevelFragmentEdiText.getText().toString())
+                    , wetBulbTemperatureSwitch.isChecked() ? Double.valueOf(wetBulbTemperatureGasFragmentEditText.getText().toString()) : 0, Double.valueOf(seaLevelPressureGasFragmentEditText.getText().toString())
+                    , airContentPercentageCO2, airContentPercentageO2, airContentPercentageN2, airContentPercentageAr, airContentPercentageH2O};
+            return inputArray;
+        }
+        catch (Exception ex){
+
+            Toast.makeText(getContext(), "Invalid Input please ", Toast.LENGTH_SHORT).show();
+            clear();
+            return null;
+        }
     }
 
     public void testApps(){
@@ -545,27 +553,35 @@ public class InputFragment extends Fragment {
     public void onStart() {
 
 
-        System.out.println("UNS ON START CALLED INPUT");
-        System.out.println("UNS CURRENT"+((DisplayActivity)getActivity()).UnitSwitch().isChecked());
-        System.out.println("UNS PREVIOUS"+previousUnits);
-        if(((DisplayActivity)getActivity()).UnitSwitch().isChecked() &&((DisplayActivity)getActivity()).UnitSwitch().isChecked()!=previousUnits) {
-            System.out.println("UNS CURRENT"+((DisplayActivity)getActivity()).UnitSwitch().isChecked());
-            System.out.println("UNS PREVIOUS"+previousUnits);
-            changeUnits("US");
-        }
-        else if(!((DisplayActivity)getActivity()).UnitSwitch().isChecked() &&((DisplayActivity)getActivity()).UnitSwitch().isChecked()!=previousUnits) {
+        try {
+            System.out.println("UNS ON START CALLED INPUT");
             System.out.println("UNS CURRENT" + ((DisplayActivity) getActivity()).UnitSwitch().isChecked());
             System.out.println("UNS PREVIOUS" + previousUnits);
-            changeUnits("SI");
+            if (((DisplayActivity) getActivity()).UnitSwitch().isChecked() && ((DisplayActivity) getActivity()).UnitSwitch().isChecked() != previousUnits) {
+                System.out.println("UNS CURRENT" + ((DisplayActivity) getActivity()).UnitSwitch().isChecked());
+                System.out.println("UNS PREVIOUS" + previousUnits);
+                changeUnits("US");
+            } else if (!((DisplayActivity) getActivity()).UnitSwitch().isChecked() && ((DisplayActivity) getActivity()).UnitSwitch().isChecked() != previousUnits) {
+                System.out.println("UNS CURRENT" + ((DisplayActivity) getActivity()).UnitSwitch().isChecked());
+                System.out.println("UNS PREVIOUS" + previousUnits);
+                changeUnits("SI");
+            }
+
+            changeUnitString(((DisplayActivity) getActivity()).UnitSwitch().isChecked());
+
+            /*
+            if (standardAirSwitch.isChecked()) {
+                standardAirDialog.hide();
+            }
+
+*/
+            if(standardAirDialog.isShowing())
+                standardAirDialog.hide();
+            standardAirSwitch.setChecked(false);
         }
-
-        changeUnitString(((DisplayActivity)getActivity()).UnitSwitch().isChecked());
-
-        if(standardAirSwitch.isChecked()) {
-            standardAirDialog.hide();
+        catch (Exception exception){
+            getActivity().recreate();
         }
-
-        standardAirSwitch.setChecked(false);
            super.onStart();
 
     }
@@ -903,7 +919,9 @@ public class InputFragment extends Fragment {
         }
         catch (Exception exception){
             Log.e("InputFragment","changeUnits",exception);
-            getActivity().recreate();
+
+            Toast.makeText(getContext(), "Invalid input please try again", Toast.LENGTH_SHORT).show();
+            clear();
         }
 
     }
